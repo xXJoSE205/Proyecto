@@ -43,5 +43,3 @@ public class Inmueble {
     }
 }
 
-
-//Comentario 2
