@@ -1,6 +1,6 @@
 package p3;
 
-public class Demandante extends UsuarioRegistrado {
+public class Demandante extends Cliente {
     private double deuda = 0;
     private boolean bloqueado = false;
     private boolean reservaActiva = false;

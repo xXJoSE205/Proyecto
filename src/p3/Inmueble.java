@@ -8,7 +8,6 @@ public class Inmueble {
     private String planta;
     private Boolean ascensor;
 
-
     public Inmueble(int nHabitaciones, int nBanos, String dimensiones, String direccion, String planta, Boolean ascensor) {
         this.nHabitaciones = nHabitaciones;
         this.nBanos = nBanos;

@@ -1,6 +1,6 @@
 package p3;
 
-public class Ofertante extends UsuarioRegistrado{
+public class Ofertante extends Cliente{
     private double cargo = 0;
     private String modificaciones;
 
