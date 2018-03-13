@@ -1,8 +1,9 @@
 package p3;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Oferta extends Inmueble{
+public class Oferta{
     private double precio;
     private boolean reservado;
     private LocalDate fechaInicio;
@@ -10,9 +11,9 @@ public class Oferta extends Inmueble{
     private boolean vacacional;
     private double fianza;
     private boolean disponible;
+    private Reserva reserva;
 
-    public Oferta(int nHabitaciones, int nBanos, String dimensiones, String direccion, String planta, Boolean ascensor, double precio, boolean reservado, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza, boolean disponible) {
-        super(nHabitaciones, nBanos, dimensiones, direccion, planta, ascensor);
+    public Oferta(double precio, boolean reservado, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza, boolean disponible) {
         this.precio = precio;
         this.reservado = reservado;
         this.fechaInicio = fechaInicio;
@@ -77,9 +78,19 @@ public class Oferta extends Inmueble{
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void reservar() {
+        Reserva r = new Reserva(LocalDateTime.now());
+        this.setReservado(true);
+        this.reserva = r;
+    }
     /*
-    Implementar
-     */
+        Implementar
+         */
     public void aprobarOferta(){
 
     }

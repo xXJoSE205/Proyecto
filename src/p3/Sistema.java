@@ -75,4 +75,12 @@ public class Sistema {
         }
         return false;
     }
+
+    public boolean comprobarReservas(){
+        for(Oferta o: ofertas){
+            if(o.isReservado()){
+
+            }
+        }
+    }
 }
