@@ -5,6 +5,7 @@ public abstract class UsuarioRegistrado {
     private String apellidos;
     private String nif;
     private String password;
+    private boolean logeado = false;
 
     public UsuarioRegistrado(String nombre, String apellidos, String nif, String password) {
         this.nombre = nombre;
@@ -27,5 +28,13 @@ public abstract class UsuarioRegistrado {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isLogeado() {
+        return logeado;
+    }
+
+    public void setLogeado(boolean logeado) {
+        this.logeado = logeado;
     }
 }
