@@ -1,5 +1,8 @@
 package p3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Inmueble {
     private int nHabitaciones;
     private int nBanos;
@@ -7,6 +10,7 @@ public class Inmueble {
     private String direccion;
     private String planta;
     private Boolean ascensor;
+    private List<Oferta> ofertas;
 
     public Inmueble(int nHabitaciones, int nBanos, String dimensiones, String direccion, String planta, Boolean ascensor) {
         this.nHabitaciones = nHabitaciones;
@@ -15,6 +19,7 @@ public class Inmueble {
         this.direccion = direccion;
         this.planta = planta;
         this.ascensor = ascensor;
+        this.ofertas = new ArrayList<>();
     }
 
     public int getnHabitaciones() {
@@ -40,6 +45,16 @@ public class Inmueble {
     public Boolean getAscensor() {
         return ascensor;
     }
-}
 
-//astolfo
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+    public boolean anadirOferta(Oferta oferta){
+        if(oferta==null){
+            return false;
+        }
+        ofertas.add(oferta);
+        return true;
+    }
+}

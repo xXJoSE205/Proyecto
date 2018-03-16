@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Oferta{
-    private double precio;
+    private double precio=0;
     private boolean reservado;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private LocalDate fechaInicio=LocalDate.MIN;
+    private LocalDate fechaFin=LocalDate.MIN;
     private boolean vacacional;
-    private double fianza;
+    private double fianza=0;
     private boolean disponible;
     private Reserva reserva;
 
@@ -92,10 +92,14 @@ public class Oferta{
         Implementar
          */
     public void aprobarOferta(){
-
+        if(precio>0 && fianza>0 && !fechaInicio.isEqual(LocalDate.MIN)){
+            disponible=true;
+            return;
+        }
     }
 
     public void rechazarOferta(){
+
 
     }
 
