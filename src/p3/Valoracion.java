@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene la información de una Valoracion
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3;
 
 public class Valoracion extends Opinion {

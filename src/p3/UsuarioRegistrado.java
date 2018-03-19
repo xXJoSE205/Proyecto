@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene la información de un UsuarioRegistrado
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3;
 
 public abstract class UsuarioRegistrado {
