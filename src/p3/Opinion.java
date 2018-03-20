@@ -28,4 +28,5 @@ public abstract class Opinion {
         comentarios.add(comentario);
         return true;
     }
+
 }

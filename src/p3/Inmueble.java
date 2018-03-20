@@ -14,7 +14,7 @@ public class Inmueble {
     /** Numero de baños*/
     private int nBanos;
     /** Dimensiones en metros cuadrados*/
-    private String dimensiones;
+    private int dimensiones;
     /** Nombre de la calle y el numero*/
     private String direccion;
     /** Planta en la que se encuentra*/
@@ -36,7 +36,7 @@ public class Inmueble {
      * @param planta Planta en la que se encuentra
      * @param ascensor True si hay ascensor, false en caso contrario
      */
-    public Inmueble(int nHabitaciones, int nBanos, String dimensiones, String direccion, int planta, Boolean ascensor) {
+    public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor) {
         this.nHabitaciones = nHabitaciones;
         this.nBanos = nBanos;
         this.dimensiones = dimensiones;
@@ -69,7 +69,7 @@ public class Inmueble {
      *
      * @return Cadena con las dimensiones
      */
-    public String getDimensiones() {
+    public int getDimensiones() {
         return dimensiones;
     }
 

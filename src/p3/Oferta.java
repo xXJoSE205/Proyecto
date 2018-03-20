@@ -21,7 +21,7 @@ public class Oferta{
     /** Fianza de la oferta*/
     private double fianza;
     /** Si esta disponible la oferta o no*/
-    private boolean disponible;
+    private Estado estado;
     /** Puntero a Reserva, si esta reservada*/
     private Reserva reserva = null;
 
@@ -40,6 +40,7 @@ public class Oferta{
         this.fechaFin = fechaFin;
         this.vacacional = vacacional;
         this.fianza = fianza;
+        this.estado = Estado.Pendiente;
     }
 
     /**
@@ -130,12 +131,12 @@ public class Oferta{
         this.fianza = fianza;
     }
 
-    public boolean isDisponible() {
-        return disponible;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public Reserva getReserva() {
@@ -156,11 +157,13 @@ public class Oferta{
         Implementar
          */
     public void aprobarOferta(){
-
+        estado = Estado.Disponible;
+        return;
     }
 
     public void rechazarOferta(){
-
+        estado=Estado.Rechazado;
+        return;
     }
 
     public boolean modificarOferta(){
