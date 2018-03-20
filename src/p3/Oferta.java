@@ -143,10 +143,16 @@ public class Oferta{
         return reserva;
     }
 
-    public void reservar() {
-        Reserva r = new Reserva(LocalDate.now());
+    public boolean reservar(Demandante usuario) {
+        Reserva r;
+        if(usuario.isReservaActiva()){
+            return false;
+        }
+        r = new Reserva(usuario);
         this.setReservado(true);
         this.reserva = r;
+        usuario.setReservaActiva(true);
+        return true;
     }
 
     public void quitarReserva() {

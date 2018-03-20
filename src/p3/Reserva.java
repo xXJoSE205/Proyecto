@@ -8,10 +8,23 @@ package p3;
 import java.time.LocalDate;
 
 public class Reserva {
+    /** Fecha de inicio de la reserva*/
     private LocalDate fechaInicio;
+    /** Usuario que realiza la reserva*/
+    private Demandante usuario;
 
-    public Reserva(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    /**
+     * Constructor de Reserva, crea una reserva con la fecha actual
+     *
+     * @param usuario Demandante que realiza la reserva
+     * @throws NullPointerException si el usuario es null
+     */
+    public Reserva(Demandante usuario) {
+        if(usuario==null){
+            throw new NullPointerException("Usuario null");
+        }
+        this.fechaInicio = LocalDate.now();
+        this.usuario = usuario;
     }
 
     public LocalDate getFechaInicio() {

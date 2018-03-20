@@ -35,8 +35,15 @@ public class Inmueble {
      * @param direccion Calle y numero
      * @param planta Planta en la que se encuentra
      * @param ascensor True si hay ascensor, false en caso contrario
+     * @throws NullPointerException si la direccion es null
+     * @throws IllegalArgumentException si las habitaciones, baños, dimesnione son menores que 1 o si la planta es menor que 0
      */
     public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor) {
+        if(direccion==null){ throw new NullPointerException("Direccion null"); }
+        if(nHabitaciones<1 || nBanos<1 || dimensiones<1 || planta<0){
+            throw new IllegalArgumentException("Numero de habbitaciones, baños o dimesiones menores que 1"
+                    +" o planta menor que 0: "+nHabitaciones+", "+nBanos+", "+dimensiones+", "+planta);
+        }
         this.nHabitaciones = nHabitaciones;
         this.nBanos = nBanos;
         this.dimensiones = dimensiones;
