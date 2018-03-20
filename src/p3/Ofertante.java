@@ -6,26 +6,62 @@
 package p3;
 
 public class Ofertante extends Cliente{
+    /** Cargo pendiente*/
     private double cargo = 0;
+    /** */
     private String modificaciones;
 
+    /**
+     * Constructor de Ofertante, se llama al constructor de Cliente
+     *
+     * @param nombre Nombre del cliente
+     * @param apellidos Apellidos del cliente
+     * @param nif Numero de Identificacion Fiscal
+     * @param password Contraseña de acceso
+     * @param tarjeta Cadena con el numero de la tarjeta
+     */
     public Ofertante(String nombre, String apellidos, String nif, String password, String tarjeta) {
         super(nombre, apellidos, nif, password, tarjeta);
     }
 
+    /**
+     * Devuelve al cargo total pendiente
+     *
+     * @return double, cantidad pendiente de cargo
+     */
     public double getCargo() {
         return cargo;
     }
 
-    public void setCargo(double cargo) {
-        this.cargo += cargo;
+    /**
+     * Modifica el cargo pendiente, suma la cantidad al cargo
+     *
+     * @param cantidad double con la cantidad a añadir, positiva o negativa
+     */
+    public void setCargo(double cantidad) {
+        this.cargo += cantidad;
     }
 
+    /**
+     * Devuelve las modificaciones propuestas
+     *
+     * @return Cadena con las modificaciones propuestas
+     */
     public String getModificaciones() {
         return modificaciones;
     }
 
-    public void setModificaciones(String modificaciones) {
-        this.modificaciones = modificaciones;
+    /**
+     * Añade modificaciones a las anteriores o establece unas nuevas
+     *
+     * @param modificaciones Cadena con las modificaciones a añadir
+     * @param anadir boolean, true si se quieren añadir, false si se quiere establecer
+     */
+    public void anadirModificaciones(String modificaciones, boolean anadir) {
+        if(anadir == true){
+            this.modificaciones += modificaciones;
+        }else {
+            this.modificaciones = modificaciones;
+        }
     }
 }

@@ -24,10 +24,11 @@ public abstract class UsuarioRegistrado {
      * @param apellidos Apellidos del usuario
      * @param nif Numero de Identificacion Fiscal
      * @param password Constraseña de acceso
+     * @throws NullPointerException si algun parametro es null
      */
     public UsuarioRegistrado(String nombre, String apellidos, String nif, String password) {
         if(nombre==null || apellidos==null || nif==null || password==null){
-            throw new NullPointerException("Nombre, appelidos, nif o contraseña nulos");
+            throw new NullPointerException("Nombre, appelidos, nif o contraseña null");
         }
         this.nombre = nombre;
         this.apellidos = apellidos;
