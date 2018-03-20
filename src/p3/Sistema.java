@@ -5,6 +5,9 @@
  */
 package p3;
 
+import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,10 +86,16 @@ public class Sistema {
     }
 
     public boolean comprobarReservas(){
+        LocalDateTime fecha;
         for(Oferta o: ofertas){
             if(o.isReservado()){
-
+                fecha = o.getReserva().getFechaInicio();
+                fecha=fecha.plusDays(5);
+                if(fecha.isEqual(LocalDateTime.now())||fecha.isBefore(LocalDateTime.now())){
+                    o.setReservado(false);
+                }
             }
         }
+        return true;
     }
 }

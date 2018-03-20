@@ -101,6 +101,12 @@ public class Inmueble {
         return ofertas;
     }
 
+    /**
+     * Añade una oferta a un inmueble
+     *
+     * @param oferta oferta que se quiere añadir
+     * @return boolean, true si se añade la oferta, false en caso contrario
+     */
     public boolean anadirOferta(Oferta oferta){
         if(oferta==null){
             return false;
