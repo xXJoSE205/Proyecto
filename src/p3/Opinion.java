@@ -5,9 +5,13 @@
  */
 package p3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Opinion {
     /** Autor de la opinion*/
     private Demandante autor;
+    private List<Comentario> comentarios;
 
     /**
      * Constructor de Opinion
@@ -20,6 +24,7 @@ public abstract class Opinion {
             throw new NullPointerException("Autor null");
         }
         this.autor = autor;
+        this.comentarios = new ArrayList<>();
     }
 
     /**
@@ -30,4 +35,13 @@ public abstract class Opinion {
     public Demandante getAutor() {
         return autor;
     }
+
+    public boolean anadirComentario(Comentario comentario){
+        if(comentario==null){
+            return false;
+        }
+        comentarios.add(comentario);
+        return true;
+    }
+
 }

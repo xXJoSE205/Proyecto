@@ -7,6 +7,8 @@ package p3;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +87,26 @@ public class Sistema {
     }
 
     public boolean comprobarReservas(){
+        LocalDate fecha;
+        for(Oferta o: ofertas){
+            if(o.isReservado()){
+                fecha = o.getReserva().getFechaInicio();
+                fecha=fecha.plusDays(5);
+                if(fecha.isEqual(LocalDate.now())||fecha.isBefore(LocalDate.now())){
+                    o.setReservado(false);
+                }
+            }
+        }
+        return true;
+    }
 
+    public List<Inmueble> buscar(int nHab, int nBan, int dim, String planta, boolean ascensor ){
+        List<Inmueble> Busqueda = new ArrayList<>();
+        for(Inmueble inmueble: inmuebles){
+            if(inmueble.getnHabitaciones()==nHab && inmueble.getnBanos()==nBan && inmueble.getDimensiones()==dim  ){
+
+            }
+        }
+        return Busqueda;
     }
 }

@@ -79,4 +79,12 @@ public class Demandante extends Cliente {
     public void setReservaActiva(boolean reserva) {
         this.reservaActiva = reserva;
     }
+
+    public boolean desbloquearUsuario(){
+        if(bloqueado==true){
+            bloqueado=false;
+            return true;
+        }
+        return false;
+    }
 }

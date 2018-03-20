@@ -5,6 +5,7 @@
  */
 package p3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Inmueble {
@@ -13,7 +14,7 @@ public class Inmueble {
     /** Numero de baños*/
     private int nBanos;
     /** Dimensiones en metros cuadrados*/
-    private String dimensiones;
+    private int dimensiones;
     /** Nombre de la calle y el numero*/
     private String direccion;
     /** Planta en la que se encuentra*/
@@ -35,13 +36,14 @@ public class Inmueble {
      * @param planta Planta en la que se encuentra
      * @param ascensor True si hay ascensor, false en caso contrario
      */
-    public Inmueble(int nHabitaciones, int nBanos, String dimensiones, String direccion, int planta, Boolean ascensor) {
+    public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor) {
         this.nHabitaciones = nHabitaciones;
         this.nBanos = nBanos;
         this.dimensiones = dimensiones;
         this.direccion = direccion;
         this.planta = planta;
         this.ascensor = ascensor;
+        this.ofertas = new ArrayList<>();
     }
 
     /**
@@ -67,7 +69,7 @@ public class Inmueble {
      *
      * @return Cadena con las dimensiones
      */
-    public String getDimensiones() {
+    public int getDimensiones() {
         return dimensiones;
     }
 
@@ -97,6 +99,22 @@ public class Inmueble {
     public Boolean getAscensor() {
         return ascensor;
     }
-}
 
-//astolfo
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+    /**
+     * Añade una oferta a un inmueble
+     *
+     * @param oferta oferta que se quiere añadir
+     * @return boolean, true si se añade la oferta, false en caso contrario
+     */
+    public boolean anadirOferta(Oferta oferta){
+        if(oferta==null){
+            return false;
+        }
+        ofertas.add(oferta);
+        return true;
+    }
+}
