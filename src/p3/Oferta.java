@@ -6,7 +6,6 @@
 package p3;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Oferta{
     /** Precio de la oferta*/
@@ -144,7 +143,7 @@ public class Oferta{
     }
 
     public void reservar() {
-        Reserva r = new Reserva(LocalDateTime.now());
+        Reserva r = new Reserva(LocalDate.now());
         this.setReservado(true);
         this.reserva = r;
     }
