@@ -5,6 +5,8 @@
  */
 package p3;
 
+import java.util.List;
+
 public class Inmueble {
     /** Numero de habitaciones*/
     private int nHabitaciones;
@@ -18,6 +20,10 @@ public class Inmueble {
     private int planta;
     /** Si hay o no ascensor en el edificio*/
     private Boolean ascensor;
+    /** Dueño del inmueble*/
+    private Ofertante dueno;
+    /** Lista de ofertas del inmueble*/
+    private List<Oferta> ofertas;
 
     /**
      * Constructor de Inmueble

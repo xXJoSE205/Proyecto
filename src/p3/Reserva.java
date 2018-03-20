@@ -5,16 +5,16 @@
  */
 package p3;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Reserva {
-    private LocalDateTime fechaInicio;
+    private LocalDate fechaInicio;
 
-    public Reserva(LocalDateTime fechaInicio) {
+    public Reserva(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public LocalDateTime getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 }
