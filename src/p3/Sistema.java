@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene la información del Sistema
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3;
 
 import java.util.ArrayList;
@@ -5,11 +10,12 @@ import java.util.List;
 
 public class Sistema {
     private double totalComisiones = 0;
-    private List<Cliente> usuarios;
+    private List<UsuarioRegistrado> usuarios;
     private TeleChargeAndPaySystem pasarelaPago;
     private List<Inmueble> inmuebles;
     private List<Oferta> ofertas;
     private List<Opinion> opiniones;
+    private Gerente gerente;
 
     public Sistema(TeleChargeAndPaySystem pasarelaPago){
         this.usuarios = new ArrayList<>();
@@ -23,7 +29,7 @@ public class Sistema {
         return totalComisiones;
     }
 
-    public List<Cliente> getUsuarios() {
+    public List<UsuarioRegistrado> getUsuarios() {
         return usuarios;
     }
 
@@ -47,13 +53,13 @@ public class Sistema {
         this.totalComisiones += comisiones;
     }
 
-    public boolean anadirUsuario(Cliente usuario){
+    public boolean anadirUsuario(UsuarioRegistrado usuario){
         return usuarios.add(usuario);
     }
 
-    public boolean login(Cliente usuario, String nif, String password){
+    public boolean login(UsuarioRegistrado usuario, String nif, String password){
         if(usuarios.contains(usuario)) {
-            for(Cliente x: usuarios) {
+            for(UsuarioRegistrado x: usuarios) {
                 if(x.isLogeado()) {
                     return false;
                 }
@@ -66,7 +72,7 @@ public class Sistema {
         return false;
     }
 
-    public boolean logout(Cliente usuario){
+    public boolean logout(UsuarioRegistrado usuario){
         if(usuarios.contains(usuario)) {
             if(usuario.isLogeado()){
                 usuario.setLogeado(false);
