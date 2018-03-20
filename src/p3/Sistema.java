@@ -100,13 +100,27 @@ public class Sistema {
         return true;
     }
 
-    public List<Inmueble> buscar(int nHab, int nBan, int dim, String planta, boolean ascensor ){
-        List<Inmueble> Busqueda = new ArrayList<>();
+    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir ){
+        List<Inmueble> busqueda = new ArrayList<>();
         for(Inmueble inmueble: inmuebles){
-            if(inmueble.getnHabitaciones()==nHab && inmueble.getnBanos()==nBan && inmueble.getDimensiones()==dim  ){
+            if(inmueble.getnHabitaciones()==nHab && inmueble.getnBanos()==nBan && inmueble.getDimensiones()==dim &&
+                    inmueble.getPlanta()==planta && inmueble.getAscensor()==ascensor && inmueble.getDireccion()==dir){
+                        busqueda.add(inmueble);
+            } else if(nHab==0 && inmueble.getnBanos()==nBan && inmueble.getDimensiones()==dim &&
+                    inmueble.getPlanta()==planta && inmueble.getAscensor()==ascensor && inmueble.getDireccion()==dir){
+                        busqueda.add(inmueble);
+            } else if(inmueble.getnHabitaciones()==nHab && nBan==0 && inmueble.getDimensiones()==dim &&
+                    inmueble.getPlanta()==planta && inmueble.getAscensor()==ascensor && inmueble.getDireccion()==dir){
+                         busqueda.add(inmueble);
+            } else if(inmueble.getnHabitaciones()==nHab && inmueble.getnBanos()==nBan && dim==0  &&
+                    inmueble.getPlanta()==planta && inmueble.getAscensor()==ascensor && inmueble.getDireccion()==dir){
+                        busqueda.add(inmueble);
+            } else if(inmueble.getnHabitaciones()==nHab && inmueble.getnBanos()==nBan && inmueble.getDimensiones()==dim
+                    && planta==0 && inmueble.getAscensor()==ascensor && inmueble.getDireccion()==dir){
+                        busqueda.add(inmueble);
+            } else if()
 
-            }
         }
-        return Busqueda;
+        return busqueda;
     }
 }
