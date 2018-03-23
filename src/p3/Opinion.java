@@ -11,6 +11,7 @@ import java.util.List;
 public abstract class Opinion {
     /** Autor de la opinion*/
     private Demandante autor;
+    /** Comentarios de la opinion*/
     private List<Comentario> comentarios;
 
     /**
@@ -36,9 +37,16 @@ public abstract class Opinion {
         return autor;
     }
 
+    /**
+     * Añade un comentario a la opinion
+     *
+     * @param comentario Comentario a añadir
+     * @return boolean, true si se añade coorectamente
+     * @throws NullPointerException Si el comentario es null
+     */
     public boolean anadirComentario(Comentario comentario){
         if(comentario==null){
-            return false;
+            throw new NullPointerException("Comentario null");
         }
         comentarios.add(comentario);
         return true;

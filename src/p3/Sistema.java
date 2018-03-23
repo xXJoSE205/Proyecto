@@ -91,8 +91,8 @@ public class Sistema {
         for(Oferta o: ofertas){
             if(o.isReservado()){
                 fecha = o.getReserva().getFechaInicio();
-                fecha=fecha.plusDays(5);
-                if(fecha.isEqual(LocalDate.now())||fecha.isBefore(LocalDate.now())){
+                fecha = fecha.plusDays(5);
+                if(fecha.isEqual(LocalDate.now()) || fecha.isBefore(LocalDate.now())){
                     o.setReservado(false);
                 }
             }
