@@ -8,7 +8,7 @@ package p3;
 public class Ofertante extends Cliente{
     /** Cargo pendiente*/
     private double cargo = 0;
-    /** */
+    /** Cadena con las modificaciones propuestas*/
     private String modificaciones;
 
     /**
