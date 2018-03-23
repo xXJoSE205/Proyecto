@@ -27,7 +27,21 @@ public class Reserva {
         this.usuario = usuario;
     }
 
+    /**
+     * Devuelve la fecha en que se hizo la reserva
+     *
+     * @return LocalDate, fecha de la reserva
+     */
     public LocalDate getFechaInicio() {
         return fechaInicio;
+    }
+
+    /**
+     * Devuelve el usuario que hizo la reserva
+     *
+     * @return Demandante que hizo la reserva
+     */
+    public Demandante getUsuario() {
+        return usuario;
     }
 }
