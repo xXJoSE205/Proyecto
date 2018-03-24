@@ -107,6 +107,11 @@ public class Inmueble {
         return ascensor;
     }
 
+    /**
+     * Devuelve las ofertas correspondientes al inmueble
+     *
+     * @return Lista con las ofertas
+     */
     public List<Oferta> getOfertas() {
         return ofertas;
     }
@@ -116,12 +121,12 @@ public class Inmueble {
      *
      * @param oferta oferta que se quiere añadir
      * @return boolean, true si se añade la oferta, false en caso contrario
+     * @throws NullPointerException Si la oferta es null
      */
     public boolean anadirOferta(Oferta oferta){
         if(oferta==null){
-            return false;
+            throw new NullPointerException("Oferta null");
         }
-        ofertas.add(oferta);
-        return true;
+        return ofertas.add(oferta);
     }
 }

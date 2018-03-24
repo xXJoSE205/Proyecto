@@ -64,4 +64,11 @@ public class Ofertante extends Cliente{
             this.modificaciones = modificaciones;
         }
     }
+
+    /**
+     * Quita las modificaciones poniendo el campo a null
+     */
+    public void quitarModificaciones(){
+        this.modificaciones = null;
+    }
 }

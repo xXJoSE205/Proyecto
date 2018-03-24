@@ -238,14 +238,14 @@ public class Oferta{
     }
 
     /**
-     * Acepta la oferta y pone su estado como DISPONIBLE
+     * Acepta la oferta y cambia su estado a DISPONIBLE
      */
     public void aprobarOferta(){
         estado = Estado.DISPONIBLE;
     }
 
     /**
-     * Rechaza la oferta y pone su estado como RECHAZADA
+     * Rechaza la oferta y cambia su estado a RECHAZADA
      */
     public void rechazarOferta(){
         estado = Estado.RECHAZADO;
