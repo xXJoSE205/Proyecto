@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 import java.time.LocalDate;
 
@@ -189,7 +189,11 @@ public class Oferta{
      * @param estado Estado nuevo de la oferta
      */
     public void setEstado(Estado estado) {
-        this.estado = estado;
+        if(estado.equals(Estado.DISPONIBLE)||estado.equals(Estado.PENDIENTE)||estado.equals(Estado.RECHAZADO)||estado.equals(Estado.NO_DISPONIBLE)){
+            this.estado = estado;
+            return;
+        }
+        throw new IllegalArgumentException("El estado no esta en la enumeracion");
     }
 
     /**

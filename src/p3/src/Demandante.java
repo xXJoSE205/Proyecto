@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 public class Demandante extends Cliente {
     /** Deuda del demandante*/
@@ -80,6 +80,11 @@ public class Demandante extends Cliente {
         this.reservaActiva = reserva;
     }
 
+    /**
+     * Desbloquea un usuario bloqueado
+     *
+     * @return boolean, true en casa de que se haya desbloqueado el usuario, false en caso de que no estuviese bloqueado
+     */
     public boolean desbloquearUsuario(){
         if(bloqueado==true){
             bloqueado=false;

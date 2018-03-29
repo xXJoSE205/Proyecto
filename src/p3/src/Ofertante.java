@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 public class Ofertante extends Cliente{
     /** Cargo pendiente*/

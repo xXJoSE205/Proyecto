@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 public abstract class Cliente extends UsuarioRegistrado{
     /** Tarjeta de credito*/
@@ -35,4 +35,5 @@ public abstract class Cliente extends UsuarioRegistrado{
     public String getTarjeta() {
         return tarjeta;
     }
+
 }

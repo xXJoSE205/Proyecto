@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 import java.time.LocalDate;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
@@ -190,21 +190,78 @@ public class Sistema {
         }
     }
 
+    /**
+     * Realiza una busqueda con filtros en las viviendas
+     * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
+     * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
+     * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
+     * @param planta planta de la vivienda, -1 si no se quiere filtrar por la planta
+     * @param ascensor existencia de ascensor o no en la vivienda
+     * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
+     * @return list, lista con las viviendas obtenidas aplicando los filtros
+     */
     public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir ){
         List<Inmueble> busqueda = new ArrayList<>();
+
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()==nHab && nHab>-1){
                 busqueda.add(inmueble);
-            }
-            if(inmueble.getnBanos()==nBan && nBan>-1){
+            } else {
                 busqueda.add(inmueble);
             }
-            if(inmueble.getDimensiones()==dim && dim>-1){
-                busqueda.add(inmueble);
+        }for (Inmueble inmueble:busqueda){
+            if(inmueble.getnBanos()!=nBan && nBan>-1){
+                busqueda.remove(inmueble);
             }
-            if(inmueble)
+            if(inmueble.getDimensiones()<dim && dim>-1){
+                busqueda.remove(inmueble);
+            }
+            if(inmueble.getPlanta()!=planta && planta>-1){
+                busqueda.remove(inmueble);
+            }
+            if(inmueble.getAscensor()!=ascensor){
+                busqueda.remove(inmueble);
+            }
+            if(inmueble.getDireccion()!=dir && dir!=null){
+                busqueda.remove(inmueble);
+            }
         }
         return busqueda;
     }
 
+    /**
+     * Realiza una busqueda con filtros para obtener todas las ofertas acordes a esos filtros
+     * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
+     * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
+     * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
+     * @param planta planta de la vivienda, -1 si no se quiere filtrar por la planta
+     * @param ascensor existencia de ascensor o no en la vivienda
+     * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
+     * @param precio precio maximo de la vivienda
+     * @param vacacional si es una vivienda vacacional o no
+     * @return list, lista con las ofertas obtenidas aplicando los filtros
+     */
+    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio, boolean vacacional){
+        List<Oferta> ofertas = new ArrayList<>();
+        List<Inmueble> aux = new ArrayList<>();
+        aux=buscar(nHab,nBan,dim,planta,ascensor,dir);
+        for(Inmueble inmueble : aux){
+            for(Oferta oferta:inmueble.getOfertas()){
+                if(oferta.getEstado()==Estado.DISPONIBLE){
+                    ofertas.add(oferta);
+                }
+            }
+        }
+        for(Oferta oferta: ofertas){
+            if(oferta.getPrecio()>precio && precio>-1){
+                ofertas.remove(oferta);
+            }
+            if(oferta.isVacacional()!=vacacional){
+                ofertas.remove(oferta);
+            }
+        }
+        return ofertas;
+
+
+    }
 }

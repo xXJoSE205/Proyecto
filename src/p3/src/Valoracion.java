@@ -3,7 +3,7 @@
  *
  * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
  */
-package p3;
+package p3.src;
 
 public class Valoracion extends Opinion {
     /** Puntuacion de la opinion, entre 0 y 5*/
