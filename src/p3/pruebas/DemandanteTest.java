@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene el test de la clase Demandante
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -8,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class DemandanteTest {
     /**
-     * Demandante para realizar los test
+     * Demandante general para realizar el test
      */
     private Demandante demandante;
 
@@ -18,39 +23,43 @@ public class DemandanteTest {
      */
     @Before
     public void setUp() throws Exception {
-        demandante= new Demandante( "Tony","Stark","12345678Q","Contraseña","0123456789012345" );
-
-
+        demandante= new Demandante( "Tony","Stark","12345678Q","Contraseña",
+                "0123456789012345" );
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor1(){
-        System.out.println("Demandante: Prueba constructor1");
-         Demandante demandate2 = new Demandante(null,"Stark","12345678Q","Contraseña","0123456789012345" );
+        System.out.println("Demandante: test constructor1");
+        Demandante demandate2 = new Demandante(null,"Stark","12345678Q","Contraseña",
+                "0123456789012345" );
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor2(){
-        System.out.println("Demandante: Prueba constructor2");
-        Demandante demandate2 = new Demandante("Tony",null,"12345678Q","Contraseña","0123456789012345" );
+        System.out.println("Demandante: test constructor2");
+        Demandante demandate2 = new Demandante("Tony",null,"12345678Q","Contraseña",
+                "0123456789012345" );
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor3(){
-        System.out.println("Demandante: Prueba constructor3");
-        Demandante demandate2 = new Demandante("Tony","Stark",null,"Contraseña","0123456789012345" );
+        System.out.println("Demandante: test constructor3");
+        Demandante demandate2 = new Demandante("Tony","Stark",null,"Contraseña",
+                "0123456789012345" );
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor4(){
-        System.out.println("Demandante: Prueba constructor4");
-        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q",null,"0123456789012345" );
+        System.out.println("Demandante: test constructor4");
+        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q",null,
+                "0123456789012345" );
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor5(){
-        System.out.println("Demandante: Prueba constructor5");
-        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",null );
+        System.out.println("Demandante: test constructor5");
+        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+                null );
     }
 
     @Test
