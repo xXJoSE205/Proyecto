@@ -222,7 +222,7 @@ public class Sistema {
             if(inmueble.getAscensor()!=ascensor){
                 busqueda.remove(inmueble);
             }
-            if(inmueble.getDireccion()!=dir && dir!=null){
+            if(!(inmueble.getDireccion().equals(dir)) && dir!=null){
                 busqueda.remove(inmueble);
             }
         }
