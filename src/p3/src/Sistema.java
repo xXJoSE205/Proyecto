@@ -132,7 +132,8 @@ public class Sistema {
      * @param nif Numero de Identifiacion Fiscal del usuario
      * @param password Contraseña del usuario
      * @return boolean, true si se logea correctamente
-     * false si ya hay un usuario logeado o si el usuario no esta registrado en el sistema
+     * false si ya hay alguien logeado, si el usuario no esta registrado en el sistema
+     * o si los datos son incorrectos
      * @throws NullPointerException Si algun argumento es null
      */
     public boolean login(Cliente usuario, String nif, String password){
@@ -145,7 +146,7 @@ public class Sistema {
                     return false;
                 }
             }
-            if ((usuario.getNif()==nif) && (usuario.getPassword()==password)) {
+            if ((usuario.getNif().equals(nif)) && (usuario.getPassword().equals(password))) {
                 usuario.setLogeado(true);
                 return true;
             }
@@ -154,10 +155,36 @@ public class Sistema {
     }
 
     /**
+     * Logea al gerente de la empresa
+     *
+     * @param nif Numero de Identificacion Fiscal del gerente
+     * @param password Contraseña del gerente
+     * @return boolean, true si se logea correctamente
+     * false si ya hay alguien logeado o si los datos son incorrectos
+     * @throws NullPointerException si algun argumento es null
+     */
+    public boolean loginGerente(String nif, String password){
+        if(nif==null || password==null) {
+            throw new NullPointerException("Usuario, nif o password null");
+        }
+        for(Cliente x: this.usuarios) {
+            if(x.isLogeado() || gerente.isLogeado()) {
+                return false;
+            }
+        }
+        if ((gerente.getNif().equals(nif)) && (gerente.getPassword().equals(password))) {
+            gerente.setLogeado(true);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Desconecta a un usuario del sistema
      *
      * @param usuario usuario que quiere desconectarse
-     * @return boolean, true si se desconecta correctamente, false si no esta registrado en el sistema
+     * @return boolean, true si se desconecta correctamente
+     * false si no esta registrado en el sistema o si no esta logeado
      * @throws NullPointerException Si el usuario es null
      */
     public boolean logout(Cliente usuario){
@@ -169,6 +196,19 @@ public class Sistema {
                 usuario.setLogeado(false);
                 return true;
             }
+        }
+        return false;
+    }
+
+    /**
+     * Desconecta al gerente del sistema
+     *
+     * @return boolean, true si se desconecta correctamente, false si no estaba logeado
+     */
+    public boolean logoutGerente(){
+        if(gerente.isLogeado()){
+            gerente.setLogeado(false);
+            return true;
         }
         return false;
     }
