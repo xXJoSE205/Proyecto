@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import p3.src.Demandante;
 import p3.src.Reserva;
-
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
