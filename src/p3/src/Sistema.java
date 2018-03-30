@@ -24,24 +24,23 @@ public class Sistema {
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private Gerente gerente;
+    private Gerente gerente = new Gerente("Señor", "Supremo", "Tenchou", "Apruebanos");
 
     /**
      * Constructor de Sistema
      *
      * @param pasarelaPago Pasarela de pago externa
-     * @throws NullPointerException Si la pasalera de pago o el gerente es null
+     * @throws NullPointerException Si la pasalera de pago es null
      */
-    public Sistema(TeleChargeAndPaySystem pasarelaPago, Gerente gerente){
-        if(pasarelaPago==null || gerente==null){
-            throw new NullPointerException("Pasarela de pago o gerente null");
+    public Sistema(TeleChargeAndPaySystem pasarelaPago){
+        if(pasarelaPago==null){
+            throw new NullPointerException("Pasarela de pago null");
         }
         this.usuarios = new ArrayList<>();
         this.pasarelaPago = pasarelaPago;
         this.inmuebles = new ArrayList<>();
         this.ofertas = new ArrayList<>();
         this.opiniones = new ArrayList<>();
-        this.gerente = gerente;
     }
 
     /**
@@ -163,7 +162,7 @@ public class Sistema {
      * false si ya hay alguien logeado o si los datos son incorrectos
      * @throws NullPointerException si algun argumento es null
      */
-    public boolean loginGerente(String nif, String password){
+    public boolean login(String nif, String password){
         if(nif==null || password==null) {
             throw new NullPointerException("Usuario, nif o password null");
         }
@@ -205,7 +204,7 @@ public class Sistema {
      *
      * @return boolean, true si se desconecta correctamente, false si no estaba logeado
      */
-    public boolean logoutGerente(){
+    public boolean logout(){
         if(gerente.isLogeado()){
             gerente.setLogeado(false);
             return true;
@@ -232,6 +231,7 @@ public class Sistema {
 
     /**
      * Realiza una busqueda con filtros en las viviendas
+     *
      * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
      * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
      * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
@@ -271,6 +271,7 @@ public class Sistema {
 
     /**
      * Realiza una busqueda con filtros para obtener todas las ofertas acordes a esos filtros
+     *
      * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
      * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
      * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
@@ -301,7 +302,5 @@ public class Sistema {
             }
         }
         return ofertas;
-
-
     }
 }
