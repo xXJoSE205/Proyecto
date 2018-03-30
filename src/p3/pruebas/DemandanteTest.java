@@ -12,9 +12,7 @@ import p3.src.Demandante;
 import static org.junit.Assert.*;
 
 public class DemandanteTest {
-    /**
-     * Demandante general para realizar el test
-     */
+    /** Demandante general para realizar el test*/
     private Demandante demandante;
 
     /**

@@ -9,7 +9,7 @@ public class Ofertante extends Cliente{
     /** Cargo pendiente*/
     private double cargo = 0;
     /** Cadena con las modificaciones propuestas*/
-    private String modificaciones;
+    private String modificaciones = null;
 
     /**
      * Constructor de Ofertante, se llama al constructor de Cliente
@@ -56,9 +56,13 @@ public class Ofertante extends Cliente{
      *
      * @param modificaciones Cadena con las modificaciones a añadir
      * @param anadir boolean, true si se quieren añadir, false si se quiere establecer
+     * @throws NullPointerException Si la cadena de modificaciones es null
      */
     public void anadirModificaciones(String modificaciones, boolean anadir) {
-        if(anadir == true){
+        if(modificaciones==null){
+            throw new NullPointerException("Modificaciones null");
+        }
+        if(anadir){
             this.modificaciones += modificaciones;
         }else {
             this.modificaciones = modificaciones;
