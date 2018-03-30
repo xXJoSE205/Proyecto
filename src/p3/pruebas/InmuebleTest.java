@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene el test de la clase Inmueble
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -11,83 +16,128 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class InmuebleTest {
-
+    /** Inmueble general para realizar el test*/
     private Inmueble inmueble;
+    /** Ofertante general para realizar el test*/
     private Ofertante ofertante;
 
-
+    /**
+     * Crea un Inmueble y un Ofertante como dueño para realizar los test
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         ofertante = new Ofertante("Tony","Stark", "12345678P","IronMan","0123456789012345");
         inmueble = new Inmueble(5,2,20,"C/ del diamante 5",5, true);
     }
 
+    /**
+     * Test 1 del constructor, se espera un IllegalArgumentException
+     * El numero de habitaciones es menor que 1
+     */
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Inmueble: test constructor1");
         Inmueble inmueble1 = new Inmueble(0,2,20,"C/ del diamante 5", 5, true);
     }
 
+    /**
+     * Test 2 del constructor, se espera un IllegalArgumentException
+     * El numero de baños es menor que 1
+     */
     @Test (expected = IllegalArgumentException.class)
     public void constructor2(){
         System.out.println("Inmueble: test constructor2");
         Inmueble inmueble1 = new Inmueble(5,0,20,"C/ del diamante 5",5, true);
     }
 
+    /**
+     * Test 3 del constructor, se espera un IllegalArgumentException
+     * Las dimensiones son menores que 1
+     */
     @Test (expected = IllegalArgumentException.class)
     public void constructor3(){
         System.out.println("Inmueble: test constructor3");
         Inmueble inmueble1 = new Inmueble(5,2,0,"C/ del diamante 5",5, true);
     }
 
+    /**
+     * Test 4 del constructor, se espera un NullPointerException
+     * La direccion es null
+     */
     @Test (expected = NullPointerException.class)
     public void constructor4(){
         System.out.println("Inmueble: test constructor4");
         Inmueble inmueble1 = new Inmueble(5,2,20,null,5, true);
     }
 
+    /**
+     * Test 5 del constructor, se espera un IllegalArgumentException
+     * El numero de la planta es menor que 0(bajo)
+     */
     @Test (expected = IllegalArgumentException.class)
     public void constructor5(){
         System.out.println("Inmueble: test constructor5");
         Inmueble inmueble1 = new Inmueble(5,2,20,"C/ del diamante 5",-1, true);
     }
 
+    /**
+     * Test de getNHabitaciones, se comprueba que el numero de habitaciones del setUp sea igual a 5
+     */
     @Test
-    public void getnHabitaciones() {
-        System.out.println("Inmueble: test getnHabitaciones");
+    public void getNHabitaciones() {
+        System.out.println("Inmueble: test getNHabitaciones");
         assertTrue(inmueble.getnHabitaciones()==5);
     }
 
+    /**
+     * Test de getNBanos, se comprueba que el numero de baños del setUp sea igual a 2
+     */
     @Test
-    public void getnBanos() {
-        System.out.println("Inmueble: test getnBanos");
+    public void getNBanos() {
+        System.out.println("Inmueble: test getNBanos");
         assertTrue(inmueble.getnBanos()==2);
     }
 
+    /**
+     * Test de getDimensiones, se comprueba que las dimensiones del setUp sean iguales a 20 m2
+     */
     @Test
     public void getDimensiones() {
         System.out.println("Inmueble: test getDimensiones");
         assertTrue(inmueble.getDimensiones()==20);
     }
 
+    /**
+     * Test de getDireccion, se comprueba que la direccion del setUp sea igual a "C/ del diamante 5"
+     */
     @Test
     public void getDireccion() {
         System.out.println("Inmueble: test getDireccion");
-        assertTrue(inmueble.getDireccion()=="C/ del diamante 5");
+        assertEquals(inmueble.getDireccion(),"C/ del diamante 5");
     }
 
+    /**
+     * Test de getPlanta, se comprueba que la planta del setUp sea igual a 5
+     */
     @Test
     public void getPlanta() {
         System.out.println("Inmueble: test getPlanta");
-        assertTrue(inmueble.getPlanta()==-1);
+        assertTrue(inmueble.getPlanta()==5);
     }
 
+    /**
+     * Test de getAscensor, se comprueba que el inmueble del setUp tiene ascensor (true)
+     */
     @Test
     public void getAscensor() {
         System.out.println("Inmueble: test getAscensor");
-        assertTrue(inmueble.getAscensor()==true);
+        assertTrue(inmueble.getAscensor());
     }
 
+    /**
+     * Test de getOfertas, se añade una Oferta al Inmueble y se comprueba que la lista de ofertas no es null
+     */
     @Test
     public void getOfertas() {
         System.out.println("Inmueble: test getOfertas");
@@ -96,6 +146,9 @@ public class InmuebleTest {
         assertNotNull(inmueble.getOfertas());
     }
 
+    /**
+     * Test 1 de anadirOferta, se espera true, se ha añadido una oferta correctamente
+     */
     @Test
     public void anadirOferta1() {
         System.out.println("Inmueble: test anadirOferta1");
@@ -103,6 +156,10 @@ public class InmuebleTest {
         assertTrue(inmueble.anadirOferta(oferta));
     }
 
+    /**
+     * Test 2 de anadirOferta, se espera un NullPointerException
+     * La oferta a añadir es null
+     */
     @Test (expected = NullPointerException.class)
     public void anadirOferta2(){
         System.out.println("Inmueble: test anadirOferta2");
