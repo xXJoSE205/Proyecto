@@ -19,26 +19,38 @@ public class UsuarioRegistradoTest {
 
     @Test
     public void getNombre() {
-
+        System.out.println("UsuarioRegistrado: test getNombre");
+        assertTrue(demandante.getNombre()=="Tony");
     }
 
     @Test
     public void getApellidos() {
+        System.out.println("UsuarioRegistrado: test getApellidos");
+        assertTrue(demandante.getApellidos()=="Stark");
     }
 
     @Test
     public void getNif() {
+        System.out.println("UsuarioRegistrado: test getNif");
+        assertTrue(demandante.getNif()=="12345678Q");
     }
 
     @Test
     public void getPassword() {
+        System.out.println("UsuarioRegistrado: test getPassword");
+        assertTrue(demandante.getPassword()=="Contraseña");
     }
 
     @Test
     public void isLogeado() {
+        System.out.println("UsuarioRegistrado: test isLogeado");
+        assertFalse(demandante.isLogeado());
     }
 
     @Test
     public void setLogeado() {
+        System.out.println("UsuarioRegistrado: test setLogeado");
+        demandante.setLogeado(true);
+        assertTrue(demandante.isLogeado());
     }
 }
