@@ -12,7 +12,7 @@ public abstract class UsuarioRegistrado {
     private String apellidos;
     /** Nimero de Identificacion Fiscal*/
     private String nif;
-    /** Contraseñña de acceso*/
+    /** Contraseña de acceso*/
     private String password;
     /** Si el usuario re ha logeado o no*/
     private boolean logeado = false;

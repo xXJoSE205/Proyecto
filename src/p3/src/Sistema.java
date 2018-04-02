@@ -5,12 +5,13 @@
  */
 package p3.src;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sistema {
+public class Sistema implements Serializable {
     /** Cantidad ganada de las comisiones*/
     private double totalComisiones = 0;
     /** Lista de los clientes*/
