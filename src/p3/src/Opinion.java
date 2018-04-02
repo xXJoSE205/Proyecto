@@ -20,7 +20,7 @@ public abstract class Opinion {
      * @param autor Autor del comentario
      * @throws NullPointerException si el autor es null
      */
-    public Opinion(Demandante autor) {
+    public Opinion(Demandante autor) throws NullPointerException{
         if(autor==null){
             throw new NullPointerException("Autor null");
         }
@@ -44,7 +44,7 @@ public abstract class Opinion {
      * @return boolean, true si se añade coorectamente
      * @throws NullPointerException Si el comentario es null
      */
-    public boolean anadirComentario(Comentario comentario){
+    public boolean anadirComentario(Comentario comentario) throws NullPointerException{
         if(comentario==null){
             throw new NullPointerException("Comentario null");
         }

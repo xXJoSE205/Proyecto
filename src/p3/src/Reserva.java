@@ -19,7 +19,7 @@ public class Reserva {
      * @param usuario Demandante que realiza la reserva
      * @throws NullPointerException si el usuario es null
      */
-    public Reserva(Demandante usuario) {
+    public Reserva(Demandante usuario) throws NullPointerException{
         if(usuario==null){
             throw new NullPointerException("Usuario null");
         }

@@ -15,7 +15,7 @@ public class Gerente extends UsuarioRegistrado{
      * @param nif Identificador especial del gerente
      * @param password Contraseña especial del gerente
      */
-    public Gerente(String nombre, String apellidos, String nif, String password) {
+    public Gerente(String nombre, String apellidos, String nif, String password) throws NullPointerException{
         super(nombre, apellidos, nif, password);
     }
 }

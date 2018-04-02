@@ -35,11 +35,13 @@ public class Inmueble {
      * @param direccion Calle y numero
      * @param planta Planta en la que se encuentra
      * @param ascensor True si hay ascensor, false en caso contrario
-     * @throws NullPointerException si la direccion es null
-     * @throws IllegalArgumentException si las habitaciones, baños, dimesnione son menores que 1 o si la planta es menor que 0
+     * @param dueno Dueño del inmueble
+     * @throws NullPointerException si la direccion o el dueño es null
+     * @throws IllegalArgumentException si las habitaciones, baños, dimensione son menores que 1 o si la planta es menor que 0
      */
-    public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor) {
-        if(direccion==null){ throw new NullPointerException("Direccion null"); }
+    public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor,
+                    Ofertante dueno) throws NullPointerException, IllegalArgumentException{
+        if(direccion==null || dueno==null){ throw new NullPointerException("Direccion o dueño null"); }
         if(nHabitaciones<1 || nBanos<1 || dimensiones<1 || planta<0){
             throw new IllegalArgumentException("Numero de habbitaciones, baños o dimesiones menores que 1"
                     +" o planta menor que 0: "+nHabitaciones+", "+nBanos+", "+dimensiones+", "+planta);
@@ -50,6 +52,7 @@ public class Inmueble {
         this.direccion = direccion;
         this.planta = planta;
         this.ascensor = ascensor;
+        this.dueno = dueno;
         this.ofertas = new ArrayList<>();
     }
 
@@ -123,7 +126,7 @@ public class Inmueble {
      * @return boolean, true si se añade la oferta, false en caso contrario
      * @throws NullPointerException Si la oferta es null
      */
-    public boolean anadirOferta(Oferta oferta){
+    public boolean anadirOferta(Oferta oferta) throws NullPointerException{
         if(oferta==null){
             throw new NullPointerException("Oferta null");
         }

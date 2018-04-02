@@ -20,7 +20,8 @@ public class Ofertante extends Cliente{
      * @param password Contraseña de acceso
      * @param tarjeta Cadena con el numero de la tarjeta
      */
-    public Ofertante(String nombre, String apellidos, String nif, String password, String tarjeta) {
+    public Ofertante(String nombre, String apellidos, String nif, String password, String tarjeta)
+            throws NullPointerException{
         super(nombre, apellidos, nif, password, tarjeta);
     }
 
@@ -58,7 +59,7 @@ public class Ofertante extends Cliente{
      * @param anadir boolean, true si se quieren añadir, false si se quiere establecer
      * @throws NullPointerException Si la cadena de modificaciones es null
      */
-    public void anadirModificaciones(String modificaciones, boolean anadir) {
+    public void anadirModificaciones(String modificaciones, boolean anadir) throws NullPointerException{
         if(modificaciones==null){
             throw new NullPointerException("Modificaciones null");
         }

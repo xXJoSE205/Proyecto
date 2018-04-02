@@ -24,7 +24,7 @@ public class Sistema {
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private Gerente gerente = new Gerente("Señor", "Supremo", "Tenchou", "Apruebanos");
+    private Gerente gerente = new Gerente("Señor", "Supremo", "SoyDios", "Apruebanos");
 
     /**
      * Constructor de Sistema
@@ -32,7 +32,7 @@ public class Sistema {
      * @param pasarelaPago Pasarela de pago externa
      * @throws NullPointerException Si la pasalera de pago es null
      */
-    public Sistema(TeleChargeAndPaySystem pasarelaPago){
+    public Sistema(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
         if(pasarelaPago==null){
             throw new NullPointerException("Pasarela de pago null");
         }
@@ -103,7 +103,7 @@ public class Sistema {
      * @param comisiones Cantidad a añadir
      * @throws IllegalArgumentException Si la cantidad es menor que 0
      */
-    public void setTotalComisiones(double comisiones) {
+    public void setTotalComisiones(double comisiones) throws IllegalArgumentException{
         if(comisiones<0){
             throw new IllegalArgumentException("Comisiones menor que 0: "+comisiones);
         }
@@ -117,11 +117,53 @@ public class Sistema {
      * @return boolean, true si se añade correctamente, false en caso contrario
      * @throws NullPointerException Si el usuario es null
      */
-    public boolean anadirUsuario(Cliente usuario){
+    public boolean anadirUsuario(Cliente usuario) throws NullPointerException{
         if(usuario==null){
             throw new NullPointerException("Usuario null");
         }
         return usuarios.add(usuario);
+    }
+
+    /**
+     * Añade un inmuelbe al sistema
+     *
+     * @param inmueble Inmueble a añadir
+     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @throws NullPointerException Si el inmueble es null
+     */
+    public boolean anadirInmueble(Inmueble inmueble) throws NullPointerException {
+        if (inmueble == null) {
+            throw new NullPointerException("Inmueble null");
+        }
+        return inmuebles.add(inmueble);
+    }
+
+    /**
+     * Añade una oferta al sistema
+     *
+     * @param oferta Oferta a añadir
+     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @throws NullPointerException Si la oferta es null
+     */
+    public boolean anadirOferta(Oferta oferta) throws NullPointerException {
+        if (oferta == null) {
+            throw new NullPointerException("Oferta null");
+        }
+        return ofertas.add(oferta);
+    }
+
+    /**
+     * Añade una opinion al sistema
+     *
+     * @param opinion Opinion a añadir
+     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @throws NullPointerException Si la opinion es null
+     */
+    public boolean anadirOpinion(Opinion opinion) throws NullPointerException {
+        if (opinion == null) {
+            throw new NullPointerException("Opinion null");
+        }
+        return opiniones.add(opinion);
     }
 
     /**
@@ -135,7 +177,7 @@ public class Sistema {
      * o si los datos son incorrectos
      * @throws NullPointerException Si algun argumento es null
      */
-    public boolean login(Cliente usuario, String nif, String password){
+    public boolean login(Cliente usuario, String nif, String password) throws NullPointerException{
         if(usuario==null || nif==null || password==null){
             throw new NullPointerException("Usuario, nif o password null");
         }
@@ -162,7 +204,7 @@ public class Sistema {
      * false si ya hay alguien logeado o si los datos son incorrectos
      * @throws NullPointerException si algun argumento es null
      */
-    public boolean login(String nif, String password){
+    public boolean login(String nif, String password) throws NullPointerException{
         if(nif==null || password==null) {
             throw new NullPointerException("Usuario, nif o password null");
         }
@@ -186,7 +228,7 @@ public class Sistema {
      * false si no esta registrado en el sistema o si no esta logeado
      * @throws NullPointerException Si el usuario es null
      */
-    public boolean logout(Cliente usuario){
+    public boolean logout(Cliente usuario) throws NullPointerException{
         if(usuario==null){
             throw new NullPointerException("Usuario null");
         }

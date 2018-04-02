@@ -27,8 +27,10 @@ public class InmuebleTest {
      */
     @Before
     public void setUp() throws Exception {
-        ofertante = new Ofertante("Tony","Stark", "12345678P","IronMan","0123456789012345");
-        inmueble = new Inmueble(5,2,20,"C/ del diamante 5",5, true);
+        ofertante = new Ofertante("Tony","Stark", "12345678P","IronMan",
+                "0123456789012345");
+        inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
+                true, ofertante);
     }
 
     /**
@@ -38,7 +40,8 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Inmueble: test constructor1");
-        Inmueble inmueble1 = new Inmueble(0,2,20,"C/ del diamante 5", 5, true);
+        Inmueble inmueble1 = new Inmueble(0,2,150,"C/ del diamante 5",
+                5, true, ofertante);
     }
 
     /**
@@ -48,7 +51,8 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor2(){
         System.out.println("Inmueble: test constructor2");
-        Inmueble inmueble1 = new Inmueble(5,0,20,"C/ del diamante 5",5, true);
+        Inmueble inmueble1 = new Inmueble(5,0,15,"C/ del diamante 5",
+                5, true, ofertante);
     }
 
     /**
@@ -58,7 +62,8 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor3(){
         System.out.println("Inmueble: test constructor3");
-        Inmueble inmueble1 = new Inmueble(5,2,0,"C/ del diamante 5",5, true);
+        Inmueble inmueble1 = new Inmueble(5,2,0,"C/ del diamante 5",
+                5, true, ofertante);
     }
 
     /**
@@ -68,7 +73,8 @@ public class InmuebleTest {
     @Test (expected = NullPointerException.class)
     public void constructor4(){
         System.out.println("Inmueble: test constructor4");
-        Inmueble inmueble1 = new Inmueble(5,2,20,null,5, true);
+        Inmueble inmueble1 = new Inmueble(5,2,150,null,5,
+                true, ofertante);
     }
 
     /**
@@ -78,7 +84,19 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor5(){
         System.out.println("Inmueble: test constructor5");
-        Inmueble inmueble1 = new Inmueble(5,2,20,"C/ del diamante 5",-1, true);
+        Inmueble inmueble1 = new Inmueble(5,2,150,"C/ del diamante 5",
+                -1, true, ofertante);
+    }
+
+    /**
+     * Test 6 del constructor, se espera un NullPointerException
+     * El dueño es null
+     */
+    @Test (expected = NullPointerException.class)
+    public void constructor6(){
+        System.out.println("Inmueble: test constructor6");
+        Inmueble inmueble1 = new Inmueble(5,2,150,"C/ del diamante 5",
+                5, true, null);
     }
 
     /**
@@ -100,12 +118,12 @@ public class InmuebleTest {
     }
 
     /**
-     * Test de getDimensiones, se comprueba que las dimensiones del setUp sean iguales a 20 m2
+     * Test de getDimensiones, se comprueba que las dimensiones del setUp sean iguales a 150 m2
      */
     @Test
     public void getDimensiones() {
         System.out.println("Inmueble: test getDimensiones");
-        assertTrue(inmueble.getDimensiones()==20);
+        assertTrue(inmueble.getDimensiones()==150);
     }
 
     /**

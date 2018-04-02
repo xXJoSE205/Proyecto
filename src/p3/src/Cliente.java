@@ -19,7 +19,8 @@ public abstract class Cliente extends UsuarioRegistrado{
      * @param tarjeta Cadena con la tarjeta de credito
      * @throws NullPointerException si la tarjeta es null
      */
-    public Cliente(String nombre, String apellidos, String nif, String password, String tarjeta) {
+    public Cliente(String nombre, String apellidos, String nif, String password, String tarjeta)
+            throws NullPointerException{
         super(nombre, apellidos, nif, password);
         if(tarjeta==null){
             throw new NullPointerException("Tarjeta null");

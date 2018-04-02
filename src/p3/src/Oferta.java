@@ -36,7 +36,8 @@ public class Oferta{
      * @throws NullPointerException Si alguna fecha es null
      * @throws IllegalArgumentException Si el precio o la fianza es menor que 0
      */
-    public Oferta(double precio, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza) {
+    public Oferta(double precio, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza)
+            throws NullPointerException, IllegalArgumentException{
         if(fechaInicio==null || fechaFin==null){
             throw new NullPointerException("Fecha inicio o fecha final null");
         }
@@ -65,7 +66,7 @@ public class Oferta{
      * @param precio double, precio nuevo
      * @throws IllegalArgumentException Si el precio es menor que 0
      */
-    public void setPrecio(double precio) {
+    public void setPrecio(double precio) throws IllegalArgumentException{
         if(precio<0){
             throw new IllegalArgumentException("Precio menor que 0");
         }
@@ -105,7 +106,7 @@ public class Oferta{
      * @param fechaInicio Nueva fecha de inicio
      * @throws NullPointerException Si la fecha de inicio es null
      */
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) throws NullPointerException{
         if(fechaInicio==null){
             throw new NullPointerException("Fecha de inicio null");
         }
@@ -127,7 +128,7 @@ public class Oferta{
      * @param fechaFin Nueva fecha final
      * @throws NullPointerException Si la fecha final es null
      */
-    public void setFechaFin(LocalDate fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) throws NullPointerException{
         if(fechaFin==null){
             throw new NullPointerException("Fecha final null");
         }
@@ -167,7 +168,7 @@ public class Oferta{
      * @param fianza Cantidad de la fianza nueva
      * @throws IllegalArgumentException Si la fianza es menor que 0
      */
-    public void setFianza(double fianza) {
+    public void setFianza(double fianza) throws IllegalArgumentException{
         if(fianza<0){
             throw new IllegalArgumentException("Precio menor que 0");
         }
@@ -187,9 +188,11 @@ public class Oferta{
      * Modifica el estado de la oferta
      *
      * @param estado Estado nuevo de la oferta
+     * @throws IllegalArgumentException Si el estado no esta en la enumeracion
      */
-    public void setEstado(Estado estado) {
-        if(estado.equals(Estado.DISPONIBLE)||estado.equals(Estado.PENDIENTE)||estado.equals(Estado.RECHAZADO)||estado.equals(Estado.NO_DISPONIBLE)){
+    public void setEstado(Estado estado) throws IllegalArgumentException{
+        if(estado.equals(Estado.DISPONIBLE)||estado.equals(Estado.PENDIENTE)||
+                estado.equals(Estado.RECHAZADO)||estado.equals(Estado.NO_DISPONIBLE)){
             this.estado = estado;
             return;
         }
@@ -212,7 +215,7 @@ public class Oferta{
      * @return boolean, true si se hace la reserva correctamente, false si ya existe una activa
      * @throws NullPointerException Si el usuario es null
      */
-    public boolean reservar(Demandante usuario) {
+    public boolean reservar(Demandante usuario) throws NullPointerException{
         Reserva r;
         if(usuario==null){
             throw new NullPointerException("Usuario null");

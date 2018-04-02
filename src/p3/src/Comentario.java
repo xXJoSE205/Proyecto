@@ -16,7 +16,7 @@ public class Comentario extends Opinion {
      * @param texto Texto con el comentario
      * @throws NullPointerException Si el texto es null
      */
-    public Comentario(Demandante autor, String texto) {
+    public Comentario(Demandante autor, String texto) throws NullPointerException{
         super(autor);
         if(texto==null){
             throw new NullPointerException("Texto null");

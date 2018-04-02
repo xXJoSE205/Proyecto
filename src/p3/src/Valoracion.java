@@ -16,9 +16,9 @@ public class Valoracion extends Opinion {
      * @param puntuacion Puntuacion etre 0 y 5
      * @throws IllegalArgumentException Si la puntuacion esta fuera del rango
      */
-    public Valoracion(Demandante autor, int puntuacion) {
+    public Valoracion(Demandante autor, int puntuacion) throws NullPointerException, IllegalArgumentException{
         super(autor);
-        if(puntuacion<0 && puntuacion>5){
+        if(puntuacion<0 || puntuacion>5){
             throw new IllegalArgumentException("Puntuacion fuera de rango <0-5>: "+puntuacion);
         }
         this.puntuacion = puntuacion;
@@ -39,8 +39,8 @@ public class Valoracion extends Opinion {
      * @param puntuacion Puntuacion nueva entre 0 y 5
      * @throws IllegalArgumentException Si la puntuacion esta fuera del rango
      */
-    public void setPuntuacion(int puntuacion) {
-        if(puntuacion<0 && puntuacion>5){
+    public void setPuntuacion(int puntuacion) throws IllegalArgumentException{
+        if(puntuacion<0 || puntuacion>5){
             throw new IllegalArgumentException("Puntuacion fuera de rango <0-5>: "+puntuacion);
         }
         this.puntuacion = puntuacion;

@@ -22,7 +22,8 @@ public class Demandante extends Cliente {
      * @param password Contraseña de acceso
      * @param tarjeta Cadena con el numero de la tarjeta
      */
-    public Demandante(String nombre, String apellidos, String nif, String password, String tarjeta) {
+    public Demandante(String nombre, String apellidos, String nif, String password, String tarjeta)
+            throws NullPointerException{
         super(nombre, apellidos, nif, password, tarjeta);
     }
 
@@ -83,10 +84,10 @@ public class Demandante extends Cliente {
     /**
      * Desbloquea un usuario bloqueado
      *
-     * @return boolean, true en casa de que se haya desbloqueado el usuario, false en caso de que no estuviese bloqueado
+     * @return boolean, true si se ha desbloqueado al usuario, false si el usuario no estuviese bloqueado
      */
     public boolean desbloquearUsuario(){
-        if(bloqueado==true){
+        if(bloqueado){
             bloqueado=false;
             return true;
         }
