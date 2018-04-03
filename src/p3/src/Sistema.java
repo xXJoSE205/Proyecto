@@ -325,13 +325,14 @@ public class Sistema implements Serializable {
      * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
      * @throws NullPointerException si el cliente es null
      */
-    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio, boolean vacacional, Cliente cliente){
+    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
+                                 boolean vacacional, Cliente cliente){
         List<Oferta> ofertas = new ArrayList<>();
         List<Inmueble> aux = new ArrayList<>();
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }
-        if(cliente.isLogeado()==false){
+        if(!cliente.isLogeado()){
             return null;
         }
         aux=buscar(nHab,nBan,dim,planta,ascensor,dir);
