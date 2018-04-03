@@ -55,12 +55,16 @@ public class Demandante extends Cliente {
     }
 
     /**
-     * Bloquea o desbloquea al demandante
+     * Bloquea al demandante
      *
-     * @param bloqueado boolean, true si se quiere bloquear, false en caso contrario
+     * @return boolean, true si se bloquea correctamente, false si ya estaba bloqueado
      */
-    public void setBloqueado(boolean bloqueado) {
-        this.bloqueado = bloqueado;
+    public boolean bloquear() {
+        if (!bloqueado){
+            bloqueado = true;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -86,7 +90,7 @@ public class Demandante extends Cliente {
      *
      * @return boolean, true si se ha desbloqueado al usuario, false si el usuario no estuviese bloqueado
      */
-    public boolean desbloquearUsuario(){
+    public boolean desbloquear(){
         if(bloqueado){
             bloqueado=false;
             return true;
