@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene el test de la clase Sistema
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3.pruebas;
 
 import com.sun.istack.internal.localization.NullLocalizable;
@@ -9,34 +14,19 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class SistemaTest {
-
-    /**
-     * Sistema general para el test
-     */
+    /** Sistema general para realizar el test*/
     private Sistema sistema;
-    /**
-     * Ofertante general para el test
-     */
+    /** Ofertante general para realizar el test*/
     private Cliente ofertante;
-    /**
-     * Demandante general para el test
-     */
+    /** Demandante general para realizar el test*/
     private Cliente demandante;
-    /**
-     * Inmueble general para el test
-     */
+    /** Inmueble general para realizar el test*/
     private Inmueble inmueble;
-    /**
-     * Oferta general para el test
-     */
+    /** Oferta general para realizar el test*/
     private Oferta oferta;
-    /**
-     * Pasarela de pago general para el test
-     */
+    /** Pasarela de pago general para realizar el test*/
     private TeleChargeAndPaySystem pasarelaPago;
-    /**
-     * Comentario general para el test
-     */
+    /** Comentario general para realizar el test*/
     private Opinion comentario;
 
     /**
@@ -415,7 +405,6 @@ public class SistemaTest {
     public void buscar() {
         System.out.println("Sistema: test buscar1");
         assertNotNull(sistema.buscar(5,2,150,5,true,"C/ del diamante 5"));
-
     }
 
     /**
@@ -425,7 +414,8 @@ public class SistemaTest {
     public void avanzada1() {
         System.out.println("Sistema: test avanzada1");
         sistema.login("SoyDios","Apruebanos");
-        assertNotNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",200, true, demandante ));
+        assertNotNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",
+                200, true, demandante ));
     }
 
     /**
@@ -435,7 +425,8 @@ public class SistemaTest {
     @Test
     public void avanzada2(){
         System.out.println("Sistema: test avanzada2");
-        assertNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",200, true, demandante));
+        assertNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",
+                200, true, demandante));
     }
 
     /**
@@ -445,6 +436,7 @@ public class SistemaTest {
     @Test (expected = NullPointerException.class)
     public void avanzada3(){
         System.out.println("Sistema: test avanzada3");
-        sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",200, true, null);
+        sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",200,
+                true, null);
     }
 }
