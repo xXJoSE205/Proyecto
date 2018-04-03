@@ -283,9 +283,8 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @return list, lista con las viviendas obtenidas aplicando los filtros
      */
-    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir ){
+    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
         List<Inmueble> busqueda = new ArrayList<>();
-
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()==nHab && nHab>-1){
                 busqueda.add(inmueble);
@@ -323,11 +322,18 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @param precio precio maximo de la vivienda
      * @param vacacional si es una vivienda vacacional o no
-     * @return list, lista con las ofertas obtenidas aplicando los filtros
+     * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
+     * @throws NullPointerException si el cliente es null
      */
-    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio, boolean vacacional){
+    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio, boolean vacacional, Cliente cliente){
         List<Oferta> ofertas = new ArrayList<>();
         List<Inmueble> aux = new ArrayList<>();
+        if(cliente==null){
+            throw new NullPointerException("Cliente null");
+        }
+        if(cliente.isLogeado()==false){
+            return null;
+        }
         aux=buscar(nHab,nBan,dim,planta,ascensor,dir);
         for(Inmueble inmueble : aux){
             for(Oferta oferta:inmueble.getOfertas()){
