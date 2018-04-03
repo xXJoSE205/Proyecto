@@ -305,20 +305,16 @@ public class OfertaTest {
     }
 
     @Test
-    public void aprobarOferta() {
-        System.out.println("Oferta: test aprobarOferta");
-        oferta.aprobarOferta();
+    public void aprobar() {
+        System.out.println("Oferta: test aprobar");
+        oferta.aprobar();
         assertTrue(oferta.getEstado()==Estado.DISPONIBLE);
     }
 
     @Test
-    public void rechazarOferta() {
-        System.out.println("Oferta: test rechazarOferta");
-        oferta.rechazarOferta();
+    public void rechazar() {
+        System.out.println("Oferta: test rechazar");
+        oferta.rechazar();
         assertTrue(oferta.getEstado()==Estado.RECHAZADO);
-    }
-
-    @Test
-    public void modificarOferta() {
     }
 }
