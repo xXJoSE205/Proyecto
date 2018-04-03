@@ -25,6 +25,8 @@ public class Inmueble {
     private Ofertante dueno;
     /** Lista de ofertas del inmueble*/
     private List<Oferta> ofertas;
+    /** Lista de opiniones*/
+    private List<Opinion> opiniones;
 
     /**
      * Constructor de Inmueble
@@ -55,6 +57,7 @@ public class Inmueble {
         this.ascensor = ascensor;
         this.dueno = dueno;
         this.ofertas = new ArrayList<>();
+        this.opiniones = new ArrayList<>();
     }
 
     /**
@@ -132,5 +135,19 @@ public class Inmueble {
             throw new NullPointerException("Oferta null");
         }
         return ofertas.add(oferta);
+    }
+
+    /**
+     * Añade una opinion al inmueble
+     *
+     * @param opinion Opinion que se quiere añadir
+     * @return boolean, true si se añade la opinion, false en caso contrario
+     * @throws NullPointerException Si la opinion es null
+     */
+    public boolean anadirOpinion(Opinion opinion) throws NullPointerException{
+        if(opinion==null){
+            throw new NullPointerException("Opinion null");
+        }
+        return opiniones.add(opinion);
     }
 }
