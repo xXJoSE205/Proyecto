@@ -37,7 +37,8 @@ public class Inmueble {
      * @param ascensor True si hay ascensor, false en caso contrario
      * @param dueno Dueño del inmueble
      * @throws NullPointerException si la direccion o el dueño es null
-     * @throws IllegalArgumentException si las habitaciones, baños, dimensione son menores que 1 o si la planta es menor que 0
+     * @throws IllegalArgumentException si las habitaciones, baños, dimensione son menores que 1
+     * o si la planta es menor que 0
      */
     public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor,
                     Ofertante dueno) throws NullPointerException, IllegalArgumentException{

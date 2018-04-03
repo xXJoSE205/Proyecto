@@ -34,7 +34,7 @@ public class UsuarioRegistradoTest {
     @Test
     public void getNombre() {
         System.out.println("UsuarioRegistrado: test getNombre");
-        assertTrue(demandante.getNombre()=="Tony");
+        assertEquals(demandante.getNombre(), "Tony");
     }
 
     /**
@@ -43,7 +43,7 @@ public class UsuarioRegistradoTest {
     @Test
     public void getApellidos() {
         System.out.println("UsuarioRegistrado: test getApellidos");
-        assertTrue(demandante.getApellidos()=="Stark");
+        assertEquals(demandante.getApellidos(), "Stark");
     }
 
     /**
@@ -52,7 +52,7 @@ public class UsuarioRegistradoTest {
     @Test
     public void getNif() {
         System.out.println("UsuarioRegistrado: test getNif");
-        assertTrue(demandante.getNif()=="12345678Q");
+        assertEquals(demandante.getNif(), "12345678Q");
     }
 
     /**
@@ -61,7 +61,7 @@ public class UsuarioRegistradoTest {
     @Test
     public void getPassword() {
         System.out.println("UsuarioRegistrado: test getPassword");
-        assertTrue(demandante.getPassword()=="Contraseña");
+        assertEquals(demandante.getPassword(), "Contraseña");
     }
 
     /**
