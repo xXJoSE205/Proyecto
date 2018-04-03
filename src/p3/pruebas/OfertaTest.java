@@ -290,16 +290,32 @@ public class OfertaTest {
     }
 
     @Test
-    public void cancelarReserva() {
+    public void cancelarReserva1() {
+        System.out.println("Oferta: test cancelarReserva1");
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña","0123456789012345" );
+        oferta.reservar(demandante);
+        assertTrue(oferta.cancelarReserva());
+    }
 
+    @Test
+    public void cancelarReserva2() {
+        System.out.println("Oferta: test cancelarReserva2");
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña","0123456789012345" );
+        assertFalse(oferta.cancelarReserva());
     }
 
     @Test
     public void aprobarOferta() {
+        System.out.println("Oferta: test aprobarOferta");
+        oferta.aprobarOferta();
+        assertTrue(oferta.getEstado()==Estado.DISPONIBLE);
     }
 
     @Test
     public void rechazarOferta() {
+        System.out.println("Oferta: test rechazarOferta");
+        oferta.rechazarOferta();
+        assertTrue(oferta.getEstado()==Estado.RECHAZADO);
     }
 
     @Test
