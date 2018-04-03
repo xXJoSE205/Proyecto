@@ -354,6 +354,14 @@ public class Sistema implements Serializable {
         return ofertas;
     }
 
+    /**
+     * Realiza el alquiler de un inmueble
+     *
+     * @param demandante demandante que quiere realizar el alquiler
+     * @param oferta oferta de la que se quiere realizar el alquiler
+     * @return true en caso de exito, false en caso de error
+     * @throws NullPointerException si el demandante o la oferta es NULL
+     */
     public boolean alquilar(Demandante demandante, Oferta oferta){
         if(demandante==null || oferta==null){
             throw new NullPointerException("Demandante u oferta NULL");
@@ -368,6 +376,7 @@ public class Sistema implements Serializable {
                 } else {
                     setTotalComisiones(oferta.getPrecio()*0.01+getTotalComisiones());
                 }
+
                 oferta.setEstado(Estado.NO_DISPONIBLE);
                 return true;
 
