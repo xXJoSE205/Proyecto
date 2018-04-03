@@ -217,6 +217,7 @@ public class SistemaTest {
 
     @Test
     public void comprobarReservas() {
+        System.out.println("Sistema: test comprobarReserva");
     }
 
     @Test
