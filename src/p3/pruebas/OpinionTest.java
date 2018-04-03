@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene el test de la clase Opinion
+ *
+ * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
+ */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -8,35 +13,69 @@ import p3.src.Opinion;
 
 import static org.junit.Assert.*;
 
-/**
- * Hacerlo
- */
 public class OpinionTest {
-
-    private Comentario comentario;
+    /** Opinion general para realizar el test*/
     private Opinion opinion;
+    /** Demandante general para realizar el test*/
+    private Demandante demandante;
 
+    /**
+     * Crea una opinion para realizar los test
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345");
-        comentario = new Comentario(demandante,"prueba");
-
-
+        opinion = new Comentario(demandante,"prueba");
     }
 
-    @Test (expected = NullPointerException.class)
+    /**
+     * Test 1 del constructor, se espera un NullPointerException
+     * El autor es null
+     */
+    @Test(expected = NullPointerException.class)
     public void constructor1(){
-        System.out.println("Comentario: test constructor1");
-        Comentario comentario1 = new Comentario(null,"prueba");
+        System.out.println("Opinion: test constructor1");
+        Opinion opinion2 = new Comentario(null,"prueba");
     }
+
+    /**
+     * Test 2 del constructor, se espera un NullPointerException
+     * El texto es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void constructor2() {
+        System.out.println("Opinion: test constructor2");
+        Opinion opinion2 = new Comentario(demandante,null);
+    }
+
+    /**
+     * Test de getAutor, se comprueba que el autor de la opinion no es null
+     */
     @Test
     public void getAutor() {
-        System.out.println("Comentario: test getAutor");
-        assertNotNull(comentario.getAutor());
+        System.out.println("Opinion: test getAutor");
+        assertNotNull(opinion.getAutor());
     }
 
+    /**
+     * Test 1 de anadirComentario, se espera true, se ha añadido correctamente
+     */
     @Test
-    public void anadirComentario() {
+    public void anadirComentario1() {
+        System.out.println("Opinion: test anadirComentario1");
+        Comentario comen = new Comentario(demandante, "prueba2");
+        assertTrue(opinion.anadirComentario(comen));
+    }
+
+    /**
+     * Test 2 de anadirComentario, se esperea un NullPointerException
+     * El comentario a añadir es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void anadirComentario2() {
+        System.out.println("Opinion: test anadirComentario1");
+        assertTrue(opinion.anadirComentario(null));
     }
 }

@@ -247,18 +247,14 @@ public class Oferta{
     /**
      * Acepta la oferta y cambia su estado a DISPONIBLE
      */
-    public void aprobarOferta(){
+    public void aprobar(){
         estado = Estado.DISPONIBLE;
     }
 
     /**
      * Rechaza la oferta y cambia su estado a RECHAZADA
      */
-    public void rechazarOferta(){
+    public void rechazar(){
         estado = Estado.RECHAZADO;
-    }
-
-    public boolean modificarOferta(){
-        return true;
     }
 }
