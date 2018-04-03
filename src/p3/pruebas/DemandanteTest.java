@@ -22,7 +22,7 @@ public class DemandanteTest {
     @Before
     public void setUp() throws Exception {
         demandante = new Demandante( "Tony","Stark","12345678Q","Contraseña",
-                "0123456789012345" );
+                "1023456789012345" );
     }
 
     /**
@@ -33,7 +33,7 @@ public class DemandanteTest {
     public void constructor1(){
         System.out.println("Demandante: test constructor1");
         Demandante demandate2 = new Demandante(null,"Stark","12345678Q","Contraseña",
-                "0123456789012345" );
+                "1023456789012345" );
     }
 
     /**
@@ -44,7 +44,7 @@ public class DemandanteTest {
     public void constructor2(){
         System.out.println("Demandante: test constructor2");
         Demandante demandate2 = new Demandante("Tony",null,"12345678Q","Contraseña",
-                "0123456789012345" );
+                "1023456789012345" );
     }
 
     /**
@@ -55,7 +55,7 @@ public class DemandanteTest {
     public void constructor3(){
         System.out.println("Demandante: test constructor3");
         Demandante demandate2 = new Demandante("Tony","Stark",null,"Contraseña",
-                "0123456789012345" );
+                "1023456789012345" );
     }
 
     /**
@@ -66,7 +66,7 @@ public class DemandanteTest {
     public void constructor4(){
         System.out.println("Demandante: test constructor4");
         Demandante demandate2 = new Demandante("Tony","Stark","12345678Q",null,
-                "0123456789012345" );
+                "1023456789012345");
     }
 
     /**
@@ -78,6 +78,17 @@ public class DemandanteTest {
         System.out.println("Demandante: test constructor5");
         Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 null );
+    }
+
+    /**
+     * Test 6 del constructor, se espera un IllegalArgumentException
+     * El numero de la tarjeta es invalido
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor6(){
+        System.out.println("Demandante: test constructor6");
+        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+                "102345678901234");
     }
 
     /**
@@ -109,13 +120,22 @@ public class DemandanteTest {
     }
 
     /**
-     * Test de sewtBloqueado, se comprueba que el nuevo estado del demandante es bloqueado, bloqueado = true
+     * Test 1 de Bloquear, se espera true, el demandante ha sido bloqueado
      */
     @Test
-    public void setBloqueado() {
-        System.out.println("Demandante: test setBloqueado");
-        demandante.setBloqueado(true);
-        assertTrue(demandante.isBloqueado());
+    public void bloquear1() {
+        System.out.println("Demandante: test setBloqueado1");
+        assertTrue(demandante.bloquear());
+    }
+
+    /**
+     * Test 2 de Bloquear, se espera false, el demandante ya estaba bloqueado
+     */
+    @Test
+    public void bloquear2() {
+        System.out.println("Demandante: test setBloqueado1");
+        demandante.bloquear();
+        assertFalse(demandante.bloquear());
     }
 
     /**
@@ -138,21 +158,21 @@ public class DemandanteTest {
     }
 
     /**
-     * Test 1 de desbloquearUsuario, se espera true, el demandante ha sido desbloqueado
+     * Test 1 de desbloquear, se espera true, el demandante ha sido desbloqueado
      */
     @Test
-    public void desbloquearUsuario1() {
-        System.out.println("Demandante: test desbloquearUsuario1");
-        demandante.setBloqueado(true);
-        assertTrue(demandante.desbloquearUsuario());
+    public void desbloquear1() {
+        System.out.println("Demandante: test desbloquear1");
+        demandante.bloquear();
+        assertTrue(demandante.desbloquear());
     }
 
     /**
-     * Test 2 de desbloquearUsuario, se espera false, el demandante no estaba bloqueado
+     * Test 2 de desbloquear, se espera false, el demandante no estaba bloqueado
      */
     @Test
-    public void desbloquearUsuario2() {
-        System.out.println("Demandante: test desbloquearUsuario2");
-        assertFalse(demandante.desbloquearUsuario());
+    public void desbloquear2() {
+        System.out.println("Demandante: test desbloquear2");
+        assertFalse(demandante.desbloquear());
     }
 }

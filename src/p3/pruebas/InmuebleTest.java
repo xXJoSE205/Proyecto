@@ -7,10 +7,7 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.Inmueble;
-import p3.src.Oferta;
-import p3.src.Ofertante;
-
+import p3.src.*;
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
@@ -20,6 +17,13 @@ public class InmuebleTest {
     private Inmueble inmueble;
     /** Ofertante general para realizar el test*/
     private Ofertante ofertante;
+    /** Demandante general para realizar  el test*/
+    private Demandante autor;
+    /**
+     * Opinion general para ralizar el test
+     * Se instanciara como Comentario
+     */
+    private Opinion opinion;
 
     /**
      * Crea un Inmueble y un Ofertante como dueño para realizar los test
@@ -165,7 +169,7 @@ public class InmuebleTest {
     }
 
     /**
-     * Test 1 de anadirOferta, se espera true, se ha añadido una oferta correctamente
+     * Test 1 de anadirOferta, se espera true, se ha añadido la oferta correctamente
      */
     @Test
     public void anadirOferta1() {
@@ -182,5 +186,27 @@ public class InmuebleTest {
     public void anadirOferta2(){
         System.out.println("Inmueble: test anadirOferta2");
         inmueble.anadirOferta(null);
+    }
+
+    /**
+     * Test 1 de anadirOpinion, se espera true, se ha añadido la opinion correctamente
+     */
+    @Test
+    public void anadirOpinion1(){
+        System.out.println("Inmueble: test anadirOpinion1");
+        autor = new Demandante("Thor", "Dios del Trueno", "09876543T", "Mjolnir",
+                "9999888877776666");
+        opinion = new Comentario(autor, "Amplio y bonito");
+        assertTrue(inmueble.anadirOpinion(opinion));
+    }
+
+    /**
+     * Test 2 de anadirOpinion, se espera un NullPointerException
+     * La opinion a añadir es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void anadirOpinion2(){
+        System.out.println("Inmueble: test anadirOpinion2");
+        inmueble.anadirOpinion(null);
     }
 }
