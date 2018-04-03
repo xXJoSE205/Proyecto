@@ -352,4 +352,36 @@ public class Sistema implements Serializable {
         }
         return ofertas;
     }
+
+    public boolean alquilar(Demandante demandante, Oferta oferta){
+        if(demandante==null || oferta==null){
+            throw new NullPointerException("Demandante u oferta NULL");
+        }
+        if(oferta.getEstado()!=Estado.DISPONIBLE ){
+            return false;
+        }
+        if(demandante.isReservaActiva() && oferta.isReservado()){
+            if(oferta.getReserva().getUsuario().equals(demandante)){
+                if(oferta.isVacacional()){
+                    setTotalComisiones(oferta.getPrecio()*0.02+getTotalComisiones());
+                } else {
+                    setTotalComisiones(oferta.getPrecio()*0.01+getTotalComisiones());
+                }
+                oferta.setEstado(Estado.NO_DISPONIBLE);
+                return true;
+
+            }
+            return false;
+        } else if(oferta.isReservado()){
+            return false;
+        }
+        if(oferta.isVacacional()){
+            setTotalComisiones(oferta.getPrecio()*0.02+getTotalComisiones());
+        } else {
+            setTotalComisiones(oferta.getPrecio()*0.01+getTotalComisiones());
+        }
+        oferta.setEstado(Estado.NO_DISPONIBLE);
+        return true;
+
+    }
 }
