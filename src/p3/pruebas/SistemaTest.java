@@ -453,10 +453,24 @@ public class SistemaTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void alquilar2(){
+    public void alquilar2() throws OrderRejectedException {
         System.out.println("Sistema: test alquilar2");
+        sistema.alquilar(null,oferta);
+    }
 
+    @Test (expected = NullPointerException.class)
+    public void alquilar3() throws OrderRejectedException {
+        System.out.println("Sistema: test alquilar3");
+        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
+                "1euroHamburger","0000000000000002");
+        sistema.alquilar(demandante1,null);
 
+    }
+
+    @Test
+    public void alquilar4(){
+        System.out.println("Sistema: test alquilar4");
 
     }
 }
+
