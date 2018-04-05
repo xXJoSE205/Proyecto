@@ -19,7 +19,7 @@ public class Muszka {
             }
         }else {
             try {
-                FileInputStream fileIn = new FileInputStream("muszka.ser");
+                FileInputStream fileIn = new FileInputStream("Proyecto/muszka.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
                 in.close();
@@ -43,12 +43,12 @@ public class Muszka {
 
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("muzska.ser");
+            FileOutputStream fileOut = new FileOutputStream("Proyecto/muzska.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(muzska);
             out.close();
             fileOut.close();
-            System.out.println("Datos serializables guardados en muzska.ser");
+            System.out.println("Datos serializables guardados en Proyecto/muzska.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
