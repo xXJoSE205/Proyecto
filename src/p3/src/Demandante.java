@@ -99,4 +99,14 @@ public class Demandante extends Cliente implements Serializable {
         }
         return false;
     }
+
+    /**
+     * Pasa toda la informacion del demandante en una cadena
+     *
+     * @return Cadena con toda la informacion del demandante
+     */
+    @Override
+    public String toString() {
+        return super.toString()+"\n\tDeuda: "+deuda+"\n\t¿Bloqueado?: "+bloqueado+"\n\t¿Reserva?: "+reservaActiva;
+    }
 }

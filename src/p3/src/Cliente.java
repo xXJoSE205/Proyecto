@@ -60,4 +60,9 @@ public abstract class Cliente extends UsuarioRegistrado implements Serializable 
         this.tarjeta = tarjeta;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+"\n\tTarjeta: "+tarjeta;
+    }
 }

@@ -151,4 +151,15 @@ public class Inmueble implements Serializable {
         }
         return opiniones.add(opinion);
     }
+
+    /**
+     * Pasa toda la informacion del inmueble en una cadena
+     *
+     * @return Cadena con toda la informacion del inmueble
+     */
+    @Override
+    public String toString() {
+        return "\tHabitaciones: "+nHabitaciones+"\n\tBaños: "+nBanos+"\n\tDimensiones: "+dimensiones
+                +"m2\n\tDireccion: "+direccion+"\n\tPlanta: "+planta+"\n\t¿Ascensor?: "+ascensor;
+    }
 }

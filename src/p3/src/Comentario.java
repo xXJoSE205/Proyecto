@@ -34,4 +34,14 @@ public class Comentario extends Opinion implements Serializable {
     public String getTexto() {
         return this.texto;
     }
+
+    /**
+     * Pasa toda la informacion del comentario en una cadena
+     *
+     * @return Cadena con toda la informacion del comentario
+     */
+    @Override
+    public String toString() {
+        return "\tTexto: "+texto;
+    }
 }

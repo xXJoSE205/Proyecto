@@ -21,7 +21,7 @@ public class Sistema implements Serializable {
     /** Lista de los clientes*/
     private List<Cliente> usuarios;
     /** Pasarela de pago externa*/
-    private final TeleChargeAndPaySystem pasarelaPago;
+    private transient TeleChargeAndPaySystem pasarelaPago;
     /** Lista de todos los inmuebles*/
     private List<Inmueble> inmuebles;
     /** Lista de todas las ofertas*/
@@ -29,7 +29,7 @@ public class Sistema implements Serializable {
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private final Gerente gerente = new Gerente("Señor", "Supremo", "SoyUnDios", "Apruebanos");
+    private final Gerente gerente = new Gerente("Señor","Supremo","00000000G","Apruebanos");
 
     /**
      * Constructor de Sistema
@@ -116,6 +116,25 @@ public class Sistema implements Serializable {
     }
 
     /**
+     * Establece la pasarela de pago. Solo sucede si la pasarela de pago es null, es decir, si se han cargado los datos
+     * del sistema desde un fichero
+     *
+     * @param pasarelaPago Pasarela de pago a establecer
+     * @return boolean, true si la pasarela era null y se ha establecido, false en caso contrario
+     * @throws NullPointerException Si la pasarela de pago es null
+     */
+    public boolean setPasarelaPago(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
+        if(pasarelaPago==null){
+            throw new NullPointerException("Pasarea de pago null");
+        }
+        if(this.pasarelaPago==null){
+            this.pasarelaPago = pasarelaPago;
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Añade un cliente al sistema
      *
      * @param usuario Cliente a añadir
@@ -192,7 +211,7 @@ public class Sistema implements Serializable {
                     return false;
                 }
             }
-            if ((usuario.getNif().equals(nif)) && (usuario.getPassword().equals(password))) {
+            if (usuario.getNif().equals(nif) && usuario.getPassword().equals(password)) {
                 usuario.setLogeado(true);
                 return true;
             }
@@ -218,7 +237,7 @@ public class Sistema implements Serializable {
                 return false;
             }
         }
-        if ((gerente.getNif().equals(nif)) && (gerente.getPassword().equals(password))) {
+        if (gerente.getNif().equals(nif) && gerente.getPassword().equals(password)) {
             gerente.setLogeado(true);
             return true;
         }
