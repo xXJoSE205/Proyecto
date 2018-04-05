@@ -396,6 +396,8 @@ public class SistemaTest {
     @Test
     public void comprobarReservas() {
         System.out.println("Sistema: test comprobarReserva");
+        oferta.reservar((Demandante) demandante);
+
     }
 
     /**
