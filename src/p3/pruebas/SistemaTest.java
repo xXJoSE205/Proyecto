@@ -5,7 +5,7 @@
  */
 package p3.pruebas;
 
-import com.sun.istack.internal.localization.NullLocalizable;
+
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import org.junit.Before;
