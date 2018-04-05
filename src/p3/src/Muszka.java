@@ -77,18 +77,19 @@ public class Muszka {
         Demandante demandante;
         int i=0;
 
-        while ((linea = buffer.readLine())!=null) {
-            String split1[] = linea.split(";");
-            if(i!=0) {
-                rol = split1[0];
-                nif = split1[1];
-                String split2[] = split1[2].split(", ");
-                apellidos = split2[0];
-                nombre = split2[1];
-                pwd = split1[3];
-                tarjeta = split1[4];
+        try {
 
-                try {
+            while ((linea = buffer.readLine()) != null) {
+                String split1[] = linea.split(";");
+                if (i != 0) {
+                    rol = split1[0];
+                    nif = split1[1];
+                    String split2[] = split1[2].split(", ");
+                    apellidos = split2[0];
+                    nombre = split2[1];
+                    pwd = split1[3];
+                    tarjeta = split1[4];
+
                     if (rol.equals("O")) {
                         ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
                         sistema.anadirUsuario(ofertante);
@@ -103,13 +104,13 @@ public class Muszka {
                     } else {
                         throw new IllegalArgumentException("Rol de usuario invalido: " + rol);
                     }
-                } catch (NullPointerException npe) {
-                    System.out.println(npe.getMessage());
-                } catch (IllegalArgumentException iae) {
-                    System.out.println(iae.getMessage()+", Usuario no añadido");
                 }
+                i = 1;
             }
-            i=1;
+        } catch (NullPointerException npe) {
+            System.out.println(npe.getMessage());
+        } catch (IllegalArgumentException iae) {
+            System.out.println(iae.getMessage() + ", Usuario no añadido");
         }
     }
 }
