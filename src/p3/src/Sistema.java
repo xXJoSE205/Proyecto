@@ -211,7 +211,7 @@ public class Sistema implements Serializable {
                     return false;
                 }
             }
-            if ((usuario.getNif().equals(nif)) && (usuario.getPassword().equals(password))) {
+            if (usuario.getNif().equals(nif) && usuario.getPassword().equals(password)) {
                 usuario.setLogeado(true);
                 return true;
             }
@@ -237,7 +237,7 @@ public class Sistema implements Serializable {
                 return false;
             }
         }
-        if ((gerente.getNif().equals(nif)) && (gerente.getPassword().equals(password))) {
+        if (gerente.getNif().equals(nif) && gerente.getPassword().equals(password)) {
             gerente.setLogeado(true);
             return true;
         }
