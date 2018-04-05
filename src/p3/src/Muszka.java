@@ -150,7 +150,7 @@ public class Muszka {
             guardarDatos(muzska);
             return;
         }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
         try {
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
@@ -159,10 +159,11 @@ public class Muszka {
                 System.out.println("Que quieres hacer: ");
                 line = br.readLine();
             } while (!line.equals("salir") && !line.equals("exit"));
-        }catch (IOException ioe){
+        }catch (IOException ioe) {
             ioe.printStackTrace();
             guardarDatos(muzska);
         }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     /**
