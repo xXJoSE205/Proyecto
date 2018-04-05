@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class Opinion implements Serializable {
     /** Autor de la opinion*/
-    private Demandante autor;
+    private final Demandante autor;
     /** Comentarios de la opinion*/
     private List<Comentario> comentarios;
 

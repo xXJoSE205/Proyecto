@@ -11,19 +11,19 @@ import java.util.List;
 
 public class Inmueble implements Serializable {
     /** Numero de habitaciones*/
-    private int nHabitaciones;
+    private final int nHabitaciones;
     /** Numero de baños*/
-    private int nBanos;
+    private final int nBanos;
     /** Dimensiones en metros cuadrados*/
-    private int dimensiones;
+    private final int dimensiones;
     /** Nombre de la calle y el numero*/
-    private String direccion;
+    private final String direccion;
     /** Planta en la que se encuentra*/
-    private int planta;
+    private final int planta;
     /** Si hay o no ascensor en el edificio*/
-    private Boolean ascensor;
+    private final Boolean ascensor;
     /** Dueño del inmueble*/
-    private Ofertante dueno;
+    private final Ofertante dueno;
     /** Lista de ofertas del inmueble*/
     private List<Oferta> ofertas;
     /** Lista de opiniones*/
