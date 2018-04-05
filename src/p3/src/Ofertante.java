@@ -78,4 +78,14 @@ public class Ofertante extends Cliente implements Serializable {
     public void quitarModificaciones(){
         this.modificaciones = null;
     }
+
+    /**
+     * Pasa toda la informacion del ofertante en una cadena
+     *
+     * @return Cadena con toda la informacion del ofertante
+     */
+    @Override
+    public String toString() {
+        return super.toString()+"\n\tCargo: "+cargo+"\n\t¿Modificaciones?: "+modificaciones;
+    }
 }

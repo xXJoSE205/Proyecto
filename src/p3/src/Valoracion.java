@@ -47,4 +47,14 @@ public class Valoracion extends Opinion  implements Serializable {
         }
         this.puntuacion = puntuacion;
     }
+
+    /**
+     * Pasa toda la informacion de la valoracion en una cadena
+     *
+     * @return Cadena con toda la informacion de la valoracion
+     */
+    @Override
+    public String toString() {
+        return "\tPuntuacion: "+puntuacion;
+    }
 }

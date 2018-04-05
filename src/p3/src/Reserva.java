@@ -45,4 +45,14 @@ public class Reserva implements Serializable {
     public Demandante getUsuario() {
         return usuario;
     }
+
+    /**
+     * Pasa toda la informacion de la reserva en una cadena
+     *
+     * @return Cadena con toda la informacion de la reserva
+     */
+    @Override
+    public String toString() {
+        return "\tFecha de la reserva: "+fechaInicio;
+    }
 }

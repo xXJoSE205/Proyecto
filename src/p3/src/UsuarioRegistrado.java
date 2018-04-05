@@ -95,4 +95,14 @@ public abstract class UsuarioRegistrado implements Serializable {
     public void setLogeado(boolean logeado) {
         this.logeado = logeado;
     }
+
+    /**
+     * Pasa toda la informacion del usuario en una cadena
+     *
+     * @return Cadena con toda la informacion del usuario
+     */
+    @Override
+    public String toString() {
+        return "\tNombre: "+nombre+"\n\tApellidos: "+apellidos+"\n\tNIF: "+nif+"\n\tPassword: "+password;
+    }
 }

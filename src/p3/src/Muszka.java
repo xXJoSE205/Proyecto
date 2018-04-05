@@ -3,36 +3,45 @@ package p3.src;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 
 import java.io.*;
+import java.util.List;
 
 public class Muszka {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         TeleChargeAndPaySystem pasarelaPago = new TeleChargeAndPaySystem();
         Sistema muzska;
-        if(args!=null) {
-            muzska = new Sistema(pasarelaPago);
-            try {
+        try {
+            if (args.length == 1 && args[0].equals("clientes.txt")) {
+                muzska = new Sistema(pasarelaPago);
+                System.out.println("Cargando clientes...");
                 cargarClientes(muzska, args[0]);
-            } catch (IllegalArgumentException iae) {
-                System.out.println(iae.getMessage());
-                return;
-            }
-        }else {
-            try {
-                FileInputStream fileIn = new FileInputStream("Proyecto/muszka.ser");
+            } else if (args.length == 0) {
+                System.out.println("Cargando datos de \"muzska.ser\"");
+                FileInputStream fileIn = new FileInputStream("muzska.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
+                muzska.setPasarelaPago(pasarelaPago);
                 in.close();
                 fileIn.close();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-                return;
-            } catch (ClassNotFoundException c) {
-                System.out.println("Clase de Sistema inexistente");
-                c.printStackTrace();
+            } else {
+                System.out.println("Numero de argumentos invalido: " + args.length);
+                System.out.println("Fichero de entrada distinto a \"clientes.txt\"");
                 return;
             }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            return;
+        } catch (ClassNotFoundException c) {
+            System.out.println("Clase de Sistema inexistente");
+            c.printStackTrace();
+            return;
         }
+
+
+
+
+
+
 
 
 
@@ -43,20 +52,29 @@ public class Muszka {
 
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("Proyecto/muzska.ser");
+            FileOutputStream fileOut = new FileOutputStream("muzska.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(muzska);
             out.close();
             fileOut.close();
-            System.out.println("Datos serializables guardados en Proyecto/muzska.ser");
+            System.out.println("Datos serializables guardados en \"muzska.ser\"");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    private static void cargarClientes(Sistema sistema, String fichero) throws IOException, IllegalArgumentException {
+    /**
+     * Registra los clientes de un fichero en el sistema
+     *
+     * @param sistema Sistema en el que registrar los clientes
+     * @param fichero Nombre del fichero del cual cargar los clientes
+     * @throws IOException Si ocurre algun error al manejar el fichero
+     */
+    private static void cargarClientes(Sistema sistema, String fichero) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(new FileInputStream(fichero)));
         String linea, rol, nif, nombre, apellidos, pwd, tarjeta;
+        Ofertante ofertante;
+        Demandante demandante;
         int i=0;
 
         while ((linea = buffer.readLine())!=null) {
@@ -72,21 +90,23 @@ public class Muszka {
 
                 try {
                     if (rol.equals("O")) {
-                        Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
+                        ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
                         sistema.anadirUsuario(ofertante);
                     } else if (rol.equals("D")) {
-                        Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
+                        demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
                         sistema.anadirUsuario(demandante);
                     } else if (rol.equals("OD") || rol.equals("DO")) {
-                        Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
-                        Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
+                        ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
+                        demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
                         sistema.anadirUsuario(ofertante);
                         sistema.anadirUsuario(demandante);
                     } else {
                         throw new IllegalArgumentException("Rol de usuario invalido: " + rol);
                     }
-                }catch(NullPointerException npe){
+                } catch (NullPointerException npe) {
                     System.out.println(npe.getMessage());
+                } catch (IllegalArgumentException iae) {
+                    System.out.println(iae.getMessage()+", Usuario no añadido");
                 }
             }
             i=1;

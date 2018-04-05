@@ -270,4 +270,15 @@ public class Oferta implements Serializable {
     public void rechazar(){
         estado = Estado.RECHAZADO;
     }
+
+    /**
+     * Pasa toda la informacion de la oferta en una cadena
+     *
+     * @return Cadena con toda la informacion de la oferta
+     */
+    @Override
+    public String toString() {
+        return "\tPrecio: "+precio+"\n\t¿Reservado?: "+reservado+"\n\tFecha de inicio: "+fechaInicio
+                +"\n\tFecha fin: "+fechaFin+"\n\t¿Vacacional?: "+vacacional+"\n\tFianza: "+fianza;
+    }
 }
