@@ -305,6 +305,9 @@ public class OfertaTest {
         oferta.reservar(null);
     }
 
+    /**
+     * Test 1 de cancelarReserva, se espera true, se ha cancelado una reserva activa
+     */
     @Test
     public void cancelarReserva1() {
         System.out.println("Oferta: test cancelarReserva1");
@@ -314,6 +317,9 @@ public class OfertaTest {
         assertTrue(oferta.cancelarReserva());
     }
 
+    /**
+     * Test 2 de cancelarReserva, se espera false, no habia ninguna reserva activa
+     */
     @Test
     public void cancelarReserva2() {
         System.out.println("Oferta: test cancelarReserva2");
@@ -322,12 +328,18 @@ public class OfertaTest {
         assertFalse(oferta.cancelarReserva());
     }
 
+    /**
+     * Test de getInmueble, se comprueba que el inmueble no es null
+     */
     @Test
     public void getInmueble() {
         System.out.println("Oferta: test getInmueble");
         assertNotNull(oferta.getInmueble());
     }
 
+    /**
+     * Test de aprobar, se comprueba que el nuevo estado de la oferta es DISPONIBLE
+     */
     @Test
     public void aprobar() {
         System.out.println("Oferta: test aprobar");
@@ -335,6 +347,9 @@ public class OfertaTest {
         assertTrue(oferta.getEstado()==Estado.DISPONIBLE);
     }
 
+    /**
+     * Test de rechazar, se comprueba que el nuevo estado de la oferta es RECHAZADO
+     */
     @Test
     public void rechazar() {
         System.out.println("Oferta: test rechazar");
