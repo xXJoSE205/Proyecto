@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public class Comentario extends Opinion {
+import java.io.Serializable;
+
+public class Comentario extends Opinion implements Serializable {
     /** Texto del comentario*/
     private String texto;
 

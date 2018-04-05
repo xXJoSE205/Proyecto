@@ -5,15 +5,17 @@
  */
 package p3.src;
 
-public abstract class UsuarioRegistrado {
+import java.io.Serializable;
+
+public abstract class UsuarioRegistrado implements Serializable {
     /** Nombre del usuario*/
-    private String nombre;
+    private final String nombre;
     /** Apellidos del usuario*/
-    private String apellidos;
+    private final String apellidos;
     /** Nimero de Identificacion Fiscal*/
-    private String nif;
+    private final String nif;
     /** Contraseña de acceso*/
-    private String password;
+    private final String password;
     /** Si el usuario re ha logeado o no*/
     private boolean logeado = false;
 

@@ -5,9 +5,10 @@
  */
 package p3.src;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Oferta{
+public class Oferta implements Serializable {
     /** Precio de la oferta*/
     private double precio;
     /** Si esta reservada o no*/

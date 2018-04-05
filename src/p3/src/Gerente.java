@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public class Gerente extends UsuarioRegistrado{
+import java.io.Serializable;
+
+public class Gerente extends UsuarioRegistrado implements Serializable {
 
     /**
      * Constructor de Gerente, llama al constructor de UsuarioRegistrado

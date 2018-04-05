@@ -5,10 +5,11 @@
  */
 package p3.src;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Opinion {
+public abstract class Opinion implements Serializable {
     /** Autor de la opinion*/
     private Demandante autor;
     /** Comentarios de la opinion*/

@@ -5,10 +5,11 @@
  */
 package p3.src;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Inmueble {
+public class Inmueble implements Serializable {
     /** Numero de habitaciones*/
     private int nHabitaciones;
     /** Numero de baños*/

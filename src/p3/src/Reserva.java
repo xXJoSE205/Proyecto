@@ -5,9 +5,10 @@
  */
 package p3.src;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Reserva {
+public class Reserva implements Serializable {
     /** Fecha de inicio de la reserva*/
     private LocalDate fechaInicio;
     /** Usuario que realiza la reserva*/
