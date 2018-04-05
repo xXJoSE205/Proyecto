@@ -25,6 +25,8 @@ public class Oferta implements Serializable {
     private Estado estado = Estado.PENDIENTE;
     /** Puntero a Reserva, si esta reservada*/
     private Reserva reserva = null;
+    /** Inmueble al que pertenece la oferta*/
+    private final Inmueble inmueble;
 
     /**
      * Constructor de Oferta
@@ -37,10 +39,10 @@ public class Oferta implements Serializable {
      * @throws NullPointerException Si alguna fecha es null
      * @throws IllegalArgumentException Si el precio o la fianza es menor que 0
      */
-    public Oferta(double precio, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza)
-            throws NullPointerException, IllegalArgumentException{
-        if(fechaInicio==null || fechaFin==null){
-            throw new NullPointerException("Fecha inicio o fecha final null");
+    public Oferta(double precio, LocalDate fechaInicio, LocalDate fechaFin, boolean vacacional, double fianza,
+                  Inmueble inmueble) throws NullPointerException, IllegalArgumentException{
+        if(fechaInicio==null || fechaFin==null || inmueble==null){
+            throw new NullPointerException("Fecha inicio, fecha final o inmueble null");
         }
         if(precio<0 || fianza<0){
             throw new IllegalArgumentException("Precio o fianza menor que 0: "+precio+", "+fianza);
@@ -50,6 +52,7 @@ public class Oferta implements Serializable {
         this.fechaFin = fechaFin;
         this.vacacional = vacacional;
         this.fianza = fianza;
+        this.inmueble = inmueble;
     }
 
     /**
@@ -207,6 +210,15 @@ public class Oferta implements Serializable {
      */
     public Reserva getReserva() {
         return reserva;
+    }
+
+    /**
+     * Devuelve el inmueble al que pertenece la oferta
+     *
+     * @return Inmueble, inmueble respectivo a la oferta
+     */
+    public Inmueble getInmueble() {
+        return inmueble;
     }
 
     /**

@@ -41,7 +41,7 @@ public class SistemaTest {
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
                 true, (Ofertante)ofertante);
-        oferta = new Oferta(200, LocalDate.MIN, LocalDate.MAX,true,50);
+        oferta = new Oferta(200, LocalDate.MIN, LocalDate.MAX,true,50, inmueble);
         demandante = new Demandante("Vic", "Rattlehead", "66666666D", "PeaceSells",
                 "6666999966669999");
         comentario = new Comentario((Demandante)demandante,"Piso a muy buen precio para unos dias de vacaciones");
