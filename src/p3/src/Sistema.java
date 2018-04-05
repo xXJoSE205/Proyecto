@@ -29,7 +29,7 @@ public class Sistema implements Serializable {
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private final Gerente gerente = new Gerente("Señor", "Supremo", "SoyDios", "Apruebanos");
+    private final Gerente gerente = new Gerente("Señor", "Supremo", "SoyUnDios", "Apruebanos");
 
     /**
      * Constructor de Sistema

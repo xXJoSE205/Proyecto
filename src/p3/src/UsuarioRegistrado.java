@@ -28,9 +28,13 @@ public abstract class UsuarioRegistrado implements Serializable {
      * @param password Constraseña de acceso
      * @throws NullPointerException si algun parametro es null
      */
-    public UsuarioRegistrado(String nombre, String apellidos, String nif, String password) throws NullPointerException{
+    public UsuarioRegistrado(String nombre, String apellidos, String nif, String password) throws NullPointerException,
+            IllegalArgumentException{
         if(nombre==null || apellidos==null || nif==null || password==null){
             throw new NullPointerException("Nombre, appelidos, nif o contraseña null");
+        }
+        if(nif.length()!=9){
+            throw new IllegalArgumentException("NIF invalido: "+nif);
         }
         this.nombre = nombre;
         this.apellidos = apellidos;

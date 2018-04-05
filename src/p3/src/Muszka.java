@@ -9,7 +9,7 @@ public class Muszka {
     public static void main(String[] args) throws IOException {
         TeleChargeAndPaySystem pasarelaPago = new TeleChargeAndPaySystem();
         Sistema muzska;
-        if(args[0]!=null) {
+        if(args!=null) {
             muzska = new Sistema(pasarelaPago);
             try {
                 cargarClientes(muzska, args[0]);
@@ -70,18 +70,23 @@ public class Muszka {
                 pwd = split1[3];
                 tarjeta = split1[4];
 
-                if(rol.equals("O")){
-                    Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
-                    sistema.anadirUsuario(ofertante);
-                }else if(rol.equals("D")){
-                    Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
-                    sistema.anadirUsuario(demandante);
-                }else if(rol.equals("OD") || rol.equals("DO")){
-                    Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
-                    Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
-                    sistema.anadirUsuario(demandante);
-                }else{
-                    throw new IllegalArgumentException("Rol de usuario invalido: "+rol);
+                try {
+                    if (rol.equals("O")) {
+                        Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
+                        sistema.anadirUsuario(ofertante);
+                    } else if (rol.equals("D")) {
+                        Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
+                        sistema.anadirUsuario(demandante);
+                    } else if (rol.equals("OD") || rol.equals("DO")) {
+                        Ofertante ofertante = new Ofertante(nombre, apellidos, nif, pwd, tarjeta);
+                        Demandante demandante = new Demandante(nombre, apellidos, nif, pwd, tarjeta);
+                        sistema.anadirUsuario(ofertante);
+                        sistema.anadirUsuario(demandante);
+                    } else {
+                        throw new IllegalArgumentException("Rol de usuario invalido: " + rol);
+                    }
+                }catch(NullPointerException npe){
+                    System.out.println(npe.getMessage());
                 }
             }
             i=1;

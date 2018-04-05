@@ -3,6 +3,7 @@ package p3.pruebas;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.Demandante;
+import p3.src.UsuarioRegistrado;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +26,61 @@ public class UsuarioRegistradoTest {
     demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
             "0123456789012345");
 
+    }
+
+    /**
+     * Test 1 del constructor, se espera un NullPointerException
+     * El nombre es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void constructor1(){
+        System.out.println("UsuarioRegistrado: test constructor1");
+        UsuarioRegistrado c1 = new Demandante(null,"Stark","12345678Q","Contraseña",
+                "1023456789012345");
+    }
+
+    /**
+     * Test 1 del constructor, se espera un NullPointerException
+     * El apellidos es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void constructor2(){
+        System.out.println("UsuarioRegistrado: test constructor2");
+        UsuarioRegistrado c1 = new Demandante("Tony",null,"12345678Q","Contraseña",
+                "1023456789012345");
+    }
+
+    /**
+     * Test 1 del constructor, se espera un NullPointerException
+     * El nif es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void constructor3(){
+        System.out.println("UsuarioRegistrado: test constructor3");
+        UsuarioRegistrado c1 = new Demandante("Tony","Stark",null,"Contraseña",
+                "1023456789012345");
+    }
+
+    /**
+     * Test 1 del constructor, se espera un NullPointerException
+     * La contraseña es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void constructor4(){
+        System.out.println("UsuarioRegistrado: test constructor4");
+        UsuarioRegistrado c1 = new Demandante("Tony","Stark","12345678Q",null,
+                "1023456789012345");
+    }
+
+    /**
+     * Test 1 del constructor, se espera un IllegalArgumentException
+     * El nif no es valido
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void constructor5(){
+        System.out.println("UsuarioRegistrado: test constructor5");
+        UsuarioRegistrado c1 = new Demandante("Tony","Stark","123458Q","Contraseña",
+                "1023456789012345");
     }
 
     /**
