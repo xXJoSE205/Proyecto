@@ -7,6 +7,10 @@ package p3.src;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
 import java.util.List;
@@ -362,33 +366,36 @@ public class Sistema implements Serializable {
      * @return true en caso de exito, false en caso de error
      * @throws NullPointerException si el demandante o la oferta es NULL
      */
-    public boolean alquilar(Demandante demandante, Oferta oferta){
-        if(demandante==null || oferta==null){
+    public boolean alquilar(Demandante demandante, Oferta oferta) throws OrderRejectedException, InvalidCardNumberException,
+            FailedInternetConnectionException {
+        double precio;
+        if (demandante == null || oferta == null) {
             throw new NullPointerException("Demandante u oferta NULL");
         }
-        if(oferta.getEstado()!=Estado.DISPONIBLE ){
+        if (oferta.getEstado() != Estado.DISPONIBLE) {
             return false;
         }
-        if(demandante.isReservaActiva() && oferta.isReservado()){
-            if(oferta.getReserva().getUsuario().equals(demandante)){
-                if(oferta.isVacacional()){
-                    setTotalComisiones(oferta.getPrecio()*0.02+getTotalComisiones());
+        pasarelaPago.charge(demandante.getTarjeta(),"Alquiler de vivienda", oferta.getPrecio());
+        if (demandante.isReservaActiva() && oferta.isReservado()) {
+            if (oferta.getReserva().getUsuario().equals(demandante)) {
+                if (oferta.isVacacional()) {
+                    setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
                 } else {
-                    setTotalComisiones(oferta.getPrecio()*0.01+getTotalComisiones());
+                    setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
                 }
-
                 oferta.setEstado(Estado.NO_DISPONIBLE);
+
                 return true;
 
             }
             return false;
-        } else if(oferta.isReservado()){
+        } else if (oferta.isReservado()) {
             return false;
         }
-        if(oferta.isVacacional()){
-            setTotalComisiones(oferta.getPrecio()*0.02+getTotalComisiones());
+        if (oferta.isVacacional()) {
+            setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
         } else {
-            setTotalComisiones(oferta.getPrecio()*0.01+getTotalComisiones());
+            setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
         }
         oferta.setEstado(Estado.NO_DISPONIBLE);
         return true;
