@@ -21,7 +21,7 @@ public class Sistema implements Serializable {
     /** Lista de los clientes*/
     private List<Cliente> usuarios;
     /** Pasarela de pago externa*/
-    private TeleChargeAndPaySystem pasarelaPago;
+    private final TeleChargeAndPaySystem pasarelaPago;
     /** Lista de todos los inmuebles*/
     private List<Inmueble> inmuebles;
     /** Lista de todas las ofertas*/
@@ -29,7 +29,7 @@ public class Sistema implements Serializable {
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private Gerente gerente = new Gerente("Señor", "Supremo", "SoyDios", "Apruebanos");
+    private final Gerente gerente = new Gerente("Señor", "Supremo", "SoyDios", "Apruebanos");
 
     /**
      * Constructor de Sistema

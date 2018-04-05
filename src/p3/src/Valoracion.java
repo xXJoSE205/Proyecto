@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public class Valoracion extends Opinion {
+import java.io.Serializable;
+
+public class Valoracion extends Opinion  implements Serializable {
     /** Puntuacion de la opinion, entre 0 y 5*/
     private int puntuacion;
 

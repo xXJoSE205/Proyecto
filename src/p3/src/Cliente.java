@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public abstract class Cliente extends UsuarioRegistrado{
+import java.io.Serializable;
+
+public abstract class Cliente extends UsuarioRegistrado implements Serializable {
     /** Tarjeta de credito*/
     private String tarjeta;
 

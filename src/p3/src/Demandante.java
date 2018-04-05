@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public class Demandante extends Cliente {
+import java.io.Serializable;
+
+public class Demandante extends Cliente implements Serializable {
     /** Deuda del demandante*/
     private double deuda = 0;
     /** Si esta bloqueado o no*/

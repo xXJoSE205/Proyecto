@@ -7,10 +7,7 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.Demandante;
-import p3.src.Estado;
-import p3.src.Oferta;
-import p3.src.Reserva;
+import p3.src.*;
 
 import java.time.LocalDate;
 
@@ -19,6 +16,10 @@ import static org.junit.Assert.*;
 public class OfertaTest {
     /** Oferta general para realizar el test*/
     private Oferta oferta;
+    /** Ofertante general para realizar el test*/
+    private Ofertante ofertante;
+    /** Inmueble general para realizar el test*/
+    private Inmueble inmueble;
 
     /**
      * Crea una oferta para realizar los test
@@ -26,7 +27,11 @@ public class OfertaTest {
      */
     @Before
     public void setUp() throws Exception {
-        oferta = new Oferta(200, LocalDate.MIN, LocalDate.MAX,true,50);
+        ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
+                "0123456789012345" );
+        inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
+                true, ofertante);
+        oferta = new Oferta(200, LocalDate.MIN, LocalDate.MAX,true,50, inmueble);
     }
 
     /**
@@ -36,7 +41,7 @@ public class OfertaTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Oferta: test constructor1");
-        Oferta oferta1 = new Oferta(-1, LocalDate.now(), LocalDate.MAX,true,50);
+        Oferta oferta1 = new Oferta(-1, LocalDate.now(), LocalDate.MAX,true,50, inmueble);
     }
 
     /**
@@ -46,7 +51,7 @@ public class OfertaTest {
     @Test (expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Oferta: test constructor2");
-        Oferta oferta1 = new Oferta(200, null, LocalDate.MAX,true,50);
+        Oferta oferta1 = new Oferta(200, null, LocalDate.MAX,true,50, inmueble);
     }
 
     /**
@@ -56,7 +61,7 @@ public class OfertaTest {
     @Test (expected = NullPointerException.class)
     public void constructor3(){
         System.out.println("Oferta: test constructor3");
-        Oferta oferta1 = new Oferta(200, LocalDate.now(),null,true,50);
+        Oferta oferta1 = new Oferta(200, LocalDate.now(),null,true,50, inmueble);
     }
 
     /**
@@ -66,7 +71,17 @@ public class OfertaTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor4(){
         System.out.println("Oferta: test constructor4");
-        Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,-1);
+        Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,-1, inmueble);
+    }
+
+    /**
+     * Test 4 del constructor, se espera un NullPointerException
+     * El inmueble es null
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void constructor5(){
+        System.out.println("Oferta: test constructor5");
+        Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,50, null);
     }
 
     /**
@@ -274,7 +289,8 @@ public class OfertaTest {
     @Test
     public void reservar2() {
         System.out.println("Oferta: test reservar2");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña","0123456789012345" );
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+                "0123456789012345" );
         demandante.setReservaActiva(true);
         assertFalse(oferta.reservar(demandante));
     }
@@ -292,7 +308,8 @@ public class OfertaTest {
     @Test
     public void cancelarReserva1() {
         System.out.println("Oferta: test cancelarReserva1");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña","0123456789012345" );
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+                "0123456789012345" );
         oferta.reservar(demandante);
         assertTrue(oferta.cancelarReserva());
     }
@@ -300,8 +317,15 @@ public class OfertaTest {
     @Test
     public void cancelarReserva2() {
         System.out.println("Oferta: test cancelarReserva2");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña","0123456789012345" );
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+                "0123456789012345" );
         assertFalse(oferta.cancelarReserva());
+    }
+
+    @Test
+    public void getInmueble() {
+        System.out.println("Oferta: test getInmueble");
+        assertNotNull(oferta.getInmueble());
     }
 
     @Test

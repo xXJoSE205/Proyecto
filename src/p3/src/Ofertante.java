@@ -5,7 +5,9 @@
  */
 package p3.src;
 
-public class Ofertante extends Cliente{
+import java.io.Serializable;
+
+public class Ofertante extends Cliente implements Serializable {
     /** Cargo pendiente*/
     private double cargo = 0;
     /** Cadena con las modificaciones propuestas*/
