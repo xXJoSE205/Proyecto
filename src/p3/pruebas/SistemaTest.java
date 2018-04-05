@@ -6,6 +6,8 @@
 package p3.pruebas;
 
 import com.sun.istack.internal.localization.NullLocalizable;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
+import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.*;
@@ -440,5 +442,21 @@ public class SistemaTest {
         System.out.println("Sistema: test avanzada3");
         sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",200,
                 true, null);
+    }
+
+    @Test
+    public void alquilar1() throws OrderRejectedException {
+        System.out.println("Sistema: test alquilar1");
+        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
+                "1euroHamburger","0000000000000002");
+        assertTrue(sistema.alquilar(demandante1,oferta));
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void alquilar2(){
+        System.out.println("Sistema: test alquilar2");
+
+
+
     }
 }

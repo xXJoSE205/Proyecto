@@ -1,10 +1,10 @@
 <component name="libraryTable">
   <library name="TeleChargeAndPaySystem">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/p3/TeleChargeAndPaySystem.jar!/" />
+      <root url="jar://$PROJECT_DIR$/TeleChargeAndPaySystem.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/src/p3/TeleChargeAndPaySystem.jar!/doc" />
+      <root url="jar://$PROJECT_DIR$/TeleChargeAndPaySystem.jar!/doc" />
     </JAVADOC>
     <SOURCES />
   </library>
