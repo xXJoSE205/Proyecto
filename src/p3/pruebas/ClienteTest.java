@@ -27,7 +27,7 @@ public class ClienteTest {
     @Before
     public void setUp() throws Exception {
         cliente = new Demandante("Tony","Stark","12345678Q","Contraseña",
-                "1023456789012345" );
+                "0123456789012345" );
     }
 
     /**

@@ -163,7 +163,7 @@ public class InmuebleTest {
     @Test
     public void getOfertas() {
         System.out.println("Inmueble: test getOfertas");
-        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50);
+        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50,inmueble);
         inmueble.anadirOferta(oferta);
         assertNotNull(inmueble.getOfertas());
     }
@@ -174,7 +174,7 @@ public class InmuebleTest {
     @Test
     public void anadirOferta1() {
         System.out.println("Inmueble: test anadirOferta1");
-        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50);
+        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50, inmueble);
         assertTrue(inmueble.anadirOferta(oferta));
     }
 
