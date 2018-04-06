@@ -26,8 +26,6 @@ public class SistemaTest {
     private Inmueble inmueble;
     /** Oferta general para realizar el test*/
     private Oferta oferta;
-    /** Pasarela de pago general para realizar el test*/
-    private TeleChargeAndPaySystem pasarelaPago;
     /** Comentario general para realizar el test*/
     private Opinion comentario;
 
@@ -36,9 +34,8 @@ public class SistemaTest {
      * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
-        pasarelaPago = new TeleChargeAndPaySystem();
-        sistema = new Sistema(pasarelaPago);
+    public void setUp() {
+        sistema = new Sistema();
         ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
@@ -47,16 +44,6 @@ public class SistemaTest {
         demandante = new Demandante("Vic", "Rattlehead", "66666666D", "PeaceSells",
                 "6666999966669999");
         comentario = new Comentario((Demandante)demandante,"Piso a muy buen precio para unos dias de vacaciones");
-    }
-
-    /**
-     * Test del constructor, se espera NullPointerException
-     * La pasarela de pago es null
-     */
-    @Test(expected = NullPointerException.class)
-    public void constructor(){
-        System.out.println("Sistema: test constructor");
-        Sistema sis2 = new Sistema(null);
     }
 
     /**
@@ -77,15 +64,6 @@ public class SistemaTest {
         sistema.anadirUsuario(ofertante);
         sistema.anadirUsuario(demandante);
         assertNotNull(sistema.getUsuarios());
-    }
-
-    /**
-     * Test de getPasarelaPago, se comprueba que la pasarela de pago del setUp no es NULL
-     */
-    @Test
-    public void getPasarelaPago() {
-        System.out.println("Sistema: test getPasarelaPago");
-        assertNotNull(sistema.getPasarelaPago());
     }
 
     /**
@@ -287,7 +265,7 @@ public class SistemaTest {
     @Test
     public void login2_1() {
         System.out.println("Sistema: test login2_1");
-        assertTrue(sistema.login("SoyDios", "Apruebanos"));
+        assertTrue(sistema.login("00000000G", "Apruebanos"));
     }
 
     /**
@@ -378,7 +356,7 @@ public class SistemaTest {
     @Test
     public void logout2_1() {
         System.out.println("Sistema: test logout2_1");
-        sistema.login("SoyDios", "Apruebanos");
+        sistema.login("00000000G", "Apruebanos");
         assertTrue(sistema.logout());
     }
 
@@ -417,9 +395,13 @@ public class SistemaTest {
     @Test
     public void avanzada1() {
         System.out.println("Sistema: test avanzada1");
-        sistema.login("SoyDios","Apruebanos");
+        sistema.anadirUsuario(demandante);
+        sistema.anadirUsuario(ofertante);
+        sistema.login("00000000G","Apruebanos");
+        sistema.anadirInmueble(inmueble);
+        sistema.anadirOferta(oferta);
         assertNotNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",
-                200, true, demandante ));
+                200, true, demandante));
     }
 
     /**
@@ -444,11 +426,19 @@ public class SistemaTest {
                 true, null);
     }
 
+    /**
+     * Test 1 de alquilar, se espera un Orde
+     * @throws OrderRejectedException
+     */
     @Test
     public void alquilar1() throws OrderRejectedException {
         System.out.println("Sistema: test alquilar1");
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
                 "1euroHamburger","0000000000000002");
+        sistema.anadirUsuario(demandante1);
+        sistema.anadirUsuario(ofertante);
+        sistema.anadirInmueble(inmueble);
+        sistema.anadirOferta(oferta);
         assertTrue(sistema.alquilar(demandante1,oferta));
     }
 

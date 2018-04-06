@@ -20,8 +20,6 @@ public class Sistema implements Serializable {
     private double totalComisiones = 0;
     /** Lista de los clientes*/
     private List<Cliente> usuarios;
-    /** Pasarela de pago externa*/
-    private transient TeleChargeAndPaySystem pasarelaPago;
     /** Lista de todos los inmuebles*/
     private List<Inmueble> inmuebles;
     /** Lista de todas las ofertas*/
@@ -34,15 +32,10 @@ public class Sistema implements Serializable {
     /**
      * Constructor de Sistema
      *
-     * @param pasarelaPago Pasarela de pago externa
      * @throws NullPointerException Si la pasalera de pago es null
      */
-    public Sistema(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
-        if(pasarelaPago==null){
-            throw new NullPointerException("Pasarela de pago null");
-        }
+    public Sistema() {
         this.usuarios = new ArrayList<>();
-        this.pasarelaPago = pasarelaPago;
         this.inmuebles = new ArrayList<>();
         this.ofertas = new ArrayList<>();
         this.opiniones = new ArrayList<>();
@@ -64,15 +57,6 @@ public class Sistema implements Serializable {
      */
     public List<Cliente> getUsuarios() {
         return usuarios;
-    }
-
-    /**
-     * Devuelve la pasarela de pago
-     *
-     * @return TeleChargeAndPaySystem, pasarela de pago externa
-     */
-    public TeleChargeAndPaySystem getPasarelaPago() {
-        return pasarelaPago;
     }
 
     /**
@@ -113,25 +97,6 @@ public class Sistema implements Serializable {
             throw new IllegalArgumentException("Comisiones menor que 0: "+comisiones);
         }
         this.totalComisiones += comisiones;
-    }
-
-    /**
-     * Establece la pasarela de pago. Solo sucede si la pasarela de pago es null, es decir, si se han cargado los datos
-     * del sistema desde un fichero
-     *
-     * @param pasarelaPago Pasarela de pago a establecer
-     * @return boolean, true si la pasarela era null y se ha establecido, false en caso contrario
-     * @throws NullPointerException Si la pasarela de pago es null
-     */
-    public boolean setPasarelaPago(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
-        if(pasarelaPago==null){
-            throw new NullPointerException("Pasarea de pago null");
-        }
-        if(this.pasarelaPago==null){
-            this.pasarelaPago = pasarelaPago;
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -384,9 +349,9 @@ public class Sistema implements Serializable {
      * @param oferta oferta de la que se quiere realizar el alquiler
      * @return true en caso de exito, false en caso de error
      * @throws NullPointerException si el demandante o la oferta es NULL
+     * @throws OrderRejectedException si la operacion de pago ha fallado
      */
-    public boolean alquilar(Demandante demandante, Oferta oferta) throws OrderRejectedException, InvalidCardNumberException,
-            FailedInternetConnectionException {
+    public boolean alquilar(Demandante demandante, Oferta oferta) throws NullPointerException, OrderRejectedException {
         double precio;
         if (demandante == null || oferta == null) {
             throw new NullPointerException("Demandante u oferta NULL");
@@ -394,30 +359,28 @@ public class Sistema implements Serializable {
         if (oferta.getEstado() != Estado.DISPONIBLE) {
             return false;
         }
-        pasarelaPago.charge(demandante.getTarjeta(),"Alquiler de vivienda", oferta.getPrecio());
+        TeleChargeAndPaySystem.charge(demandante.getTarjeta(), "Alquiler de vivienda", oferta.getPrecio());
         if (demandante.isReservaActiva() && oferta.isReservado()) {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
                 if (oferta.isVacacional()) {
-                    setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
+                    setTotalComisiones(oferta.getPrecio() * 0.02);
                 } else {
-                    setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+                    setTotalComisiones(oferta.getPrecio() * 0.01);
                 }
                 oferta.setEstado(Estado.NO_DISPONIBLE);
-
                 return true;
-
             }
             return false;
         } else if (oferta.isReservado()) {
             return false;
-        }
-        if (oferta.isVacacional()) {
-            setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
         } else {
-            setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+            if (oferta.isVacacional()) {
+                setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
+            } else {
+                setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+            }
+            oferta.setEstado(Estado.NO_DISPONIBLE);
+            return true;
         }
-        oferta.setEstado(Estado.NO_DISPONIBLE);
-        return true;
-
     }
 }
