@@ -42,15 +42,14 @@ public abstract class Opinion implements Serializable {
      * Añade un comentario a la opinion
      *
      * @param comentario Comentario a añadir
-     * @return boolean, true si se añade coorectamente
+     * @return boolean, true si se añade coorectamente, false en caso contrario
      * @throws NullPointerException Si el comentario es null
      */
     public boolean anadirComentario(Comentario comentario) throws NullPointerException{
         if(comentario==null){
             throw new NullPointerException("Comentario null");
         }
-        comentarios.add(comentario);
-        return true;
+        return comentarios.add(comentario);
     }
 
 }
