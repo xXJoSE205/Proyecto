@@ -170,6 +170,7 @@ public class Sistema implements Serializable {
         if(usuario==null || nif==null || password==null){
             throw new NullPointerException("Usuario, nif o password null");
         }
+
         if(usuarios.contains(usuario)) {
             for(Cliente x: usuarios) {
                 if(x.isLogeado() || this.gerente.isLogeado()) {
