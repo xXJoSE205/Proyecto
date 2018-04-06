@@ -11,7 +11,6 @@ import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Sistema implements Serializable {
@@ -83,6 +82,15 @@ public class Sistema implements Serializable {
      */
     public List<Opinion> getOpiniones() {
         return opiniones;
+    }
+
+    /**
+     * Devuelve el gerente del sistema
+     *
+     * @return Gerente del sistema
+     */
+    public Gerente getGerente() {
+        return gerente;
     }
 
     /**
@@ -270,8 +278,8 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @return list, lista con las viviendas obtenidas aplicando los filtros
      */
-    public LinkedList<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
-        LinkedList<Inmueble> busqueda = new LinkedList<>();
+    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        List<Inmueble> busqueda = new ArrayList<>();
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()>=nHab && nHab>-1){
                 busqueda.add(inmueble);
@@ -312,10 +320,10 @@ public class Sistema implements Serializable {
      * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
      * @throws NullPointerException si el cliente es null
      */
-    public LinkedList<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
+    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
                                        boolean vacacional, Cliente cliente){
-        LinkedList<Oferta> ofertas = new LinkedList<>();
-        LinkedList<Inmueble> aux;
+        List<Oferta> ofertas = new ArrayList<>();
+        List<Inmueble> aux;
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }

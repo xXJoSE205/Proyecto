@@ -1,8 +1,7 @@
 package p3.src;
 
-
 import java.io.*;
-import java.util.List;
+import java.util.*;
 
 public class Muszka {
 
@@ -49,11 +48,15 @@ public class Muszka {
                         System.out.println("Introduce tu NIF y tu contraseña: ");
                         line = br.readLine();
                         split1 = line.split("\\s+");
-                        if (muzska.login(split1[0], split1[1])) {
-                            System.out.println("Inicio de sesion exitoso");
-                            break;
-                        } else {
-                            System.out.println("NIF y/o contraseñas incorrectos");
+                        if(split1.length!=2){
+                            System.out.println("Argumentos invalidos");
+                        }else {
+                            if (muzska.login(split1[0], split1[1])) {
+                                System.out.println("Inicio de sesion exitoso");
+                                break;
+                            } else {
+                                System.out.println("NIF y/o contraseñas incorrectos");
+                            }
                         }
                         if (i == 2) {
                             System.out.println("Intentos agotados");
@@ -67,31 +70,35 @@ public class Muszka {
                         System.out.println("Introduce tu NIF y tu contraseña: ");
                         line = br.readLine();
                         split1 = line.split("\\s+");
-                        List<Cliente> clientes = muzska.getUsuarios();
-                        for (Cliente d : clientes) {
-                            if (d.getNif().equals(split1[0])) {
-                                if (d instanceof Demandante) {
-                                    clReg = (Demandante) d;
-                                    cliente = clReg;
-                                    break;
+                        if(split1.length!=2){
+                            System.out.println("Argumentos invalidos");
+                        }else {
+                            List<Cliente> clientes = muzska.getUsuarios();
+                            for (Cliente d : clientes) {
+                                if (d.getNif().equals(split1[0])) {
+                                    if (d instanceof Demandante) {
+                                        clReg = (Demandante) d;
+                                        cliente = clReg;
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        if (clReg != null) {
-                            if (muzska.login(clReg, split1[0], split1[1])) {
-                                System.out.println("Inicio de sesion exitoso");
-                                break;
+                            if (clReg != null) {
+                                if (muzska.login(clReg, split1[0], split1[1])) {
+                                    System.out.println("Inicio de sesion exitoso");
+                                    break;
+                                } else {
+                                    System.out.println("NIF y/o contraseñas incorrectos");
+                                }
                             } else {
-                                System.out.println("NIF y/o contraseñas incorrectos");
+                                System.out.println("No esta registrado nadie con ese NIF");
                             }
-                        } else {
-                            System.out.println("No esta registrado nadie con ese NIF");
                         }
                         if (i == 2) {
                             System.out.println("Intentos agotados");
                             if (clReg != null) {
                                 clReg.bloquear();
-                                System.out.println("Este NIF ha sido bloqueado");
+                                System.out.println("Este NIF ha sido bloqueado. pongase en contacto con el gerente");
                             }
                             guardarDatos(muzska);
                             return;
@@ -105,25 +112,29 @@ public class Muszka {
                         System.out.println("Introduce tu NIF y tu contraseña: ");
                         line = br.readLine();
                         split1 = line.split("\\s+");
-                        List<Cliente> clientes = muzska.getUsuarios();
-                        for (Cliente d : clientes) {
-                            if (d.getNif().equals(split1[0])) {
-                                if (d instanceof Ofertante) {
-                                    clReg = (Ofertante) d;
-                                    cliente = clReg;
-                                    break;
+                        if(split1.length!=2){
+                            System.out.println("Argumentos invalidos");
+                        }else {
+                            List<Cliente> clientes = muzska.getUsuarios();
+                            for (Cliente d : clientes) {
+                                if (d.getNif().equals(split1[0])) {
+                                    if (d instanceof Ofertante) {
+                                        clReg = (Ofertante) d;
+                                        cliente = clReg;
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        if (clReg != null) {
-                            if (muzska.login(clReg, split1[0], split1[1])) {
-                                System.out.println("Inicio de sesion exitoso");
-                                break;
+                            if (clReg != null) {
+                                if (muzska.login(clReg, split1[0], split1[1])) {
+                                    System.out.println("Inicio de sesion exitoso");
+                                    break;
+                                } else {
+                                    System.out.println("NIF y/o contraseñas incorrectos");
+                                }
                             } else {
-                                System.out.println("NIF y/o contraseñas incorrectos");
+                                System.out.println("No esta registrado nadie con ese NIF");
                             }
-                        } else {
-                            System.out.println("No esta registrado nadie con ese NIF");
                         }
                         if (i == 2) {
                             System.out.println("Intentos agotados");
@@ -150,14 +161,100 @@ public class Muszka {
             return;
         }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
         try {
+            if(cliente instanceof Demandante){
+                if(((Demandante) cliente).isBloqueado()){
+                    System.out.println("Estas bloqueado. Ponte en contacto con el gerente");
+                    guardarDatos(muzska);
+                    return;
+                }
+            }
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            String line, split[];
+            List<Inmueble> busquedaIN;
+            List<Oferta> busqeudaOF;
             do {
                 System.out.println("Que quieres hacer: ");
                 line = br.readLine();
+                if(line.equals("buscar") || line.equals("Buscar")){
+                    System.out.println("Introduce los campos de busqueda: hab., baños, dimen., planta, ¿ascensor?"
+                            +", direccion (-1 o null(direccion) si no se quieren tener en cuenta)");
+                    line = br.readLine();
+                    split = line.split("\\s+");
+                    if(split.length!=6){
+                        System.out.println("Numero de campos inscorrecto: "+split.length);
+                    }else {
+                        if (split[5].equals("null")) {
+                            split[5] = null;
+                        }
+                        busquedaIN = muzska.buscar(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+                                Integer.parseInt(split[2]), Integer.parseInt(split[3]),
+                                Boolean.parseBoolean(split[4]), split[5]);
+                        if (busquedaIN.size() == 0) {
+                            System.out.println("Busqueda fallida, no se han encontrado resultados");
+                        }
+                        busquedaIN.sort(Comparator.comparingInt(Inmueble::getnHabitaciones));
+                        int i = 1;
+                        for (Inmueble inm : busquedaIN) {
+                            System.out.println("Inmueble " + i);
+                            System.out.println(inm.toString());
+                            i++;
+                            line = br.readLine();
+                        }
+                    }
+                }else if(line.equals("busqueda avanzada") || line.equals("Busqueda avanzada")
+                        || line.equals("b. avanzada")){
+                    if(cliente==null && !muzska.getGerente().isLogeado()){
+                        System.out.println("No tienes permiso para la busqueda avanzada");
+                    }
+                    System.out.println("Introduce los campos de busqueda: hab., baños, dimen., planta, ¿ascensor?, "
+                            +"precio, ¿vacacional?, direccion (-1 o null(direccion) si no se quieren tener en cuenta)");
+                    line = br.readLine();
+                    split = line.split("\\s+");
+                    if(split.length!=8){
+                        System.out.println("Numero de campos inscorrecto: "+split.length);
+                    }else {
+                        if (split[5].equals("null")) {
+                            split[5] = null;
+                        }
+                        busqeudaOF = muzska.avanzada(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+                                Integer.parseInt(split[2]), Integer.parseInt(split[3]),
+                                Boolean.parseBoolean(split[4]), split[5],Double.parseDouble(split[6]),
+                                Boolean.parseBoolean(split[7]), cliente);
+                        if (busqeudaOF.size() == 0) {
+                            System.out.println("Busqueda fallida, no se han encontrado resultados");
+                        }
+                        busqeudaOF.sort(Comparator.comparingDouble(Oferta::getPrecio));
+                        int i = 1;
+                        for (Oferta ofer : busqeudaOF) {
+                            System.out.println("Oferta " + i);
+                            System.out.println(ofer.toString());
+                            i++;
+                            line = br.readLine();
+                        }
+                    }
+                }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {
             ioe.printStackTrace();
@@ -169,7 +266,6 @@ public class Muszka {
             muzska.logout(cliente);
         }
         guardarDatos(muzska);
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     /**

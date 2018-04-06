@@ -95,6 +95,15 @@ public class SistemaTest {
     }
 
     /**
+     * Test de getGerente, se comprueba que el gerente no sea null
+     */
+    @Test
+    public void getGerente() {
+        System.out.println("Sistema: test getGerente");
+        assertNotNull(sistema.getGerente());
+    }
+
+    /**
      * Test de setTotalComisione, se comprueba que la nueva comision es igual a 20
      */
     @Test
