@@ -283,11 +283,7 @@ public class Muszka {
                             System.out.println("No tienes ninguna reserva activa");
                         }
                     }
-                }
-
-
-
-                else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
+                } else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
                     List<Oferta> pendientes;
                     if (!muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para manejar ofertas");
@@ -428,8 +424,8 @@ public class Muszka {
                             System.out.println(dem.toString());
                             i++;
                         }
-                        line = br.readLine();
                         System.out.println("Numero de usuario que desbloquear");
+                        line = br.readLine();
                         if(line.equals("stop") || line.equals("Stop")){
                             break;
                         } else {
@@ -466,7 +462,7 @@ public class Muszka {
                         System.out.println("No tienes permisos para crear una oferta");
                     } else {
                         for(Inmueble inm:muzska.getInmuebles()){
-                            if(inm.getDueno().equals((Demandante) cliente)) {
+                            if(inm.getDueno().equals(cliente)) {
                                 list.add(inm);
                             }
                         }
@@ -512,7 +508,6 @@ public class Muszka {
                     }
                 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 muzska.comprobarReservas();
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {
