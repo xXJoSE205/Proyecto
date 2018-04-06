@@ -8,6 +8,7 @@ package p3.pruebas;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.Demandante;
+import p3.src.Reserva;
 
 import static org.junit.Assert.*;
 
@@ -155,5 +156,37 @@ public class DemandanteTest {
     public void desbloquear2() {
         System.out.println("Demandante: test desbloquear2");
         assertFalse(demandante.desbloquear());
+    }
+
+    /**
+     * Test de getReserva, se asegura que el metodo devuelve algo distinto de NULL
+     */
+    @Test
+    public void getReserva(){
+        System.out.println("Demandante: test getReserva");
+        Reserva r = new Reserva(demandante);
+        demandante.setReserva(r);
+        assertNotNull(demandante.getReserva());
+    }
+
+    /**
+     * Test de setReserva1, se comprueba que el usuario ahora tiene una reserva activa
+     */
+    @Test
+    public void setReserva1(){
+        System.out.println("Demandante: test setReserva1");
+        Reserva r = new Reserva(demandante);
+        demandante.setReserva(r);
+        assertNotNull(demandante.getReserva());
+
+    }
+
+    /**
+     * Test de setReserva2, se espera NullPointerException
+     */
+    @Test (expected = NullPointerException.class)
+    public void setReserva2(){
+        System.out.println("Demandante: test setReserva2");
+        demandante.setReserva(null);
     }
 }

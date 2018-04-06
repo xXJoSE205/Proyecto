@@ -24,6 +24,7 @@ public class Muszka {
                 ofe = new Oferta(1200, LocalDate.now(), LocalDate.now().plusMonths(4), false, 200, inm);
                 inm.anadirOferta(ofe);
                 muzska.anadirOferta(ofe);
+
             } else if (args.length == 0) {
                 System.out.println("Cargando datos de \"muzska.ser\"...");
                 FileInputStream fileIn = new FileInputStream("muzska.ser");
@@ -185,6 +186,7 @@ public class Muszka {
             String line, split[];
             List<Inmueble> busquedaIN;
             List<Oferta> busqeudaOF = null;
+            List<Demandante> usuarosBlock = new ArrayList<>();
             do {
                 System.out.println("Que quieres hacer: ");
                 line = br.readLine();
@@ -246,6 +248,9 @@ public class Muszka {
                                 System.out.println(ofer.toString());
                                 i++;
                                 line = br.readLine();
+                                if(line.equals("stop") || line.equals("Stop")){
+                                    break;
+                                }
                             }
                         }
                     }
@@ -275,8 +280,130 @@ public class Muszka {
                     } else {
                         System.out.println("Cancelando reserva...");
 
+
+                    }
+                } else if(line.equals("alquilar") || line.equals("Alquilar")){
+                    if ((cliente == null || cliente instanceof Ofertante) && !muzska.getGerente().isLogeado()) {
+                        System.out.println("No tienes permiso para alquilar");
+                    }else if(busqeudaOF==null){
+                        System.out.println("Primero realiza una busqueda avanzada");
+                    }else {
+                        System.out.println("Indica el nuemro de la oferta a alquilar");
+                        line = br.readLine();
+                        if(Integer.parseInt(line)<1){
+                            System.out.println("Numero invalido");
+                        }else{
+                            if(muzska.alquilar((Demandante)cliente,busqeudaOF.get(Integer.parseInt(line)-1))){
+                                System.out.println("Oferta alquilada con exito");
+                            } else{
+                                System.out.println("Erroro al alquilar la oferta");
+                            }
+                        }
+                    }
+                } else if(line.equals("Desbloquear") || line.equals("desbloquear")) {
+                    if(!muzska.getGerente().isLogeado()){
+                        System.out.println("No tienes permisos para desbloquear un usuario");
+                    } else{
+                        for(Cliente dem :muzska.getUsuarios()){
+                            if(dem instanceof Demandante && ((Demandante) dem).isBloqueado()){
+                                usuarosBlock.add((Demandante)dem);
+                            }
+                        }
+                        if(usuarosBlock.isEmpty()){
+                            System.out.println("No hay usuarios bloqueados");
+                        } else {
+                            usuarosBlock.sort(Comparator.comparing(Demandante::getNif));
+                        }
+                        int i=1;
+                        for(Demandante dem : usuarosBlock){
+                            System.out.println("Usuario" + i);
+                            System.out.println(dem.toString());
+                            i++;
+                        }
+                        line = br.readLine();
+                        System.out.println("Numero de usuario que desbloquear");
+                        if(line.equals("stop") || line.equals("Stop")){
+                            break;
+                        } else {
+                            if(usuarosBlock.get(Integer.parseInt(line)-1).desbloquear()){
+                                System.out.println("Usuario desbloqueado");
+                            }else{
+                                System.out.println("Error al desbloquear");
+                            }
+                        }
+                    }
+                } else if(line.equals("Añadir Inmueble") || line.equals("añadir inmueble")){
+                    if(((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado())){
+                        System.out.println("No tienes permisos para crear un inmueble");
+                    } else{
+                        System.out.println("Introduce los datos del inmueble: nHabitaciones, nBanos, dimensiones, direccion, planta, ascensor");
+                        line = br.readLine();
+                        split = line.split("\\s+");
+                        if (split.length !=6 ) {
+                            System.out.println("Numero de campos inscorrecto: " + split.length);
+                        } else {
+                            Inmueble in = new Inmueble(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+                                    Integer.parseInt(split[2]), split[3],Integer.parseInt(split[4]),
+                                    Boolean.parseBoolean(split[5]),(Ofertante) cliente );
+                            if(muzska.anadirInmueble(in)){
+                                System.out.println("Inmueble añadido correctamente");
+                            } else {
+                                System.out.println("Error al añadir el inmueble");
+                            }
+                        }
+                    }
+                } else if (line.equals("Añadir Oferta") || line.equals("añadir oferata")){
+                    List<Inmueble> list = new ArrayList<>();
+                    if(((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado())){
+                        System.out.println("No tienes permisos para crear una oferta");
+                    } else {
+                        for(Inmueble inm:muzska.getInmuebles()){
+                            if(inm.getDueno().equals((Demandante) cliente)) {
+                                list.add(inm);
+                            }
+                        }
+                        if(list.isEmpty()){
+                            System.out.println("No tienes inmuebles");
+                        } else {
+                            System.out.println("Estos son tus inmuebles:");
+                            int i;
+                            for(Inmueble inm : list){
+                                System.out.println("Inmueble:" + i);
+                                System.out.println(inm.toString());
+                                i++;
+                            }
+                            line = br.readLine();
+                            System.out.println("Numero de inmueble que ofertar");
+                            if(line.equals("stop") || line.equals("Stop")){
+                                break;
+                            } else {
+                                Inmueble aux = null;
+                                aux = list.get(Integer.parseInt(line)-1);
+                                if(aux==null) {
+                                    System.out.println("Numero incorrecto");
+                                } else {
+                                    System.out.println("Datos de la oferta: precio, fechaInicio, fechaFin, vacacional, fianza");
+                                    line = br.readLine();
+                                    split = line.split("\\s+");
+                                    if (split.length !=5 ) {
+                                        System.out.println("Numero de campos inscorrecto: " + split.length);
+                                    } else {
+                                        Oferta oferta = new Oferta(Integer.parseInt(split[0]),,,
+                                                Boolean.parseBoolean(split[3]),Integer.parseInt(split[4]),aux);
+                                        if(muzska.anadirOferta(oferta)){
+                                            System.out.println("Oferta creada correctamente");
+                                        } else {
+                                            System.out.println("Error al crear la oferta");
+                                        }
+
+                                    }
+                                }
+
+                            }
+                        }
                     }
                 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {

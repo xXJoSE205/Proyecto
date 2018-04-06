@@ -293,7 +293,7 @@ public class Sistema implements Serializable {
             if(inmueble.getDimensiones()<dim && dim>-1){
                 busqueda.remove(inmueble);
             }
-            if(inmueble.getPlanta()!=planta && planta>-1){
+            if(inmueble.getPlanta()>planta && planta>-1){
                 busqueda.remove(inmueble);
             }
             if(inmueble.getAscensor()!=ascensor){
