@@ -501,7 +501,7 @@ public class Muszka {
                                         if(muzska.anadirOferta(oferta)){
                                             System.out.println("Oferta creada correctamente");
                                         } else {
-                                            System.out.println("Error al crear la oferta");
+                                            System.out.println("Error al crear la oferta ");
                                         }
 
                                     }
