@@ -284,11 +284,7 @@ public static void main(String[] args) {
                             System.out.println("No tienes ninguna reserva activa");
                         }
                     }
-                }
-
-
-
-                else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
+                } else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
                     List<Oferta> pendientes;
                     if (!muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para manejar ofertas");
@@ -429,8 +425,8 @@ public static void main(String[] args) {
                             System.out.println(dem.toString());
                             i++;
                         }
-                        line = br.readLine();
                         System.out.println("Numero de usuario que desbloquear");
+                        line = br.readLine();
                         if(line.equals("stop") || line.equals("Stop")){
                             break;
                         } else {
@@ -529,7 +525,6 @@ public static void main(String[] args) {
                     }
                 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 muzska.comprobarReservas();
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {

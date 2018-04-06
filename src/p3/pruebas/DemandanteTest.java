@@ -165,10 +165,12 @@ public class DemandanteTest {
     @Test
     public void getReserva(){
         System.out.println("Demandante: test getReserva");
-
-        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
-        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
-        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
+        Ofertante ofertante = new Ofertante("Vic","Rattlehead","66666666D","PeaceSells",
+                "6666999966669999");
+        Inmueble inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
+                false,ofertante);
+        Oferta oferta = new Oferta(1200, LocalDate.now(),LocalDate.now().plusMonths(4),false,
+                200,inmueble);
         Reserva r = new Reserva(demandante, oferta);
         demandante.setReserva(r);
         assertNotNull(demandante.getReserva());
@@ -180,10 +182,13 @@ public class DemandanteTest {
     @Test
     public void setReserva1(){
         System.out.println("Demandante: test setReserva1");
-        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
-        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
-        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
-        Reserva r = new Reserva(demandante,oferta);
+        Ofertante ofertante = new Ofertante("Vic","Rattlehead","66666666D","PeaceSells",
+                "6666999966669999");
+        Inmueble inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
+                false,ofertante);
+        Oferta oferta = new Oferta(1200, LocalDate.now(),LocalDate.now().plusMonths(4),false,
+                200,inmueble);
+        Reserva r = new Reserva(demandante, oferta);
         demandante.setReserva(r);
         assertNotNull(demandante.getReserva());
 
@@ -191,14 +196,11 @@ public class DemandanteTest {
 
     /**
      * Test de setReserva2, se espera NullPointerException
+     * La reserva es null
      */
     @Test (expected = NullPointerException.class)
     public void setReserva2(){
         System.out.println("Demandante: test setReserva2");
-        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
-        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
-        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
         demandante.setReserva(null);
     }
-
 }
