@@ -292,10 +292,8 @@ public class Muszka {
                                     }
                                 }
                             }
-                        }catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if (line.equals("reservar") || line.equals("Reservar")) {
@@ -316,10 +314,8 @@ public class Muszka {
                                     System.out.println("Error en la reserva");
                                 }
                             }
-                        }catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if (line.equals("cancelar reserva") || line.equals("Cancelra reserva")) {
@@ -333,10 +329,8 @@ public class Muszka {
                             } else {
                                 System.out.println("No tienes ninguna reserva activa");
                             }
-                        }catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
@@ -431,10 +425,8 @@ public class Muszka {
                                                 of.setFianza(Integer.parseInt(split[4]));
                                                 flag = 1;
                                             }
-                                        } catch (IllegalArgumentException iae){
-                                            System.out.println(iae.getMessage());
-                                        } catch (NullPointerException npe){
-                                            System.out.println(npe.getMessage());
+                                        } catch (Exception e){
+                                            System.out.println(e.getMessage());
                                         }
                                     }
                                 }
@@ -459,10 +451,8 @@ public class Muszka {
                                     System.out.println("Erroro al alquilar la oferta");
                                 }
                             }
-                        }catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if(line.equals("Desbloquear") || line.equals("desbloquear")) {
@@ -497,10 +487,8 @@ public class Muszka {
                                     System.out.println("Error al desbloquear");
                                 }
                             }
-                        }catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if(line.equals("Añadir Inmueble") || line.equals("añadir inmueble")){
@@ -523,10 +511,8 @@ public class Muszka {
                                     System.out.println("Error al añadir el inmueble");
                                 }
                             }
-                        } catch (NullPointerException npe){
-                            System.out.println(npe.getMessage());
-                        } catch (IllegalArgumentException iae){
-                            System.out.println(iae.getMessage());
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
                         }
                     }
                 } else if (line.equals("Añadir Oferta") || line.equals("añadir oferta")){
@@ -585,17 +571,14 @@ public class Muszka {
                                                 System.out.println("Error al añadir la oferta");
                                             }
                                         }
-                                    }catch (NullPointerException npe) {
-                                        System.out.println(npe.getMessage());
-                                    }catch (IllegalArgumentException iae) {
-                                        System.out.println(iae.getMessage());
+                                    }catch (Exception e) {
+                                        System.out.println(e.getMessage());
                                     }
                                 }
                             }
                         }
                     }
                 }
-
                 muzska.comprobarReservas();
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {
@@ -676,8 +659,9 @@ public class Muszka {
             out.close();
             fileOut.close();
             System.out.println("Datos serializables guardados en \"muzska.ser\"");
-        } catch (IOException i) {
-            i.printStackTrace();
+        }catch(IOException ioe) {
+            System.out.println("Error al manejar el fichero \"muzska.ser\"");
+            ioe.printStackTrace();
         }
     }
 }
