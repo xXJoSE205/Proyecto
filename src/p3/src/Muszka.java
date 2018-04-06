@@ -10,7 +10,7 @@ public static void main(String[] args) {
         Sistema muzska;
         Cliente cliente = null;
         try {
-            if (args.length == 1 && args[0].equals("C:\\Users\\josel\\IdeaProjects\\Proyecto\\clientes.txt")) {
+            if (args.length == 1 && args[0].equals("clientes.txt")) {
                 Cliente ofertante;
                 Inmueble inm;
                 Oferta ofe;
@@ -26,7 +26,7 @@ public static void main(String[] args) {
                 muzska.anadirOferta(ofe);
             } else if (args.length == 0) {
                 System.out.println("Cargando datos de \"muzska.ser\"...");
-                FileInputStream fileIn = new FileInputStream("C:\\Users\\josel\\IdeaProjects\\Proyecto\\muzska.ser");
+                FileInputStream fileIn = new FileInputStream("muzska.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
                 in.close();
@@ -216,6 +216,34 @@ public static void main(String[] args) {
                             line = br.readLine();
                             if(line.equals("stop") || line.equals("Stop")){
                                 break;
+                            }else if(line.equals("anadir comentario") || line.equals("Anadir comentario")){
+                                if(cliente==null || cliente instanceof Ofertante && !muzska.getGerente().isLogeado()){
+                                    System.out.println("No tienes permiso para anadir un comantario");
+                                }else{
+                                    try {
+                                        System.out.println("Introduce tu comentario");
+                                        line = br.readLine();
+                                        Opinion comentario = new Comentario((Demandante) cliente, line);
+                                        inm.anadirOpinion(comentario);
+                                        muzska.anadirOpinion(comentario);
+                                    }catch (NullPointerException npe) {
+                                        System.out.println(npe.getMessage());
+                                    }
+                                }
+                            }else if(line.equals("anadir valoracion") || line.equals("Anadir valoracion")){
+                                if(cliente==null || cliente instanceof Ofertante && !muzska.getGerente().isLogeado()){
+                                    System.out.println("No tienes permiso para anadir una puntuacion");
+                                }else{
+                                    try {
+                                        System.out.println("Introduce tu puntuacion");
+                                        line = br.readLine();
+                                        Opinion comentario = new Valoracion((Demandante) cliente, Integer.parseInt(line));
+                                        inm.anadirOpinion(comentario);
+                                        muzska.anadirOpinion(comentario);
+                                    }catch (IllegalArgumentException iae) {
+                                        System.out.println(iae.getMessage());
+                                    }
+                                }
                             }
                         }
                     }
@@ -482,7 +510,7 @@ public static void main(String[] args) {
                             if(line.equals("stop") || line.equals("Stop")){
                                 break;
                             } else {
-                                Inmueble aux = null;
+                                Inmueble aux;
                                 aux = list.get(Integer.parseInt(line)-1);
                                 if(aux==null) {
                                     System.out.println("Numero incorrecto");
@@ -596,7 +624,7 @@ public static void main(String[] args) {
      */
     private static void guardarDatos(Sistema sistema){
         try {
-            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\josel\\IdeaProjects\\Proyecto\\muzska.ser");
+            FileOutputStream fileOut = new FileOutputStream("muzska.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(sistema);
             out.close();
