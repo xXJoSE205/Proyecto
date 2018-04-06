@@ -1,5 +1,6 @@
 package p3.src;
 
+import javax.sound.midi.SysexMessage;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -24,7 +25,6 @@ public class Muszka {
                 ofe = new Oferta(1200, LocalDate.now(), LocalDate.now().plusMonths(4), false, 200, inm);
                 inm.anadirOferta(ofe);
                 muzska.anadirOferta(ofe);
-
             } else if (args.length == 0) {
                 System.out.println("Cargando datos de \"muzska.ser\"...");
                 FileInputStream fileIn = new FileInputStream("muzska.ser");
@@ -275,12 +275,120 @@ public class Muszka {
                 } else if (line.equals("cancelar reserva") || line.equals("Cancelra reserva")) {
                     if ((cliente == null || cliente instanceof Ofertante) && !muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para cancelar una reserva");
-                    } else if (!((Demandante) cliente).isReservaActiva()) {
-                        System.out.println("No tienes ninguna reserva activa");
+                    } else {
+                        System.out.println("Cancelando reserva...");
+                        if(((Demandante) cliente).getReserva().getOferta().cancelarReserva()){
+                            System.out.println("Reserva cancelada correcatmente");
+                        }else{
+                            System.out.println("No tienes ninguna reserva activa");
+                        }
+                    }
+                }
+
+
+
+                else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
+                    List<Oferta> pendientes;
+                    if (!muzska.getGerente().isLogeado()) {
+                        System.out.println("No tienes permiso para manejar ofertas");
+                    } else {
+                        pendientes = muzska.getOfertas();
+                        for (Oferta of : pendientes) {
+                            if (of.getEstado() != Estado.PENDIENTE) {
+                                pendientes.remove(of);
+                            }
+                        }
+                        if (pendientes.size() == 0) {
+                            System.out.println("No hay ofertas pendientes de revision");
+                        } else {
+                            int i = 1;
+                            for (Oferta of : pendientes) {
+                                System.out.println("Oferta " + i);
+                                System.out.println(of.toString());
+                                i++;
+                                line = br.readLine();
+                                if (line.equals("stop") || line.equals("Stop")) {
+                                    break;
+                                } else if (line.equals("aprobar") || line.equals("Aprobar")) {
+                                    of.aprobar();
+                                    pendientes.remove(of);
+                                } else if (line.equals("rechazar") || line.equals("Rechazar")) {
+                                    of.rechazar();
+                                    pendientes.remove(of);
+                                    System.out.println("¿Quieres proponer modificaciones?:");
+                                    line = br.readLine();
+                                    if (line.equals("si") || line.equals("Si")) {
+                                        System.out.println("Introduce las propuestas:");
+                                        line = br.readLine();
+                                        of.getInmueble().getDueno().anadirModificaciones(line, false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if(line.equals("Modificar oferta") || line.equals("modificar ofertas")){
+                    List<Oferta> rechazadas;
+                    String split2[];
+                    if ((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado()) {
+                        System.out.println("No tienes permiso para modificar una oferta");
                     } else {
                         System.out.println("Cancelando reserva...");
 
 
+                        rechazadas = muzska.getOfertas();
+                        for(Oferta of: rechazadas){
+                            if(of.getInmueble().getDueno()!=cliente){
+                                rechazadas.remove(of);
+                            }else if(of.getEstado()!=Estado.RECHAZADO){
+                                rechazadas.remove(of);
+                            }
+                        }
+                        if (rechazadas.size() == 0) {
+                            System.out.println("No hay ofertas posibles para modificar");
+                        } else {
+                            int i = 1;
+                            for (Oferta of : rechazadas) {
+                                System.out.println("Oferta " + i);
+                                System.out.println(of.toString());
+                                i++;
+                                line = br.readLine();
+                                if (line.equals("stop") || line.equals("Stop")) {
+                                    break;
+                                } else if (line.equals("modificar") || line.equals("Modificar")) {
+                                    int flag=0;
+                                    while(flag!=1) {
+                                        try {
+                                            System.out.println("Introduce las nuevas caracteristicas: precio, fecha de inicio"
+                                                    + ", fecha fin, ¿vacacional?, fianza");
+                                            line = br.readLine();
+                                            if (line.equals("stop") || line.equals("Stop")) {
+                                                break;
+                                            }
+                                            split = line.split("\\s+");
+                                            if (split.length != 5) {
+                                                System.out.println("Numero de argumentos invalido, se esperan 5");
+                                            } else {
+                                                of.setPrecio(Integer.parseInt(split[0]));
+                                                split2 = split[1].split("-");
+                     /////////////////////
+                                                of.setFechaInicio(LocalDate.of(Integer.parseInt(split2[0]),
+                                                        Integer.parseInt(split2[1]), Integer.parseInt(split2[2])));
+                                                split2 = split[2].split("-");
+                                                of.setFechaFin(LocalDate.of(Integer.parseInt(split2[0]),
+                                                        Integer.parseInt(split2[1]), Integer.parseInt(split2[2])));
+                                                of.setVacacional(Boolean.parseBoolean(split[3]));
+                                                of.setFianza(Integer.parseInt(split[4]));
+                                                flag = 1;
+                                            }
+                                        } catch (IllegalArgumentException iae){
+                                            System.out.println(iae.getMessage());
+                                        } catch (NullPointerException npe){
+                                            System.out.println(npe.getMessage());
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 } else if(line.equals("alquilar") || line.equals("Alquilar")){
                     if ((cliente == null || cliente instanceof Ofertante) && !muzska.getGerente().isLogeado()) {

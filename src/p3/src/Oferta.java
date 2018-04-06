@@ -236,7 +236,7 @@ public class Oferta implements Serializable {
         if(usuario.isReservaActiva()){
             return false;
         }
-        r = new Reserva(usuario);
+        r = new Reserva(usuario, this);
         this.setReservado(true);
         this.reserva = r;
         usuario.setReservaActiva(true);
@@ -254,7 +254,7 @@ public class Oferta implements Serializable {
             return false;
         }
         this.setReservado(false);
-        this.reserva = null;
+        this.reserva.getUsuario().quitarReserva();
         return true;
     }
 

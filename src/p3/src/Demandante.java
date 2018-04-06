@@ -91,6 +91,14 @@ public class Demandante extends Cliente implements Serializable {
         this.reserva = reserva;
     }
 
+    public boolean quitarReserva(){
+        if(this.reserva==null){
+            return false;
+        }
+        this.reserva = null;
+        return true;
+    }
+
     /**
      * Desbloquea un usuario bloqueado
      *
