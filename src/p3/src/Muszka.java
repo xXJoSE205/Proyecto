@@ -1,6 +1,5 @@
 package p3.src;
 
-import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 
 import java.io.*;
 import java.util.List;
@@ -23,7 +22,7 @@ public class Muszka {
                 in.close();
                 fileIn.close();
             } else {
-                System.out.println("Numero de argumentos invalido: " + args.length);
+                System.out.println("Numero de argumentos invalido: " + args.length+", esperados 0 o 1");
                 System.out.println("Fichero de entrada distinto a \"clientes.txt\"");
                 return;
             }
@@ -137,6 +136,7 @@ public class Muszka {
                 } else {
                     System.out.println("Error, no existe el tipo indicado\nFin de programa");
                     guardarDatos(muzska);
+                    return;
                 }
             }
         } catch (IOException ioe) {

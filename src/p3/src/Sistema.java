@@ -316,7 +316,7 @@ public class Sistema implements Serializable {
     public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
                                  boolean vacacional, Cliente cliente){
         List<Oferta> ofertas = new ArrayList<>();
-        List<Inmueble> aux = new ArrayList<>();
+        List<Inmueble> aux;
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }
@@ -349,42 +349,78 @@ public class Sistema implements Serializable {
      * @param oferta oferta de la que se quiere realizar el alquiler
      * @return true en caso de exito, false en caso de error
      * @throws NullPointerException si el demandante o la oferta es NULL
-     * @throws OrderRejectedException si la operacion de pago ha fallado
      */
-    public boolean alquilar(Demandante demandante, Oferta oferta) throws NullPointerException, OrderRejectedException {
-        double precio;
+    public boolean alquilar(Demandante demandante, Oferta oferta) throws NullPointerException{
         if (demandante == null || oferta == null) {
             throw new NullPointerException("Demandante u oferta NULL");
         }
         if (oferta.getEstado() != Estado.DISPONIBLE) {
             return false;
         }
-        TeleChargeAndPaySystem.charge(demandante.getTarjeta(), "Alquiler de vivienda", oferta.getPrecio());
         if (demandante.isReservaActiva() && oferta.isReservado()) {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
-                if (oferta.isVacacional()) {
-                    setTotalComisiones(oferta.getPrecio() * 0.02);
-                    setTotalComisiones(oferta.getPrecio() * 0.02 );
-                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
-                } else {
-                    setTotalComisiones(oferta.getPrecio() * 0.01);
-                    setTotalComisiones(oferta.getPrecio() * 0.01 );
-                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
+                try {
+                    TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda",
+                            -oferta.getPrecio(),true);
+                    try {
+                        if (oferta.isVacacional()) {
+                            setTotalComisiones(oferta.getPrecio() * 0.02);
+                            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                    , "Pago del alquiler", oferta.getPrecio() * 0.98);
+                        } else {
+                            setTotalComisiones(oferta.getPrecio() * 0.01);
+                            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                    , "Pago del alquiler", oferta.getPrecio() * 0.99);
+                        }
+                        oferta.setEstado(Estado.NO_DISPONIBLE);
+                        return true;
+                    }catch (InvalidCardNumberException icne){
+                        System.out.println(icne.getMessage());
+                        oferta.getInmueble().getDueno().setCargo(
+                                oferta.isVacacional() ? oferta.getPrecio()*0.98 : oferta.getPrecio()*0.99);
+                    }
+                }catch (InvalidCardNumberException icne){
+                    System.out.println(icne.getMessage());
+                    demandante.bloquear();
+                    return false;
+                }catch (OrderRejectedException ore){
+                    System.out.println(ore.getMessage());
+                    return false;
                 }
-                oferta.setEstado(Estado.NO_DISPONIBLE);
-                return true;
             }
             return false;
         } else if (oferta.isReservado()) {
             return false;
-        } else {
-            if (oferta.isVacacional()) {
-                setTotalComisiones(oferta.getPrecio() * 0.02);
-            } else {
-                setTotalComisiones(oferta.getPrecio() * 0.01);
+        } else if (!demandante.isReservaActiva()){
+            try {
+                TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda",
+                        -oferta.getPrecio(),true);
+                try {
+                    if (oferta.isVacacional()) {
+                        setTotalComisiones(oferta.getPrecio() * 0.02);
+                        TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                , "Pago del alquiler", oferta.getPrecio() * 0.98);
+                    } else {
+                        setTotalComisiones(oferta.getPrecio() * 0.01);
+                        TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                , "Pago del alquiler", oferta.getPrecio() * 0.99);
+                    }
+                    oferta.setEstado(Estado.NO_DISPONIBLE);
+                    return true;
+                }catch (InvalidCardNumberException icne){
+                    System.out.println(icne.getMessage());
+                    oferta.getInmueble().getDueno().setCargo(
+                            oferta.isVacacional() ? oferta.getPrecio()*0.98 : oferta.getPrecio()*0.99);
+                }
+            }catch (InvalidCardNumberException icne){
+                System.out.println(icne.getMessage());
+                demandante.bloquear();
+                return false;
+            }catch (OrderRejectedException ore){
+                System.out.println(ore.getMessage());
+                return false;
             }
-            oferta.setEstado(Estado.NO_DISPONIBLE);
-            return true;
         }
+        return false;
     }
 }

@@ -5,8 +5,6 @@
  */
 package p3.pruebas;
 
-
-import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +32,7 @@ public class SistemaTest {
      * @throws Exception
      */
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         sistema = new Sistema();
         ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
@@ -400,6 +398,9 @@ public class SistemaTest {
         sistema.login("00000000G","Apruebanos");
         sistema.anadirInmueble(inmueble);
         sistema.anadirOferta(oferta);
+        oferta.aprobar();
+        sistema.logout();
+        sistema.login(demandante,"66666666D","PeaceSells");
         assertNotNull(sistema.avanzada(5,2,150,5,true,"C/ del diamante 5",
                 200, true, demandante));
     }
@@ -439,6 +440,10 @@ public class SistemaTest {
         sistema.anadirUsuario(ofertante);
         sistema.anadirInmueble(inmueble);
         sistema.anadirOferta(oferta);
+        sistema.login("000000G", "Apruebanos");
+        oferta.aprobar();
+        sistema.logout();
+        sistema.login(demandante1, "02020202P", "1euroHambuerger");
         assertTrue(sistema.alquilar(demandante1,oferta));
     }
 
@@ -493,19 +498,6 @@ public class SistemaTest {
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
                 "1euroHamburger","0000000000000002");
         assertFalse(sistema.alquilar(demandante1,oferta));
-    }
-
-    /**
-     * Test de alquilar6, se espera InvalidCardNumberException
-     * Un numero de la tarjeta de credito es una letra
-     * @throws OrderRejectedException
-     */
-    @Test (expected = InvalidCardNumberException.class)
-    public void alquilar6() throws OrderRejectedException {
-        System.out.println("Sistema: test alquilar6");
-        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
-                "1euroHamburger","a000000000000002");
-        sistema.alquilar(demandante1,oferta);
     }
 }
 
