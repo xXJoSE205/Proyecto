@@ -270,11 +270,13 @@ public class Muszka {
                 } else if (line.equals("cancelar reserva") || line.equals("Cancelra reserva")) {
                     if ((cliente == null || cliente instanceof Ofertante) && !muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para cancelar una reserva");
-                    } else if (!((Demandante) cliente).isReservaActiva()) {
-                        System.out.println("No tienes ninguna reserva activa");
                     } else {
                         System.out.println("Cancelando reserva...");
-                        ((Demandante) cliente).getReserva().getOferta().cancelarReserva();
+                        if(((Demandante) cliente).getReserva().getOferta().cancelarReserva()){
+                            System.out.println("Reserva cancelada correcatmente");
+                        }else{
+                            System.out.println("No tienes ninguna reserva activa");
+                        }
                     }
                 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
