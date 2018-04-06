@@ -309,13 +309,13 @@ public class Sistema implements Serializable {
     public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
         List<Inmueble> busqueda = new ArrayList<>();
         for(Inmueble inmueble: inmuebles){
-            if(inmueble.getnHabitaciones()==nHab && nHab>-1){
+            if(inmueble.getnHabitaciones()>=nHab && nHab>-1){
                 busqueda.add(inmueble);
             } else {
                 busqueda.add(inmueble);
             }
         }for (Inmueble inmueble:busqueda){
-            if(inmueble.getnBanos()!=nBan && nBan>-1){
+            if(inmueble.getnBanos()<nBan && nBan>-1){
                 busqueda.remove(inmueble);
             }
             if(inmueble.getDimensiones()<dim && dim>-1){
