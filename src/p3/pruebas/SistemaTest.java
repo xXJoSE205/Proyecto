@@ -438,10 +438,9 @@ public class SistemaTest {
 
     /**
      * Test alquilar 1, comprueba que alquilar devuelve true
-     * @throws OrderRejectedException
      */
     @Test
-    public void alquilar1() throws OrderRejectedException {
+    public void alquilar1() {
         System.out.println("Sistema: test alquilar1");
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
                 "1euroHamburger","0000000000000002");
@@ -459,10 +458,9 @@ public class SistemaTest {
     /**
      * Test de alquilar2, se espera NullPointerException
      * demandante es null
-     * @throws OrderRejectedException
      */
     @Test (expected = NullPointerException.class)
-    public void alquilar2() throws OrderRejectedException {
+    public void alquilar2(){
         System.out.println("Sistema: test alquilar2");
         sistema.alquilar(null,oferta);
     }
@@ -470,10 +468,9 @@ public class SistemaTest {
     /**
      * Test de alquilar3, se espera NullPointerException
      * oferta es null
-     * @throws OrderRejectedException
      */
     @Test (expected = NullPointerException.class)
-    public void alquilar3() throws OrderRejectedException {
+    public void alquilar3(){
         System.out.println("Sistema: test alquilar3");
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
                 "1euroHamburger","0000000000000002");
@@ -484,10 +481,9 @@ public class SistemaTest {
     /**
      * Test de alquilar4, se comprueba que alquiler devuelve false
      * El estado de la oferta es NO_DISPONIBLE
-     * @throws OrderRejectedException
      */
     @Test
-    public void alquilar4() throws OrderRejectedException {
+    public void alquilar4(){
         System.out.println("Sistema: test alquilar4");
         oferta.setEstado(Estado.NO_DISPONIBLE);
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
@@ -498,10 +494,9 @@ public class SistemaTest {
     /**
      * Test de alquilar5, se comprueba que alquilar devuelve false
      * La oferta esta reservada, pero no por el demandante
-     * @throws OrderRejectedException
      */
     @Test
-    public void alquilar5() throws OrderRejectedException {
+    public void alquilar5(){
         System.out.println("Sistema: test alquilar5");
         oferta.setReservado(true);
         Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",

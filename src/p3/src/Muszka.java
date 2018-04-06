@@ -1,6 +1,5 @@
 package p3.src;
 
-import javax.sound.midi.SysexMessage;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -11,14 +10,14 @@ public static void main(String[] args) {
         Sistema muzska;
         Cliente cliente = null;
         try {
-            if (args.length == 1 && args[0].equals("clientes.txt")) {
+            if (args.length == 1 && args[0].equals("C:\\Users\\josel\\IdeaProjects\\Proyecto\\clientes.txt")) {
                 Cliente ofertante;
                 Inmueble inm;
                 Oferta ofe;
                 muzska = new Sistema();
                 System.out.println("Cargando clientes...");
                 cargarClientes(muzska, args[0]);
-                ofertante = new Ofertante("Enrique","Cedeño","12378970G","xPeke","8252358967346235");
+                ofertante = new Ofertante("Enrique","Cedeno","12378970G","xPeke","8252358967346235");
                 muzska.anadirUsuario(ofertante);
                 inm = new Inmueble(3,1,80,"Paseo Castellana", 2, false, (Ofertante)ofertante);
                 muzska.anadirInmueble(inm);
@@ -27,7 +26,7 @@ public static void main(String[] args) {
                 muzska.anadirOferta(ofe);
             } else if (args.length == 0) {
                 System.out.println("Cargando datos de \"muzska.ser\"...");
-                FileInputStream fileIn = new FileInputStream("muzska.ser");
+                FileInputStream fileIn = new FileInputStream("C:\\Users\\josel\\IdeaProjects\\Proyecto\\muzska.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
                 in.close();
@@ -367,7 +366,6 @@ public static void main(String[] args) {
                                             } else {
                                                 of.setPrecio(Integer.parseInt(split[0]));
                                                 split2 = split[1].split("-");
-                     /////////////////////
                                                 of.setFechaInicio(LocalDate.of(Integer.parseInt(split2[0]),
                                                         Integer.parseInt(split2[1]), Integer.parseInt(split2[2])));
                                                 split2 = split[2].split("-");
@@ -515,11 +513,10 @@ public static void main(String[] args) {
                                         }
                                     }catch (NullPointerException npe) {
                                         System.out.println(npe.getMessage());
-                                    } catch (IllegalArgumentException iae) {
+                                    }catch (IllegalArgumentException iae) {
                                         System.out.println(iae.getMessage());
                                     }
                                 }
-
                             }
                         }
                     }
@@ -599,7 +596,7 @@ public static void main(String[] args) {
      */
     private static void guardarDatos(Sistema sistema){
         try {
-            FileOutputStream fileOut = new FileOutputStream("muzska.ser");
+            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\josel\\IdeaProjects\\Proyecto\\muzska.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(sistema);
             out.close();
