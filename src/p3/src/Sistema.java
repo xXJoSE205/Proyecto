@@ -316,7 +316,7 @@ public class Sistema implements Serializable {
     public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
                                  boolean vacacional, Cliente cliente){
         List<Oferta> ofertas = new ArrayList<>();
-        List<Inmueble> aux;
+        List<Inmueble> aux = new ArrayList<>();
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }

@@ -8,6 +8,7 @@ package p3.pruebas;
 import org.junit.Test;
 import p3.src.Gerente;
 
+
 public class GerenteTest {
     /**
      * Test 1 del constructor, se espera un NullPointerException

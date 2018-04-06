@@ -21,7 +21,7 @@ public abstract class Opinion implements Serializable {
      * @param autor Autor del comentario
      * @throws NullPointerException si el autor es null
      */
-    public Opinion(Demandante autor) throws NullPointerException{
+    Opinion(Demandante autor) throws NullPointerException{
         if(autor==null){
             throw new NullPointerException("Autor null");
         }
