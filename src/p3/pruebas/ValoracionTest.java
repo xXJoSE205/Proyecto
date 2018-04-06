@@ -20,10 +20,9 @@ public class ValoracionTest {
 
     /**
      * Crea una valoracion para el test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
          demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345");
         valoracion = new Valoracion(demandante, 5);

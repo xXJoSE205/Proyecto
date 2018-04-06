@@ -17,10 +17,9 @@ public class OfertanteTest {
 
     /**
      * Crea un Ofertante para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         ofertante = new Ofertante("Vic", "Rattlehead", "66666666D", "PeaceSells",
                 "6666999966669999");
     }

@@ -29,10 +29,9 @@ public class SistemaTest {
 
     /**
      * Crea un sistema para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         sistema = new Sistema();
         ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );

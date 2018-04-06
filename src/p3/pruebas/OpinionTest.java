@@ -21,10 +21,9 @@ public class OpinionTest {
 
     /**
      * Crea una opinion para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345");
         opinion = new Comentario(demandante,"prueba");

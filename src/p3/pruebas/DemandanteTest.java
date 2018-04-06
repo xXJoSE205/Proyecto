@@ -19,10 +19,9 @@ public class DemandanteTest {
 
     /**
      * Crea un demnadante para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         demandante = new Demandante( "Tony","Stark","12345678Q","Contraseña",
                 "1023456789012345" );
     }

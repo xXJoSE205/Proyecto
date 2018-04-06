@@ -317,6 +317,7 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @param precio precio maximo de la vivienda
      * @param vacacional si es una vivienda vacacional o no
+     * @param cliente Cliente que realiza la busqueda
      * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
      * @throws NullPointerException si el cliente es null
      */

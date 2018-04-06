@@ -22,10 +22,9 @@ public class ClienteTest {
 
     /**
      * Crea un Cliente como Demandante para los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         cliente = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
     }

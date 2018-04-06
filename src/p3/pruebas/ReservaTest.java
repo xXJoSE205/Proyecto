@@ -26,10 +26,9 @@ public class ReservaTest {
 
     /**
      * Crea una reserva para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         ofertante = new Ofertante("Vic", "Rattlehead", "66666666D", "PeaceSells",
                 "6666999966669999");
         inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,

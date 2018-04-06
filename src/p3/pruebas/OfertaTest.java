@@ -23,10 +23,9 @@ public class OfertaTest {
 
     /**
      * Crea una oferta para realizar los test
-     * @throws Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp(){
         ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,

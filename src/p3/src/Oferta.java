@@ -36,6 +36,7 @@ public class Oferta implements Serializable {
      * @param fechaFin Fecha final de la oferta
      * @param vacacional Boolean, true si es vacacional, false en caso contrario
      * @param fianza Fianza de la oferta
+     * @param inmueble Inmueble al que corresponde la oferta
      * @throws NullPointerException Si alguna fecha es null
      * @throws IllegalArgumentException Si el precio o la fianza es menor que 0
      */
