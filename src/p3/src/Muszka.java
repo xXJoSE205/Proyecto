@@ -262,34 +262,40 @@ public class Muszka {
                     if(cliente==null && !muzska.getGerente().isLogeado()){
                         System.out.println("No tienes permiso para la busqueda avanzada");
                     }else {
-                        System.out.println("Introduce los campos de busqueda: hab., baños, dimen., planta, ¿ascensor?, "
-                                + "precio, ¿vacacional?, direccion (-1 o null(direccion) si no se quieren tener en cuenta)");
-                        line = br.readLine();
-                        split = line.split("\\s+");
-                        if (split.length != 8) {
-                            System.out.println("Numero de campos inscorrecto: " + split.length);
-                        } else {
-                            if (split[5].equals("null")) {
-                                split[5] = null;
-                            }
-                            busqeudaOF = muzska.avanzada(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
-                                    Integer.parseInt(split[2]), Integer.parseInt(split[3]),
-                                    Boolean.parseBoolean(split[4]), split[5], Double.parseDouble(split[6]),
-                                    Boolean.parseBoolean(split[7]), cliente);
-                            if (busqeudaOF.size() == 0) {
-                                System.out.println("Busqueda fallida, no se han encontrado resultados");
-                            }
-                            busqeudaOF.sort(Comparator.comparingDouble(Oferta::getPrecio));
-                            int i = 1;
-                            for (Oferta ofer : busqeudaOF) {
-                                System.out.println("Oferta " + i);
-                                System.out.println(ofer.toString());
-                                i++;
-                                line = br.readLine();
-                                if(line.equals("stop") || line.equals("Stop")){
-                                    break;
+                        try {
+                            System.out.println("Introduce los campos de busqueda: hab., baños, dimen., planta, ¿ascensor?, "
+                                    + "precio, ¿vacacional?, direccion (-1 o null(direccion) si no se quieren tener en cuenta)");
+                            line = br.readLine();
+                            split = line.split("\\s+");
+                            if (split.length != 8) {
+                                System.out.println("Numero de campos inscorrecto: " + split.length);
+                            } else {
+                                if (split[5].equals("null")) {
+                                    split[5] = null;
+                                }
+                                busqeudaOF = muzska.avanzada(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+                                        Integer.parseInt(split[2]), Integer.parseInt(split[3]),
+                                        Boolean.parseBoolean(split[4]), split[5], Double.parseDouble(split[6]),
+                                        Boolean.parseBoolean(split[7]), cliente);
+                                if (busqeudaOF.size() == 0) {
+                                    System.out.println("Busqueda fallida, no se han encontrado resultados");
+                                }
+                                busqeudaOF.sort(Comparator.comparingDouble(Oferta::getPrecio));
+                                int i = 1;
+                                for (Oferta ofer : busqeudaOF) {
+                                    System.out.println("Oferta " + i);
+                                    System.out.println(ofer.toString());
+                                    i++;
+                                    line = br.readLine();
+                                    if (line.equals("stop") || line.equals("Stop")) {
+                                        break;
+                                    }
                                 }
                             }
+                        }catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if (line.equals("reservar") || line.equals("Reservar")) {
@@ -297,28 +303,40 @@ public class Muszka {
                         System.out.println("No tienes permiso para una reserva");
                     }else if(busqeudaOF==null){
                         System.out.println("Primero realiza una busqueda avanzada");
-                    }else{
-                        System.out.println("Indica el nuemro de la oferta a reservar");
-                        line = br.readLine();
-                        if(Integer.parseInt(line)<1){
-                            System.out.println("Numero invalido");
-                        }else{
-                            if(busqeudaOF.get(Integer.parseInt(line)-1).reservar((Demandante)cliente)){
-                                System.out.println("Reserva realizada con exito");
-                            }else{
-                                System.out.println("Error en la reserva");
+                    }else {
+                        try {
+                            System.out.println("Indica el nuemro de la oferta a reservar");
+                            line = br.readLine();
+                            if (Integer.parseInt(line) < 1) {
+                                System.out.println("Numero invalido");
+                            } else {
+                                if (busqeudaOF.get(Integer.parseInt(line) - 1).reservar((Demandante) cliente)) {
+                                    System.out.println("Reserva realizada con exito");
+                                } else {
+                                    System.out.println("Error en la reserva");
+                                }
                             }
+                        }catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if (line.equals("cancelar reserva") || line.equals("Cancelra reserva")) {
                     if ((cliente == null || cliente instanceof Ofertante) && !muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para cancelar una reserva");
                     } else {
-                        System.out.println("Cancelando reserva...");
-                        if(((Demandante) cliente).getReserva().getOferta().cancelarReserva()){
-                            System.out.println("Reserva cancelada correcatmente");
-                        }else{
-                            System.out.println("No tienes ninguna reserva activa");
+                        try {
+                            System.out.println("Cancelando reserva...");
+                            if (((Demandante) cliente).getReserva().getOferta().cancelarReserva()) {
+                                System.out.println("Reserva cancelada correcatmente");
+                            } else {
+                                System.out.println("No tienes ninguna reserva activa");
+                            }
+                        }catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
@@ -429,68 +447,86 @@ public class Muszka {
                     }else if(busqeudaOF==null){
                         System.out.println("Primero realiza una busqueda avanzada");
                     }else {
-                        System.out.println("Indica el nuemro de la oferta a alquilar");
-                        line = br.readLine();
-                        if(Integer.parseInt(line)<1){
-                            System.out.println("Numero invalido");
-                        }else{
-                            if(muzska.alquilar((Demandante)cliente,busqeudaOF.get(Integer.parseInt(line)-1))){
-                                System.out.println("Oferta alquilada con exito");
-                            } else{
-                                System.out.println("Erroro al alquilar la oferta");
+                        try {
+                            System.out.println("Indica el nuemro de la oferta a alquilar");
+                            line = br.readLine();
+                            if (Integer.parseInt(line) < 1) {
+                                System.out.println("Numero invalido");
+                            } else {
+                                if (muzska.alquilar((Demandante) cliente, busqeudaOF.get(Integer.parseInt(line) - 1))) {
+                                    System.out.println("Oferta alquilada con exito");
+                                } else {
+                                    System.out.println("Erroro al alquilar la oferta");
+                                }
                             }
+                        }catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if(line.equals("Desbloquear") || line.equals("desbloquear")) {
                     if(!muzska.getGerente().isLogeado()){
                         System.out.println("No tienes permisos para desbloquear un usuario");
                     } else{
-                        for(Cliente dem :muzska.getUsuarios()){
-                            if(dem instanceof Demandante && ((Demandante) dem).isBloqueado()){
-                                usuarosBlock.add((Demandante)dem);
+                        try {
+                            for (Cliente dem : muzska.getUsuarios()) {
+                                if (dem instanceof Demandante && ((Demandante) dem).isBloqueado()) {
+                                    usuarosBlock.add((Demandante) dem);
+                                }
                             }
-                        }
-                        if(usuarosBlock.isEmpty()){
-                            System.out.println("No hay usuarios bloqueados");
-                        } else {
-                            usuarosBlock.sort(Comparator.comparing(Demandante::getNif));
-                        }
-                        int i=1;
-                        for(Demandante dem : usuarosBlock){
-                            System.out.println("Usuario" + i);
-                            System.out.println(dem.toString());
-                            i++;
-                        }
-                        System.out.println("Numero de usuario que desbloquear");
-                        line = br.readLine();
-                        if(line.equals("stop") || line.equals("Stop")){
-                            break;
-                        } else {
-                            if(usuarosBlock.get(Integer.parseInt(line)-1).desbloquear()){
-                                System.out.println("Usuario desbloqueado");
-                            }else{
-                                System.out.println("Error al desbloquear");
+                            if (usuarosBlock.isEmpty()) {
+                                System.out.println("No hay usuarios bloqueados");
+                            } else {
+                                usuarosBlock.sort(Comparator.comparing(Demandante::getNif));
                             }
+                            int i = 1;
+                            for (Demandante dem : usuarosBlock) {
+                                System.out.println("Usuario" + i);
+                                System.out.println(dem.toString());
+                                i++;
+                            }
+                            System.out.println("Numero de usuario que desbloquear");
+                            line = br.readLine();
+                            if (line.equals("stop") || line.equals("Stop")) {
+                                break;
+                            } else {
+                                if (usuarosBlock.get(Integer.parseInt(line) - 1).desbloquear()) {
+                                    System.out.println("Usuario desbloqueado");
+                                } else {
+                                    System.out.println("Error al desbloquear");
+                                }
+                            }
+                        }catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if(line.equals("Añadir Inmueble") || line.equals("añadir inmueble")){
                     if(((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado())){
                         System.out.println("No tienes permisos para crear un inmueble");
                     } else{
-                        System.out.println("Introduce los datos del inmueble: nHabitaciones, nBanos, dimensiones, direccion, planta, ascensor");
-                        line = br.readLine();
-                        split = line.split("\\s+");
-                        if (split.length !=6 ) {
-                            System.out.println("Numero de campos inscorrecto: " + split.length);
-                        } else {
-                            Inmueble in = new Inmueble(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
-                                    Integer.parseInt(split[2]), split[3],Integer.parseInt(split[4]),
-                                    Boolean.parseBoolean(split[5]),(Ofertante) cliente );
-                            if(muzska.anadirInmueble(in)){
-                                System.out.println("Inmueble añadido correctamente");
+                        try{
+                            System.out.println("Introduce los datos del inmueble: nHabitaciones, nBanos, dimensiones, direccion, planta, ascensor");
+                            line = br.readLine();
+                            split = line.split("\\s+");
+                            if (split.length !=6 ) {
+                                System.out.println("Numero de campos inscorrecto: " + split.length);
                             } else {
-                                System.out.println("Error al añadir el inmueble");
+                                Inmueble in = new Inmueble(Integer.parseInt(split[0]), Integer.parseInt(split[1]),
+                                        Integer.parseInt(split[2]), split[3], Integer.parseInt(split[4]),
+                                        Boolean.parseBoolean(split[5]), (Ofertante) cliente);
+                                if (muzska.anadirInmueble(in)) {
+                                    System.out.println("Inmueble añadido correctamente");
+                                } else {
+                                    System.out.println("Error al añadir el inmueble");
+                                }
                             }
+                        } catch (NullPointerException npe){
+                            System.out.println(npe.getMessage());
+                        } catch (IllegalArgumentException iae){
+                            System.out.println(iae.getMessage());
                         }
                     }
                 } else if (line.equals("Añadir Oferta") || line.equals("añadir oferta")){
