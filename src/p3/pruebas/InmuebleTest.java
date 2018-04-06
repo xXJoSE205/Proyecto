@@ -17,13 +17,6 @@ public class InmuebleTest {
     private Inmueble inmueble;
     /** Ofertante general para realizar el test*/
     private Ofertante ofertante;
-    /** Demandante general para realizar  el test*/
-    private Demandante autor;
-    /**
-     * Opinion general para ralizar el test
-     * Se instanciara como Comentario
-     */
-    private Opinion opinion;
 
     /**
      * Crea un Inmueble y un Ofertante como dueño para realizar los test
@@ -193,9 +186,9 @@ public class InmuebleTest {
     @Test
     public void anadirOpinion1(){
         System.out.println("Inmueble: test anadirOpinion1");
-        autor = new Demandante("Thor", "Dios del Trueno", "09876543T", "Mjolnir",
+        Demandante autor = new Demandante("Thor", "Dios del Trueno", "09876543T", "Mjolnir",
                 "9999888877776666");
-        opinion = new Comentario(autor, "Amplio y bonito");
+        Opinion opinion = new Comentario(autor, "Amplio y bonito");
         assertTrue(inmueble.anadirOpinion(opinion));
     }
 

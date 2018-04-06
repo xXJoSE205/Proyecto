@@ -23,7 +23,7 @@ public class ComentarioTest {
      */
     @Before
     public void setUp(){
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
         comentario = new Comentario(demandante, "prueba");
     }

@@ -5,7 +5,6 @@
  */
 package p3.pruebas;
 
-import es.uam.eps.padsof.telecard.OrderRejectedException;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.*;

@@ -91,12 +91,11 @@ public class Demandante extends Cliente implements Serializable {
         this.reserva = reserva;
     }
 
-    public boolean quitarReserva(){
-        if(this.reserva==null){
-            return false;
-        }
+    /**
+     * Quita la reserva que tuviese el demandante
+     */
+    public void quitarReserva(){
         this.reserva = null;
-        return true;
     }
 
     /**

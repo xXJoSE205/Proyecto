@@ -17,10 +17,6 @@ public class ReservaTest {
     private Reserva reserva;
     /** Demandante general para realizar el test*/
     private Demandante demandante;
-    /** Ofertante general para realizar el test*/
-    private Ofertante ofertante;
-    /** Inmueble general para realizar el test*/
-    private Inmueble inmueble;
     /** Oferta general para realizar el test*/
     private Oferta oferta;
 
@@ -29,9 +25,9 @@ public class ReservaTest {
      */
     @Before
     public void setUp() {
-        ofertante = new Ofertante("Vic", "Rattlehead", "66666666D", "PeaceSells",
+        Ofertante ofertante = new Ofertante("Vic", "Rattlehead", "66666666D", "PeaceSells",
                 "6666999966669999");
-        inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
+        Inmueble inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
                 false,ofertante);
         oferta = new Oferta(1200,LocalDate.now(),LocalDate.now().plusMonths(4),false,
                 200,inmueble);

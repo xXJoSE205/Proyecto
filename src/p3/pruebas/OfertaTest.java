@@ -16,8 +16,6 @@ import static org.junit.Assert.*;
 public class OfertaTest {
     /** Oferta general para realizar el test*/
     private Oferta oferta;
-    /** Ofertante general para realizar el test*/
-    private Ofertante ofertante;
     /** Inmueble general para realizar el test*/
     private Inmueble inmueble;
 
@@ -26,7 +24,7 @@ public class OfertaTest {
      */
     @Before
     public void setUp(){
-        ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
+        Ofertante ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
                 true, ofertante);
