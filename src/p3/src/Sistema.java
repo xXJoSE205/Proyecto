@@ -7,12 +7,11 @@ package p3.src;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
 import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Sistema implements Serializable {
@@ -271,8 +270,8 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @return list, lista con las viviendas obtenidas aplicando los filtros
      */
-    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
-        List<Inmueble> busqueda = new ArrayList<>();
+    public LinkedList<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        LinkedList<Inmueble> busqueda = new LinkedList<>();
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()==nHab && nHab>-1){
                 busqueda.add(inmueble);
@@ -313,17 +312,17 @@ public class Sistema implements Serializable {
      * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
      * @throws NullPointerException si el cliente es null
      */
-    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
-                                 boolean vacacional, Cliente cliente){
-        List<Oferta> ofertas = new ArrayList<>();
-        List<Inmueble> aux = new ArrayList<>();
+    public LinkedList<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
+                                       boolean vacacional, Cliente cliente){
+        LinkedList<Oferta> ofertas = new LinkedList<>();
+        LinkedList<Inmueble> aux;
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }
         if(!cliente.isLogeado()){
             return null;
         }
-        aux=buscar(nHab,nBan,dim,planta,ascensor,dir);
+        aux = buscar(nHab,nBan,dim,planta,ascensor,dir);
         for(Inmueble inmueble : aux){
             for(Oferta oferta:inmueble.getOfertas()){
                 if(oferta.getEstado()==Estado.DISPONIBLE){
