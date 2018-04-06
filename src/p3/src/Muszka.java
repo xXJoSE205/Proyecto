@@ -274,7 +274,7 @@ public class Muszka {
                         System.out.println("No tienes ninguna reserva activa");
                     } else {
                         System.out.println("Cancelando reserva...");
-
+                        ((Demandante) cliente).getReserva().getOferta().cancelarReserva();
                     }
                 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////

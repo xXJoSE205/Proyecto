@@ -13,19 +13,23 @@ public class Reserva implements Serializable {
     private final LocalDate fechaInicio;
     /** Usuario que realiza la reserva*/
     private final Demandante usuario;
+    /** Oferta correspondiente a la reserva*/
+    private Oferta oferta;
 
     /**
      * Constructor de Reserva, crea una reserva con la fecha actual
      *
      * @param usuario Demandante que realiza la reserva
-     * @throws NullPointerException si el usuario es null
+     * @param oferta Oferta correspondiente a la reserva
+     * @throws NullPointerException si el usuario o la oferta es null
      */
-    public Reserva(Demandante usuario) throws NullPointerException{
-        if(usuario==null){
-            throw new NullPointerException("Usuario null");
+    public Reserva(Demandante usuario, Oferta oferta) throws NullPointerException{
+        if(usuario==null || oferta==null){
+            throw new NullPointerException("Usuario u oferta null");
         }
         this.fechaInicio = LocalDate.now();
         this.usuario = usuario;
+        this.oferta = oferta;
     }
 
     /**
@@ -44,6 +48,15 @@ public class Reserva implements Serializable {
      */
     public Demandante getUsuario() {
         return usuario;
+    }
+
+    /**
+     * Devuelve la oferta correspondiente a la reserva
+     *
+     * @return Oferta correspondiente
+     */
+    public Oferta getOferta() {
+        return oferta;
     }
 
     /**
