@@ -81,8 +81,8 @@ public class Demandante extends Cliente implements Serializable {
     /**
      * Modifica la reserva del demandante
      *
-     * @param reserva
-     * @throws NullPointerException
+     * @param reserva Reserva que se va a asignar
+     * @throws NullPointerException Si la reserva es null
      */
     public void setReserva(Reserva reserva) throws NullPointerException{
         if(reserva==null){
