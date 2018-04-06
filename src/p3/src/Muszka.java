@@ -513,6 +513,7 @@ public class Muszka {
                 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                muzska.comprobarReservas();
             } while (!line.equals("salir") && !line.equals("exit"));
         }catch (IOException ioe) {
             ioe.printStackTrace();
