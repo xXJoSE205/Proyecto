@@ -6,8 +6,8 @@
 package p3.pruebas;
 
 
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
-import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.*;
@@ -416,7 +416,7 @@ public class SistemaTest {
     }
 
     /**
-     * Test vanzada3, se espera NullPointerException
+     * Test avanzada3, se espera NullPointerException
      * El demandante es NULL
      */
     @Test (expected = NullPointerException.class)
@@ -427,7 +427,7 @@ public class SistemaTest {
     }
 
     /**
-     * Test 1 de alquilar, se espera un Orde
+     * Test alquilar 1, comprueba que alquilar devuelve true
      * @throws OrderRejectedException
      */
     @Test
@@ -442,12 +442,22 @@ public class SistemaTest {
         assertTrue(sistema.alquilar(demandante1,oferta));
     }
 
+    /**
+     * Test de alquilar2, se espera NullPointerException
+     * demandante es null
+     * @throws OrderRejectedException
+     */
     @Test (expected = NullPointerException.class)
     public void alquilar2() throws OrderRejectedException {
         System.out.println("Sistema: test alquilar2");
         sistema.alquilar(null,oferta);
     }
 
+    /**
+     * Test de alquilar3, se espera NullPointerException
+     * oferta es null
+     * @throws OrderRejectedException
+     */
     @Test (expected = NullPointerException.class)
     public void alquilar3() throws OrderRejectedException {
         System.out.println("Sistema: test alquilar3");
@@ -457,10 +467,45 @@ public class SistemaTest {
 
     }
 
+    /**
+     * Test de alquilar4, se comprueba que alquiler devuelve false
+     * El estado de la oferta es NO_DISPONIBLE
+     * @throws OrderRejectedException
+     */
     @Test
-    public void alquilar4(){
+    public void alquilar4() throws OrderRejectedException {
         System.out.println("Sistema: test alquilar4");
+        oferta.setEstado(Estado.NO_DISPONIBLE);
+        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
+                "1euroHamburger","0000000000000002");
+        assertFalse(sistema.alquilar(demandante1,oferta));
+    }
 
+    /**
+     * Test de alquilar5, se comprueba que alquilar devuelve false
+     * La oferta esta reservada, pero no por el demandante
+     * @throws OrderRejectedException
+     */
+    @Test
+    public void alquilar5() throws OrderRejectedException {
+        System.out.println("Sistema: test alquilar5");
+        oferta.setReservado(true);
+        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
+                "1euroHamburger","0000000000000002");
+        assertFalse(sistema.alquilar(demandante1,oferta));
+    }
+
+    /**
+     * Test de alquilar6, se espera InvalidCardNumberException
+     * Un numero de la tarjeta de credito es una letra
+     * @throws OrderRejectedException
+     */
+    @Test (expected = InvalidCardNumberException.class)
+    public void alquilar6() throws OrderRejectedException {
+        System.out.println("Sistema: test alquilar6");
+        Demandante demandante1 = new Demandante("Ichigo","Lluvia de Estrellas","02020202P",
+                "1euroHamburger","a000000000000002");
+        sistema.alquilar(demandante1,oferta);
     }
 }
 

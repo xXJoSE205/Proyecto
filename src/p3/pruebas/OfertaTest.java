@@ -78,7 +78,7 @@ public class OfertaTest {
      * Test 4 del constructor, se espera un NullPointerException
      * El inmueble es null
      */
-    @Test (expected = IllegalArgumentException.class)
+    @Test (expected = NullPointerException.class)
     public void constructor5(){
         System.out.println("Oferta: test constructor5");
         Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,50, null);

@@ -125,6 +125,15 @@ public class Inmueble implements Serializable {
     }
 
     /**
+     * Devuelve el dueño del inmueble
+     *
+     * @return Ofertante, el dueño del inmueble
+     */
+    public Ofertante getDueno() {
+        return dueno;
+    }
+
+    /**
      * Añade una oferta a un inmueble
      *
      * @param oferta oferta que se quiere añadir

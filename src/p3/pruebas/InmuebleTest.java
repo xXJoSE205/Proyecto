@@ -163,7 +163,7 @@ public class InmuebleTest {
     @Test
     public void getOfertas() {
         System.out.println("Inmueble: test getOfertas");
-        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50, inmueble);
+        Oferta oferta = new Oferta(20.20, LocalDate.now(), LocalDate.MAX,true,50,inmueble);
         inmueble.anadirOferta(oferta);
         assertNotNull(inmueble.getOfertas());
     }

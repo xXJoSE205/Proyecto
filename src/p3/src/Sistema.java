@@ -364,8 +364,12 @@ public class Sistema implements Serializable {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
                 if (oferta.isVacacional()) {
                     setTotalComisiones(oferta.getPrecio() * 0.02);
+                    setTotalComisiones(oferta.getPrecio() * 0.02 );
+                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
                 } else {
                     setTotalComisiones(oferta.getPrecio() * 0.01);
+                    setTotalComisiones(oferta.getPrecio() * 0.01 );
+                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
                 }
                 oferta.setEstado(Estado.NO_DISPONIBLE);
                 return true;
@@ -375,9 +379,9 @@ public class Sistema implements Serializable {
             return false;
         } else {
             if (oferta.isVacacional()) {
-                setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
+                setTotalComisiones(oferta.getPrecio() * 0.02);
             } else {
-                setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+                setTotalComisiones(oferta.getPrecio() * 0.01);
             }
             oferta.setEstado(Estado.NO_DISPONIBLE);
             return true;
