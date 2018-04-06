@@ -1,3 +1,8 @@
+/**
+ * Esta clase contiene el programa principal de la aplicacion MUZSKA
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 package p3.src;
 
 import java.io.*;
@@ -5,8 +10,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Muszka {
-
-public static void main(String[] args) {
+    /**
+     * Programa principal de MUZSKA, al finalizar guarda en "muzska.ser" toda la informacion del sistema
+     *
+     * @param args "clientes.txt" si se quieren cargar los clientes desde el fichero
+     *             nada si se quiere recuperar el sistema desde "muzska.ser"
+     */
+    public static void main(String[] args) {
         Sistema muzska;
         Cliente cliente = null;
         try {
