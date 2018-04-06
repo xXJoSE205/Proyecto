@@ -7,8 +7,9 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.Demandante;
-import p3.src.Reserva;
+import p3.src.*;
+
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
@@ -164,7 +165,11 @@ public class DemandanteTest {
     @Test
     public void getReserva(){
         System.out.println("Demandante: test getReserva");
-        Reserva r = new Reserva(demandante);
+
+        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
+        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
+        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
+        Reserva r = new Reserva(demandante, oferta);
         demandante.setReserva(r);
         assertNotNull(demandante.getReserva());
     }
@@ -175,7 +180,10 @@ public class DemandanteTest {
     @Test
     public void setReserva1(){
         System.out.println("Demandante: test setReserva1");
-        Reserva r = new Reserva(demandante);
+        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
+        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
+        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
+        Reserva r = new Reserva(demandante,oferta);
         demandante.setReserva(r);
         assertNotNull(demandante.getReserva());
 
@@ -187,6 +195,10 @@ public class DemandanteTest {
     @Test (expected = NullPointerException.class)
     public void setReserva2(){
         System.out.println("Demandante: test setReserva2");
+        Ofertante ofertante = new Ofertante("Natasha","Romanov","78965412A","ViudaNegra","4849849848948445");
+        Inmueble inmueble = new Inmueble(5,2,500,"C/Hola",7,true,ofertante);
+        Oferta oferta = new Oferta(500, LocalDate.now(),LocalDate.MAX,true,50,inmueble);
         demandante.setReserva(null);
     }
+
 }
