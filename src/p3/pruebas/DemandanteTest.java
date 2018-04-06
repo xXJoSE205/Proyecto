@@ -92,25 +92,6 @@ public class DemandanteTest {
     }
 
     /**
-     * Test de getDeuda, se comprueba que la deuda del demandante del setUp es igual a 0
-     */
-    @Test
-    public void getDeuda() {
-        System.out.println("Demandante: test getDeuda");
-        assertTrue(demandante.getDeuda()==0);
-    }
-
-    /**
-     * Test de setDeuda, se comprueba que la nueva deuda es igual a 20.20
-     */
-    @Test
-    public void setDeuda() {
-        System.out.println("Demandante: test setDeuda");
-        demandante.setDeuda(20.20);
-        assertTrue(demandante.getDeuda()==20.20);
-    }
-
-    /**
      * Test de isBloqueado, se comprueba que el demandante del setUp no esta bloqueado, bloqueado = false
      */
     @Test

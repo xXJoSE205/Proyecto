@@ -1,6 +1,5 @@
 package p3.src;
 
-import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 
 import java.io.*;
 import java.util.List;
@@ -8,24 +7,22 @@ import java.util.List;
 public class Muszka {
 
     public static void main(String[] args) {
-        TeleChargeAndPaySystem pasarelaPago = new TeleChargeAndPaySystem();
         Sistema muzska;
-        Cliente cliente;
+        Cliente cliente = null;
         try {
             if (args.length == 1 && args[0].equals("clientes.txt")) {
-                muzska = new Sistema(pasarelaPago);
+                muzska = new Sistema();
                 System.out.println("Cargando clientes...");
                 cargarClientes(muzska, args[0]);
             } else if (args.length == 0) {
-                System.out.println("Cargando datos de \"muzska.ser\"");
+                System.out.println("Cargando datos de \"muzska.ser\"...");
                 FileInputStream fileIn = new FileInputStream("muzska.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
-                muzska.setPasarelaPago(pasarelaPago);
                 in.close();
                 fileIn.close();
             } else {
-                System.out.println("Numero de argumentos invalido: " + args.length);
+                System.out.println("Numero de argumentos invalido: " + args.length+", esperados 0 o 1");
                 System.out.println("Fichero de entrada distinto a \"clientes.txt\"");
                 return;
             }
@@ -53,6 +50,7 @@ public class Muszka {
                         line = br.readLine();
                         split1 = line.split("\\s+");
                         if (muzska.login(split1[0], split1[1])) {
+                            System.out.println("Inicio de sesion exitoso");
                             break;
                         } else {
                             System.out.println("NIF y/o contraseñas incorrectos");
@@ -138,6 +136,7 @@ public class Muszka {
                 } else {
                     System.out.println("Error, no existe el tipo indicado\nFin de programa");
                     guardarDatos(muzska);
+                    return;
                 }
             }
         } catch (IOException ioe) {
@@ -150,6 +149,7 @@ public class Muszka {
             guardarDatos(muzska);
             return;
         }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         try {
             InputStreamReader isr = new InputStreamReader(System.in);
@@ -162,7 +162,13 @@ public class Muszka {
         }catch (IOException ioe) {
             ioe.printStackTrace();
             guardarDatos(muzska);
+            return;
         }
+        if(cliente!=null) {
+            System.out.println("Cerrando sesion...");
+            muzska.logout(cliente);
+        }
+        guardarDatos(muzska);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
@@ -180,9 +186,8 @@ public class Muszka {
         Demandante demandante;
         int i=0;
 
-        try {
-
-            while ((linea = buffer.readLine()) != null) {
+        while ((linea = buffer.readLine()) != null) {
+            try {
                 String split1[] = linea.split(";");
                 if (i != 0) {
                     rol = split1[0];
@@ -209,11 +214,11 @@ public class Muszka {
                     }
                 }
                 i = 1;
+            }catch (NullPointerException npe) {
+                System.out.println(npe.getMessage());
+            } catch (IllegalArgumentException iae) {
+                System.out.println(iae.getMessage() + ", Usuario no añadido");
             }
-        } catch (NullPointerException npe) {
-            System.out.println(npe.getMessage());
-        } catch (IllegalArgumentException iae) {
-            System.out.println(iae.getMessage() + ", Usuario no añadido");
         }
     }
 

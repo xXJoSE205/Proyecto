@@ -7,12 +7,11 @@ package p3.src;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
-import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
 import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Sistema implements Serializable {
@@ -20,8 +19,6 @@ public class Sistema implements Serializable {
     private double totalComisiones = 0;
     /** Lista de los clientes*/
     private List<Cliente> usuarios;
-    /** Pasarela de pago externa*/
-    private transient TeleChargeAndPaySystem pasarelaPago;
     /** Lista de todos los inmuebles*/
     private List<Inmueble> inmuebles;
     /** Lista de todas las ofertas*/
@@ -34,15 +31,10 @@ public class Sistema implements Serializable {
     /**
      * Constructor de Sistema
      *
-     * @param pasarelaPago Pasarela de pago externa
      * @throws NullPointerException Si la pasalera de pago es null
      */
-    public Sistema(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
-        if(pasarelaPago==null){
-            throw new NullPointerException("Pasarela de pago null");
-        }
+    public Sistema() {
         this.usuarios = new ArrayList<>();
-        this.pasarelaPago = pasarelaPago;
         this.inmuebles = new ArrayList<>();
         this.ofertas = new ArrayList<>();
         this.opiniones = new ArrayList<>();
@@ -64,15 +56,6 @@ public class Sistema implements Serializable {
      */
     public List<Cliente> getUsuarios() {
         return usuarios;
-    }
-
-    /**
-     * Devuelve la pasarela de pago
-     *
-     * @return TeleChargeAndPaySystem, pasarela de pago externa
-     */
-    public TeleChargeAndPaySystem getPasarelaPago() {
-        return pasarelaPago;
     }
 
     /**
@@ -113,25 +96,6 @@ public class Sistema implements Serializable {
             throw new IllegalArgumentException("Comisiones menor que 0: "+comisiones);
         }
         this.totalComisiones += comisiones;
-    }
-
-    /**
-     * Establece la pasarela de pago. Solo sucede si la pasarela de pago es null, es decir, si se han cargado los datos
-     * del sistema desde un fichero
-     *
-     * @param pasarelaPago Pasarela de pago a establecer
-     * @return boolean, true si la pasarela era null y se ha establecido, false en caso contrario
-     * @throws NullPointerException Si la pasarela de pago es null
-     */
-    public boolean setPasarelaPago(TeleChargeAndPaySystem pasarelaPago) throws NullPointerException{
-        if(pasarelaPago==null){
-            throw new NullPointerException("Pasarea de pago null");
-        }
-        if(this.pasarelaPago==null){
-            this.pasarelaPago = pasarelaPago;
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -306,8 +270,8 @@ public class Sistema implements Serializable {
      * @param dir direccion de la vivienda, null si no se quiere filtrar por direccion
      * @return list, lista con las viviendas obtenidas aplicando los filtros
      */
-    public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
-        List<Inmueble> busqueda = new ArrayList<>();
+    public LinkedList<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        LinkedList<Inmueble> busqueda = new LinkedList<>();
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()>=nHab && nHab>-1){
                 busqueda.add(inmueble);
@@ -348,17 +312,17 @@ public class Sistema implements Serializable {
      * @return list, lista con las ofertas obtenidas aplicando los filtros, null en caso de que el cliente no este logeado
      * @throws NullPointerException si el cliente es null
      */
-    public List<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
-                                 boolean vacacional, Cliente cliente){
-        List<Oferta> ofertas = new ArrayList<>();
-        List<Inmueble> aux = new ArrayList<>();
+    public LinkedList<Oferta> avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, double precio,
+                                       boolean vacacional, Cliente cliente){
+        LinkedList<Oferta> ofertas = new LinkedList<>();
+        LinkedList<Inmueble> aux;
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }
         if(!cliente.isLogeado()){
             return null;
         }
-        aux=buscar(nHab,nBan,dim,planta,ascensor,dir);
+        aux = buscar(nHab,nBan,dim,planta,ascensor,dir);
         for(Inmueble inmueble : aux){
             for(Oferta oferta:inmueble.getOfertas()){
                 if(oferta.getEstado()==Estado.DISPONIBLE){
@@ -385,41 +349,77 @@ public class Sistema implements Serializable {
      * @return true en caso de exito, false en caso de error
      * @throws NullPointerException si el demandante o la oferta es NULL
      */
-    public boolean alquilar(Demandante demandante, Oferta oferta) throws OrderRejectedException, InvalidCardNumberException,
-            FailedInternetConnectionException {
-        double precio;
+    public boolean alquilar(Demandante demandante, Oferta oferta) throws NullPointerException{
         if (demandante == null || oferta == null) {
             throw new NullPointerException("Demandante u oferta NULL");
         }
         if (oferta.getEstado() != Estado.DISPONIBLE) {
             return false;
         }
-        TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda", oferta.getPrecio());
         if (demandante.isReservaActiva() && oferta.isReservado()) {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
-                if (oferta.isVacacional()) {
-                    setTotalComisiones(oferta.getPrecio() * 0.02 );
-                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
-                } else {
-                    setTotalComisiones(oferta.getPrecio() * 0.01 );
-                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
+                try {
+                    TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda",
+                            -oferta.getPrecio(),true);
+                    try {
+                        if (oferta.isVacacional()) {
+                            setTotalComisiones(oferta.getPrecio() * 0.02);
+                            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                    , "Pago del alquiler", oferta.getPrecio() * 0.98);
+                        } else {
+                            setTotalComisiones(oferta.getPrecio() * 0.01);
+                            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                    , "Pago del alquiler", oferta.getPrecio() * 0.99);
+                        }
+                        oferta.setEstado(Estado.NO_DISPONIBLE);
+                        return true;
+                    }catch (InvalidCardNumberException icne){
+                        System.out.println(icne.getMessage());
+                        oferta.getInmueble().getDueno().setCargo(
+                                oferta.isVacacional() ? oferta.getPrecio()*0.98 : oferta.getPrecio()*0.99);
+                    }
+                }catch (InvalidCardNumberException icne){
+                    System.out.println(icne.getMessage());
+                    demandante.bloquear();
+                    return false;
+                }catch (OrderRejectedException ore){
+                    System.out.println(ore.getMessage());
+                    return false;
                 }
-                oferta.setEstado(Estado.NO_DISPONIBLE);
-                return true;
             }
             return false;
         } else if (oferta.isReservado()) {
             return false;
+        } else if (!demandante.isReservaActiva()){
+            try {
+                TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda",
+                        -oferta.getPrecio(),true);
+                try {
+                    if (oferta.isVacacional()) {
+                        setTotalComisiones(oferta.getPrecio() * 0.02);
+                        TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                , "Pago del alquiler", oferta.getPrecio() * 0.98);
+                    } else {
+                        setTotalComisiones(oferta.getPrecio() * 0.01);
+                        TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta()
+                                , "Pago del alquiler", oferta.getPrecio() * 0.99);
+                    }
+                    oferta.setEstado(Estado.NO_DISPONIBLE);
+                    return true;
+                }catch (InvalidCardNumberException icne){
+                    System.out.println(icne.getMessage());
+                    oferta.getInmueble().getDueno().setCargo(
+                            oferta.isVacacional() ? oferta.getPrecio()*0.98 : oferta.getPrecio()*0.99);
+                }
+            }catch (InvalidCardNumberException icne){
+                System.out.println(icne.getMessage());
+                demandante.bloquear();
+                return false;
+            }catch (OrderRejectedException ore){
+                System.out.println(ore.getMessage());
+                return false;
+            }
         }
-        if (oferta.isVacacional()) {
-            setTotalComisiones(oferta.getPrecio() * 0.02 );
-            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
-        } else {
-            setTotalComisiones(oferta.getPrecio() * 0.01 );
-            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
-        }
-        oferta.setEstado(Estado.NO_DISPONIBLE);
-        return true;
-
+        return false;
     }
 }

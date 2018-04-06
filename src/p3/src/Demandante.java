@@ -8,8 +8,6 @@ package p3.src;
 import java.io.Serializable;
 
 public class Demandante extends Cliente implements Serializable {
-    /** Deuda del demandante*/
-    private double deuda = 0;
     /** Si esta bloqueado o no*/
     private boolean bloqueado = false;
     /** Si tiene una reserva activa o no*/
@@ -27,24 +25,6 @@ public class Demandante extends Cliente implements Serializable {
     public Demandante(String nombre, String apellidos, String nif, String password, String tarjeta)
             throws NullPointerException{
         super(nombre, apellidos, nif, password, tarjeta);
-    }
-
-    /**
-     * Devuelve la deuda que tiene el demandante
-     *
-     * @return double, cantidad de dinero que debe
-     */
-    public double getDeuda() {
-        return deuda;
-    }
-
-    /**
-     * Modifica la deuda del demandante
-     *
-     * @param deuda Cantidad que se quiere sumar o restar
-     */
-    public void setDeuda(double deuda) {
-        this.deuda += deuda;
     }
 
     /**
@@ -107,6 +87,6 @@ public class Demandante extends Cliente implements Serializable {
      */
     @Override
     public String toString() {
-        return super.toString()+"\n\tDeuda: "+deuda+"\n\t¿Bloqueado?: "+bloqueado+"\n\t¿Reserva?: "+reservaActiva;
+        return super.toString()+"\n\t¿Bloqueado?: "+bloqueado+"\n\t¿Reserva?: "+reservaActiva;
     }
 }
