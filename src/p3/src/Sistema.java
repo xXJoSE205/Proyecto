@@ -398,23 +398,25 @@ public class Sistema implements Serializable {
         if (demandante.isReservaActiva() && oferta.isReservado()) {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
                 if (oferta.isVacacional()) {
-                    setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
+                    setTotalComisiones(oferta.getPrecio() * 0.02 );
+                    pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
                 } else {
-                    setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+                    setTotalComisiones(oferta.getPrecio() * 0.01 );
+                    pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
                 }
                 oferta.setEstado(Estado.NO_DISPONIBLE);
-
                 return true;
-
             }
             return false;
         } else if (oferta.isReservado()) {
             return false;
         }
         if (oferta.isVacacional()) {
-            setTotalComisiones(oferta.getPrecio() * 0.02 + getTotalComisiones());
+            setTotalComisiones(oferta.getPrecio() * 0.02 );
+            pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
         } else {
-            setTotalComisiones(oferta.getPrecio() * 0.01 + getTotalComisiones());
+            setTotalComisiones(oferta.getPrecio() * 0.01 );
+            pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
         }
         oferta.setEstado(Estado.NO_DISPONIBLE);
         return true;
