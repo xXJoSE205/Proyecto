@@ -394,15 +394,15 @@ public class Sistema implements Serializable {
         if (oferta.getEstado() != Estado.DISPONIBLE) {
             return false;
         }
-        pasarelaPago.charge(demandante.getTarjeta(),"Alquiler de vivienda", oferta.getPrecio());
+        TeleChargeAndPaySystem.charge(demandante.getTarjeta(),"Alquiler de vivienda", oferta.getPrecio());
         if (demandante.isReservaActiva() && oferta.isReservado()) {
             if (oferta.getReserva().getUsuario().equals(demandante)) {
                 if (oferta.isVacacional()) {
                     setTotalComisiones(oferta.getPrecio() * 0.02 );
-                    pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
+                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
                 } else {
                     setTotalComisiones(oferta.getPrecio() * 0.01 );
-                    pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
+                    TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
                 }
                 oferta.setEstado(Estado.NO_DISPONIBLE);
                 return true;
@@ -413,10 +413,10 @@ public class Sistema implements Serializable {
         }
         if (oferta.isVacacional()) {
             setTotalComisiones(oferta.getPrecio() * 0.02 );
-            pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
+            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.98);
         } else {
             setTotalComisiones(oferta.getPrecio() * 0.01 );
-            pasarelaPago.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
+            TeleChargeAndPaySystem.charge(oferta.getInmueble().getDueno().getTarjeta(),"Pago del alquiler",oferta.getPrecio()*0.99);
         }
         oferta.setEstado(Estado.NO_DISPONIBLE);
         return true;
