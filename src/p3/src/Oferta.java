@@ -240,6 +240,7 @@ public class Oferta implements Serializable {
         this.setReservado(true);
         this.reserva = r;
         usuario.setReservaActiva(true);
+        usuario.serReserva(r);
         return true;
     }
 

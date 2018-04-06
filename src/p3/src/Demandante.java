@@ -12,6 +12,8 @@ public class Demandante extends Cliente implements Serializable {
     private boolean bloqueado = false;
     /** Si tiene una reserva activa o no*/
     private boolean reservaActiva = false;
+    /** Reserva si la tuviese*/
+    private Reserva reserva = null;
 
     /**
      * Constructor de Cliente, llama al constructor de Cliente
@@ -65,6 +67,28 @@ public class Demandante extends Cliente implements Serializable {
      */
     public void setReservaActiva(boolean reserva) {
         this.reservaActiva = reserva;
+    }
+
+    /**
+     * Devuelve la reserva del demandante
+     *
+     * @return Reserva del usuario, null si no tiene ninguna
+     */
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    /**
+     * Modifica la reserva del demandante
+     *
+     * @param reserva
+     * @throws NullPointerException
+     */
+    public void setReserva(Reserva reserva) throws NullPointerException{
+        if(reserva==null){
+            throw new NullPointerException("Reserva null");
+        }
+        this.reserva = reserva;
     }
 
     /**
