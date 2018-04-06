@@ -462,7 +462,7 @@ public static void main(String[] args) {
                     String split2[];
                     String split3[];
                     if(((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado())){
-                        System.out.println("No tienes permisos para crear una oferta");
+                        System.out.println("No tienes permisos para crear una oferta ");
                     } else {
                         for(Inmueble inm:muzska.getInmuebles()){
                             if(inm.getDueno().equals(cliente)) {
