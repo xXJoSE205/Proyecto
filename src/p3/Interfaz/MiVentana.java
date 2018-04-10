@@ -7,19 +7,24 @@ public class MiVentana extends JFrame  {
 
     public MiVentana() {
         super("Muzska");
+        Container contenedor = this.getContentPane();
+        contenedor.setLayout(new BorderLayout());
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Image icon = new ImageIcon(("definitivo.png")).getImage();
+        Image icon = new ImageIcon("definitivo.png").getImage();
         setIconImage(icon);
 
-        setSize(350, 350);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        JPanel panel = new PanelLogin();
+
+        contenedor.add(panel, BorderLayout.CENTER);
+
+        this.pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(350, 350);
+        this.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new MiVentana();
+        JFrame ventana = new MiVentana();
     }
 
 
