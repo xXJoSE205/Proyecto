@@ -25,6 +25,7 @@ public class PanelLogin extends JPanel{
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
+
         JLabel etiqueta1 = new JLabel("NIF: ");
         final JTextField nif = new JTextField(10);
         JLabel etiqueta2 = new JLabel("Contraseña: ");
