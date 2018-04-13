@@ -19,7 +19,7 @@ public class MiVentana extends JFrame  {
 
         this.pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(350, 350);
+        this.setSize(500, 500);
         this.setVisible(true);
     }
 
