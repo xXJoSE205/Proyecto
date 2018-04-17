@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de un Cliente
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de un Cliente
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public abstract class Cliente extends UsuarioRegistrado implements Serializable {
     /** Tarjeta de credito*/
     private String tarjeta;
@@ -17,12 +17,12 @@ public abstract class Cliente extends UsuarioRegistrado implements Serializable 
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
      * @param nif Numero de Identificacion Fiscal
-     * @param password Contraseña de acceso
+     * @param password Contrasena de acceso
      * @param tarjeta Cadena con la tarjeta de credito
      * @throws NullPointerException si la tarjeta es null
      * @throws IllegalArgumentException si la tarjeta no tiene 16 digitos
      */
-    public Cliente(String nombre, String apellidos, String nif, String password, String tarjeta)
+    Cliente(String nombre, String apellidos, String nif, String password, String tarjeta)
             throws NullPointerException, IllegalArgumentException{
         super(nombre, apellidos, nif, password);
         if(tarjeta==null){

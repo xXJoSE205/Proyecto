@@ -7,6 +7,11 @@ import p3.src.Valoracion;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Valoracion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class ValoracionTest {
 
     /**
@@ -23,7 +28,7 @@ public class ValoracionTest {
      */
     @Before
     public void setUp(){
-         demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+         demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345");
         valoracion = new Valoracion(demandante, 5);
     }
@@ -35,7 +40,7 @@ public class ValoracionTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Valoracion: test constructor1");
-        Valoracion valoracion = new Valoracion(demandante, 7);
+        new Valoracion(demandante, 7);
     }
 
     /**
@@ -45,7 +50,7 @@ public class ValoracionTest {
     @Test (expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Valoracion: test constructor2");
-        Valoracion valoracion = new Valoracion(null, 5);
+        new Valoracion(null, 5);
     }
 
     /**

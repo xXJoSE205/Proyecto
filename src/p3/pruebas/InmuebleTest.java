@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Inmueble
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -12,6 +7,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Inmueble
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class InmuebleTest {
     /** Inmueble general para realizar el test*/
     private Inmueble inmueble;
@@ -19,7 +19,7 @@ public class InmuebleTest {
     private Ofertante ofertante;
 
     /**
-     * Crea un Inmueble y un Ofertante como dueño para realizar los test
+     * Crea un Inmueble y un Ofertante como dueno para realizar los test
      */
     @Before
     public void setUp(){
@@ -36,18 +36,18 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Inmueble: test constructor1");
-        Inmueble inmueble1 = new Inmueble(0,2,150,"C/ del diamante 5",
+        new Inmueble(0,2,150,"C/ del diamante 5",
                 5, true, ofertante);
     }
 
     /**
      * Test 2 del constructor, se espera un IllegalArgumentException
-     * El numero de baños es menor que 1
+     * El numero de banos es menor que 1
      */
     @Test (expected = IllegalArgumentException.class)
     public void constructor2(){
         System.out.println("Inmueble: test constructor2");
-        Inmueble inmueble1 = new Inmueble(5,0,15,"C/ del diamante 5",
+        new Inmueble(5,0,15,"C/ del diamante 5",
                 5, true, ofertante);
     }
 
@@ -58,7 +58,7 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor3(){
         System.out.println("Inmueble: test constructor3");
-        Inmueble inmueble1 = new Inmueble(5,2,0,"C/ del diamante 5",
+        new Inmueble(5,2,0,"C/ del diamante 5",
                 5, true, ofertante);
     }
 
@@ -69,7 +69,7 @@ public class InmuebleTest {
     @Test (expected = NullPointerException.class)
     public void constructor4(){
         System.out.println("Inmueble: test constructor4");
-        Inmueble inmueble1 = new Inmueble(5,2,150,null,5,
+        new Inmueble(5,2,150,null,5,
                 true, ofertante);
     }
 
@@ -80,18 +80,18 @@ public class InmuebleTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor5(){
         System.out.println("Inmueble: test constructor5");
-        Inmueble inmueble1 = new Inmueble(5,2,150,"C/ del diamante 5",
+       new Inmueble(5,2,150,"C/ del diamante 5",
                 -1, true, ofertante);
     }
 
     /**
      * Test 6 del constructor, se espera un NullPointerException
-     * El dueño es null
+     * El dueno es null
      */
     @Test (expected = NullPointerException.class)
     public void constructor6(){
         System.out.println("Inmueble: test constructor6");
-        Inmueble inmueble1 = new Inmueble(5,2,150,"C/ del diamante 5",
+        new Inmueble(5,2,150,"C/ del diamante 5",
                 5, true, null);
     }
 
@@ -105,7 +105,7 @@ public class InmuebleTest {
     }
 
     /**
-     * Test de getNBanos, se comprueba que el numero de baños del setUp sea igual a 2
+     * Test de getNBanos, se comprueba que el numero de banos del setUp sea igual a 2
      */
     @Test
     public void getNBanos() {
@@ -150,7 +150,7 @@ public class InmuebleTest {
     }
 
     /**
-     * Test de getOfertas, se añade una Oferta al Inmueble y se comprueba que la lista de ofertas no es null
+     * Test de getOfertas, se anade una Oferta al Inmueble y se comprueba que la lista de ofertas no es null
      */
     @Test
     public void getOfertas() {
@@ -161,7 +161,7 @@ public class InmuebleTest {
     }
 
     /**
-     * Test 1 de anadirOferta, se espera true, se ha añadido la oferta correctamente
+     * Test 1 de anadirOferta, se espera true, se ha anadido la oferta correctamente
      */
     @Test
     public void anadirOferta1() {
@@ -172,7 +172,7 @@ public class InmuebleTest {
 
     /**
      * Test 2 de anadirOferta, se espera un NullPointerException
-     * La oferta a añadir es null
+     * La oferta a anadir es null
      */
     @Test (expected = NullPointerException.class)
     public void anadirOferta2(){
@@ -181,20 +181,20 @@ public class InmuebleTest {
     }
 
     /**
-     * Test 1 de anadirOpinion, se espera true, se ha añadido la opinion correctamente
+     * Test 1 de anadirOpinion, se espera true, se ha anadido la opinion correctamente
      */
     @Test
     public void anadirOpinion1(){
         System.out.println("Inmueble: test anadirOpinion1");
-        Demandante autor = new Demandante("Thor", "Dios del Trueno", "09876543T", "Mjolnir",
-                "9999888877776666");
+        Demandante autor = new Demandante("Thor","Dios del Trueno","09876543T",
+                "Mjolnir","9999888877776666");
         Opinion opinion = new Comentario(autor, "Amplio y bonito");
         assertTrue(inmueble.anadirOpinion(opinion));
     }
 
     /**
      * Test 2 de anadirOpinion, se espera un NullPointerException
-     * La opinion a añadir es null
+     * La opinion a anadir es null
      */
     @Test(expected = NullPointerException.class)
     public void anadirOpinion2(){

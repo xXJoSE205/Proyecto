@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Cliente
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -12,6 +7,11 @@ import p3.src.Demandante;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Cliente
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class ClienteTest {
     /**
      * Cliente general para realizar el test
@@ -25,7 +25,7 @@ public class ClienteTest {
      */
     @Before
     public void setUp(){
-        cliente = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        cliente = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
     }
 
@@ -36,7 +36,7 @@ public class ClienteTest {
     @Test(expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("Cliente: test constructor1");
-        Cliente c1 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        new Demandante("Tony","Stark","12345678Q","Contrasena",
                 null );
     }
 
@@ -47,7 +47,7 @@ public class ClienteTest {
     @Test(expected = IllegalArgumentException.class)
     public void constructor2(){
         System.out.println("Cliente: test constructor2");
-        Cliente c1 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "102345678901234");
     }
 

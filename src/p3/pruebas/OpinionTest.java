@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Opinion
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -13,6 +8,11 @@ import p3.src.Opinion;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Opinion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class OpinionTest {
     /** Opinion general para realizar el test*/
     private Opinion opinion;
@@ -24,7 +24,7 @@ public class OpinionTest {
      */
     @Before
     public void setUp(){
-        demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345");
         opinion = new Comentario(demandante,"prueba");
     }
@@ -36,7 +36,7 @@ public class OpinionTest {
     @Test(expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("Opinion: test constructor1");
-        Opinion opinion2 = new Comentario(null,"prueba");
+        new Comentario(null,"prueba");
     }
 
     /**
@@ -46,7 +46,7 @@ public class OpinionTest {
     @Test(expected = NullPointerException.class)
     public void constructor2() {
         System.out.println("Opinion: test constructor2");
-        Opinion opinion2 = new Comentario(demandante,null);
+        new Comentario(demandante,null);
     }
 
     /**
@@ -59,7 +59,7 @@ public class OpinionTest {
     }
 
     /**
-     * Test 1 de anadirComentario, se espera true, se ha añadido correctamente
+     * Test 1 de anadirComentario, se espera true, se ha anadido correctamente
      */
     @Test
     public void anadirComentario1() {
@@ -70,7 +70,7 @@ public class OpinionTest {
 
     /**
      * Test 2 de anadirComentario, se esperea un NullPointerException
-     * El comentario a añadir es null
+     * El comentario a annadir es null
      */
     @Test(expected = NullPointerException.class)
     public void anadirComentario2() {

@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de un Comentario
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de un Comentario
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Comentario extends Opinion implements Serializable {
     /** Texto del comentario*/
     private final String texto;

@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Reserva
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -12,6 +7,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Reserva
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class ReservaTest {
     /** Reserva genereal para realizar el test*/
     private Reserva reserva;
@@ -25,7 +25,7 @@ public class ReservaTest {
      */
     @Before
     public void setUp() {
-        Ofertante ofertante = new Ofertante("Vic", "Rattlehead", "66666666D", "PeaceSells",
+        Ofertante ofertante = new Ofertante("Vic","Rattlehead","66666666D","PeaceSells",
                 "6666999966669999");
         Inmueble inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
                 false,ofertante);
@@ -43,7 +43,7 @@ public class ReservaTest {
     @Test(expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("Reserva: test constructor1");
-        Reserva reserva2 = new Reserva(null, oferta);
+        new Reserva(null, oferta);
     }
 
     /**
@@ -53,7 +53,7 @@ public class ReservaTest {
     @Test(expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Reserva: test constructor2");
-        Reserva reserva2 = new Reserva(demandante, null);
+        new Reserva(demandante, null);
     }
 
     /**

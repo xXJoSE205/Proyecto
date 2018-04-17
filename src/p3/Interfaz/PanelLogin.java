@@ -28,7 +28,7 @@ public class PanelLogin extends JPanel{
 
         JLabel etiqueta1 = new JLabel("NIF: ");
         final JTextField nif = new JTextField(10);
-        JLabel etiqueta2 = new JLabel("Contraseña: ");
+        JLabel etiqueta2 = new JLabel("Contrasena: ");
         final JPasswordField pswd = new JPasswordField(15);
         JButton boton = new JButton("Iniciar sesion");
 
@@ -53,7 +53,5 @@ public class PanelLogin extends JPanel{
         this.add(selectLogin);
         this.setPreferredSize(new Dimension(200,100));
         this.setVisible(true);
-
-
     }
 }
