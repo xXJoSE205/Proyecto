@@ -18,7 +18,6 @@ public class UsuarioRegistradoTest {
      * Se instanciara como Demandante, clase descendiente de Cliente, clase descendiente de UsuarioRegistradi
      * La clase UsuarioRegistrado es abstracta y no es instanciable
      */
-
     private Demandante demandante;
 
     /**
