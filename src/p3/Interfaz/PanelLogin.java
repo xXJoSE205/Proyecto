@@ -25,7 +25,6 @@ public class PanelLogin extends JPanel{
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-
         JLabel etiqueta1 = new JLabel("NIF: ");
         final JTextField nif = new JTextField(10);
         JLabel etiqueta2 = new JLabel("Contrasena: ");
@@ -37,7 +36,7 @@ public class PanelLogin extends JPanel{
         layout.putConstraint(SpringLayout.WEST, nif, 0, SpringLayout.WEST, pswd);
         layout.putConstraint(SpringLayout.NORTH, nif, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 9, SpringLayout.SOUTH, etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, pswd, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, pswd, 5, SpringLayout.SOUTH, nif);
         layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, etiqueta2);

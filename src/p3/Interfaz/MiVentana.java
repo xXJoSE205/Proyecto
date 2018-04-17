@@ -13,7 +13,7 @@ public class MiVentana extends JFrame  {
         Image icon = new ImageIcon("definitivo.png").getImage();
         setIconImage(icon);
 
-        JPanel panel = new PanelLogin();
+        JPanel panel = new PanelCrearOferta();
 
         contenedor.add(panel, BorderLayout.CENTER);
 
