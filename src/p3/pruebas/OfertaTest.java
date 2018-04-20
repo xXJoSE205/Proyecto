@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Oferta
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -13,6 +8,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Oferta
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class OfertaTest {
     /** Oferta general para realizar el test*/
     private Oferta oferta;
@@ -24,7 +24,7 @@ public class OfertaTest {
      */
     @Before
     public void setUp(){
-        Ofertante ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
+        Ofertante ofertante = new Ofertante( "Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
                 true, ofertante);
@@ -38,7 +38,7 @@ public class OfertaTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor1(){
         System.out.println("Oferta: test constructor1");
-        Oferta oferta1 = new Oferta(-1, LocalDate.now(), LocalDate.MAX,true,50, inmueble);
+        new Oferta(-1, LocalDate.now(), LocalDate.MAX,true,50, inmueble);
     }
 
     /**
@@ -48,7 +48,7 @@ public class OfertaTest {
     @Test (expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Oferta: test constructor2");
-        Oferta oferta1 = new Oferta(200, null, LocalDate.MAX,true,50, inmueble);
+        new Oferta(200, null, LocalDate.MAX,true,50, inmueble);
     }
 
     /**
@@ -58,7 +58,7 @@ public class OfertaTest {
     @Test (expected = NullPointerException.class)
     public void constructor3(){
         System.out.println("Oferta: test constructor3");
-        Oferta oferta1 = new Oferta(200, LocalDate.now(),null,true,50, inmueble);
+        new Oferta(200, LocalDate.now(),null,true,50, inmueble);
     }
 
     /**
@@ -68,7 +68,7 @@ public class OfertaTest {
     @Test (expected = IllegalArgumentException.class)
     public void constructor4(){
         System.out.println("Oferta: test constructor4");
-        Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,-1, inmueble);
+        new Oferta(200, LocalDate.now(), LocalDate.MAX,true,-1, inmueble);
     }
 
     /**
@@ -78,7 +78,7 @@ public class OfertaTest {
     @Test (expected = NullPointerException.class)
     public void constructor5(){
         System.out.println("Oferta: test constructor5");
-        Oferta oferta1 = new Oferta(200, LocalDate.now(), LocalDate.MAX,true,50, null);
+        new Oferta(200, LocalDate.now(), LocalDate.MAX,true,50, null);
     }
 
     /**
@@ -273,7 +273,7 @@ public class OfertaTest {
     @Test
     public void reservar1() {
         System.out.println("Oferta: test reservar1");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         assertTrue(oferta.reservar(demandante));
         assertTrue(oferta.isReservado());
@@ -286,7 +286,7 @@ public class OfertaTest {
     @Test
     public void reservar2() {
         System.out.println("Oferta: test reservar2");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         demandante.setReservaActiva(true);
         assertFalse(oferta.reservar(demandante));
@@ -308,7 +308,7 @@ public class OfertaTest {
     @Test
     public void cancelarReserva1() {
         System.out.println("Oferta: test cancelarReserva1");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         oferta.reservar(demandante);
         assertTrue(oferta.cancelarReserva());
@@ -320,7 +320,7 @@ public class OfertaTest {
     @Test
     public void cancelarReserva2() {
         System.out.println("Oferta: test cancelarReserva2");
-        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         assertFalse(oferta.cancelarReserva());
     }

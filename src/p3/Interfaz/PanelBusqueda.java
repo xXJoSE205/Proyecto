@@ -10,7 +10,7 @@ public class PanelBusqueda extends JPanel {
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
         final JTextField numero = new JTextField("", 2);
-        JLabel etiqueta2 = new JLabel("Numero de baños:");
+        JLabel etiqueta2 = new JLabel("Numero de banos:");
         final JTextField numeroBan = new JTextField("", 2);
         JLabel etiqueta3 = new JLabel("Dimensiones:");
         final JTextField dim = new JTextField("", 2);

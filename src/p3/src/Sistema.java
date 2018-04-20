@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene la información del Sistema
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
@@ -13,17 +8,22 @@ import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del Sistema
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Sistema implements Serializable {
     /** Cantidad ganada de las comisiones*/
     private double totalComisiones = 0;
     /** Lista de los clientes*/
-    private List<Cliente> usuarios;
+    private final List<Cliente> usuarios;
     /** Lista de todos los inmuebles*/
-    private List<Inmueble> inmuebles;
+    private final List<Inmueble> inmuebles;
     /** Lista de todas las opiniones*/
-    private List<Opinion> opiniones;
+    private final List<Opinion> opiniones;
     /** Gerente de la empresa*/
-    private final Gerente gerente = new Gerente("Señor","Supremo","00000000G","Apruebanos");
+    private final Gerente gerente = new Gerente("Senor","Supremo","00000000G","Apruebanos");
 
     /**
      * Constructor de Sistema
@@ -82,9 +82,9 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Añade una cantidad al total ganado con las comisiones
+     * Anade una cantidad al total ganado con las comisiones
      *
-     * @param comisiones Cantidad a añadir
+     * @param comisiones Cantidad a anadir
      * @throws IllegalArgumentException Si la cantidad es menor que 0
      */
     public void setTotalComisiones(double comisiones) throws IllegalArgumentException{
@@ -95,10 +95,10 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Añade un cliente al sistema
+     * Anade un cliente al sistema
      *
-     * @param usuario Cliente a añadir
-     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @param usuario Cliente a anadir
+     * @return boolean, true si se anade correctamente, false en caso contrario
      * @throws NullPointerException Si el usuario es null
      */
     public boolean anadirUsuario(Cliente usuario) throws NullPointerException{
@@ -109,10 +109,10 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Añade un inmuelbe al sistema
+     * Anade un inmuelbe al sistema
      *
-     * @param inmueble Inmueble a añadir
-     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @param inmueble Inmueble a anadir
+     * @return boolean, true si se anade correctamente, false en caso contrario
      * @throws NullPointerException Si el inmueble es null
      */
     public boolean anadirInmueble(Inmueble inmueble) throws NullPointerException {
@@ -123,10 +123,10 @@ public class Sistema implements Serializable {
     }
 
     /**
-     * Añade una opinion al sistema
+     * Anade una opinion al sistema
      *
-     * @param opinion Opinion a añadir
-     * @return boolean, true si se añade correctamente, false en caso contrario
+     * @param opinion Opinion a anadir
+     * @return boolean, true si se anade correctamente, false en caso contrario
      * @throws NullPointerException Si la opinion es null
      */
     public boolean anadirOpinion(Opinion opinion) throws NullPointerException {
@@ -141,7 +141,7 @@ public class Sistema implements Serializable {
      *
      * @param usuario Usuario que quiere logearse
      * @param nif Numero de Identifiacion Fiscal del usuario
-     * @param password Contraseña del usuario
+     * @param password Contrasena del usuario
      * @return boolean, true si se logea correctamente
      * false si ya hay alguien logeado, si el usuario no esta registrado en el sistema
      * o si los datos son incorrectos
@@ -169,7 +169,7 @@ public class Sistema implements Serializable {
      * Logea al gerente de la empresa
      *
      * @param nif Numero de Identificacion Fiscal del gerente
-     * @param password Contraseña del gerente
+     * @param password Contrasena del gerente
      * @return boolean, true si se logea correctamente
      * false si ya hay alguien logeado o si los datos son incorrectos
      * @throws NullPointerException si algun argumento es null
@@ -247,7 +247,7 @@ public class Sistema implements Serializable {
      * Realiza una busqueda con filtros en las viviendas
      *
      * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
-     * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
+     * @param nBan numero de banos de la vivienda, -1 si no se quiere filtrar por el numero de banos
      * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
      * @param planta planta de la vivienda, -1 si no se quiere filtrar por la planta
      * @param ascensor existencia de ascensor o no en la vivienda
@@ -286,7 +286,7 @@ public class Sistema implements Serializable {
      * Realiza una busqueda con filtros para obtener todas las ofertas acordes a esos filtros
      *
      * @param nHab numero de habitaciones de la vivienda, -1 si no se quiere filtrar por el numero de habitaciones
-     * @param nBan numero de baños de la vivienda, -1 si no se quiere filtrar por el numero de baños
+     * @param nBan numero de banos de la vivienda, -1 si no se quiere filtrar por el numero de banos
      * @param dim dimension de la vivienda, -1 si no se quiere filtrar por las dimensiones
      * @param planta planta de la vivienda, -1 si no se quiere filtrar por la planta
      * @param ascensor existencia de ascensor o no en la vivienda

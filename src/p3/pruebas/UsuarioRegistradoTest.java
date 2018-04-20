@@ -3,10 +3,14 @@ package p3.pruebas;
 import org.junit.Before;
 import org.junit.Test;
 import p3.src.Demandante;
-import p3.src.UsuarioRegistrado;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase UsuarioRegistrado
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class UsuarioRegistradoTest {
 
     /**
@@ -14,7 +18,6 @@ public class UsuarioRegistradoTest {
      * Se instanciara como Demandante, clase descendiente de Cliente, clase descendiente de UsuarioRegistradi
      * La clase UsuarioRegistrado es abstracta y no es instanciable
      */
-
     private Demandante demandante;
 
     /**
@@ -22,7 +25,7 @@ public class UsuarioRegistradoTest {
      */
     @Before
     public void setUp(){
-    demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
             "0123456789012345");
 
     }
@@ -34,7 +37,7 @@ public class UsuarioRegistradoTest {
     @Test(expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("UsuarioRegistrado: test constructor1");
-        UsuarioRegistrado c1 = new Demandante(null,"Stark","12345678Q","Contraseña",
+        new Demandante(null,"Stark","12345678Q","Contrasena",
                 "1023456789012345");
     }
 
@@ -45,7 +48,7 @@ public class UsuarioRegistradoTest {
     @Test(expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("UsuarioRegistrado: test constructor2");
-        UsuarioRegistrado c1 = new Demandante("Tony",null,"12345678Q","Contraseña",
+        new Demandante("Tony",null,"12345678Q","Contrasena",
                 "1023456789012345");
     }
 
@@ -56,18 +59,18 @@ public class UsuarioRegistradoTest {
     @Test(expected = NullPointerException.class)
     public void constructor3(){
         System.out.println("UsuarioRegistrado: test constructor3");
-        UsuarioRegistrado c1 = new Demandante("Tony","Stark",null,"Contraseña",
+        new Demandante("Tony","Stark",null,"Contrasena",
                 "1023456789012345");
     }
 
     /**
      * Test 1 del constructor, se espera un NullPointerException
-     * La contraseña es null
+     * La contrasena es null
      */
     @Test(expected = NullPointerException.class)
     public void constructor4(){
         System.out.println("UsuarioRegistrado: test constructor4");
-        UsuarioRegistrado c1 = new Demandante("Tony","Stark","12345678Q",null,
+       new Demandante("Tony","Stark","12345678Q",null,
                 "1023456789012345");
     }
 
@@ -78,7 +81,7 @@ public class UsuarioRegistradoTest {
     @Test(expected = IllegalArgumentException.class)
     public void constructor5(){
         System.out.println("UsuarioRegistrado: test constructor5");
-        UsuarioRegistrado c1 = new Demandante("Tony","Stark","123458Q","Contraseña",
+        new Demandante("Tony","Stark","123458Q","Contrasena",
                 "1023456789012345");
     }
 
@@ -111,12 +114,12 @@ public class UsuarioRegistradoTest {
     }
 
     /**
-     * Test de getPassword, se comprueba que la contraseña sea igual a "Contraseña"
+     * Test de getPassword, se comprueba que la contrasena sea igual a "Contrasena"
      */
     @Test
     public void getPassword() {
         System.out.println("UsuarioRegistrado: test getPassword");
-        assertEquals(demandante.getPassword(), "Contraseña");
+        assertEquals(demandante.getPassword(), "Contrasena");
     }
 
     /**

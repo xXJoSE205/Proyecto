@@ -1,13 +1,13 @@
-/**
- * Esta clase contiene la información de una Reserva
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Esta clase contiene la informacion de una Reserva
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Reserva implements Serializable {
     /** Fecha de inicio de la reserva*/
     private final LocalDate fechaInicio;

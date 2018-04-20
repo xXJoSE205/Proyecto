@@ -1,18 +1,18 @@
-/**
- * Esta clase contiene la información de un Inmueble
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion de un Inmueble
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Inmueble implements Serializable {
     /** Numero de habitaciones*/
     private final int nHabitaciones;
-    /** Numero de baños*/
+    /** Numero de banos*/
     private final int nBanos;
     /** Dimensiones en metros cuadrados*/
     private final int dimensiones;
@@ -22,7 +22,7 @@ public class Inmueble implements Serializable {
     private final int planta;
     /** Si hay o no ascensor en el edificio*/
     private final Boolean ascensor;
-    /** Dueño del inmueble*/
+    /** Dueno del inmueble*/
     private final Ofertante dueno;
     /** Lista de ofertas del inmueble*/
     private List<Oferta> ofertas;
@@ -33,21 +33,21 @@ public class Inmueble implements Serializable {
      * Constructor de Inmueble
      *
      * @param nHabitaciones Numero de habitaciones
-     * @param nBanos Numero de baños
+     * @param nBanos Numero de banos
      * @param dimensiones Dimensiones con m2
      * @param direccion Calle y numero
      * @param planta Planta en la que se encuentra
      * @param ascensor True si hay ascensor, false en caso contrario
-     * @param dueno Dueño del inmueble
-     * @throws NullPointerException si la direccion o el dueño es null
-     * @throws IllegalArgumentException si las habitaciones, baños, dimensione son menores que 1
+     * @param dueno Dueno del inmueble
+     * @throws NullPointerException si la direccion o el dueno es null
+     * @throws IllegalArgumentException si las habitaciones, banos, dimensione son menores que 1
      * o si la planta es menor que 0
      */
     public Inmueble(int nHabitaciones, int nBanos, int dimensiones, String direccion, int planta, Boolean ascensor,
                     Ofertante dueno) throws NullPointerException, IllegalArgumentException{
-        if(direccion==null || dueno==null){ throw new NullPointerException("Direccion o dueño null"); }
+        if(direccion==null || dueno==null){ throw new NullPointerException("Direccion o dueno null"); }
         if(nHabitaciones<1 || nBanos<1 || dimensiones<1 || planta<0){
-            throw new IllegalArgumentException("Numero de habbitaciones, baños o dimesiones menores que 1"
+            throw new IllegalArgumentException("Numero de habbitaciones, banos o dimesiones menores que 1"
                     +" o planta menor que 0: "+nHabitaciones+", "+nBanos+", "+dimensiones+", "+planta);
         }
         this.nHabitaciones = nHabitaciones;
@@ -71,9 +71,9 @@ public class Inmueble implements Serializable {
     }
 
     /**
-     * Devuelve el numero de baños que hay
+     * Devuelve el numero de banos que hay
      *
-     * @return Entero, numero de baños
+     * @return Entero, numero de banos
      */
     public int getnBanos() {
         return nBanos;
@@ -125,19 +125,19 @@ public class Inmueble implements Serializable {
     }
 
     /**
-     * Devuelve el dueño del inmueble
+     * Devuelve el dueno del inmueble
      *
-     * @return Ofertante, el dueño del inmueble
+     * @return Ofertante, el dueno del inmueble
      */
     public Ofertante getDueno() {
         return dueno;
     }
 
     /**
-     * Añade una oferta a un inmueble
+     * Anade una oferta a un inmueble
      *
-     * @param oferta oferta que se quiere añadir
-     * @return boolean, true si se añade la oferta, false en caso contrario
+     * @param oferta oferta que se quiere anadir
+     * @return boolean, true si se anade la oferta, false en caso contrario
      * @throws NullPointerException Si la oferta es null
      */
     public boolean anadirOferta(Oferta oferta) throws NullPointerException{
@@ -148,10 +148,10 @@ public class Inmueble implements Serializable {
     }
 
     /**
-     * Añade una opinion al inmueble
+     * Anade una opinion al inmueble
      *
-     * @param opinion Opinion que se quiere añadir
-     * @return boolean, true si se añade la opinion, false en caso contrario
+     * @param opinion Opinion que se quiere anadir
+     * @return boolean, true si se anade la opinion, false en caso contrario
      * @throws NullPointerException Si la opinion es null
      */
     public boolean anadirOpinion(Opinion opinion) throws NullPointerException{
@@ -168,7 +168,7 @@ public class Inmueble implements Serializable {
      */
     @Override
     public String toString() {
-        return "\tHabitaciones: "+nHabitaciones+"\n\tBaños: "+nBanos+"\n\tDimensiones: "+dimensiones
+        return "\tHabitaciones: "+nHabitaciones+"\n\tBanos: "+nBanos+"\n\tDimensiones: "+dimensiones
                 +"m2\n\tDireccion: "+direccion+"\n\tPlanta: "+planta+"\n\t¿Ascensor?: "+ascensor;
     }
 }

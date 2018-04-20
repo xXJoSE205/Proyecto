@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Demandante
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -13,6 +8,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Demandante
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class DemandanteTest {
     /** Demandante general para realizar el test*/
     private Demandante demandante;
@@ -22,7 +22,7 @@ public class DemandanteTest {
      */
     @Before
     public void setUp(){
-        demandante = new Demandante( "Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante( "Tony","Stark","12345678Q","Contrasena",
                 "1023456789012345" );
     }
 
@@ -33,7 +33,7 @@ public class DemandanteTest {
     @Test(expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("Demandante: test constructor1");
-        Demandante demandate2 = new Demandante(null,"Stark","12345678Q","Contraseña",
+        new Demandante(null,"Stark","12345678Q","Contrasena",
                 "1023456789012345" );
     }
 
@@ -44,7 +44,7 @@ public class DemandanteTest {
     @Test(expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Demandante: test constructor2");
-        Demandante demandate2 = new Demandante("Tony",null,"12345678Q","Contraseña",
+        new Demandante("Tony",null,"12345678Q","Contrasena",
                 "1023456789012345" );
     }
 
@@ -55,18 +55,18 @@ public class DemandanteTest {
     @Test(expected = NullPointerException.class)
     public void constructor3(){
         System.out.println("Demandante: test constructor3");
-        Demandante demandate2 = new Demandante("Tony","Stark",null,"Contraseña",
+        new Demandante("Tony","Stark",null,"Contrasena",
                 "1023456789012345" );
     }
 
     /**
      * Test 4 del constructor, se espera un NullPointerException
-     * La contraseña es null
+     * La contrasena es null
      */
     @Test(expected = NullPointerException.class)
     public void constructor4(){
         System.out.println("Demandante: test constructor4");
-        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q",null,
+        new Demandante("Tony","Stark","12345678Q",null,
                 "1023456789012345");
     }
 
@@ -77,7 +77,7 @@ public class DemandanteTest {
     @Test(expected = NullPointerException.class)
     public void constructor5(){
         System.out.println("Demandante: test constructor5");
-        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        new Demandante("Tony","Stark","12345678Q","Contrasena",
                 null );
     }
 
@@ -88,7 +88,7 @@ public class DemandanteTest {
     @Test(expected = IllegalArgumentException.class)
     public void constructor6(){
         System.out.println("Demandante: test constructor6");
-        Demandante demandate2 = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "102345678901234");
     }
 

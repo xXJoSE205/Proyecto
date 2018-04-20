@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de una Valoracion
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de una Valoracion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Valoracion extends Opinion  implements Serializable {
     /** Puntuacion de la opinion, entre 0 y 5*/
     private int puntuacion;

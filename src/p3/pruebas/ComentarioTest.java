@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Comentario
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -12,6 +7,11 @@ import p3.src.Demandante;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Comentario
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class ComentarioTest {
     /** Comentario general para realizar el test*/
     private Comentario comentario;
@@ -23,7 +23,7 @@ public class ComentarioTest {
      */
     @Before
     public void setUp(){
-        demandante = new Demandante("Tony","Stark","12345678Q","Contraseña",
+        demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         comentario = new Comentario(demandante, "prueba");
     }
@@ -35,8 +35,7 @@ public class ComentarioTest {
     @Test (expected = NullPointerException.class)
     public void constructor1(){
         System.out.println("Comentario: test constructor1");
-        Comentario comentario2 = new Comentario(null,"prueba");
-
+        new Comentario(null,"prueba");
     }
 
     /**
@@ -46,8 +45,7 @@ public class ComentarioTest {
     @Test (expected = NullPointerException.class)
     public void constructor2(){
         System.out.println("Comentario: test constructor2");
-        Comentario comentario2 = new Comentario(demandante,null);
-
+        new Comentario(demandante,null);
     }
 
     /**

@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de un UsuarioRegistrado
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de un UsuarioRegistrado
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public abstract class UsuarioRegistrado implements Serializable {
     /** Nombre del usuario*/
     private final String nombre;
@@ -14,7 +14,7 @@ public abstract class UsuarioRegistrado implements Serializable {
     private final String apellidos;
     /** Nimero de Identificacion Fiscal*/
     private final String nif;
-    /** Contraseña de acceso*/
+    /** Contrasena de acceso*/
     private final String password;
     /** Si el usuario re ha logeado o no*/
     private boolean logeado = false;
@@ -25,13 +25,13 @@ public abstract class UsuarioRegistrado implements Serializable {
      * @param nombre Nombre del usuario
      * @param apellidos Apellidos del usuario
      * @param nif Numero de Identificacion Fiscal
-     * @param password Constraseña de acceso
+     * @param password Constrasena de acceso
      * @throws NullPointerException si algun parametro es null
      */
     UsuarioRegistrado(String nombre, String apellidos, String nif, String password) throws NullPointerException,
             IllegalArgumentException{
         if(nombre==null || apellidos==null || nif==null || password==null){
-            throw new NullPointerException("Nombre, appelidos, nif o contraseña null");
+            throw new NullPointerException("Nombre, appelidos, nif o contrasena null");
         }
         if(nif.length()!=9){
             throw new IllegalArgumentException("NIF invalido: "+nif);
@@ -70,9 +70,9 @@ public abstract class UsuarioRegistrado implements Serializable {
     }
 
     /**
-     * Devuelve la contraseña del usuario
+     * Devuelve la contrasena del usuario
      *
-     * @return Cadena con la contraseña
+     * @return Cadena con la contrasena
      */
     public String getPassword() {
         return password;

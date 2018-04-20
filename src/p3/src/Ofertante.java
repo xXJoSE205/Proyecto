@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de una Ofertante
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de una Ofertante
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Ofertante extends Cliente implements Serializable {
     /** Cargo pendiente*/
     private double cargo = 0;
@@ -19,7 +19,7 @@ public class Ofertante extends Cliente implements Serializable {
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
      * @param nif Numero de Identificacion Fiscal
-     * @param password Contraseña de acceso
+     * @param password Contrasena de acceso
      * @param tarjeta Cadena con el numero de la tarjeta
      */
     public Ofertante(String nombre, String apellidos, String nif, String password, String tarjeta)
@@ -39,7 +39,7 @@ public class Ofertante extends Cliente implements Serializable {
     /**
      * Modifica el cargo pendiente, suma la cantidad al cargo
      *
-     * @param cantidad double con la cantidad a añadir, positiva o negativa
+     * @param cantidad double con la cantidad a anadir, positiva o negativa
      */
     public void setCargo(double cantidad) {
         this.cargo += cantidad;
@@ -55,10 +55,10 @@ public class Ofertante extends Cliente implements Serializable {
     }
 
     /**
-     * Añade modificaciones a las anteriores o establece unas nuevas
+     * Anade modificaciones a las anteriores o establece unas nuevas
      *
-     * @param modificaciones Cadena con las modificaciones a añadir
-     * @param anadir boolean, true si se quieren añadir, false si se quiere establecer
+     * @param modificaciones Cadena con las modificaciones a anadir
+     * @param anadir boolean, true si se quieren anadir, false si se quiere establecer
      * @throws NullPointerException Si la cadena de modificaciones es null
      */
     public void anadirModificaciones(String modificaciones, boolean anadir) throws NullPointerException{

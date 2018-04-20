@@ -1,14 +1,14 @@
-/**
- * Esta clase contiene la información de una Opinion
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion de una Opinion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public abstract class Opinion implements Serializable {
     /** Autor de la opinion*/
     private final Demandante autor;
@@ -39,10 +39,10 @@ public abstract class Opinion implements Serializable {
     }
 
     /**
-     * Añade un comentario a la opinion
+     * Anade un comentario a la opinion
      *
-     * @param comentario Comentario a añadir
-     * @return boolean, true si se añade coorectamente, false en caso contrario
+     * @param comentario Comentario a anadir
+     * @return boolean, true si se anade coorectamente, false en caso contrario
      * @throws NullPointerException Si el comentario es null
      */
     public boolean anadirComentario(Comentario comentario) throws NullPointerException{

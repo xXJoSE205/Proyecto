@@ -1,8 +1,3 @@
-/**
- * Esta clase contiene el test de la clase Sistema
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.pruebas;
 
 import org.junit.Before;
@@ -12,6 +7,11 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
+/**
+ * Esta clase contiene el test de la clase Sistema
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class SistemaTest {
     /** Sistema general para realizar el test*/
     private Sistema sistema;
@@ -32,7 +32,7 @@ public class SistemaTest {
     @Before
     public void setUp(){
         sistema = new Sistema();
-        ofertante = new Ofertante( "Tony","Stark","12345678Q","Contraseña",
+        ofertante = new Ofertante( "Tony","Stark","12345678Q","Contrasena",
                 "0123456789012345" );
         inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
                 true, (Ofertante)ofertante);
@@ -168,7 +168,7 @@ public class SistemaTest {
     public void login1_1() {
         System.out.println("Sistema: test login1_1");
         sistema.anadirUsuario(ofertante);
-        assertTrue(sistema.login(ofertante, "12345678Q", "Contraseña"));
+        assertTrue(sistema.login(ofertante, "12345678Q", "Contrasena"));
     }
 
     /**
@@ -179,7 +179,7 @@ public class SistemaTest {
     public void login1_2() {
         System.out.println("Sistema: test login1_2");
         sistema.anadirUsuario(ofertante);
-        assertFalse(sistema.login(ofertante, "87654321Q", "Contraseña"));
+        assertFalse(sistema.login(ofertante, "87654321Q", "Contrasena"));
     }
 
     /**
@@ -190,7 +190,7 @@ public class SistemaTest {
     public void login1_3() {
         System.out.println("Sistema: test login1_3");
         sistema.anadirUsuario(ofertante);
-        sistema.login(null, "12345678Q", "Contraseña");
+        sistema.login(null, "12345678Q", "Contrasena");
     }
 
     /**
@@ -201,12 +201,12 @@ public class SistemaTest {
     public void login1_4() {
         System.out.println("Sistema: test login1_4");
         sistema.anadirUsuario(ofertante);
-        sistema.login(ofertante, null, "Contraseña");
+        sistema.login(ofertante, null, "Contrasena");
     }
 
     /**
      * Test de login1_5, se espera NullPointerException
-     * La contraseña es NULL
+     * La contrasena es NULL
      */
     @Test(expected = NullPointerException.class)
     public void login1_5() {
@@ -217,17 +217,17 @@ public class SistemaTest {
 
     /**
      * Test de login1_6, se comprueba que el metodo devuelve false
-     * El usuario no se añade a la lista
+     * El usuario no se anade a la lista
      */
     @Test
     public void login1_6() {
         System.out.println("Sistema: test login1_6");
-        assertFalse(sistema.login(ofertante, "12345678Q","Contraseña"));
+        assertFalse(sistema.login(ofertante, "12345678Q","Contrasena"));
     }
 
     /**
      * Test de login1_7, se comprueba que el metodo devuelve false
-     * La contraseña no es correcta
+     * La contrasena no es correcta
      */
     @Test
     public void login1_7(){
@@ -267,7 +267,7 @@ public class SistemaTest {
 
     /**
      * Test de login2_4, se espera NullPointerException
-     * La contraseña en NULL
+     * La contrasena en NULL
      */
     @Test(expected = NullPointerException.class)
     public void login2_4() {
@@ -277,7 +277,7 @@ public class SistemaTest {
 
     /**
      * Test de login2_5, se comprueba que el metodo devuelve false
-     * La contraseña es erronea
+     * La contrasena es erronea
      */
     @Test
     public void login2_5(){
@@ -292,7 +292,7 @@ public class SistemaTest {
     public void logout1_1() {
         System.out.println("Sistema: test logout1_1");
         sistema.anadirUsuario(ofertante);
-        sistema.login(ofertante, "12345678Q", "Contraseña");
+        sistema.login(ofertante, "12345678Q", "Contrasena");
         assertTrue(sistema.logout(ofertante));
     }
 

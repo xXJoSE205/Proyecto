@@ -1,12 +1,12 @@
-/**
- * Esta clase contiene la información de un Demandante
- *
- * @author Jorge Mateo Segura y José Antonio Muñoz Ortega
- */
 package p3.src;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase contiene la informacion de un Demandante
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Demandante extends Cliente implements Serializable {
     /** Si esta bloqueado o no*/
     private boolean bloqueado = false;
@@ -21,7 +21,7 @@ public class Demandante extends Cliente implements Serializable {
      * @param nombre Nombre del cliente
      * @param apellidos Apellidos del cliente
      * @param nif Numero de Identificacion Fiscal
-     * @param password Contraseña de acceso
+     * @param password Contrasena de acceso
      * @param tarjeta Cadena con el numero de la tarjeta
      */
     public Demandante(String nombre, String apellidos, String nif, String password, String tarjeta)
