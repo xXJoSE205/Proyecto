@@ -10,7 +10,7 @@ public class PanelBusquedaAvanzada extends JPanel {
 
         JLabel etiqueta1 = new JLabel("Precio:");
         final JTextField numero = new JTextField("", 2);
-        JCheckBox casilla1 = new JCheckBox("Ascensor");
+        JCheckBox casilla1 = new JCheckBox("Ascensor ");
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
 
