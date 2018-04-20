@@ -23,48 +23,27 @@ public class PanelBusqueda extends JPanel {
 
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
-
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
-        // El norte de field estará a 5 pixels desde el norte del contenedor
         layout.putConstraint(SpringLayout.NORTH, numero, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.EAST, etiqueta2, 0, SpringLayout.EAST, etiqueta1);
-        // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
-        // La izquierda de field2 alienada con la izquierda de field
         layout.putConstraint(SpringLayout.WEST, numeroBan, 0, SpringLayout.WEST, numero);
-        // El norte de field2, 5 pixels más abajo de field
         layout.putConstraint(SpringLayout.NORTH, numeroBan, 5, SpringLayout.SOUTH, numero);
-
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, etiqueta2);
-        // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
-        // La izquierda de field2 alienada con la izquierda de field
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
-        // El norte de field2, 5 pixels más abajo de field
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
-
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
-        // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
-        // La izquierda de field2 alienada con la izquierda de field
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
-        // El norte de field2, 5 pixels más abajo de field
         layout.putConstraint(SpringLayout.NORTH, planta, 5, SpringLayout.SOUTH, dim);
-
         layout.putConstraint(SpringLayout.EAST, etiqueta5, 0, SpringLayout.EAST, etiqueta4);
-        // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, etiqueta5, 8, SpringLayout.SOUTH, etiqueta4);
-        // La izquierda de field2 alienada con la izquierda de field
         layout.putConstraint(SpringLayout.WEST, direccion, 0, SpringLayout.WEST, planta);
-        // El norte de field2, 5 pixels más abajo de field
         layout.putConstraint(SpringLayout.NORTH, direccion, 5, SpringLayout.SOUTH, planta);
-
         layout.putConstraint(SpringLayout.EAST, casilla1, 0, SpringLayout.EAST, etiqueta5);
-        // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta5);
-
         layout.putConstraint(SpringLayout.NORTH, boton, 10, SpringLayout.SOUTH, casilla1);
         layout.putConstraint(SpringLayout.WEST, boton, 0, SpringLayout.WEST, casilla1);
 
