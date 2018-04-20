@@ -33,7 +33,6 @@ public class Muszka {
                 muzska.anadirInmueble(inm);
                 ofe = new Oferta(1200, LocalDate.now(), LocalDate.now().plusMonths(4), false, 200, inm);
                 inm.anadirOferta(ofe);
-                muzska.anadirOferta(ofe);
             } else if (args.length == 0) {
                 System.out.println("Cargando datos de \"muzska.ser\"...");
                 FileInputStream fileIn = new FileInputStream("muzska.ser");
@@ -334,11 +333,13 @@ public class Muszka {
                         }
                     }
                 } else if (line.equals("manejar ofertas") || line.equals("Manejar ofertas")) {
-                    List<Oferta> pendientes;
+                    List<Oferta> pendientes = new ArrayList<>();
                     if (!muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para manejar ofertas");
                     } else {
-                        pendientes = muzska.getOfertas();
+                        for(Inmueble i: muzska.getInmuebles()) {
+                            pendientes.addAll(i.getOfertas());
+                        }
                         for (Oferta of : pendientes) {
                             if (of.getEstado() != Estado.PENDIENTE) {
                                 pendientes.remove(of);
@@ -373,15 +374,17 @@ public class Muszka {
                         }
                     }
                 }else if(line.equals("Modificar oferta") || line.equals("modificar ofertas")){
-                    List<Oferta> rechazadas;
+                    List<Oferta> rechazadas= new ArrayList<>();
                     String split2[];
                     if ((cliente == null || cliente instanceof Demandante) && !muzska.getGerente().isLogeado()) {
                         System.out.println("No tienes permiso para modificar una oferta");
                     } else {
                         System.out.println("Cancelando reserva...");
 
+                        for(Inmueble i: muzska.getInmuebles()) {
+                            rechazadas.addAll(i.getOfertas());
+                        }
 
-                        rechazadas = muzska.getOfertas();
                         for(Oferta of: rechazadas){
                             if(of.getInmueble().getDueno()!=cliente){
                                 rechazadas.remove(of);
@@ -531,7 +534,7 @@ public class Muszka {
                             System.out.println("No tienes inmuebles");
                         } else {
                             System.out.println("Estos son tus inmuebles:");
-                            int i=0;
+                            int i=1;
                             for(Inmueble inm : list){
                                 System.out.println("Inmueble:" + i);
                                 System.out.println(inm.toString());
@@ -565,7 +568,7 @@ public class Muszka {
                                                     Integer.parseInt(split2[2])),LocalDate.of(Integer.parseInt(split3[0]),
                                                     Integer.parseInt(split3[1]),Integer.parseInt(split3[2])),
                                                     Boolean.parseBoolean(split[3]),Integer.parseInt(split[4]),aux);
-                                            if(muzska.anadirOferta(ofer)){
+                                            if(aux.anadirOferta(ofer)){
                                                 System.out.println("Oferta añadida correctamente");
                                             } else {
                                                 System.out.println("Error al añadir la oferta");

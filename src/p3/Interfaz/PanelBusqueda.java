@@ -1,6 +1,7 @@
 package p3.Interfaz;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PanelBusqueda extends JPanel {
     PanelBusqueda(){
@@ -12,12 +13,13 @@ public class PanelBusqueda extends JPanel {
         JLabel etiqueta2 = new JLabel("Numero de baños:");
         final JTextField numeroBan = new JTextField("", 2);
         JLabel etiqueta3 = new JLabel("Dimensiones:");
-        final JTextField dim = new JTextField("", 3);
+        final JTextField dim = new JTextField("", 2);
         JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
         final JTextField planta = new JTextField("", 2);
         JLabel etiqueta5 = new JLabel("Direccion:");
-        final JTextField direccion = new JTextField("", 100);
+        final JTextField direccion = new JTextField("", 50);
         JCheckBox casilla1 = new JCheckBox("Ascensor");
+        JButton boton = new JButton("Buscar");
 
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -63,6 +65,9 @@ public class PanelBusqueda extends JPanel {
         // El norte de label2 estará a 5 pixels del borde inferior (SOUTH) de label
         layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta5);
 
+        layout.putConstraint(SpringLayout.NORTH, boton, 10, SpringLayout.SOUTH, casilla1);
+        layout.putConstraint(SpringLayout.WEST, boton, 0, SpringLayout.WEST, casilla1);
+
 
         this.add(etiqueta1);
         this.add(numero);
@@ -75,6 +80,8 @@ public class PanelBusqueda extends JPanel {
         this.add(direccion);
         this.add(planta);
         this.add(casilla1);
+        this.setPreferredSize(new Dimension(200,100));
+        this.add(boton);
 
     }
 }

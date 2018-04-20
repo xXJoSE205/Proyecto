@@ -72,15 +72,6 @@ public class SistemaTest {
         assertNotNull(sistema.getInmuebles());
     }
 
-    /**
-     * Test de getOfertas, se comprueba que la lista de ofertas del setUp no  NULL
-     */
-    @Test
-    public void getOfertas() {
-        System.out.println("Sistema: test getOfertas");
-        sistema.anadirOferta(oferta);
-        assertNotNull(sistema.getOfertas());
-    }
 
     /**
      * Test de getOpiniones, se comprueba que la lista de opiniones del setUp no  NULL
@@ -149,25 +140,6 @@ public class SistemaTest {
     public void anadirInmueble2() {
         System.out.println("Sistema: test anadirInmueble2");
         sistema.anadirInmueble(null);
-    }
-
-    /**
-     * Test de anadirOferta1, se comprueba que el metodo devuelve true
-     */
-    @Test
-    public void anadirOferta1() {
-        System.out.println("Sistema: test anadirOferta1");
-        assertTrue(sistema.anadirOferta(oferta));
-    }
-
-    /**
-     * Test de anadirOferta2, se espera NullPointerException
-     * La oferta es NULL
-     */
-    @Test (expected = NullPointerException.class)
-    public void anadirOferta2() {
-        System.out.println("Sistema: test anadirOferta2");
-        sistema.anadirOferta(null);
     }
 
     /**
@@ -404,7 +376,6 @@ public class SistemaTest {
         sistema.anadirUsuario(ofertante);
         sistema.login("00000000G","Apruebanos");
         sistema.anadirInmueble(inmueble);
-        sistema.anadirOferta(oferta);
         oferta.aprobar();
         sistema.logout();
         sistema.login(demandante,"66666666D","PeaceSells");
@@ -445,7 +416,6 @@ public class SistemaTest {
         sistema.anadirUsuario(demandante1);
         sistema.anadirUsuario(ofertante);
         sistema.anadirInmueble(inmueble);
-        sistema.anadirOferta(oferta);
         sistema.login("000000G", "Apruebanos");
         oferta.aprobar();
         sistema.logout();

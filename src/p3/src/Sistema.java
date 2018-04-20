@@ -20,8 +20,6 @@ public class Sistema implements Serializable {
     private List<Cliente> usuarios;
     /** Lista de todos los inmuebles*/
     private List<Inmueble> inmuebles;
-    /** Lista de todas las ofertas*/
-    private List<Oferta> ofertas;
     /** Lista de todas las opiniones*/
     private List<Opinion> opiniones;
     /** Gerente de la empresa*/
@@ -35,7 +33,6 @@ public class Sistema implements Serializable {
     public Sistema() {
         this.usuarios = new ArrayList<>();
         this.inmuebles = new ArrayList<>();
-        this.ofertas = new ArrayList<>();
         this.opiniones = new ArrayList<>();
     }
 
@@ -64,15 +61,6 @@ public class Sistema implements Serializable {
      */
     public List<Inmueble> getInmuebles() {
         return inmuebles;
-    }
-
-    /**
-     * Devuelve la lista con las ofertas
-     *
-     * @return Lista con todas las ofertas
-     */
-    public List<Oferta> getOfertas() {
-        return ofertas;
     }
 
     /**
@@ -132,20 +120,6 @@ public class Sistema implements Serializable {
             throw new NullPointerException("Inmueble null");
         }
         return inmuebles.add(inmueble);
-    }
-
-    /**
-     * Añade una oferta al sistema
-     *
-     * @param oferta Oferta a añadir
-     * @return boolean, true si se añade correctamente, false en caso contrario
-     * @throws NullPointerException Si la oferta es null
-     */
-    public boolean anadirOferta(Oferta oferta) throws NullPointerException {
-        if (oferta == null) {
-            throw new NullPointerException("Oferta null");
-        }
-        return ofertas.add(oferta);
     }
 
     /**
@@ -256,12 +230,14 @@ public class Sistema implements Serializable {
      */
     public void comprobarReservas(){
         LocalDate fecha;
-        for(Oferta o: ofertas){
-            if(o.isReservado()){
-                fecha = o.getReserva().getFechaInicio();
-                fecha = fecha.plusDays(5);
-                if(fecha.isEqual(LocalDate.now()) || fecha.isBefore(LocalDate.now())){
-                    o.cancelarReserva();
+        for(Inmueble i: inmuebles){
+            for(Oferta o: i.getOfertas()) {
+                if (o.isReservado()) {
+                    fecha = o.getReserva().getFechaInicio();
+                    fecha = fecha.plusDays(5);
+                    if (fecha.isEqual(LocalDate.now()) || fecha.isBefore(LocalDate.now())) {
+                        o.cancelarReserva();
+                    }
                 }
             }
         }
