@@ -40,6 +40,7 @@ public class PanelCrearOferta extends JPanel{
         layout.putConstraint(SpringLayout.NORTH, crear, 10, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, casilla);
 
+
         this.add(etiqueta1);
         this.add(precio);
         this.add(etiqueta2);
