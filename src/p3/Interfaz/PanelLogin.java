@@ -9,18 +9,18 @@ public class PanelLogin extends JPanel{
         JRadioButton ofertante = new JRadioButton("Ofertante");
         JRadioButton gerente = new JRadioButton("Gerente");
 
-        ButtonGroup grupo = new ButtonGroup();
+        ButtonGroup grupo1 = new ButtonGroup();
 
-        grupo.add(demandante);
-        grupo.add(ofertante);
-        grupo.add(gerente);
+        grupo1.add(demandante);
+        grupo1.add(ofertante);
+        grupo1.add(gerente);
 
-        JPanel selectLogin = new JPanel(new GridLayout(3, 1));
-        selectLogin.add(demandante);
-        selectLogin.add(ofertante);
-        selectLogin.add(gerente);
+        JPanel selectType = new JPanel(new GridLayout(3, 1));
+        selectType.add(demandante);
+        selectType.add(ofertante);
+        selectType.add(gerente);
 
-        selectLogin.setVisible(true);
+        selectType.setVisible(true);
 
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -29,7 +29,15 @@ public class PanelLogin extends JPanel{
         final JTextField nif = new JTextField(10);
         JLabel etiqueta2 = new JLabel("Contrasena: ");
         final JPasswordField pswd = new JPasswordField(15);
-        JButton boton = new JButton("Iniciar sesion");
+        ButtonGroup grupo2 = new ButtonGroup();
+        JButton inSes = new JButton("Iniciar Sesion");
+        JButton volver = new JButton("Volver");
+        grupo2.add(inSes);
+        grupo2.add(volver);
+        JPanel selectLogin = new JPanel(new GridLayout(1, 2));
+        selectLogin.add(inSes);
+        selectLogin.add(volver);
+        selectLogin.setVisible(true);
 
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
@@ -39,18 +47,17 @@ public class PanelLogin extends JPanel{
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, pswd, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, pswd, 5, SpringLayout.SOUTH, nif);
-        layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, etiqueta2);
-        layout.putConstraint(SpringLayout.WEST, selectLogin, 0, SpringLayout.EAST, etiqueta2);
-        layout.putConstraint(SpringLayout.NORTH, boton, 10, SpringLayout.SOUTH, selectLogin);
-        layout.putConstraint(SpringLayout.WEST, boton, 0, SpringLayout.WEST, selectLogin);
+        layout.putConstraint(SpringLayout.NORTH, selectType, 10, SpringLayout.SOUTH, etiqueta2);
+        layout.putConstraint(SpringLayout.WEST, selectType, 0, SpringLayout.EAST, etiqueta2);
+        layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, selectType);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, selectLogin, 0, SpringLayout.HORIZONTAL_CENTER, pswd);
 
         this.add(etiqueta1);
         this.add(etiqueta2);
         this.add(nif);
         this.add(pswd);
-        this.add(boton);
         this.add(selectLogin);
-        this.setPreferredSize(new Dimension(200,100));
+        this.add(selectType);
         this.setVisible(true);
     }
 }

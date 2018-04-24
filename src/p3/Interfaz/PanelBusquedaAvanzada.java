@@ -19,7 +19,15 @@ public class PanelBusquedaAvanzada extends JPanel {
         JLabel etiqueta5 = new JLabel("Direccion:");
         final JTextField direccion = new JTextField("", 50);
         JCheckBox casilla1 = new JCheckBox("Ascensor");
-        JButton boton = new JButton("Buscar");
+        ButtonGroup grupo = new ButtonGroup();
+        JButton buscar = new JButton("Buscar");
+        JButton volver = new JButton("Volver");
+        grupo.add(buscar);
+        grupo.add(volver);
+        JPanel select = new JPanel(new GridLayout(1, 2));
+        select.add(buscar);
+        select.add(volver);
+        select.setVisible(true);
 
         JLabel etiqueta6 = new JLabel("Precio:");
         final JTextField precio = new JTextField("", 2);
@@ -51,10 +59,10 @@ public class PanelBusquedaAvanzada extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, precio, 5, SpringLayout.SOUTH, direccion);
         layout.putConstraint(SpringLayout.EAST, casilla1, 0, SpringLayout.EAST, etiqueta6);
         layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta6);
-        layout.putConstraint(SpringLayout.EAST, casilla2, 0, SpringLayout.EAST, casilla1);
+        layout.putConstraint(SpringLayout.WEST, casilla2, 0, SpringLayout.WEST, casilla1);
         layout.putConstraint(SpringLayout.NORTH, casilla2, 8, SpringLayout.SOUTH, casilla1);
-        layout.putConstraint(SpringLayout.NORTH, boton, 10, SpringLayout.SOUTH, casilla2);
-        layout.putConstraint(SpringLayout.WEST, boton, 0, SpringLayout.WEST, casilla2);
+        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, casilla2);
 
 
         this.add(etiqueta1);
@@ -68,10 +76,10 @@ public class PanelBusquedaAvanzada extends JPanel {
         this.add(direccion);
         this.add(planta);
         this.add(casilla1);
-        this.setPreferredSize(new Dimension(200, 100));
-        this.add(boton);
+        this.add(select);
         this.add(casilla2);
         this.add(etiqueta6);
         this.add(precio);
+        this.setVisible(true);
     }
 }
