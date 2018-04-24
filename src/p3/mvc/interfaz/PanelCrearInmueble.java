@@ -1,7 +1,6 @@
-package p3.Interfaz;
+package p3.mvc.interfaz;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class PanelCrearInmueble extends JPanel{
     PanelCrearInmueble(){

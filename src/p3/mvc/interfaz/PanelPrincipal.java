@@ -1,4 +1,4 @@
-package p3.Interfaz;
+package p3.mvc.interfaz;
 
 
 import javax.swing.*;
@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipal extends JPanel implements ActionListener{
+public class PanelPrincipal extends JPanel{
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton buscar = new JButton("Buscar");
     PanelPrincipal(){
@@ -14,8 +14,8 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         this.setLayout(layout);
 
         ButtonGroup grupo = new ButtonGroup();
-        /*JButton inSes = new JButton("Iniciar Sesion");
-        JButton buscar = new JButton("Buscar");*/
+        JButton inSes = new JButton("Iniciar Sesion");
+        JButton buscar = new JButton("Buscar");
         grupo.add(inSes);
         grupo.add(buscar);
 
@@ -31,8 +31,10 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         JLabel texto = new JLabel("BIENVENIDO A MUZSKA");
 
         layout.putConstraint(SpringLayout.NORTH, imagen, 5, SpringLayout.NORTH, this);
+
         layout.putConstraint(SpringLayout.NORTH, texto, 15, SpringLayout.SOUTH, imagen);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, imagen);
+
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, imagen);
 
@@ -40,12 +42,5 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         this.add(texto);
         this.add(select);
         this.setVisible(true);
-
-        inSes.addActionListener(this);
-    }
-
-    public void actionPerformed(ActionEvent evento){
-        System.out.println("Iniciar Sesion pulsado");
-        this.add(new PanelLogin());
     }
 }
