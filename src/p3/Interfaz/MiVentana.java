@@ -14,7 +14,7 @@ public class MiVentana extends JFrame  {
         Image icon = new ImageIcon("definitivo3.png").getImage();
         setIconImage(icon);
 
-        JPanel panel = new PanelComentario(5);
+        JPanel panel = new PanelLogin();
 
         contenedor.add(panel, BorderLayout.CENTER);
 
