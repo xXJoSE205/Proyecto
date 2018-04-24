@@ -1,5 +1,6 @@
 package p3.mvc.interfaz;
 
+import p3.mvc.controlador.Controlador;
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +14,7 @@ public class MiVentana extends JFrame  {
         Image icon = new ImageIcon("definitivo3.png").getImage();
         setIconImage(icon);
 
-        JPanel panel = new PanelLogin();
+        JPanel panel = new PanelLogin(new GuiSimple("Muzska"));
 
         contenedor.add(panel, BorderLayout.CENTER);
 

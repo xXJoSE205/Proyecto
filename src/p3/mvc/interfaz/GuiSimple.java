@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 
-public class GuiSimple extends JFrame /*implements ChangeListener */{
+public class GuiSimple extends JFrame {
     private PanelPrincipal panelPrincipal;
     private PanelLogin panelLogin;
     private PanelBusqueda panelBusqueda;
@@ -22,14 +22,32 @@ public class GuiSimple extends JFrame /*implements ChangeListener */{
         contenedor.setLayout(new FlowLayout());
 
         // crear componentes
-        panelLogin = new PanelLogin();
+        panelPrincipal = new PanelPrincipal();
+        panelLogin = new PanelLogin(this);
+        panelBusqueda = new PanelBusqueda();
+        panelBAvanzada = new PanelBusquedaAvanzada();
+        panelCOferta = new PanelCrearOferta();
+        panelCInmueble = new PanelCrearInmueble();
+        panelComentario = new PanelComentario(3);
 
         // a�adir componentes al contenedor
+        contenedor.add(panelPrincipal);
         contenedor.add(panelLogin);
+        contenedor.add(panelBusqueda);
+        contenedor.add(panelBAvanzada);
+        contenedor.add(panelCOferta);
+        contenedor.add(panelCInmueble);
+        contenedor.add(panelComentario);
         // this.pack();
 
         // visibilidad inicial
-        panelLogin.setVisible( true );
+        panelPrincipal.setVisible(true);
+        panelLogin.setVisible(false);
+        panelBusqueda.setVisible(false);
+        panelBAvanzada.setVisible(false);
+        panelCOferta.setVisible(false);
+        panelCInmueble.setVisible(false);
+        panelComentario.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTA�A
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -45,27 +63,18 @@ public class GuiSimple extends JFrame /*implements ChangeListener */{
     public void setControlador(Controlador c) {
         this.controlador = c;
     }
+
     public Controlador getControlador() {
         return this.controlador;
     }
 
-
-    /*@Override
-    public void stateChanged(ChangeEvent ev) {
-        // solamente a efectos de seguimiento del programa
-        System.out.println( pesta�as.getSelectedIndex() );
-        System.out.println( pesta�as.getSelectedComponent() );
-        this.panelPares.limpiaCampo();
-        this.panelPalindromos.limpiaCampo();
-    }
-
     public void loginResult(boolean loginOK) {
         if (loginOK) {
-            panelLogin.setVisible( false );
-            pesta�as.setVisible( true );
-        } else {
-            this.panelLogin.setError("login incorrecto");
+            panelLogin.setVisible(false);
+            //
+        }else {
+            this.panelLogin.setError("Datos incorrecto o tipo no elegido");
         }
-    }*/
+    }
 }
 

@@ -2,39 +2,35 @@ package p3.mvc.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelLogin extends JPanel{
-    PanelLogin(){
-        JRadioButton demandante = new JRadioButton("Demandante");
-        JRadioButton ofertante = new JRadioButton("Ofertante");
-        JRadioButton gerente = new JRadioButton("Gerente");
+public class PanelLogin extends JPanel implements ActionListener{
+    private JLabel etiqueta1 = new JLabel("NIF: ");
+    private final JTextField nif = new JTextField(10);
+    private JLabel etiqueta2 = new JLabel("Contrasena: ");
+    private final JPasswordField pswd = new JPasswordField(15);
+    private JPanel selectType = new JPanel(new GridLayout(3, 1));
+    private JPanel selectLogin = new JPanel(new GridLayout(1, 2));
+    private JRadioButton demandante = new JRadioButton("Demandante");
+    private JRadioButton ofertante = new JRadioButton("Ofertante");
+    private JRadioButton gerente = new JRadioButton("Gerente");
 
-        ButtonGroup grupo1 = new ButtonGroup();
+    private GuiSimple gui;
 
-        grupo1.add(demandante);
-        grupo1.add(ofertante);
-        grupo1.add(gerente);
-
-        JPanel selectType = new JPanel(new GridLayout(3, 1));
-        selectType.add(demandante);
-        selectType.add(ofertante);
-        selectType.add(gerente);
-
-        selectType.setVisible(true);
+    PanelLogin(GuiSimple gui){
+        this.gui = gui;
 
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        JLabel etiqueta1 = new JLabel("NIF: ");
-        final JTextField nif = new JTextField(10);
-        JLabel etiqueta2 = new JLabel("Contrasena: ");
-        final JPasswordField pswd = new JPasswordField(15);
-        ButtonGroup grupo2 = new ButtonGroup();
+        selectType.add(demandante);
+        selectType.add(ofertante);
+        selectType.add(gerente);
+        selectType.setVisible(true);
+
         JButton inSes = new JButton("Iniciar Sesion");
         JButton volver = new JButton("Volver");
-        grupo2.add(inSes);
-        grupo2.add(volver);
-        JPanel selectLogin = new JPanel(new GridLayout(1, 2));
         selectLogin.add(inSes);
         selectLogin.add(volver);
         selectLogin.setVisible(true);
@@ -59,5 +55,24 @@ public class PanelLogin extends JPanel{
         this.add(selectLogin);
         this.add(selectType);
         this.setVisible(true);
+
+        inSes.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent evento){
+        String option = "";
+        if(demandante.isSelected()){
+            option = demandante.getText();
+        }else if(ofertante.isSelected()){
+            option = ofertante.getText();
+        }else if(gerente.isSelected()) {
+            option = gerente.getText();
+        }
+        gui.getControlador().login(nif.getText(), new String(pswd.getPassword()), option);
+    }
+
+    public void setError(String error) {
+        pswd.setText(error);
+        pswd.setForeground(java.awt.Color.red);
     }
 }

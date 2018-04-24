@@ -31,6 +31,7 @@ public class PanelPrincipal extends JPanel{
         JLabel texto = new JLabel("BIENVENIDO A MUZSKA");
 
         layout.putConstraint(SpringLayout.NORTH, imagen, 5, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, imagen, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
         layout.putConstraint(SpringLayout.NORTH, texto, 15, SpringLayout.SOUTH, imagen);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, imagen);
