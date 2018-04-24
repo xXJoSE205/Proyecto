@@ -26,8 +26,6 @@ public class Inmueble implements Serializable {
     private final Ofertante dueno;
     /** Lista de ofertas del inmueble*/
     private List<Oferta> ofertas;
-    /** Lista de opiniones*/
-    private List<Opinion> opiniones;
 
     /**
      * Constructor de Inmueble
@@ -58,7 +56,6 @@ public class Inmueble implements Serializable {
         this.ascensor = ascensor;
         this.dueno = dueno;
         this.ofertas = new ArrayList<>();
-        this.opiniones = new ArrayList<>();
     }
 
     /**
@@ -147,19 +144,6 @@ public class Inmueble implements Serializable {
         return ofertas.add(oferta);
     }
 
-    /**
-     * Anade una opinion al inmueble
-     *
-     * @param opinion Opinion que se quiere anadir
-     * @return boolean, true si se anade la opinion, false en caso contrario
-     * @throws NullPointerException Si la opinion es null
-     */
-    public boolean anadirOpinion(Opinion opinion) throws NullPointerException{
-        if(opinion==null){
-            throw new NullPointerException("Opinion null");
-        }
-        return opiniones.add(opinion);
-    }
 
     /**
      * Pasa toda la informacion del inmueble en una cadena

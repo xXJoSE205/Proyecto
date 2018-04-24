@@ -353,4 +353,26 @@ public class OfertaTest {
         oferta.rechazar();
         assertTrue(oferta.getEstado()==Estado.RECHAZADO);
     }
+
+    /**
+     * Test 1 de anadirOpinion, se espera true, se ha anadido la opinion correctamente
+     */
+    @Test
+    public void anadirOpinion1(){
+        System.out.println("Oferta: test anadirOpinion1");
+        Demandante autor = new Demandante("Thor","Dios del Trueno","09876543T",
+                "Mjolnir","9999888877776666");
+        Opinion opinion = new Comentario(autor, "Amplio y bonito");
+        assertTrue(oferta.anadirOpinion(opinion));
+    }
+
+    /**
+     * Test 2 de anadirOpinion, se espera un NullPointerException
+     * La opinion a anadir es null
+     */
+    @Test(expected = NullPointerException.class)
+    public void anadirOpinion2(){
+        System.out.println("Oferta: test anadirOpinion2");
+        oferta.anadirOpinion(null);
+    }
 }

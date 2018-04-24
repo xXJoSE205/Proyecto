@@ -2,6 +2,7 @@ package p3.src;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.*;
 
 /**
  * Esta clase contiene la informacion de una Oferta
@@ -27,6 +28,8 @@ public class Oferta implements Serializable {
     private Reserva reserva = null;
     /** Inmueble al que pertenece la oferta*/
     private final Inmueble inmueble;
+    /** Lista de opiniones*/
+    private List<Opinion> opiniones;
 
     /**
      * Constructor de Oferta
@@ -54,6 +57,7 @@ public class Oferta implements Serializable {
         this.vacacional = vacacional;
         this.fianza = fianza;
         this.inmueble = inmueble;
+        this.opiniones = new ArrayList<>();
     }
 
     /**
@@ -223,12 +227,27 @@ public class Oferta implements Serializable {
     }
 
     /**
-     * Hace una reserva para la oferta y se la asigna
+     * Anade una opinion a la oferta
      *
-     * @param usuario Demandante que realiza la reserva
-     * @return boolean, true si se hace la reserva correctamente, false si ya existe una activa
-     * @throws NullPointerException Si el usuario es null
+     * @param opinion Opinion que se quiere anadir
+     * @return boolean, true si se anade la opinion, false en caso contrario
+     * @throws NullPointerException Si la opinion es null
      */
+    public boolean anadirOpinion(Opinion opinion) throws NullPointerException {
+        if (opinion == null) {
+            throw new NullPointerException("Opinion null");
+        }
+        return opiniones.add(opinion);
+
+    }
+
+        /**
+         * Hace una reserva para la oferta y se la asigna
+         *
+         * @param usuario Demandante que realiza la reserva
+         * @return boolean, true si se hace la reserva correctamente, false si ya existe una activa
+         * @throws NullPointerException Si el usuario es null
+         */
     public boolean reservar(Demandante usuario) throws NullPointerException{
         Reserva r;
         if(usuario==null){
