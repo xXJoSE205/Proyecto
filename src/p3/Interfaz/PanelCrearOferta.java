@@ -51,7 +51,6 @@ public class PanelCrearOferta extends JPanel{
         this.add(fianza);
         this.add(casilla);
         this.add(crear);
-        this.setPreferredSize(new Dimension(200,100));
         this.setVisible(true);
     }
 }

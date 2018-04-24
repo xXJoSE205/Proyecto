@@ -2,6 +2,7 @@ package p3.Interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 
 public class MiVentana extends JFrame  {
 
@@ -19,13 +20,11 @@ public class MiVentana extends JFrame  {
 
         this.pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500, 500);
+        this.setSize(500, 600);
         this.setVisible(true);
     }
 
     public static void main(String[] args) {
         JFrame ventana = new MiVentana();
     }
-
-
 }

@@ -58,7 +58,6 @@ public class PanelCrearInmueble extends JPanel{
         this.add(planta);
         this.add(casilla);
         this.add(crear);
-        this.setPreferredSize(new Dimension(200,100));
         this.setVisible(true);
     }
 }
