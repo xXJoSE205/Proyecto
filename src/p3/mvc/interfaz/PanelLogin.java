@@ -15,6 +15,9 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JRadioButton demandante = new JRadioButton("Demandante");
     private JRadioButton ofertante = new JRadioButton("Ofertante");
     private JRadioButton gerente = new JRadioButton("Gerente");
+    private ButtonGroup grupo = new ButtonGroup();
+    private JButton inSes = new JButton("Iniciar Sesion");
+    private JButton volver = new JButton("Volver");
 
     private GuiSimple gui;
 
@@ -29,8 +32,8 @@ public class PanelLogin extends JPanel implements ActionListener{
         selectType.add(gerente);
         selectType.setVisible(true);
 
-        JButton inSes = new JButton("Iniciar Sesion");
-        JButton volver = new JButton("Volver");
+        grupo.add(inSes);
+        grupo.add(volver);
         selectLogin.add(inSes);
         selectLogin.add(volver);
         selectLogin.setVisible(true);
@@ -61,14 +64,18 @@ public class PanelLogin extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent evento){
         String option = "";
-        if(demandante.isSelected()){
-            option = demandante.getText();
-        }else if(ofertante.isSelected()){
-            option = ofertante.getText();
-        }else if(gerente.isSelected()) {
-            option = gerente.getText();
+        if(evento.getSource()==inSes) {
+            if (demandante.isSelected()) {
+                option = demandante.getText();
+            } else if (ofertante.isSelected()) {
+                option = ofertante.getText();
+            } else if (gerente.isSelected()) {
+                option = gerente.getText();
+            }
+            gui.getControlador().login(nif.getText(), new String(pswd.getPassword()), option);
+        }else if(evento.getSource()==volver){
+            gui.getControlador().volverLogin();
         }
-        gui.getControlador().login(nif.getText(), new String(pswd.getPassword()), option);
     }
 
     public void setError(String error) {

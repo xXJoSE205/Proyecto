@@ -6,29 +6,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipal extends JPanel{
-    private JButton inSes = new JButton("Iniciar Sesion");
-    private JButton buscar = new JButton("Buscar");
-    PanelPrincipal(){
+public class PanelPrincipal extends JPanel implements ActionListener{
+    private JButton inSes = new JButton("Iniciar Sesion");private JButton buscar = new JButton("Buscar");
+    private final ImageIcon logo = new ImageIcon("definitivo3.png");
+    private JLabel imagen;
+    private JLabel texto = new JLabel("BIENVENIDO A MUZSKA");
+    private JPanel select = new JPanel(new GridLayout(1, 2));
+    private GuiSimple gui;
+
+    PanelPrincipal(GuiSimple gui){
+        this.gui = gui;
+
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        ButtonGroup grupo = new ButtonGroup();
-        JButton inSes = new JButton("Iniciar Sesion");
-        JButton buscar = new JButton("Buscar");
-        grupo.add(inSes);
-        grupo.add(buscar);
-
-        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(inSes);
         select.add(buscar);
         select.setVisible(true);
 
-        ImageIcon logo = new ImageIcon("definitivo3.png");
         Image newLogo = logo.getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_DEFAULT);
         logo.setImage(newLogo);
-        JLabel imagen = new JLabel(logo);
-        JLabel texto = new JLabel("BIENVENIDO A MUZSKA");
+        imagen = new JLabel(logo);
 
         layout.putConstraint(SpringLayout.NORTH, imagen, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, imagen, 0, SpringLayout.HORIZONTAL_CENTER, this);
@@ -42,6 +40,13 @@ public class PanelPrincipal extends JPanel{
         this.add(imagen);
         this.add(texto);
         this.add(select);
-        this.setVisible(true);
+
+        inSes.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent evento){
+        if(evento.getSource()==inSes){
+            this.gui.getControlador().goLogin();
+        }
     }
 }

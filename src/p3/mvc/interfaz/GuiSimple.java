@@ -22,32 +22,32 @@ public class GuiSimple extends JFrame {
         contenedor.setLayout(new FlowLayout());
 
         // crear componentes
-        panelPrincipal = new PanelPrincipal();
+        panelPrincipal = new PanelPrincipal(this);
         panelLogin = new PanelLogin(this);
-        panelBusqueda = new PanelBusqueda();
+        /*panelBusqueda = new PanelBusqueda();
         panelBAvanzada = new PanelBusquedaAvanzada();
         panelCOferta = new PanelCrearOferta();
         panelCInmueble = new PanelCrearInmueble();
-        panelComentario = new PanelComentario(3);
+        panelComentario = new PanelComentario(3);*/
 
         // a�adir componentes al contenedor
         contenedor.add(panelPrincipal);
         contenedor.add(panelLogin);
-        contenedor.add(panelBusqueda);
+        /*contenedor.add(panelBusqueda);
         contenedor.add(panelBAvanzada);
         contenedor.add(panelCOferta);
         contenedor.add(panelCInmueble);
-        contenedor.add(panelComentario);
+        contenedor.add(panelComentario);*/
         // this.pack();
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
         panelLogin.setVisible(false);
-        panelBusqueda.setVisible(false);
+        /*panelBusqueda.setVisible(false);
         panelBAvanzada.setVisible(false);
         panelCOferta.setVisible(false);
         panelCInmueble.setVisible(false);
-        panelComentario.setVisible(false);
+        panelComentario.setVisible(false);*/
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTA�A
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -55,6 +55,7 @@ public class GuiSimple extends JFrame {
         // Para realizar acciones al cambiar de pesta�as
 
         // mostrar this, en otros ejemplos era ventana, ahora this
+        this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500,400); // remove and uncomment this.pack above
         this.setVisible(true);
@@ -75,6 +76,16 @@ public class GuiSimple extends JFrame {
         }else {
             this.panelLogin.setError("Datos incorrecto o tipo no elegido");
         }
+    }
+
+    public void volverLogin() {
+        panelLogin.setVisible(false);
+        panelPrincipal.setVisible(true);
+    }
+
+    public void goLogin() {
+        panelPrincipal.setVisible(false);
+        panelLogin.setVisible(true);
     }
 }
 

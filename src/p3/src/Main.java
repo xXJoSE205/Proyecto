@@ -9,7 +9,7 @@ import java.util.*;
  *
  * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
  */
-public class Muszka {
+public class Main {
     /**
      * Programa principal de MUZSKA, al finalizar guarda en "muzska.ser" toda la informacion del sistema
      *

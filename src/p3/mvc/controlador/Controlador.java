@@ -9,16 +9,17 @@ import java.util.List;
 public class Controlador {
     private GuiSimple gui;
     private Sistema muzska;
-    private Cliente usr;
 
     public Controlador(GuiSimple gui, Sistema muzska) {
         this.gui = gui; this.muzska = muzska;
     }
 
     public void login(String nif, String passwd, String option) {
-        if(usr==null || nif==null || passwd==null){
+        Cliente usr;
+        if(nif==null || passwd==null || option==null){
             this.gui.loginResult(false);
         }
+        assert option != null;
         switch (option) {
             case "Demandante": {
                 List<Cliente> clientes = muzska.getUsuarios();
@@ -53,4 +54,11 @@ public class Controlador {
         }
     }
 
+    public void volverLogin() {
+        this.gui.volverLogin();
+    }
+
+    public void goLogin() {
+        this.gui.goLogin();
+    }
 }
