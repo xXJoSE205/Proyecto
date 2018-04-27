@@ -40,8 +40,10 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         this.add(imagen);
         this.add(texto);
         this.add(select);
+        this.setVisible(true);
 
         inSes.addActionListener(this);
+        //buscar.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento){

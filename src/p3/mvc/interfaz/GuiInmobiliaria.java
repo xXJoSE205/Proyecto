@@ -69,6 +69,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500,400); // remove and uncomment this.pack above
         this.setVisible(true);
+        this.setResizable(true);
+
         this.addWindowListener(this);
     }
 
@@ -87,6 +89,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void windowClosing(WindowEvent e) {
         //intercept the window close event so that data can be saved to disk at this point
         System.out.println("Guardando datos...");
+        this.getControlador().logout();
         this.getControlador().saveData();
         dispose();  //dispose the frame
         System.exit(0);
@@ -143,6 +146,19 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void goLogin() {
         panelPrincipal.setVisible(false);
         panelLogin.setVisible(true);
+    }
+
+    public void logout(boolean logoutOK) {
+        if(logoutOK){
+            /*panelDemandante.setVisible(false);
+            panelOfertante.setVisible(false);
+            panelGerente.setVisible(false);*/
+            panelPrincipal.setVisible(true);
+        }/*else{
+            this.panelDemandante.setError("Error al cerrar sesion");
+            this.panelOfertante.setError("Error al cerrar sesion");
+            this.panelGerente.setError("Error al cerrar sesion");
+        }*/
     }
 }
 

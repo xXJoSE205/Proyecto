@@ -65,4 +65,17 @@ public class Controlador {
     public void saveData() {
         this.gui.guardarDatos(this.muzska);
     }
+
+    public void logout() {
+        if(this.muzska.getGerente().isLogeado()) {
+            this.gui.logout(this.muzska.logout());
+        }else{
+            for(Cliente c: this.muzska.getUsuarios()){
+                if(c.isLogeado()){
+                    this.gui.logout(this.muzska.logout(c));
+                }
+            }
+            this.gui.logout(false);
+        }
+    }
 }
