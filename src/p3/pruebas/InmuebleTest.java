@@ -2,7 +2,10 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.*;
+import p3.mvc.modelo.Inmueble;
+import p3.mvc.modelo.Oferta;
+import p3.mvc.modelo.Ofertante;
+
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;

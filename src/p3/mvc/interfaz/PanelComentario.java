@@ -1,11 +1,8 @@
 package p3.mvc.interfaz;
 
-import p3.src.Comentario;
-
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
-import java.util.List;
 
 public class PanelComentario extends JPanel {
     PanelComentario(int y) {

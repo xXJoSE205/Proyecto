@@ -1,17 +1,17 @@
 package p3.mvc.controlador;
 
-/*import p3.mvc.modelo.Aplicacion;*/
-import p3.mvc.interfaz.GuiSimple;
-import p3.src.*;
+import p3.mvc.interfaz.GuiInmobiliaria;
+import p3.mvc.modelo.*;
 
 import java.util.List;
 
 public class Controlador {
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
     private Sistema muzska;
 
-    public Controlador(GuiSimple gui, Sistema muzska) {
-        this.gui = gui; this.muzska = muzska;
+    public Controlador(GuiInmobiliaria gui, Sistema muzska) {
+        this.gui = gui;
+        this.muzska = muzska;
     }
 
     public void login(String nif, String passwd, String option) {
@@ -84,5 +84,22 @@ public class Controlador {
 
     public void goLogin() {
         this.gui.goLogin();
+    }
+
+    public void saveData() {
+        this.gui.guardarDatos(this.muzska);
+    }
+
+    public void logout() {
+        if(this.muzska.getGerente().isLogeado()) {
+            this.gui.logout(this.muzska.logout());
+        }else{
+            for(Cliente c: this.muzska.getUsuarios()){
+                if(c.isLogeado()){
+                    this.gui.logout(this.muzska.logout(c));
+                }
+            }
+            this.gui.logout(false);
+        }
     }
 }

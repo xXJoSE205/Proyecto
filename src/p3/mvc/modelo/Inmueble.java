@@ -1,4 +1,4 @@
-package p3.src;
+package p3.mvc.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

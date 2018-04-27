@@ -19,9 +19,9 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton volver = new JButton("Volver");
 
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
 
-    PanelLogin(GuiSimple gui){
+    PanelLogin(GuiInmobiliaria gui){
         this.gui = gui;
 
         SpringLayout layout = new SpringLayout();
@@ -57,9 +57,9 @@ public class PanelLogin extends JPanel implements ActionListener{
         this.add(pswd);
         this.add(selectLogin);
         this.add(selectType);
-        this.setVisible(true);
 
         inSes.addActionListener(this);
+        volver.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento){

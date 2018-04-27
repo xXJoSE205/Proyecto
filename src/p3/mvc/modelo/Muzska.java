@@ -1,21 +1,19 @@
 package p3.mvc.modelo;
 
 import p3.mvc.controlador.Controlador;
-import p3.mvc.interfaz.GuiSimple;
-import p3.src.*;
+import p3.mvc.interfaz.GuiInmobiliaria;
 
 import java.io.*;
-import java.time.LocalDate;
 
 public class Muzska {
 
     public static void main(String[] args){
-        GuiSimple gui = new GuiSimple("Muzska");
-        Sistema muzska = new Sistema();
-        Controlador  controlador = new Controlador(gui, muzska);
-        gui.setControlador( controlador );
+        GuiInmobiliaria gui = new GuiInmobiliaria("Muzska");
+        Sistema muzska/* = new Sistema()*/;
+        //Controlador  controlador = new Controlador(gui, muzska);
+        //gui.setControlador( controlador );
 
-        /*try {
+        try {
             if (args.length == 1 && args[0].equals("clientes.txt")) {
                 muzska = new Sistema();
                 System.out.println("Cargando clientes...");
@@ -42,7 +40,7 @@ public class Muzska {
             c.printStackTrace();
             return;
         }
-        guardarDatos(muzska);*/
+        //guardarDatos(muzska);
     }
 
     /**
@@ -97,25 +95,6 @@ public class Muzska {
             } catch (IllegalArgumentException iae) {
                 System.out.println(iae.getMessage() + ", Usuario no anadido");
             }
-        }
-    }
-
-    /**
-     * Guarda los datos del Sistema en el fichero "muzska.ser"
-     *
-     * @param sistema Sistema del cual se quieren guardar los datos
-     */
-    private static void guardarDatos(Sistema sistema){
-        try {
-            FileOutputStream fileOut = new FileOutputStream("muzska.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(sistema);
-            out.close();
-            fileOut.close();
-            System.out.println("Datos serializables guardados en \"muzska.ser\"");
-        }catch(IOException ioe) {
-            System.out.println("Error al manejar el fichero \"muzska.ser\"");
-            ioe.printStackTrace();
         }
     }
 }

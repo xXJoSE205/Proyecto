@@ -2,9 +2,9 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.Comentario;
-import p3.src.Demandante;
-import p3.src.Opinion;
+import p3.mvc.modelo.Comentario;
+import p3.mvc.modelo.Demandante;
+import p3.mvc.modelo.Opinion;
 
 import static org.junit.Assert.*;
 
