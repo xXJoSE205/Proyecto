@@ -30,8 +30,6 @@ public class Muzska {
                 System.out.println("Fichero de entrada distinto a \"clientes.txt\"");
                 return;
             }
-            Controlador controlador = new Controlador(gui, muzska);
-            gui.setControlador(controlador);
         } catch (IOException ioe) {
             ioe.printStackTrace();
             return;
@@ -40,6 +38,8 @@ public class Muzska {
             c.printStackTrace();
             return;
         }
+        Controlador controlador = new Controlador(gui, muzska);
+        gui.setControlador(controlador);
         //guardarDatos(muzska);
     }
 

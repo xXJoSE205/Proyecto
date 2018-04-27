@@ -22,13 +22,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCrearOferta panelCOferta;
     private PanelCrearInmueble panelCInmueble;
     private PanelComentario panelComentario;
+
     private Controlador controlador;
+    private Container contenedor;
 
     public GuiInmobiliaria(String titulo) {
         super(titulo);
 
         // obtener contenedor, asignar layout
-        Container contenedor = this.getContentPane(); // antes: ventana.getContentPane();
+        contenedor = this.getContentPane(); // antes: ventana.getContentPane();
         contenedor.setLayout(new FlowLayout());
 
         // crear componentes
@@ -65,7 +67,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         // Para realizar acciones al cambiar de pesta�as
 
         // mostrar this, en otros ejemplos era ventana, ahora this
-        this.pack();
+        //this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(500,400); // remove and uncomment this.pack above
         this.setVisible(true);
