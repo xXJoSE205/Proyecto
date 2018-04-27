@@ -12,9 +12,9 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     private JLabel imagen;
     private JLabel texto = new JLabel("BIENVENIDO A MUZSKA");
     private JPanel select = new JPanel(new GridLayout(1, 2));
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
 
-    PanelPrincipal(GuiSimple gui){
+    PanelPrincipal(GuiInmobiliaria gui){
         this.gui = gui;
 
         SpringLayout layout = new SpringLayout();
@@ -47,6 +47,8 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==inSes){
             this.gui.getControlador().goLogin();
-        }
+        }/* else if(evento.getSource()==buscar){
+            this.gui.getControlador().busqueda();
+        }*/
     }
 }

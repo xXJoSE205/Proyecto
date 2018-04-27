@@ -1,7 +1,7 @@
 package p3.pruebas;
 
 import org.junit.Test;
-import p3.src.Gerente;
+import p3.mvc.modelo.Gerente;
 
 /**
  * Esta clase contiene el test de la clase Gerente

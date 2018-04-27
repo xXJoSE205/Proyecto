@@ -1,8 +1,6 @@
-package p3.src;
+package p3.mvc.modelo;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.util.*;
 
 /**
  * Esta clase contiene el programa principal de la aplicacion MUZSKA

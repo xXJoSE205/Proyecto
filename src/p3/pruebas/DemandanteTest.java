@@ -2,7 +2,7 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.*;
+import p3.mvc.modelo.*;
 
 import java.time.LocalDate;
 

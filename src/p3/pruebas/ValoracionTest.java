@@ -2,8 +2,8 @@ package p3.pruebas;
 
 import org.junit.Before;
 import org.junit.Test;
-import p3.src.Demandante;
-import p3.src.Valoracion;
+import p3.mvc.modelo.Demandante;
+import p3.mvc.modelo.Valoracion;
 
 import static org.junit.Assert.*;
 
