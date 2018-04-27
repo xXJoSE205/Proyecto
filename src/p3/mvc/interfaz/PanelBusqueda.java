@@ -2,29 +2,37 @@ package p3.mvc.interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelBusqueda extends JPanel {
-    PanelBusqueda(){
+public class PanelBusqueda extends JPanel implements ActionListener {
+
+    private JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
+    private final JTextField numero = new JTextField("", 2);
+    private JLabel etiqueta2 = new JLabel("Numero de banos:");
+    private final JTextField numeroBan = new JTextField("", 2);
+    private JLabel etiqueta3 = new JLabel("Dimensiones:");
+    private final JTextField dim = new JTextField("", 2);
+    private JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
+    private final JTextField planta = new JTextField("", 2);
+    private JLabel etiqueta5 = new JLabel("Direccion:");
+    private final JTextField direccion = new JTextField("", 50);
+    private JCheckBox casilla1 = new JCheckBox("Ascensor");
+    private ButtonGroup grupo = new ButtonGroup();
+
+
+    private JPanel select = new JPanel(new GridLayout(1, 2));
+    private GuiSimple gui;
+
+    PanelBusqueda(GuiSimple gui){
+        this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
-        final JTextField numero = new JTextField("", 2);
-        JLabel etiqueta2 = new JLabel("Numero de banos:");
-        final JTextField numeroBan = new JTextField("", 2);
-        JLabel etiqueta3 = new JLabel("Dimensiones:");
-        final JTextField dim = new JTextField("", 2);
-        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
-        final JTextField planta = new JTextField("", 2);
-        JLabel etiqueta5 = new JLabel("Direccion:");
-        final JTextField direccion = new JTextField("", 50);
-        JCheckBox casilla1 = new JCheckBox("Ascensor");
-        ButtonGroup grupo = new ButtonGroup();
         JButton buscar = new JButton("Buscar");
         JButton volver = new JButton("Volver");
         grupo.add(buscar);
         grupo.add(volver);
-        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(buscar);
         select.add(volver);
         select.setVisible(true);
@@ -76,5 +84,31 @@ public class PanelBusqueda extends JPanel {
         this.add(casilla1);
         this.add(select);
         this.setVisible(true);
+
+    }
+
+    public void actionPerformed(ActionEvent evento) {
+        String option1 = "";
+        String option2 = "";
+        String option3 = "";
+        String option4 = "";
+        String option5 = "";
+        String option6 = "";
+
+        option1 = numero.getText();
+        option2 = numeroBan.getText();
+        option3 = dim.getText();
+        option4 = planta.getText();
+        option5 = direccion.getText();
+        if(casilla1.isSelected()){
+            option6 = "true";
+        } else {
+            option6 = "false";
+        }
+        gui.getControlador().buscar(option1,option2,option3,option4,option5,option6);
+    }
+
+    public void setError(String error) {
+
     }
 }

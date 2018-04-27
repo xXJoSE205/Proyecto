@@ -1,8 +1,11 @@
 package p3.mvc.interfaz;
 import p3.mvc.controlador.Controlador;
+import p3.src.Inmueble;
+
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
+import java.util.List;
 
 public class GuiSimple extends JFrame {
     private PanelPrincipal panelPrincipal;
@@ -13,6 +16,7 @@ public class GuiSimple extends JFrame {
     private PanelCrearInmueble panelCInmueble;
     private PanelComentario panelComentario;
     private Controlador controlador;
+    private PanelDemandante panelDemandante;
 
     public GuiSimple(String titulo) {
         super(titulo); // antes: JFrame ventana = new JFrame("Mi GUI");
@@ -24,11 +28,12 @@ public class GuiSimple extends JFrame {
         // crear componentes
         panelPrincipal = new PanelPrincipal(this);
         panelLogin = new PanelLogin(this);
-        /*panelBusqueda = new PanelBusqueda();
+        panelBusqueda = new PanelBusqueda(this);
         panelBAvanzada = new PanelBusquedaAvanzada();
         panelCOferta = new PanelCrearOferta();
         panelCInmueble = new PanelCrearInmueble();
-        panelComentario = new PanelComentario(3);*/
+        panelComentario = new PanelComentario(3);
+        panelDemandante = new PanelDemandante(this,"Jorge");
 
         // a�adir componentes al contenedor
         contenedor.add(panelPrincipal);
@@ -39,6 +44,7 @@ public class GuiSimple extends JFrame {
         contenedor.add(panelCInmueble);
         contenedor.add(panelComentario);*/
         // this.pack();
+        contenedor.add(panelDemandante);
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
@@ -48,6 +54,7 @@ public class GuiSimple extends JFrame {
         panelCOferta.setVisible(false);
         panelCInmueble.setVisible(false);
         panelComentario.setVisible(false);*/
+        panelDemandante.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTA�A
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -86,6 +93,16 @@ public class GuiSimple extends JFrame {
     public void goLogin() {
         panelPrincipal.setVisible(false);
         panelLogin.setVisible(true);
+    }
+
+    public void busquedaResult(List<Inmueble> resultado){
+        if(resultado!=null){
+
+        }
+    }
+
+    public void goBuscar(){
+
     }
 }
 

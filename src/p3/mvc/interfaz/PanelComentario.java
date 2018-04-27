@@ -25,7 +25,7 @@ public class PanelComentario extends JPanel {
         DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
         DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
         JTree arbol = new JTree (modeloDatos);
-        arbol.setPreferredSize(new Dimension(200, 100));
+
         JScrollPane scroll = new JScrollPane(arbol);
         JButton boton1 = new JButton("Valorar");
         JButton boton2 = new JButton("Atras");

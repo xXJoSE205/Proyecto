@@ -54,6 +54,30 @@ public class Controlador {
         }
     }
 
+    public void buscar (String nHab, String nBan, String dim, String planta, String ascensor, String dir){
+        if(nHab == null){
+            int nHab2 = -1;
+        } else {
+            int nHab2 = Integer.parseInt(nHab);
+        }
+        if(nBan == null){
+            int nBan2 = -1;
+        } else {
+            int nBan2 = Integer.parseInt(nBan);
+        }
+        if(dim == null){
+            int dim2 = -1;
+        } else {
+            int dim2 = Integer.parseInt(dim);
+        }
+        if(planta == null){
+            int planta2 = -1;
+        } else {
+            int planta2 = Integer.parseInt(planta);
+        }
+        List<Inmueble> lista;
+
+    }
     public void volverLogin() {
         this.gui.volverLogin();
     }
