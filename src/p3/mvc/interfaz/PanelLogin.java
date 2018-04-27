@@ -57,9 +57,9 @@ public class PanelLogin extends JPanel implements ActionListener{
         this.add(pswd);
         this.add(selectLogin);
         this.add(selectType);
-        this.setVisible(true);
 
         inSes.addActionListener(this);
+        volver.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento){
