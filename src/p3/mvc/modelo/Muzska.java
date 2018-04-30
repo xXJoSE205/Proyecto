@@ -40,7 +40,6 @@ public class Muzska {
         }
         Controlador controlador = new Controlador(gui, muzska);
         gui.setControlador(controlador);
-        //guardarDatos(muzska);
     }
 
     /**
@@ -96,5 +95,6 @@ public class Muzska {
                 System.out.println(iae.getMessage() + ", Usuario no anadido");
             }
         }
+        buffer.close();
     }
 }

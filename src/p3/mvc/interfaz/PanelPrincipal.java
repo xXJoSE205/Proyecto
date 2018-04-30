@@ -45,11 +45,6 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         sl.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
         sl.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, imagen);
 
-        panel2.add(imagen);
-        panel2.add(texto);
-        panel2.add(select);
-
-        panel.add(panel2);
         this.add(panel);
         this.setVisible(true);
 
