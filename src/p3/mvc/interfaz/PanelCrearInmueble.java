@@ -1,24 +1,38 @@
 package p3.mvc.interfaz;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelCrearInmueble extends JPanel{
-    PanelCrearInmueble(){
+
+public class PanelCrearInmueble extends JPanel implements ActionListener{
+    private JLabel etiqueta1 = new JLabel("Nº Habitaciones: ");
+    private final JTextField nHab = new JTextField(2);
+    private JLabel etiqueta2 = new JLabel("Nº Banos: ");
+    private final JTextField nBanos = new JTextField(2);
+    private JLabel etiqueta3 = new JLabel("Dimensiones: ");
+    private final JTextField dim = new JTextField(5);
+    private JLabel etiqueta4 = new JLabel("Direccion: ");
+    private final JTextField direccion = new JTextField(30);
+    private JLabel etiqueta5 = new JLabel("Planta: ");
+    private final JTextField planta = new JTextField(2);
+    private JCheckBox casilla = new JCheckBox("Ascensor");
+    private JButton crear = new JButton("Crear inmueble");
+    private JButton volver = new JButton("Cancelar");
+    private JPanel select = new JPanel(new GridLayout(1, 2));
+    private ButtonGroup grupo = new ButtonGroup();
+    private GuiInmobiliaria gui;
+
+    PanelCrearInmueble(GuiInmobiliaria gui){
+        this.gui=gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        grupo.add(volver);
+        grupo.add(crear);
+        select.add(volver);
+        select.add(crear);
 
-        JLabel etiqueta1 = new JLabel("Nº Habitaciones: ");
-        final JTextField nHab = new JTextField(2);
-        JLabel etiqueta2 = new JLabel("Nº Banos: ");
-        final JTextField nBanos = new JTextField(2);
-        JLabel etiqueta3 = new JLabel("Dimensiones: ");
-        final JTextField dim = new JTextField(5);
-        JLabel etiqueta4 = new JLabel("Direccion: ");
-        final JTextField direccion = new JTextField(30);
-        JLabel etiqueta5 = new JLabel("Planta: ");
-        final JTextField planta = new JTextField(2);
-        JCheckBox casilla = new JCheckBox("Ascensor");
-        final JButton crear = new JButton("Crear inmueble");
 
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -42,8 +56,8 @@ public class PanelCrearInmueble extends JPanel{
         layout.putConstraint(SpringLayout.NORTH, planta, 5, SpringLayout.SOUTH, direccion);
         layout.putConstraint(SpringLayout.WEST, casilla, 0, SpringLayout.WEST, planta);
         layout.putConstraint(SpringLayout.NORTH, casilla, 8, SpringLayout.SOUTH, etiqueta5);
-        layout.putConstraint(SpringLayout.NORTH, crear, 10, SpringLayout.SOUTH, casilla);
-        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, casilla);
+        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
+        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
 
         this.add(etiqueta1);
         this.add(nHab);
@@ -56,7 +70,11 @@ public class PanelCrearInmueble extends JPanel{
         this.add(etiqueta5);
         this.add(planta);
         this.add(casilla);
-        this.add(crear);
+        this.add(select);
         this.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e){
+
     }
 }

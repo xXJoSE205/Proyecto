@@ -52,4 +52,15 @@ public abstract class Opinion implements Serializable {
         return comentarios.add(comentario);
     }
 
+    /**
+     * Devuelve la lista de respuestas al comentario
+     * @return list, lista de comentarios
+     */
+    public List<Comentario> getComentarios(){
+        return comentarios;
+    }
+
+    public String getNombre(){
+        return autor.getNombre();
+    }
 }

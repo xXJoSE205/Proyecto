@@ -19,18 +19,19 @@ public class PanelBusqueda extends JPanel implements ActionListener {
     private final JTextField direccion = new JTextField("", 50);
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private ButtonGroup grupo = new ButtonGroup();
+    private JButton buscar = new JButton("Buscar");
+    private JButton volver = new JButton("Volver");
 
 
     private JPanel select = new JPanel(new GridLayout(1, 2));
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
 
-    PanelBusqueda(GuiSimple gui){
+    PanelBusqueda(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        JButton buscar = new JButton("Buscar");
-        JButton volver = new JButton("Volver");
+
         grupo.add(buscar);
         grupo.add(volver);
         select.add(buscar);
@@ -94,18 +95,21 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         String option4 = "";
         String option5 = "";
         String option6 = "";
-
-        option1 = numero.getText();
-        option2 = numeroBan.getText();
-        option3 = dim.getText();
-        option4 = planta.getText();
-        option5 = direccion.getText();
-        if(casilla1.isSelected()){
-            option6 = "true";
-        } else {
-            option6 = "false";
+        if(evento.getSource()==buscar) {
+            option1 = numero.getText();
+            option2 = numeroBan.getText();
+            option3 = dim.getText();
+            option4 = planta.getText();
+            option5 = direccion.getText();
+            if (casilla1.isSelected()) {
+                option6 = "true";
+            } else {
+                option6 = "false";
+            }
+            gui.getControlador().buscar(option1, option2, option3, option4, option5, option6);
+        } else if(evento.getSource()==volver){
+            gui.getControlador().volverDemandante();
         }
-        gui.getControlador().buscar(option1,option2,option3,option4,option5,option6);
     }
 
     public void setError(String error) {

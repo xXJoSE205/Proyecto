@@ -1,36 +1,64 @@
 package p3.mvc.interfaz;
 
+import p3.mvc.modelo.Comentario;
+import p3.mvc.modelo.Opinion;
+
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelComentario extends JPanel {
-    PanelComentario(int y) {
+public class PanelComentario extends JPanel implements ActionListener {
+    private JLabel etiqueta1 = new JLabel("Autor: ");
+    private final JTextField nombre;
+
+    private JLabel etiqueta2 = new JLabel("Comentario: ");
+    private final JTextArea comentario ;
+
+    private JLabel etiqueta3 = new JLabel("Valorar: ");
+    private String[] numeros = {"Val","0","1","2","3","4","5"};
+    private JComboBox lista = new JComboBox(numeros);
+
+    private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
+    private DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
+    private JTree arbol = new JTree (modeloDatos);
+
+    private JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    private JButton boton1 = new JButton("Valorar");
+    private JButton boton2 = new JButton("Atras");
+    private JButton boton3 = new JButton("Añadir Comentario");
+    private JPanel select = new JPanel(new GridLayout(1, 3));
+    private ButtonGroup grupo = new ButtonGroup();
+    private GuiInmobiliaria gui;
+    private Comentario com;
+
+    PanelComentario(GuiInmobiliaria gui, Comentario com) {
+        this.com=com;
+        this.gui=gui;
         SpringLayout layout = new SpringLayout();
+        nombre = new JTextField(com.getAutor().getNombre()+" "+com.getAutor().getApellidos(), 20);
+        comentario = new JTextArea(com.getTexto(),5, 20);
         this.setLayout(layout);
-
-        JLabel etiqueta1 = new JLabel("Autor: ");
-        final JTextField nombre = new JTextField(" ", 20);
+        arbol.setVisibleRowCount(10);
+        scroll.add(arbol);
+        scroll.setViewportView(arbol);
+        scroll.setPreferredSize(new Dimension(400,300));
+        grupo.add(boton1);
+        grupo.add(boton2);
+        grupo.add(boton3);
+        select.add(boton1);
+        select.add(boton2);
+        select.add(boton3);
         nombre.setEditable(false);
-        JLabel etiqueta2 = new JLabel("Comentario: ");
-        final JTextArea comentario = new JTextArea(5, 20);
         comentario.setEditable(false);
-        JLabel etiqueta3 = new JLabel("Valorar: ");
-        String[] numeros = {"Val","0","1","2","3","4","5"};
-        JComboBox lista = new JComboBox(numeros);
         lista.setSelectedIndex(0);
-        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
-        DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
-        JTree arbol = new JTree (modeloDatos);
+        int i=0;
+        for(Comentario comentario1 :com.getComentarios()){
 
-        JScrollPane scroll = new JScrollPane(arbol);
-        JButton boton1 = new JButton("Valorar");
-        JButton boton2 = new JButton("Atras");
-        JButton boton3 = new JButton("Añadir Comentario");
-
-        for(int i=0;i<y;i++){
-            int x=i+1;
-            modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Comentario" + x), raiz, i);
+            modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:"+comentario1.getAutor().getNombre()+", "+comentario1.getTexto() ), raiz, i);
+            i++;
         }
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -47,12 +75,8 @@ public class PanelComentario extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, lista, 30, SpringLayout.SOUTH, comentario);
         layout.putConstraint(SpringLayout.WEST, scroll, 0, SpringLayout.WEST, lista);
         layout.putConstraint(SpringLayout.NORTH, scroll, 5, SpringLayout.SOUTH, lista);
-        layout.putConstraint(SpringLayout.WEST, boton2, 0, SpringLayout.WEST, scroll);
-        layout.putConstraint(SpringLayout.NORTH, boton2, 30, SpringLayout.SOUTH, scroll);
-        layout.putConstraint(SpringLayout.WEST, boton1, 100, SpringLayout.WEST, boton2);
-        layout.putConstraint(SpringLayout.NORTH, boton1, 30, SpringLayout.SOUTH, scroll);
-        layout.putConstraint(SpringLayout.WEST, boton3, 100, SpringLayout.WEST, boton1);
-        layout.putConstraint(SpringLayout.NORTH, boton3, 30, SpringLayout.SOUTH, scroll);
+        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scroll);
+        layout.putConstraint(SpringLayout.NORTH, select, 30, SpringLayout.SOUTH, scroll);
 
         this.setPreferredSize(new Dimension(200, 100));
         this.add(etiqueta1);
@@ -62,8 +86,18 @@ public class PanelComentario extends JPanel {
         this.add(etiqueta3);
         this.add(lista);
         this.add(scroll);
-        this.add(boton1);
-        this.add(boton2);
-        this.add(boton3);
+        this.add(select);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==boton1){
+            int x= Integer.parseInt((String)lista.getSelectedItem());
+            gui.getControlador().valorar(x);
+        } else if(e.getSource()==boton2){
+            gui.getControlador().volverOferta();
+        } else if(e.getSource()==boton3){
+            gui.getControlador().anadirComentario(com);
+        }
+
     }
 }

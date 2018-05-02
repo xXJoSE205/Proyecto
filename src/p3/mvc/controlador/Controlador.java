@@ -55,27 +55,27 @@ public class Controlador {
     }
 
     public void buscar (String nHab, String nBan, String dim, String planta, String ascensor, String dir){
-        if(nHab == null){
-            int nHab2 = -1;
-        } else {
-            int nHab2 = Integer.parseInt(nHab);
+        int nHab2=-1;
+        int nBan2=-1;
+        int dim2=-1;
+        int planta2=-1;
+        double precio2=-1;
+        if(nHab!=null){
+            nHab2=Integer.parseInt(nHab);
         }
-        if(nBan == null){
-            int nBan2 = -1;
-        } else {
-            int nBan2 = Integer.parseInt(nBan);
+        if(nBan!=null){
+            nBan2=Integer.parseInt(nBan);
         }
-        if(dim == null){
-            int dim2 = -1;
-        } else {
-            int dim2 = Integer.parseInt(dim);
+        if(dim!=null){
+            dim2=Integer.parseInt(dim);
         }
-        if(planta == null){
-            int planta2 = -1;
-        } else {
-            int planta2 = Integer.parseInt(planta);
+        if(planta!=null){
+            planta2=Integer.parseInt(planta);
         }
+        boolean ascensor2 = Boolean.parseBoolean(ascensor);
         List<Inmueble> lista;
+        lista=muzska.buscar(nHab2,nBan2,dim2,planta2,ascensor2,dir);
+
 
     }
     public void volverLogin() {
@@ -109,6 +109,78 @@ public class Controlador {
             }
             this.gui.logout(false);
         }
+    }
+
+    public void goBuscar(){
+        this.gui.goBuscar();
+    }
+
+    public void goAvanzada(){
+        this.gui.goAvanzada();
+    }
+
+    public void volverDemandante(){
+        this.gui.volverDemandante();
+    }
+
+    public void cancelarReserva(){
+        for(Cliente c: this.muzska.getUsuarios()){
+            if(c.isLogeado()){
+                ((Demandante)c).quitarReserva();
+                this.gui.volverDemandante();
+            }
+        }
+    }
+
+    public void avanzada(String nHab, String nBan, String dim, String planta, String ascensor, String dir, String precio, String vacacional){
+        int nHab2=-1;
+        int nBan2=-1;
+        int dim2=-1;
+        int planta2=-1;
+        double precio2=-1;
+        if(nHab!=null){
+            nHab2=Integer.parseInt(nHab);
+        }
+        if(nBan!=null){
+            nBan2=Integer.parseInt(nBan);
+        }
+        if(dim!=null){
+            dim2=Integer.parseInt(dim);
+        }
+        if(planta!=null){
+            planta2=Integer.parseInt(planta);
+        }
+        if(precio!=null){
+            precio2=Double.parseDouble(precio);
+        }
+        boolean ascensor2 = Boolean.parseBoolean(ascensor);
+        boolean vacacional2 = Boolean.parseBoolean(vacacional);
+        List<Oferta> lista;
+        Demandante demandante = null;
+        for(UsuarioRegistrado usuario : muzska.getUsuarios()){
+            if(usuario.isLogeado()){
+                demandante = (Demandante)usuario;
+                break;
+            }
+        }
+        lista=muzska.avanzada(nHab2,nBan2, dim2,planta2,ascensor2,dir,precio2,vacacional2,demandante);
+        //this.gui.goAvanzadaResultado(lista);
+
+    }
+    public void alquilar(List<Oferta> lista){
+
+    }
+
+    public void valorar(int x){
+
+    }
+
+    public void volverOferta(){
+        this.gui.volverOferta();
+    }
+
+    public void anadirComentario(Comentario comentario){
+        //this.gui.goAnadirComentario(comentario);
     }
 
     public void quitarLogin(){

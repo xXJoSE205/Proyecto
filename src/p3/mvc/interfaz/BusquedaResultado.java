@@ -1,6 +1,6 @@
 package p3.mvc.interfaz;
 
-import p3.src.Inmueble;
+import p3.mvc.modelo.Inmueble;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,12 +13,14 @@ public class BusquedaResultado extends JPanel implements ActionListener {
     private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
     private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
     private Object filas [][] = {};
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
     private JPanel select = new JPanel(new GridLayout(1, 2));
     private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos);
+    private JButton volver = new JButton("Volver");
+    private JButton alquilar = new JButton("Alquilar");
 
-    BusquedaResultado(GuiSimple gui, List<Inmueble> lista){
+    BusquedaResultado(GuiInmobiliaria gui, List<Inmueble> lista){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -29,9 +31,10 @@ public class BusquedaResultado extends JPanel implements ActionListener {
             modeloDatos.addRow(nuevaFila);
         }
 
-        JButton volver = new JButton("Volver");
         grupo.add(volver);
+        grupo.add(alquilar);
         select.add(volver);
+        select.add(alquilar);
         select.setVisible(true);
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -49,7 +52,9 @@ public class BusquedaResultado extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento) {
-
+        if(evento.getSource()==volver){
+            gui.getControlador().volverDemandante();
+        }
     }
 
 }

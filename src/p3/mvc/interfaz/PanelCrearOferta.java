@@ -1,22 +1,35 @@
 package p3.mvc.interfaz;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PanelCrearOferta extends JPanel{
-    PanelCrearOferta(){
+public class PanelCrearOferta extends JPanel implements ActionListener{
+    private JLabel etiqueta1 = new JLabel("Precio: ");
+    private final JTextField precio = new JTextField(10);
+    private JLabel etiqueta2 = new JLabel("Fecha inicio: ");
+    private final JTextField fIni = new JTextField(10);
+    private JLabel etiqueta3 = new JLabel("Fecha final: ");
+    private final JTextField fFin = new JTextField(10);
+    private JLabel etiqueta4 = new JLabel("Fianza: ");
+    private final JTextField fianza = new JTextField(10);
+    private JCheckBox casilla = new JCheckBox("Vacacional");
+    private JButton crear = new JButton("Crear oferta");
+    private JButton volver = new JButton("Cancelar");
+    private JPanel select = new JPanel(new GridLayout(1, 3));
+    private ButtonGroup grupo = new ButtonGroup();
+    private GuiInmobiliaria gui;
+
+    PanelCrearOferta(GuiInmobiliaria gui){
+        this.gui=gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        select.add(crear);
+        select.add(volver);
+        grupo.add(volver);
+        grupo.add(crear);
 
-        JLabel etiqueta1 = new JLabel("Precio: ");
-        final JTextField precio = new JTextField(10);
-        JLabel etiqueta2 = new JLabel("Fecha inicio: ");
-        final JTextField fIni = new JTextField(10);
-        JLabel etiqueta3 = new JLabel("Fecha final: ");
-        final JTextField fFin = new JTextField(10);
-        JLabel etiqueta4 = new JLabel("Fianza: ");
-        final JTextField fianza = new JTextField(10);
-        JCheckBox casilla = new JCheckBox("Vacacional");
-        final JButton crear = new JButton("Crear oferta");
 
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
@@ -36,8 +49,8 @@ public class PanelCrearOferta extends JPanel{
         layout.putConstraint(SpringLayout.NORTH, fianza, 5, SpringLayout.SOUTH, fFin);
         layout.putConstraint(SpringLayout.WEST, casilla, 0, SpringLayout.WEST, fianza);
         layout.putConstraint(SpringLayout.NORTH, casilla, 8, SpringLayout.SOUTH, etiqueta4);
-        layout.putConstraint(SpringLayout.NORTH, crear, 10, SpringLayout.SOUTH, casilla);
-        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, casilla);
+        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
+        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
 
 
         this.add(etiqueta1);
@@ -49,7 +62,11 @@ public class PanelCrearOferta extends JPanel{
         this.add(etiqueta4);
         this.add(fianza);
         this.add(casilla);
-        this.add(crear);
+        this.add(select);
         this.setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

@@ -1,10 +1,7 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.controlador.Controlador;
-import p3.mvc.modelo.Cliente;
-import p3.mvc.modelo.Demandante;
-import p3.mvc.modelo.Ofertante;
-import p3.mvc.modelo.Sistema;
+import p3.mvc.modelo.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -29,6 +26,12 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private Controlador controlador;
     private Container contenedor;
     private PanelDemandante panelDemandante;
+    private PanelCReserva panelCReserva;
+    private BusquedaResultado busquedaResultado;
+
+    private Comentario comentario;
+
+
 
     public GuiInmobiliaria(String titulo) {
         super(titulo);
@@ -41,10 +44,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelPrincipal = new PanelPrincipal(this);
         panelLogin = new PanelLogin(this);
         panelBusqueda = new PanelBusqueda(this);
-        panelBAvanzada = new PanelBusquedaAvanzada();
-        panelCOferta = new PanelCrearOferta();
-        panelCInmueble = new PanelCrearInmueble();
-        panelComentario = new PanelComentario(3);
+        panelBAvanzada = new PanelBusquedaAvanzada(this);
+        panelCOferta = new PanelCrearOferta(this);
+        panelCInmueble = new PanelCrearInmueble(this);
+        //panelComentario = new PanelComentario(this,comentario);
         panelDemandante = new PanelDemandante(this,"Jorge");
 
         // anadir componentes al contenedor
@@ -177,13 +180,29 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }*/
     }
 
-    public void busquedaResult(List<Inmueble> resultado){
-        if(resultado!=null){
+    public void busquedaResult(){
 
-        }
     }
 
     public void goBuscar(){
+        panelDemandante.setVisible(false);
+        panelBusqueda.setVisible(true);
+    }
+
+    public void goAvanzada(){
+        panelDemandante.setVisible(false);
+        panelBAvanzada.setVisible(true);
+    }
+
+    public void volverDemandante(){
+        panelCReserva.setVisible(false);
+        panelDemandante.setVisible(true);
+    }
+
+    public void goBusquedaResultado(List lista){
+        panelBusqueda.setVisible(false);
+        busquedaResultado = new BusquedaResultado(this, (java.util.List<Inmueble>) lista);
+        busquedaResultado.setVisible(true);
 
     }
 
@@ -201,6 +220,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void goBusqueda() {
         panelPrincipal.setVisible(false);
         panelBusqueda.setVisible(true);
+    }
+
+    public void volverOferta(){
+        panelComentario.setVisible(false);
+        //panelAvanzada.setVisibel(true);
     }
 }
 

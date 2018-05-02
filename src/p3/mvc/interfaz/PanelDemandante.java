@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class PanelDemandante extends JPanel implements ActionListener {
     private JLabel etiqueta1 = new JLabel("DEMANDANTE");
     private JLabel etiqueta2;
-    private GuiSimple gui;
+    private GuiInmobiliaria gui;
     private JPanel select = new JPanel(new GridLayout(4, 1));
     private ButtonGroup grupo = new ButtonGroup();
 
@@ -17,7 +17,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
     JButton avanzada = new JButton("Busqueda Avanzada");
     JButton reservas = new JButton("Comprobar Reserva");
 
-    PanelDemandante(GuiSimple gui, String nombre){
+    PanelDemandante(GuiInmobiliaria gui, String nombre){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -52,7 +52,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
         } else if(evento.getSource()==avanzada){
             gui.getControlador().goAvanzada();
         } else if(evento.getSource()==reservas){
-            gui.getControlador().goComprobarReserva();
+            //gui.getControlador().goComprobarReserva();
         }
     }
 }

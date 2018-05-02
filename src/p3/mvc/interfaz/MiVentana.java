@@ -1,10 +1,10 @@
 package p3.mvc.interfaz;
 
-import p3.src.Inmueble;
-import p3.src.Ofertante;
+import p3.mvc.modelo.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,16 +15,24 @@ public class MiVentana extends JFrame  {
         Container contenedor = this.getContentPane();
         contenedor.setLayout(new BorderLayout());
 
+        Demandante demandante = new Demandante("Tony","Stark","12345678Q","Contrasena",
+                "0123456789012345" );
+        Comentario comentario = new Comentario(demandante, "prueba");
+        Comentario comentario2 = new Comentario(demandante, "Hola");
+        comentario.anadirComentario(comentario2);
         Image icon = new ImageIcon("definitivo3.png").getImage();
         setIconImage(icon);
 
         List<Inmueble> lista = new ArrayList<>();
-        Ofertante ofertante = new Ofertante("Tony", "Stark", "12345678P", "IronMan",
-                "0123456789012345");
-        Inmueble inmueble = new Inmueble(5,2,150,"C/ del diamante 5",5,
-                true, ofertante);
+        Ofertante ofertante = new Ofertante("Vic","Rattlehead","66666666D","PeaceSells",
+                "6666999966669999");
+        Inmueble inmueble = new Inmueble(3,1,80,"Paseo Castellana",2,
+                false,ofertante);
+        Oferta oferta = new Oferta(1200, LocalDate.now(),LocalDate.now().plusMonths(4),false,
+                200,inmueble);
+        Reserva reserva = new Reserva(demandante, oferta);
         lista.add(inmueble);
-        JPanel panel = new PanelDemandante(new GuiSimple("Muzska"),"Jorge");
+        JPanel panel = new PanelCrearOferta(new GuiInmobiliaria("Muzska"));
 
         contenedor.add(panel, BorderLayout.CENTER);
 
