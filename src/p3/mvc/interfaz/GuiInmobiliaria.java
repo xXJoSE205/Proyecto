@@ -1,6 +1,9 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.controlador.Controlador;
+import p3.mvc.modelo.Cliente;
+import p3.mvc.modelo.Demandante;
+import p3.mvc.modelo.Ofertante;
 import p3.mvc.modelo.Sistema;
 
 import javax.swing.*;
@@ -22,14 +25,16 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCrearOferta panelCOferta;
     private PanelCrearInmueble panelCInmueble;
     private PanelComentario panelComentario;
+
     private Controlador controlador;
+    private Container contenedor;
     private PanelDemandante panelDemandante;
 
     public GuiInmobiliaria(String titulo) {
         super(titulo);
 
         // obtener contenedor, asignar layout
-        Container contenedor = this.getContentPane(); // antes: ventana.getContentPane();
+        contenedor = this.getContentPane(); // antes: ventana.getContentPane();
         contenedor.setLayout(new FlowLayout());
 
         // crear componentes
@@ -42,7 +47,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelComentario = new PanelComentario(3);
         panelDemandante = new PanelDemandante(this,"Jorge");
 
-        // a�adir componentes al contenedor
+        // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
         contenedor.add(panelLogin);
         /*contenedor.add(panelBusqueda);
@@ -63,15 +68,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelComentario.setVisible(false);*/
         panelDemandante.setVisible(false);
 
-        // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTA�A
+        // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTANA
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
 
-        // Para realizar acciones al cambiar de pesta�as
+        // Para realizar acciones al cambiar de pestanas
 
         // mostrar this, en otros ejemplos era ventana, ahora this
-        this.pack();
+        //this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(500,400); // remove and uncomment this.pack above
+        this.setSize(800,600); // remove and uncomment this.pack above
         this.setVisible(true);
         this.setResizable(true);
 
@@ -136,6 +141,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void loginResult(boolean loginOK) {
         if (loginOK) {
             panelLogin.setVisible(false);
+            panelPrincipal.setVisible(true);
             //
         }else {
             this.panelLogin.setError("Datos incorrecto o tipo no elegido");
@@ -153,10 +159,16 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void logout(boolean logoutOK) {
-        if(logoutOK){
-            /*panelDemandante.setVisible(false);
-            panelOfertante.setVisible(false);
-            panelGerente.setVisible(false);*/
+        if(logoutOK) {
+            /*if(usr instance of Demandante){
+                panelDemandante.setVisible(false);
+                this.getControlador().quitarLogin();
+            }else if(usr instance of Ofertante){
+                panelOfertante.setVisible(false);
+                this.getControlador().quitarLogin();
+            }else{
+                panelGerente.setVisible(false);
+            }*/
             panelPrincipal.setVisible(true);
         }/*else{
             this.panelDemandante.setError("Error al cerrar sesion");
@@ -173,6 +185,22 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goBuscar(){
 
+    }
+
+    public void volverBusqueda(Cliente usr) {
+        panelBusqueda.setVisible(false);
+        if(usr==null){
+            panelPrincipal.setVisible(true);
+        }/*}else if(usr instanceof Demandante){
+            panelDemandante.setVisible(true);
+        }else if(usr instanceof Ofertante){
+            panelOfertante.setVisible(true);
+        }*/
+    }
+
+    public void goBusqueda() {
+        panelPrincipal.setVisible(false);
+        panelBusqueda.setVisible(true);
     }
 }
 

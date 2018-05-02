@@ -8,6 +8,7 @@ import java.util.List;
 public class Controlador {
     private GuiInmobiliaria gui;
     private Sistema muzska;
+    private Cliente usr;
 
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
@@ -15,7 +16,6 @@ public class Controlador {
     }
 
     public void login(String nif, String passwd, String option) {
-        Cliente usr;
         if(nif==null || passwd==null || option==null){
             this.gui.loginResult(false);
         }
@@ -26,7 +26,7 @@ public class Controlador {
                 for (Cliente d : clientes) {
                     if (d.getNif().equals(nif)) {
                         if (d instanceof Demandante) {
-                            usr = d;
+                            this.usr = d;
                             this.gui.loginResult(muzska.login(usr, nif, passwd));
                         }
                     }
@@ -38,7 +38,7 @@ public class Controlador {
                 for (Cliente d : clientes) {
                     if (d.getNif().equals(nif)) {
                         if (d instanceof Ofertante) {
-                            usr = d;
+                            this.usr = d;
                             this.gui.loginResult(muzska.login(usr, nif, passwd));
                         }
                     }
@@ -86,6 +86,14 @@ public class Controlador {
         this.gui.goLogin();
     }
 
+    public void volverBusqueda() {
+        this.gui.volverBusqueda(usr);
+    }
+
+    public void goBusqueda() {
+        this.gui.goBusqueda();
+    }
+
     public void saveData() {
         this.gui.guardarDatos(this.muzska);
     }
@@ -101,5 +109,9 @@ public class Controlador {
             }
             this.gui.logout(false);
         }
+    }
+
+    public void quitarLogin(){
+        this.usr = null;
     }
 }

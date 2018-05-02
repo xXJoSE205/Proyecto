@@ -1,7 +1,8 @@
-package p3.mvc.modelo;
+package p3.mvc;
 
 import p3.mvc.controlador.Controlador;
 import p3.mvc.interfaz.GuiInmobiliaria;
+import p3.mvc.modelo.*;
 
 import java.io.*;
 
@@ -9,9 +10,7 @@ public class Muzska {
 
     public static void main(String[] args){
         GuiInmobiliaria gui = new GuiInmobiliaria("Muzska");
-        Sistema muzska/* = new Sistema()*/;
-        //Controlador  controlador = new Controlador(gui, muzska);
-        //gui.setControlador( controlador );
+        Sistema muzska;
 
         try {
             if (args.length == 1 && args[0].equals("clientes.txt")) {
@@ -23,6 +22,7 @@ public class Muzska {
                 FileInputStream fileIn = new FileInputStream("muzska.ser");
                 ObjectInputStream in = new ObjectInputStream(fileIn);
                 muzska = (Sistema) in.readObject();
+                System.out.println("Datos cargados");
                 in.close();
                 fileIn.close();
             } else {
@@ -30,8 +30,6 @@ public class Muzska {
                 System.out.println("Fichero de entrada distinto a \"clientes.txt\"");
                 return;
             }
-            Controlador controlador = new Controlador(gui, muzska);
-            gui.setControlador(controlador);
         } catch (IOException ioe) {
             ioe.printStackTrace();
             return;
@@ -40,7 +38,8 @@ public class Muzska {
             c.printStackTrace();
             return;
         }
-        //guardarDatos(muzska);
+        Controlador controlador = new Controlador(gui, muzska);
+        gui.setControlador(controlador);
     }
 
     /**
@@ -96,5 +95,6 @@ public class Muzska {
                 System.out.println(iae.getMessage() + ", Usuario no anadido");
             }
         }
+        buffer.close();
     }
 }
