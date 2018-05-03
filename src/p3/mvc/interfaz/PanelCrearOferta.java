@@ -89,8 +89,5 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         }
     }
 
-    public void creadaOK(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
     }
 }

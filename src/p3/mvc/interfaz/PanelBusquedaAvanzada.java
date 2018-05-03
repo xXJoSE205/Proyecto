@@ -3,9 +3,10 @@ package p3.mvc.interfaz;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class PanelBusquedaAvanzada extends JPanel {
+public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
 
     private JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
     private final JTextField numero = new JTextField("", 2);
@@ -86,6 +87,9 @@ public class PanelBusquedaAvanzada extends JPanel {
         this.add(etiqueta6);
         this.add(precio);
         this.setVisible(true);
+        buscar.addActionListener(this);
+        volver.addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent evento) {

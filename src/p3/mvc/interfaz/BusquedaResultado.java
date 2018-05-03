@@ -51,6 +51,7 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         this.add(select);
         this.add(scrollPane);
         this.setVisible(true);
+        volver.addActionListener(this);
 
         volver.addActionListener(this);
     }
