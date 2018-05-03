@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class PanelCrearOferta extends JPanel implements ActionListener{
     private JLabel etiqueta1 = new JLabel("Precio: ");
@@ -68,6 +69,9 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         this.add(select);
         this.add(texto);
         this.setVisible(true);
+
+        volver.addActionListener(this);
+        crear.addActionListener(this);
     }
 
     public void setInmueble(Inmueble inmueble){
@@ -75,6 +79,18 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
+        texto.setVisible(false);
+        if(e.getSource()==volver){
+            gui.getControlador().volverVerInmuebles();
+        }else if(e.getSource()==crear){
+            gui.getControlador().crearOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
+                    , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
+                    , inmueble);
+        }
+    }
 
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
     }
 }

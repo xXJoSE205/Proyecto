@@ -407,19 +407,4 @@ public class Sistema implements Serializable {
         }
         return false;
     }
-
-    public List<Oferta> getOfertas(){
-        List<Oferta> aux= new ArrayList<>();
-        for(Inmueble i: inmuebles){
-            for(Oferta o : i.getOfertas()){
-                aux.add(o);
-            }
-        }
-        return aux;
-    }
-
-    public boolean anadirOferta(Oferta o){
-        return o.getInmueble().anadirOferta(o);
-
-    }
 }

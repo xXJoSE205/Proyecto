@@ -209,11 +209,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelBusqueda.setVisible(false);
         if(usr==null){
             panelPrincipal.setVisible(true);
-        }/*}else if(usr instanceof Demandante){
+        }else if(usr instanceof Demandante){
             panelDemandante.setVisible(true);
         }else if(usr instanceof Ofertante){
             panelOfertante.setVisible(true);
-        }*/
+        }
     }
 
     public void goBusqueda() {
@@ -231,8 +231,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCInmueble.setVisible(true);
     }
 
-    public void goCrearOferta() {
+    public void goCrearOferta(Inmueble inmueble) {
         panelVerInmuebles.setVisible(false);
+        panelCOferta.setInmueble(inmueble);
         panelCOferta.setVisible(true);
     }
 
@@ -254,6 +255,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void goVerInmuebles() {
         panelOfertante.setVisible(false);
         panelVerInmuebles.setVisible(true);
+    }
+
+    public void creadaOK(String texto) {
+        this.panelCOferta.creadaOK(texto);
     }
 }
 

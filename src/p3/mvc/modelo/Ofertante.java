@@ -1,6 +1,8 @@
 package p3.mvc.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Esta clase contiene la informacion de una Ofertante
@@ -12,6 +14,8 @@ public class Ofertante extends Cliente implements Serializable {
     private double cargo = 0;
     /** Cadena con las modificaciones propuestas*/
     private String modificaciones = null;
+    /** Lista de inmuebles del ofertante*/
+    private List<Inmueble> inmuebles;
 
     /**
      * Constructor de Ofertante, se llama al constructor de Cliente
@@ -25,6 +29,7 @@ public class Ofertante extends Cliente implements Serializable {
     public Ofertante(String nombre, String apellidos, String nif, String password, String tarjeta)
             throws NullPointerException{
         super(nombre, apellidos, nif, password, tarjeta);
+        this.inmuebles = new ArrayList<>();
     }
 
     /**
@@ -52,6 +57,15 @@ public class Ofertante extends Cliente implements Serializable {
      */
     public String getModificaciones() {
         return modificaciones;
+    }
+
+    /**
+     * Devuelve los inmuebles del ofertante
+     *
+     * @return Lista con los inmuebles del ofertante
+     */
+    public List<Inmueble> getInmuebles() {
+        return inmuebles;
     }
 
     /**
@@ -87,5 +101,15 @@ public class Ofertante extends Cliente implements Serializable {
     @Override
     public String toString() {
         return super.toString()+"\n\tCargo: "+cargo+"\n\t¿Modificaciones?: "+modificaciones;
+    }
+
+    /**
+     * Anade un inmueble a la lista del ofertante
+     *
+     * @param inmueble Inmueble a anadir
+     * @return boolean, true si se anade correctamente, false en caso contrario
+     */
+    public boolean anadirInmueble(Inmueble inmueble) {
+        return inmuebles.add(inmueble);
     }
 }

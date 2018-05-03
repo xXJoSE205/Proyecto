@@ -56,6 +56,7 @@ public class Inmueble implements Serializable {
         this.ascensor = ascensor;
         this.dueno = dueno;
         this.ofertas = new ArrayList<>();
+        this.dueno.anadirInmueble(this);
     }
 
     /**

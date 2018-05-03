@@ -52,6 +52,7 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         this.add(scrollPane);
         this.setVisible(true);
 
+        volver.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {

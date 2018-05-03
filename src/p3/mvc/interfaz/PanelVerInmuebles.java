@@ -6,6 +6,7 @@ import p3.mvc.modelo.Ofertante;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,17 +23,19 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         }
     };
     private JButton volver = new JButton("Volver");
+    private JButton crear = new JButton("Crear Oferta");
     private List<Inmueble> lista;
+    private JTable tabla = new JTable(modeloDatos);
 
-    PnaelVerInmuebles(GuiInmobiliaria gui){
+    public PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
-        this.lista = ((Ofertante)gui.getControlador().getCliente()).get;
+        this.lista = ((Ofertante)gui.getControlador().getCliente()).getInmuebles();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Inmueble i:lista){
-            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(),i.getPlanta()};
+            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(), i.getPlanta()};
             modeloDatos.addRow(nuevaFila);
         }
 
@@ -49,6 +52,7 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
 
         this.add(etiqueta1);
         this.add(select);
+        this.add(tabla);
         this.add(scrollPane);
         this.setVisible(true);
 
@@ -58,6 +62,8 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             gui.getControlador().volverOfertante();
+        }else if(e.getSource()==crear){
+            gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
         }
     }
 }

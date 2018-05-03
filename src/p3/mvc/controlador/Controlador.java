@@ -3,6 +3,7 @@ package p3.mvc.controlador;
 import p3.mvc.interfaz.GuiInmobiliaria;
 import p3.mvc.modelo.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Controlador {
@@ -202,8 +203,8 @@ public class Controlador {
         this.gui.goCrearInmueble();
     }
 
-    public void goCrearOferta() {
-        this.gui.goCrearOferta();
+    public void goCrearOferta(Inmueble inmueble) {
+        this.gui.goCrearOferta(inmueble);
     }
 
     public void volverOfertante(){
@@ -240,5 +241,26 @@ public class Controlador {
 
     public void goComentario(Oferta oferta){
         this.oferta=oferta;
+    }
+
+    public void crearOferta(double precio, LocalDate fIni, LocalDate fFin, boolean vacacional
+            , double fianza, Inmueble inmueble) {
+        String texto;
+        try {
+            if (usr instanceof Ofertante) {
+                Oferta oferta = new Oferta(precio, fIni, fFin, vacacional, fianza, inmueble);
+                if(inmueble.anadirOferta(oferta)){
+                    texto = "La oferta se ha creado correctamente";
+                    this.gui.creadaOK(texto);
+                }else{
+                    texto = "Error al añadir la oferta";
+                    this.gui.creadaOK(texto);
+                }
+
+            }
+        }catch(Exception e){
+            texto = e.getMessage();
+            this.gui.creadaOK(texto);
+        }
     }
 }
