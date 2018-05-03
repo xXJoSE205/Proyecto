@@ -26,13 +26,14 @@ public class BusquedaResultado extends JPanel implements ActionListener {
 
     BusquedaResultado(GuiInmobiliaria gui){
         this.gui = gui;
+
         this.lista= gui.getControlador().getBusqueda();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Inmueble i:lista){
-            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(),i.getPlanta()};
+            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(), i.getPlanta()};
             modeloDatos.addRow(nuevaFila);
         }
 
@@ -51,8 +52,6 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         this.add(select);
         this.add(scrollPane);
         this.setVisible(true);
-        volver.addActionListener(this);
-
         volver.addActionListener(this);
     }
 

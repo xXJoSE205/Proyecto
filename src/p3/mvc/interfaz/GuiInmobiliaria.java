@@ -26,6 +26,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCReserva panelCReserva;
     private PanelOfertante panelOfertante;
     private PanelVerInmuebles panelVerInmuebles;
+    private PanelGerente panelGerente;
+    private PanelComprobarOfertas panelComprobarOfertas;
+    private PanelDesbloquearUsuario panelDesbloquearUsuario;
+    private PanelUsuariosBloqueados panelUsuariosBloqueados;
 
     private Controlador controlador;
     private Container contenedor;
@@ -49,6 +53,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCInmueble = new PanelCrearInmueble(this);
         //panelComentario = new PanelComentario(this,comentario);
         panelDemandante = new PanelDemandante(this);
+        panelComprobarOfertas = new PanelComprobarOfertas(this);
+        panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
+        panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
 
         // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
@@ -59,6 +66,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         contenedor.add(panelCInmueble);
         contenedor.add(panelComentario);*/
         contenedor.add(panelDemandante);
+        contenedor.add(panelComprobarOfertas);
+        contenedor.add(panelUsuariosBloqueados);
+        contenedor.add(panelDesbloquearUsuario);
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
@@ -69,6 +79,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCInmueble.setVisible(false);
         panelComentario.setVisible(false);*/
         panelDemandante.setVisible(false);
+        panelComprobarOfertas.setVisible(false);
+        panelUsuariosBloqueados.setVisible(false);
+        panelDesbloquearUsuario.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTANA
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -249,7 +262,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void creadoOK(String texto) {
-        this.panelCInmueble.creadoOK(texto);
+        panelCInmueble.creadoOK(texto);
     }
 
     public void goVerInmuebles() {
@@ -258,7 +271,39 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void creadaOK(String texto) {
-        this.panelCOferta.creadaOK(texto);
+        panelCOferta.creadaOK(texto);
+    }
+
+    public void goDesbloquearUsuarios(Demandante demandante) {
+        panelGerente.setVisible(false);
+        panelDesbloquearUsuario.setVisible(true);
+    }
+
+    public void volverGerente(){
+        panelComprobarOfertas.setVisible(false);
+        panelUsuariosBloqueados.setVisible(false);
+        panelGerente.setVisible(true);
+    }
+
+    public void goComprobarOfertas() {
+        panelGerente.setVisible(false);
+        panelComprobarOfertas.setVisible(true);
+    }
+
+    public void aceptarOferta(Oferta oferta) {
+    }
+
+    public void rechazarOferta(Oferta oferta, String modificaciones) {
+    }
+
+    public void goUsuariosBloqueados() {
+        panelGerente.setVisible(false);
+        panelUsuariosBloqueados.setVisible(true);
+    }
+
+    public void volverUsuariosBloqueados() {
+        panelDesbloquearUsuario.setVisible(false);
+        panelUsuariosBloqueados.setVisible(true);
     }
 }
 

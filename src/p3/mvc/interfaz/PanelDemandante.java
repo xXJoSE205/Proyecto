@@ -69,6 +69,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
 
     public void setError(String error) {
         texto.setVisible(true);
+        texto.setText(error);
         texto.setForeground(java.awt.Color.red);
     }
 }

@@ -47,7 +47,7 @@ public class PanelGerente extends JPanel implements ActionListener {
 
         volver.addActionListener(this);
         desbloquear.addActionListener(this);
-        //comprobar.addActionListener(this);
+        comprobar.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
@@ -55,7 +55,7 @@ public class PanelGerente extends JPanel implements ActionListener {
         if( evento.getSource()==volver){
             gui.getControlador().logout();
         } else if(evento.getSource()==desbloquear){
-            gui.getControlador().goDesbloquearUsuarios();
+            gui.getControlador().goUsuariosBloqueados();
         } else if(evento.getSource()==comprobar){
             gui.getControlador().goComprobarOfertas();
         }

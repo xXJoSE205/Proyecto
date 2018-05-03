@@ -4,6 +4,7 @@ import p3.mvc.interfaz.GuiInmobiliaria;
 import p3.mvc.modelo.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controlador {
@@ -246,5 +247,57 @@ public class Controlador {
 
     public Sistema getSistema() {
         return muzska;
+    }
+
+    public void goDesbloquearUsuarios(Demandante demandante) {
+        this.gui.goDesbloquearUsuarios(demandante);
+    }
+
+    public void goComprobarOfertas() {
+        this.gui.goComprobarOfertas();
+    }
+
+    public List<Demandante> getUsuariosBloqueados() {
+        List<Demandante> usuarios = new ArrayList<>();
+
+        for(Cliente c: muzska.getUsuarios()){
+            if(c instanceof Demandante){
+                usuarios.add((Demandante)c);
+            }
+        }
+        return usuarios;
+    }
+
+    public void volverGerente() {
+        this.gui.volverGerente();
+    }
+
+    public List<Oferta> getOfertasPendientes() {
+        List<Oferta> ofertas = new ArrayList<>();
+
+        for(Inmueble i: muzska.getInmuebles()){
+            for(Oferta o: i.getOfertas()){
+                if(o.getEstado()==Estado.PENDIENTE){
+                    ofertas.add(o);
+                }
+            }
+        }
+        return ofertas;
+    }
+
+    public void aceptarOferta(Oferta oferta) {
+        this.gui.aceptarOferta(oferta);
+    }
+
+    public void rechazarOferta(Oferta oferta, String modificaciones) {
+        this.gui.rechazarOferta(oferta, modificaciones);
+    }
+
+    public void goUsuariosBloqueados() {
+        this.gui.goUsuariosBloqueados();
+    }
+
+    public void volverUsuariosBloqueados(){
+        this.gui.volverUsuariosBloqueados();
     }
 }
