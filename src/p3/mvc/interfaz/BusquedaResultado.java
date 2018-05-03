@@ -23,6 +23,7 @@ public class BusquedaResultado extends JPanel implements ActionListener {
     };
     private JButton volver = new JButton("Volver");
     private List<Inmueble> lista;
+    private JLabel texto = new JLabel("");
 
     BusquedaResultado(GuiInmobiliaria gui){
         this.gui = gui;
@@ -57,8 +58,14 @@ public class BusquedaResultado extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
-            gui.getControlador().volverDemandante();
+            gui.getControlador().volverBusqueda2();
         }
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 
 }

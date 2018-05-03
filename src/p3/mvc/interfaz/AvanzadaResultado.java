@@ -28,6 +28,7 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
     private JButton comentario2 = new JButton("Ver comentarios");
     private List<Oferta> lista;
     private JTable tabla = new JTable(modeloDatos);
+    private JLabel texto = new JLabel("");
 
     AvanzadaResultado(GuiInmobiliaria gui) {
         this.gui = gui;
@@ -73,14 +74,20 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
-            //gui.getControlador().volverAvanzada();
+            gui.getControlador().volverAvanzada();
         } else if(evento.getSource()==alquilar){
-            gui.getControlador().alquilar(lista.get(tabla.getSelectedRow()));
+            gui.getControlador().goAlquilar(lista.get(tabla.getSelectedRow()));
         } else if(evento.getSource()==comentario){
             gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
         }else if(evento.getSource()==comentario2){
             gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
         }
 
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

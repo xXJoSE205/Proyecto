@@ -18,6 +18,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private ButtonGroup grupo = new ButtonGroup();
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton volver = new JButton("Volver");
+    private JLabel texto = new JLabel("");
 
     private GuiInmobiliaria gui;
 
@@ -81,5 +82,11 @@ public class PanelLogin extends JPanel implements ActionListener{
     public void setError(String error) {
         pswd.setText(error);
         pswd.setForeground(java.awt.Color.red);
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

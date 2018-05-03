@@ -27,6 +27,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
     private JButton volver = new JButton("Volver");
     private JPanel select = new JPanel(new GridLayout(1, 2));
     private GuiInmobiliaria gui;
+    private JLabel texto = new JLabel("");
 
     PanelBusquedaAvanzada(GuiInmobiliaria gui) {
         this.gui = gui;
@@ -93,35 +94,30 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento) {
-        String option1 = "";
-        String option2 = "";
-        String option3 = "";
-        String option4 = "";
-        String option5 = "";
-        String option6 = "";
-        String option7 = "";
-        String option8 = "";
+        boolean ascensor;
+        boolean vacacional;
         if(evento.getSource()==buscar) {
-            option1 = numero.getText();
-            option2 = numeroBan.getText();
-            option3 = dim.getText();
-            option4 = planta.getText();
-            option5 = direccion.getText();
-            option7 = precio.getText();
-
             if (casilla1.isSelected()) {
-                option6 = "true";
+                 ascensor = true;
             } else {
-                option6 = "false";
+                 ascensor = false;
             }
             if (casilla2.isSelected()) {
-                option8="true";
+                 vacacional=true;
             } else {
-                option8 = "false";
+                 vacacional = false;
             }
-            gui.getControlador().avanzada(option1, option2, option3, option4, option5, option6, option7,option8);
+            gui.getControlador().avanzada(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText()),
+                    Integer.parseInt(dim.getText()), Integer.parseInt(planta.getText()),  ascensor, direccion.getText(),
+                    Integer.parseInt(precio.getText()),vacacional);
         } else if(evento.getSource()==volver){
             gui.getControlador().volverDemandante();
         }
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

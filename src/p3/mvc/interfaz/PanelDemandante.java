@@ -17,6 +17,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
     JButton buscar = new JButton("Busqueda");
     JButton avanzada = new JButton("Busqueda Avanzada");
     JButton reservas = new JButton("Comprobar Reserva");
+    private JLabel texto2 = new JLabel("");
 
     PanelDemandante(GuiInmobiliaria gui){
         this.gui = gui;
@@ -71,5 +72,11 @@ public class PanelDemandante extends JPanel implements ActionListener {
         texto.setVisible(true);
         texto.setText(error);
         texto.setForeground(java.awt.Color.red);
+    }
+
+    public void creadaOK(String texto) {
+        this.texto2.setText(texto);
+        this.texto2.setVisible(true);
+        this.texto2.setForeground(java.awt.Color.red);
     }
 }

@@ -25,6 +25,7 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
     private JLabel texto = new JLabel("");
     private Inmueble inmueble;
     private GuiInmobiliaria gui;
+    private JLabel texto = new JLabel("");
 
     PanelCrearOferta(GuiInmobiliaria gui) {
         this.gui = gui;

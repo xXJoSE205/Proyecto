@@ -30,6 +30,7 @@ public class PanelComentario extends JPanel implements ActionListener {
     private ButtonGroup grupo = new ButtonGroup();
     private GuiInmobiliaria gui;
     private List<Comentario> com;
+    private JLabel texto = new JLabel("");
 
     PanelComentario(GuiInmobiliaria gui) {
         this.gui=gui;
@@ -92,5 +93,11 @@ public class PanelComentario extends JPanel implements ActionListener {
             gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
         }
 
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

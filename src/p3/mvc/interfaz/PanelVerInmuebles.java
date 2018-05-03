@@ -26,6 +26,7 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
     private JButton crear = new JButton("Crear Oferta");
     private List<Inmueble> lista;
     private JTable tabla = new JTable(modeloDatos);
+    private JLabel texto = new JLabel("");
 
     public PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
@@ -65,5 +66,11 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         }else if(e.getSource()==crear){
             gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
         }
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

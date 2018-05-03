@@ -1,14 +1,14 @@
 package p3.mvc.interfaz;
 
-import p3.mvc.modelo.Oferta;
+import p3.mvc.modelo.Comentario;
+import p3.mvc.modelo.Demandante;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelCrearComentario extends JPanel implements ActionListener {
-
+public class PanelAnadirComentario extends JPanel implements ActionListener {
     private JLabel etiqueta1 = new JLabel("Texto: ");
     private final JTextArea texto = new JTextArea(20,100);
     private GuiInmobiliaria gui;
@@ -18,7 +18,7 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
     private JButton publicar = new JButton("Publicar");
     private JLabel texto2 = new JLabel("");
 
-    PanelCrearComentario(GuiInmobiliaria gui){
+    PanelAnadirComentario(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -47,9 +47,9 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
-            gui.getControlador().volverBAvanzada();
+            gui.getControlador().volverComentario();
         } else if(evento.getSource()==publicar){
-            gui.getControlador().anadirComentario(gui.getControlador().getOferta());
+            gui.getControlador().anadirComentario(new Comentario((Demandante)gui.getControlador().getCliente(),texto.getText()));
         }
     }
 

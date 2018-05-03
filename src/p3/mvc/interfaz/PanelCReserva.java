@@ -17,6 +17,7 @@ public class PanelCReserva extends JPanel implements ActionListener {
     JButton volver = new JButton("Volver");
     JButton cancelar = new JButton("Cancelar Reserva");
     private Reserva reserva;
+    private JLabel texto = new JLabel("");
 
     PanelCReserva(GuiInmobiliaria gui){
         this.gui = gui;
@@ -51,5 +52,11 @@ public class PanelCReserva extends JPanel implements ActionListener {
         } else if(evento.getSource()==cancelar){
             gui.getControlador().cancelarReserva();
         }
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

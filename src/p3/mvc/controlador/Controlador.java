@@ -14,6 +14,7 @@ public class Controlador {
     private List<Inmueble> busqueda;
     private List<Oferta> avanzada;
     private Oferta oferta;
+    private Comentario comentario;
 
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
@@ -60,6 +61,18 @@ public class Controlador {
     }
 
     public void buscar (int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        String texto;
+        try{
+            this.busqueda=muzska.buscar(nHab,nBan,dim,planta,ascensor,dir);
+            if(this.busqueda==null){
+                texto ="Error, no hay inmuebles que coincidan con las condiciones";
+                this.gui.errorBusqueda(texto);
+            }else {
+                this.gui.goBusquedaResultado();
+            }
+        } catch (Exception e){
+            this.gui.errorBusqueda(e.getMessage());
+        }
 
     }
 
@@ -74,6 +87,8 @@ public class Controlador {
     public void volverBusqueda() {
         this.gui.volverBusqueda(usr);
     }
+
+    public void volverBusqueda2(){this.gui.volverBusqueda();}
 
     public void goBusqueda() {
         this.gui.goBusqueda();
@@ -117,35 +132,37 @@ public class Controlador {
         }
     }
 
-    public void avanzada(String nHab, String nBan, String dim, String planta, String ascensor, String dir, String precio, String vacacional){
-        int nHab2=-1;
-        int nBan2=-1;
-        int dim2=-1;
-        int planta2=-1;
-        double precio2=-1;
-        if(nHab!=null){
-            nHab2=Integer.parseInt(nHab);
+    public void avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, int precio, boolean vacacional){
+        String texto;
+        try{
+            this.avanzada=muzska.avanzada(nHab,nBan, dim,planta,ascensor,dir,precio,vacacional,usr);
+            if(this.avanzada==null){
+                texto = "Error, no hay ofertas que coincidan con las condiciones";
+                this.gui.avanzadaError(texto);
+            } else {
+                this.gui.goRAvanzada();
+            }
+        }catch (Exception e){
+            this.gui.avanzadaError(e.getMessage());
         }
-        if(nBan!=null){
-            nBan2=Integer.parseInt(nBan);
-        }
-        if(dim!=null){
-            dim2=Integer.parseInt(dim);
-        }
-        if(planta!=null){
-            planta2=Integer.parseInt(planta);
-        }
-        if(precio!=null){
-            precio2=Double.parseDouble(precio);
-        }
-        boolean ascensor2 = Boolean.parseBoolean(ascensor);
-        boolean vacacional2 = Boolean.parseBoolean(vacacional);
-        List<Oferta> lista;
-        this.avanzada=muzska.avanzada(nHab2,nBan2, dim2,planta2,ascensor2,dir,precio2,vacacional2,usr);
-        //this.gui.goAvanzadaResultado(lista);
+
 
     }
     public void alquilar(Oferta oferta){
+        String texto;
+        try{
+            if(muzska.alquilar((Demandante)usr,oferta)){
+                texto = "Alquiler realizado correctamente";
+                this.gui.alquilerOK(texto);
+            } else{
+                texto = "Error al alquilar";
+                this.gui.alquilerOK(texto);
+            }
+        } catch (Exception e){
+            texto = e.getMessage();
+            this.gui.alquilerOK(texto);
+        }
+
 
     }
 
@@ -158,10 +175,25 @@ public class Controlador {
     }
 
     public void anadirComentario(Comentario comentario){
-        //this.gui.goAnadirComentario(comentario);
+        String texto;
+        try{
+            if(this.comentario.anadirComentario(comentario)){
+                texto = "Comentario anadido correctamente";
+                this.gui.comentarioOK(texto);
+            } else {
+                texto = "Error al anadir el comentario";
+                this.gui.comentarioOK(texto);
+            }
+
+        }catch (Exception e){
+            texto = e.getMessage();
+            this.gui.comentarioOK(texto);
+        }
     }
 
     public void anadirComentario(Oferta oferta){
+        this.oferta=oferta;
+        this.gui.goCrearComentario();
 
     }
     public void quitarLogin(){
@@ -249,6 +281,16 @@ public class Controlador {
         return muzska;
     }
 
+    public Oferta getOferta(){return oferta;}
+
+    public void volverRAvanzada(){
+        this.gui.volverRAvanzada();
+    }
+
+    public void volverAvanzada(){
+        this.gui.volverBAvanzada();
+    }
+
     public void goDesbloquearUsuarios(Demandante demandante) {
         this.gui.goDesbloquearUsuarios(demandante);
     }
@@ -300,4 +342,19 @@ public class Controlador {
     public void volverUsuariosBloqueados(){
         this.gui.volverUsuariosBloqueados();
     }
+
+    public void goAlquilar(Oferta oferta){
+        this.oferta=oferta;
+        this.gui.goAlquilar();
+    }
+
+    public void volverBAvanzada(){
+        this.gui.volverBAvanzada();
+    }
+
+    public void volverComentario(){
+        this.gui.volverComentario();
+    }
+
+    public Comentario getComentario(){return comentario;}
 }

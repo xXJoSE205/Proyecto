@@ -65,4 +65,10 @@ public class PanelGerente extends JPanel implements ActionListener {
         texto.setVisible(true);
         texto.setForeground(java.awt.Color.red);
     }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
+    }
 }

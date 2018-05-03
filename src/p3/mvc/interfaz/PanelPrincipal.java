@@ -10,6 +10,7 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton buscar = new JButton("Buscar");
     private GuiInmobiliaria gui;
+    private JLabel texto = new JLabel("");
 
     PanelPrincipal(GuiInmobiliaria gui){
         this.gui = gui;
@@ -49,5 +50,11 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         } else if(evento.getSource()==buscar){
             this.gui.getControlador().goBusqueda();
         }
+    }
+
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

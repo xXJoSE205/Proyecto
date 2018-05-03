@@ -26,16 +26,20 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCReserva panelCReserva;
     private PanelOfertante panelOfertante;
     private PanelVerInmuebles panelVerInmuebles;
+    private PanelCrearComentario panelCrearComentario;
+    private AvanzadaResultado avanzadaResultado;
+    private PanelBusquedaAvanzada panelBusquedaAvanzada;
     private PanelGerente panelGerente;
     private PanelComprobarOfertas panelComprobarOfertas;
     private PanelDesbloquearUsuario panelDesbloquearUsuario;
     private PanelUsuariosBloqueados panelUsuariosBloqueados;
+    private PanelAlquilar panelAlquilar;
+    private PanelAnadirComentario panelAnadirComentario;
 
     private Controlador controlador;
     private Container contenedor;
     private BusquedaResultado busquedaResultado;
 
-    private Comentario comentario;
 
     public GuiInmobiliaria(String titulo) {
         super(titulo);
@@ -56,6 +60,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelComprobarOfertas = new PanelComprobarOfertas(this);
         panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
         panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
+        panelAnadirComentario = new PanelAnadirComentario(this);
 
         // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
@@ -208,12 +213,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverDemandante(){
         panelCReserva.setVisible(false);
+        panelBusqueda.setVisible(false);
+        panelBusquedaAvanzada.setVisible(false);
         panelDemandante.setVisible(true);
     }
 
-    public void goBusquedaResultado(List lista){
+    public void goBusquedaResultado(){
         panelBusqueda.setVisible(false);
         busquedaResultado = new BusquedaResultado(this);
+        contenedor.add(busquedaResultado);
         busquedaResultado.setVisible(true);
 
     }
@@ -227,6 +235,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }else if(usr instanceof Ofertante){
             panelOfertante.setVisible(true);
         }
+    }
+
+    public void volverBusqueda(){
+       busquedaResultado.setVisible(false);
+       panelBusqueda.setVisible(true);
     }
 
     public void goBusqueda() {
@@ -304,6 +317,61 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void volverUsuariosBloqueados() {
         panelDesbloquearUsuario.setVisible(false);
         panelUsuariosBloqueados.setVisible(true);
+    }
+
+    public void volverRAvanzada(){
+        panelCrearComentario.setVisible(false);
+        panelAlquilar.setVisible(false);
+        avanzadaResultado.setVisible(true);
+    }
+
+    public void volverBAvanzada(){
+        avanzadaResultado.setVisible(false);
+        panelBusquedaAvanzada.setVisible(true);
+    }
+
+    public void alquilerOK(String texto){
+        panelAlquilar.creadaOK(texto);
+    }
+
+    public void goAlquilar(){
+        avanzadaResultado.setVisible(false);
+        panelAlquilar = new PanelAlquilar(this);
+        contenedor.add(panelAlquilar);
+        panelAlquilar.setVisible(true);
+    }
+
+    public void goAnadirComentario(){
+        panelComentario.setVisible(false);
+
+    }
+
+    public void goCrearComentario(){
+
+    }
+
+    public void volverComentario(){
+        panelAnadirComentario.setVisible(false);
+        panelComentario.setVisible(true);
+    }
+
+    public void comentarioOK(String texto){
+        panelAnadirComentario.creadaOK(texto);
+    }
+
+    public void errorBusqueda(String texto){
+        panelBusqueda.creadaOK(texto);
+    }
+
+    public void avanzadaError(String texto){
+        panelBusquedaAvanzada.creadaOK(texto);
+    }
+
+    public void goRAvanzada(){
+        panelBusquedaAvanzada.setVisible(false);
+        avanzadaResultado = new AvanzadaResultado(this);
+        contenedor.add(avanzadaResultado);
+        avanzadaResultado.setVisible(true);
     }
 }
 

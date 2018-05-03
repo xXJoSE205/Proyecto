@@ -34,7 +34,7 @@ public class MiVentana extends JFrame  {
         lista.add(inmueble);
         List<Oferta> lista2 = new ArrayList<>();
         lista2.add(oferta);
-        JPanel panel = new BusquedaResultado(new GuiInmobiliaria("Muzska"));
+        JPanel panel = new PanelCrearComentario(new GuiInmobiliaria("Muzska"));
 
         contenedor.add(panel, BorderLayout.CENTER);
 
