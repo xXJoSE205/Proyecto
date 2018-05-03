@@ -85,6 +85,8 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         this.add(casilla1);
         this.add(select);
         this.setVisible(true);
+        buscar.addActionListener(this);
+        volver.addActionListener(this);
 
     }
 

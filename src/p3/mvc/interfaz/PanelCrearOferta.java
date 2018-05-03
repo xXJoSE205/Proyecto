@@ -68,6 +68,8 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         this.add(select);
         this.add(texto);
         this.setVisible(true);
+        crear.addActionListener(this);
+        volver.addActionListener(this);
     }
 
     public void setInmueble(Inmueble inmueble){

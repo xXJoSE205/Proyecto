@@ -64,6 +64,10 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
         this.add(select);
         this.add(tabla);
         this.setVisible(true);
+        volver.addActionListener(this);
+        comentario.addActionListener(this);
+        comentario2.addActionListener(this);
+        alquilar.addActionListener(this);
 
     }
 

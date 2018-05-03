@@ -77,6 +77,9 @@ public class PanelComentario extends JPanel implements ActionListener {
         this.add(lista);
         this.add(scroll);
         this.add(select);
+        boton1.addActionListener(this);
+        boton2.addActionListener(this);
+        boton3.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
