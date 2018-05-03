@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelDemandante extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("DEMANDANTE");
+public class PanelOfertante extends JPanel implements ActionListener {
+    private JLabel etiqueta1 = new JLabel("OFERTANTE");
     private JLabel etiqueta2;
     private JLabel texto = new JLabel("Error al cerrar sesion");
     private GuiInmobiliaria gui;
@@ -14,23 +14,23 @@ public class PanelDemandante extends JPanel implements ActionListener {
     private ButtonGroup grupo = new ButtonGroup();
 
     JButton volver = new JButton("Desconectarse");
-    JButton buscar = new JButton("Busqueda");
-    JButton avanzada = new JButton("Busqueda Avanzada");
-    JButton reservas = new JButton("Comprobar Reserva");
+    JButton crearInm = new JButton("Crear Inmueble");
+    JButton verInmuebles = new JButton("Ver Inmuebles");
+    JButton modificaciones = new JButton("Ver modificaciones propuestas");
 
-    PanelDemandante(GuiInmobiliaria gui){
+    PanelOfertante(GuiInmobiliaria gui) {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        etiqueta2=new JLabel("Bienvenido " + gui.getControlador().getCliente().getNombre());
+        etiqueta2 = new JLabel("Bienvenido " + gui.getControlador().getCliente().getNombre());
         grupo.add(volver);
-        grupo.add(buscar);
-        grupo.add(avanzada);
-        grupo.add(reservas);
+        grupo.add(crearInm);
+        grupo.add(verInmuebles);
+        grupo.add(modificaciones);
         select.add(volver);
-        select.add(buscar);
-        select.add(avanzada);
-        select.add(reservas);
+        select.add(crearInm);
+        select.add(verInmuebles);
+        select.add(modificaciones);
         select.setVisible(true);
         texto.setVisible(false);
 
@@ -40,7 +40,6 @@ public class PanelDemandante extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 20, SpringLayout.NORTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, etiqueta2);
-        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
         this.add(etiqueta1);
         this.add(select);
@@ -49,21 +48,21 @@ public class PanelDemandante extends JPanel implements ActionListener {
         this.setVisible(true);
 
         volver.addActionListener(this);
-        buscar.addActionListener(this);
-        /*avanzada.addActionListener(this);
-        reservas.addActionListener(this);*/
+        crearInm.addActionListener(this);
+        verInmuebles.addActionListener(this);
+        //reservas.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
         texto.setVisible(false);
-        if( evento.getSource()==volver){
+        if (evento.getSource() == volver) {
             gui.getControlador().logout();
-        } else if(evento.getSource()==buscar){
-            gui.getControlador().goBuscar();
-        } else if(evento.getSource()==avanzada){
-            //gui.getControlador().goAvanzada();
-        } else if(evento.getSource()==reservas){
-            //gui.getControlador().goComprobarReserva();
+        } else if (evento.getSource() == crearInm) {
+            gui.getControlador().goCrearInmueble();
+        } else if (evento.getSource() == verInmuebles) {
+            gui.getControlador().goVerInmuebles();
+        } else if (evento.getSource() == modificaciones) {
+            //gui.getControlador().goVerModificaciones();
         }
     }
 

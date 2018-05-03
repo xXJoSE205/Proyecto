@@ -22,16 +22,16 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCrearOferta panelCOferta;
     private PanelCrearInmueble panelCInmueble;
     private PanelComentario panelComentario;
+    private PanelDemandante panelDemandante;
+    private PanelCReserva panelCReserva;
+    private PanelOfertante panelOfertante;
+    private PanelVerInmuebles panelVerInmuebles;
 
     private Controlador controlador;
     private Container contenedor;
-    private PanelDemandante panelDemandante;
-    private PanelCReserva panelCReserva;
     private BusquedaResultado busquedaResultado;
 
     private Comentario comentario;
-
-
 
     public GuiInmobiliaria(String titulo) {
         super(titulo);
@@ -48,7 +48,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCOferta = new PanelCrearOferta(this);
         panelCInmueble = new PanelCrearInmueble(this);
         //panelComentario = new PanelComentario(this,comentario);
-        panelDemandante = new PanelDemandante(this,"Jorge");
+        panelDemandante = new PanelDemandante(this);
 
         // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
@@ -58,7 +58,6 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         contenedor.add(panelCOferta);
         contenedor.add(panelCInmueble);
         contenedor.add(panelComentario);*/
-        // this.pack();
         contenedor.add(panelDemandante);
 
         // visibilidad inicial
@@ -77,7 +76,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         // Para realizar acciones al cambiar de pestanas
 
         // mostrar this, en otros ejemplos era ventana, ahora this
-        //this.pack();
+        this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800,600); // remove and uncomment this.pack above
         this.setVisible(true);
@@ -161,7 +160,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelLogin.setVisible(true);
     }
 
-    public void logout(boolean logoutOK) {
+    public void logout(boolean logoutOK/*, Cliente usr*/) {
         if(logoutOK) {
             /*if(usr instance of Demandante){
                 panelDemandante.setVisible(false);
@@ -225,6 +224,36 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void volverOferta(){
         panelComentario.setVisible(false);
         //panelAvanzada.setVisibel(true);
+    }
+
+    public void goCrearInmueble() {
+        panelOfertante.setVisible(false);
+        panelCInmueble.setVisible(true);
+    }
+
+    public void goCrearOferta() {
+        panelVerInmuebles.setVisible(false);
+        panelCOferta.setVisible(true);
+    }
+
+    public void volverOfertante(){
+        panelCInmueble.setVisible(false);
+        panelVerInmuebles.setVisible(false);
+        panelOfertante.setVisible(true);
+    }
+
+    public void volverVerInmuebles(){
+        panelCOferta.setVisible(false);
+        panelVerInmuebles.setVisible(true);
+    }
+
+    public void creadoOK(String texto) {
+        this.panelCInmueble.creadoOK(texto);
+    }
+
+    public void goVerInmuebles() {
+        panelOfertante.setVisible(false);
+        panelVerInmuebles.setVisible(true);
     }
 }
 

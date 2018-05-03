@@ -190,4 +190,48 @@ public class Controlador {
     public List<Comentario> getComentarios(){
         return (List<Comentario>)(Comentario)oferta.getOpiniones();
     }
+
+    public Cliente getCliente() {
+        return usr;
+    }
+
+    public void goCrearInmueble() {
+        this.gui.goCrearInmueble();
+    }
+
+    public void goCrearOferta() {
+        this.gui.goCrearOferta();
+    }
+
+    public void volverOfertante(){
+        this.gui.volverOfertante();
+    }
+
+    public void volverVerInmuebles(){
+        this.gui.volverVerInmuebles();
+    }
+
+    public void crearInmueble(int nHab, int nBanos, int dim, String dir, int planta, boolean ascensor) {
+        String texto;
+        try {
+            if (usr instanceof Ofertante) {
+                Inmueble inmueble = new Inmueble(nHab, nBanos, dim, dir, planta, ascensor, (Ofertante) usr);
+                if(muzska.anadirInmueble(inmueble)){
+                    texto = "El inmueble se ha creado correctamente";
+                    this.gui.creadoOK(texto);
+                }else{
+                    texto = "Error al añadir el inmueble";
+                    this.gui.creadoOK(texto);
+                }
+
+            }
+        }catch(Exception e){
+            texto = e.getMessage();
+            this.gui.creadoOK(texto);
+        }
+    }
+
+    public void goVerInmuebles() {
+        this.gui.goVerInmuebles();
+    }
 }

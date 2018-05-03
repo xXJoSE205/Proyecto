@@ -22,6 +22,7 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
     private JButton volver = new JButton("Cancelar");
     private JPanel select = new JPanel(new GridLayout(1, 2));
     private ButtonGroup grupo = new ButtonGroup();
+    private JLabel texto = new JLabel("");
     private GuiInmobiliaria gui;
 
     PanelCrearInmueble(GuiInmobiliaria gui){
@@ -32,7 +33,7 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         grupo.add(crear);
         select.add(volver);
         select.add(crear);
-
+        texto.setVisible(false);
 
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -58,6 +59,8 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, casilla, 8, SpringLayout.SOUTH, etiqueta5);
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
 
         this.add(etiqueta1);
         this.add(nHab);
@@ -71,10 +74,26 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         this.add(planta);
         this.add(casilla);
         this.add(select);
+        this.add(texto);
         this.setVisible(true);
+
+        volver.addActionListener(this);
+        crear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
+        texto.setVisible(false);
+        if(e.getSource()==volver){
+            gui.getControlador().volverOfertante();
+        }else if(e.getSource()==crear){
+            gui.getControlador().crearInmueble(Integer.parseInt(nHab.getText()), Integer.parseInt(nBanos.getText())
+                    , Integer.parseInt(dim.getText()), direccion.getText(), Integer.parseInt(planta.getText())
+                    , casilla.isSelected());
+        }
+    }
 
+    public void creadoOK(String cadena){
+        texto.setText(cadena);
+        texto.setVisible(true);
     }
 }

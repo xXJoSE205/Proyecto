@@ -1,5 +1,7 @@
 package p3.mvc.interfaz;
 
+import p3.mvc.modelo.Inmueble;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,8 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
     private JButton volver = new JButton("Cancelar");
     private JPanel select = new JPanel(new GridLayout(1, 3));
     private ButtonGroup grupo = new ButtonGroup();
+    private JLabel texto = new JLabel("");
+    private Inmueble inmueble;
     private GuiInmobiliaria gui;
 
     PanelCrearOferta(GuiInmobiliaria gui){
@@ -29,7 +33,7 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         select.add(volver);
         grupo.add(volver);
         grupo.add(crear);
-
+        texto.setVisible(false);
 
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
@@ -52,7 +56,6 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
 
-
         this.add(etiqueta1);
         this.add(precio);
         this.add(etiqueta2);
@@ -63,7 +66,12 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         this.add(fianza);
         this.add(casilla);
         this.add(select);
+        this.add(texto);
         this.setVisible(true);
+    }
+
+    public void setInmueble(Inmueble inmueble){
+        this.inmueble = inmueble;
     }
 
     public void actionPerformed(ActionEvent e) {
