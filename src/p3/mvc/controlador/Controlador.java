@@ -9,6 +9,9 @@ public class Controlador {
     private GuiInmobiliaria gui;
     private Sistema muzska;
     private Cliente usr;
+    private List<Inmueble> busqueda;
+    private List<Oferta> avanzada;
+    private Oferta oferta;
 
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
@@ -74,7 +77,7 @@ public class Controlador {
         }
         boolean ascensor2 = Boolean.parseBoolean(ascensor);
         List<Inmueble> lista;
-        lista=muzska.buscar(nHab2,nBan2,dim2,planta2,ascensor2,dir);
+        this.busqueda=muzska.buscar(nHab2,nBan2,dim2,planta2,ascensor2,dir);
 
 
     }
@@ -156,14 +159,7 @@ public class Controlador {
         boolean ascensor2 = Boolean.parseBoolean(ascensor);
         boolean vacacional2 = Boolean.parseBoolean(vacacional);
         List<Oferta> lista;
-        Demandante demandante = null;
-        for(UsuarioRegistrado usuario : muzska.getUsuarios()){
-            if(usuario.isLogeado()){
-                demandante = (Demandante)usuario;
-                break;
-            }
-        }
-        lista=muzska.avanzada(nHab2,nBan2, dim2,planta2,ascensor2,dir,precio2,vacacional2,demandante);
+        this.avanzada=muzska.avanzada(nHab2,nBan2, dim2,planta2,ascensor2,dir,precio2,vacacional2,usr);
         //this.gui.goAvanzadaResultado(lista);
 
     }
@@ -185,5 +181,13 @@ public class Controlador {
 
     public void quitarLogin(){
         this.usr = null;
+    }
+
+    public List<Inmueble> getBusqueda(){return busqueda;}
+
+    public List<Oferta> getAvanzada(){return avanzada;}
+
+    public List<Comentario> getComentarios(){
+        return (List<Comentario>)(Comentario)oferta.getOpiniones();
     }
 }

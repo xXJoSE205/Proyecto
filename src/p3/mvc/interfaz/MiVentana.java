@@ -32,7 +32,9 @@ public class MiVentana extends JFrame  {
                 200,inmueble);
         Reserva reserva = new Reserva(demandante, oferta);
         lista.add(inmueble);
-        JPanel panel = new PanelCrearOferta(new GuiInmobiliaria("Muzska"));
+        List<Oferta> lista2 = new ArrayList<>();
+        lista2.add(oferta);
+        JPanel panel = new BusquedaResultado(new GuiInmobiliaria("Muzska"));
 
         contenedor.add(panel, BorderLayout.CENTER);
 

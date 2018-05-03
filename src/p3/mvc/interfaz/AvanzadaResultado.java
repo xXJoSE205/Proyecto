@@ -1,6 +1,7 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.modelo.Inmueble;
+import p3.mvc.modelo.Oferta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class BusquedaResultado extends JPanel implements ActionListener {
+public class AvanzadaResultado extends JPanel implements ActionListener {
     private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
-    private Object filas [][] = {};
+    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Precio","Vacacional"};
+    private Object filas[][] = {};
     private GuiInmobiliaria gui;
     private JPanel select = new JPanel(new GridLayout(1, 2));
     private ButtonGroup grupo = new ButtonGroup();
@@ -22,42 +23,47 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         }
     };
     private JButton volver = new JButton("Volver");
-    private List<Inmueble> lista;
+    private JButton alquilar = new JButton("Alquilar");
+    private JButton comentario = new JButton("Anadir comentario");
+    private List<Oferta> lista;
 
-    BusquedaResultado(GuiInmobiliaria gui){
+    AvanzadaResultado(GuiInmobiliaria gui) {
         this.gui = gui;
-        this.lista= gui.getControlador().getBusqueda();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        this.lista= gui.getControlador().getAvanzada();
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
-        for(Inmueble i:lista){
-            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(),i.getPlanta()};
+
+        for (Oferta i : lista) {
+            Object[] nuevaFila = {i.getInmueble().getnHabitaciones(), i.getInmueble().getnBanos(), i.getInmueble().getDimensiones(),
+                    i.getInmueble().getAscensor(), i.getInmueble().getPlanta(),i.getPrecio(),i.isVacacional()};
             modeloDatos.addRow(nuevaFila);
         }
 
         grupo.add(volver);
+        grupo.add(alquilar);
+        grupo.add(comentario);
+        select.add(comentario);
         select.add(volver);
+        select.add(alquilar);
         select.setVisible(true);
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scrollPane);
-        layout.putConstraint(SpringLayout.NORTH, select, 425, SpringLayout.NORTH, scrollPane);
+        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, scrollPane);
+        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, scrollPane);
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(scrollPane);
+        this.add(tabla);
         this.setVisible(true);
 
     }
 
-    public void actionPerformed(ActionEvent evento) {
-        if(evento.getSource()==volver){
-            gui.getControlador().volverDemandante();
-        }
-    }
+    public void actionPerformed(ActionEvent evento){
 
+    }
 }

@@ -302,4 +302,10 @@ public class Oferta implements Serializable {
         return "\tPrecio: "+precio+"\n\t¿Reservado?: "+reservado+"\n\tFecha de inicio: "+fechaInicio
                 +"\n\tFecha fin: "+fechaFin+"\n\t¿Vacacional?: "+vacacional+"\n\tFianza: "+fianza;
     }
+
+    /**
+     * Devuelve la lista de opiniones
+     * @return list, lista de opiniones
+     */
+    public List<Opinion> getOpiniones(){return opiniones;}
 }

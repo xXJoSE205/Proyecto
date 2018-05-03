@@ -201,7 +201,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goBusquedaResultado(List lista){
         panelBusqueda.setVisible(false);
-        busquedaResultado = new BusquedaResultado(this, (java.util.List<Inmueble>) lista);
+        busquedaResultado = new BusquedaResultado(this);
         busquedaResultado.setVisible(true);
 
     }
