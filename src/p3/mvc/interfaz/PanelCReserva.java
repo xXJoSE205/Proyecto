@@ -1,5 +1,6 @@
 package p3.mvc.interfaz;
 
+import p3.mvc.modelo.Demandante;
 import p3.mvc.modelo.Reserva;
 
 import javax.swing.*;
@@ -15,9 +16,11 @@ public class PanelCReserva extends JPanel implements ActionListener {
     private ButtonGroup grupo = new ButtonGroup();
     JButton volver = new JButton("Volver");
     JButton cancelar = new JButton("Cancelar Reserva");
+    private Reserva reserva;
 
-    PanelCReserva(GuiInmobiliaria gui, Reserva reserva){
+    PanelCReserva(GuiInmobiliaria gui){
         this.gui = gui;
+        this.reserva=((Demandante)gui.getControlador().getCliente()).getReserva();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         etiqueta2= new JTextArea(reserva.toString()+ "\n"+ reserva.getOferta().toString() +  "\n" +reserva.getOferta().getInmueble().toString());

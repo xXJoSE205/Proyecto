@@ -15,7 +15,7 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
     private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Precio","Vacacional"};
     private Object filas[][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
+    private JPanel select = new JPanel(new GridLayout(1, 4));
     private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
@@ -25,14 +25,16 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
     private JButton volver = new JButton("Volver");
     private JButton alquilar = new JButton("Alquilar");
     private JButton comentario = new JButton("Anadir comentario");
+    private JButton comentario2 = new JButton("Ver comentarios");
     private List<Oferta> lista;
+    private JTable tabla = new JTable(modeloDatos);
 
     AvanzadaResultado(GuiInmobiliaria gui) {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         this.lista= gui.getControlador().getAvanzada();
-        JTable tabla = new JTable(modeloDatos);
+
         JScrollPane scrollPane = new JScrollPane(tabla);
 
         for (Oferta i : lista) {
@@ -44,7 +46,9 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
         grupo.add(volver);
         grupo.add(alquilar);
         grupo.add(comentario);
+        grupo.add(comentario2);
         select.add(comentario);
+        select.add(comentario2);
         select.add(volver);
         select.add(alquilar);
         select.setVisible(true);
@@ -64,6 +68,15 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento){
+        if(evento.getSource()==volver){
+            //gui.getControlador().volverAvanzada();
+        } else if(evento.getSource()==alquilar){
+            gui.getControlador().alquilar(lista.get(tabla.getSelectedRow()));
+        } else if(evento.getSource()==comentario){
+            gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
+        }else if(evento.getSource()==comentario2){
+            gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
+        }
 
     }
 }

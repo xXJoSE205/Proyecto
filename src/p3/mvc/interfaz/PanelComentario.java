@@ -47,6 +47,8 @@ public class PanelComentario extends JPanel implements ActionListener {
         select.add(boton2);
         select.add(boton3);
         lista.setSelectedIndex(0);
+        arbol.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+
         int i=0;
         for(Comentario comentario1 :com){
             if(!comentario1.getComentarios().isEmpty()){
@@ -84,7 +86,7 @@ public class PanelComentario extends JPanel implements ActionListener {
         } else if(e.getSource()==boton2){
             gui.getControlador().volverOferta();
         } else if(e.getSource()==boton3){
-            gui.getControlador().anadirComentario();
+            gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
         }
 
     }

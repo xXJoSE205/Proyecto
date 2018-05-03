@@ -163,7 +163,7 @@ public class Controlador {
         //this.gui.goAvanzadaResultado(lista);
 
     }
-    public void alquilar(List<Oferta> lista){
+    public void alquilar(Oferta oferta){
 
     }
 
@@ -179,6 +179,9 @@ public class Controlador {
         //this.gui.goAnadirComentario(comentario);
     }
 
+    public void anadirComentario(Oferta oferta){
+
+    }
     public void quitarLogin(){
         this.usr = null;
     }
@@ -233,5 +236,9 @@ public class Controlador {
 
     public void goVerInmuebles() {
         this.gui.goVerInmuebles();
+    }
+
+    public void goComentario(Oferta oferta){
+        this.oferta=oferta;
     }
 }
