@@ -19,6 +19,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
     private final JTextField direccion = new JTextField("", 50);
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private ButtonGroup grupo = new ButtonGroup();
+    private JLabel texto = new JLabel("");
     private JButton buscar = new JButton("Buscar");
     private JButton volver = new JButton("Volver");
 
@@ -31,16 +32,14 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-
         grupo.add(buscar);
         grupo.add(volver);
         select.add(buscar);
         select.add(volver);
         select.setVisible(true);
-
+        texto.setVisible(false);
 
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
-
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
 
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
@@ -85,30 +84,16 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         this.add(casilla1);
         this.add(select);
         this.setVisible(true);
+
         buscar.addActionListener(this);
         volver.addActionListener(this);
-
     }
 
     public void actionPerformed(ActionEvent evento) {
-        String option1 = "";
-        String option2 = "";
-        String option3 = "";
-        String option4 = "";
-        String option5 = "";
-        String option6 = "";
         if(evento.getSource()==buscar) {
-            option1 = numero.getText();
-            option2 = numeroBan.getText();
-            option3 = dim.getText();
-            option4 = planta.getText();
-            option5 = direccion.getText();
-            if (casilla1.isSelected()) {
-                option6 = "true";
-            } else {
-                option6 = "false";
-            }
-            gui.getControlador().buscar(option1, option2, option3, option4, option5, option6);
+            gui.getControlador().buscar(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText())
+                    , Integer.parseInt(dim.getText()),Integer.parseInt(planta.getText())
+                    , casilla1.isSelected(), direccion.getText());
         } else if(evento.getSource()==volver){
             gui.getControlador().volverDemandante();
         }

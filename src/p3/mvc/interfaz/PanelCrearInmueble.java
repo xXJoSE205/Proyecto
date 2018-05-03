@@ -95,5 +95,6 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
     public void creadoOK(String cadena){
         texto.setText(cadena);
         texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

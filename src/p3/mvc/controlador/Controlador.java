@@ -58,30 +58,10 @@ public class Controlador {
         }
     }
 
-    public void buscar (String nHab, String nBan, String dim, String planta, String ascensor, String dir){
-        int nHab2=-1;
-        int nBan2=-1;
-        int dim2=-1;
-        int planta2=-1;
-        double precio2=-1;
-        if(nHab!=null){
-            nHab2=Integer.parseInt(nHab);
-        }
-        if(nBan!=null){
-            nBan2=Integer.parseInt(nBan);
-        }
-        if(dim!=null){
-            dim2=Integer.parseInt(dim);
-        }
-        if(planta!=null){
-            planta2=Integer.parseInt(planta);
-        }
-        boolean ascensor2 = Boolean.parseBoolean(ascensor);
-        List<Inmueble> lista;
-        this.busqueda=muzska.buscar(nHab2,nBan2,dim2,planta2,ascensor2,dir);
-
+    public void buscar (int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
 
     }
+
     public void volverLogin() {
         this.gui.volverLogin();
     }
@@ -262,5 +242,9 @@ public class Controlador {
             texto = e.getMessage();
             this.gui.creadaOK(texto);
         }
+    }
+
+    public Sistema getSistema() {
+        return muzska;
     }
 }

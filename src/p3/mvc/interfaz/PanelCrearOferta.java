@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
-public class PanelCrearOferta extends JPanel implements ActionListener{
+public class PanelCrearOferta extends JPanel implements ActionListener {
     private JLabel etiqueta1 = new JLabel("Precio: ");
     private final JTextField precio = new JTextField(10);
     private JLabel etiqueta2 = new JLabel("Fecha inicio: ");
@@ -26,8 +26,8 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
     private Inmueble inmueble;
     private GuiInmobiliaria gui;
 
-    PanelCrearOferta(GuiInmobiliaria gui){
-        this.gui=gui;
+    PanelCrearOferta(GuiInmobiliaria gui) {
+        this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         select.add(crear);
@@ -74,20 +74,24 @@ public class PanelCrearOferta extends JPanel implements ActionListener{
         crear.addActionListener(this);
     }
 
-    public void setInmueble(Inmueble inmueble){
+    public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
     }
 
     public void actionPerformed(ActionEvent e) {
         texto.setVisible(false);
-        if(e.getSource()==volver){
+        if (e.getSource() == volver) {
             gui.getControlador().volverVerInmuebles();
-        }else if(e.getSource()==crear){
+        } else if (e.getSource() == crear) {
             gui.getControlador().crearOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
                     , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
                     , inmueble);
         }
     }
 
+    public void creadaOK(String texto) {
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }
