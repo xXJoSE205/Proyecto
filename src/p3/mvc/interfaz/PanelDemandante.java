@@ -62,9 +62,9 @@ public class PanelDemandante extends JPanel implements ActionListener {
         } else if(evento.getSource()==buscar){
             gui.getControlador().goBuscar();
         } else if(evento.getSource()==avanzada){
-            //gui.getControlador().goAvanzada();
+            gui.getControlador().goAvanzada();
         } else if(evento.getSource()==reservas){
-            //gui.getControlador().goComprobarReserva();
+            gui.getControlador().goComprobarReserva();
         }
     }
 

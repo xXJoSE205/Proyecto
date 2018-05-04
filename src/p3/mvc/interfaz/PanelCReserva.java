@@ -24,7 +24,11 @@ public class PanelCReserva extends JPanel implements ActionListener {
         this.reserva=((Demandante)gui.getControlador().getCliente()).getReserva();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        etiqueta2= new JTextArea(reserva.toString()+ "\n"+ reserva.getOferta().toString() +  "\n" +reserva.getOferta().getInmueble().toString());
+        if(reserva==null){
+            etiqueta2= new JTextArea("No hay ninguna reserva activa");
+        } else {
+            etiqueta2 = new JTextArea(reserva.toString() + "\n" + reserva.getOferta().toString() + "\n" + reserva.getOferta().getInmueble().toString());
+        }
         grupo.add(volver);
         grupo.add(cancelar);
         select.add(volver);

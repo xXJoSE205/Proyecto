@@ -16,7 +16,8 @@ public class PanelComentario extends JPanel implements ActionListener {
     private JLabel etiqueta3 = new JLabel("Valorar: ");
     private String[] numeros = {"Val","0","1","2","3","4","5"};
     private JComboBox lista = new JComboBox(numeros);
-
+    private JLabel etiqueta1 = new JLabel("Precio: ");
+    private final JTextField val = new JTextField(2);
     private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
     private DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
     private JTree arbol = new JTree (modeloDatos);
@@ -63,6 +64,7 @@ public class PanelComentario extends JPanel implements ActionListener {
             i++;
         }
 
+        val.setText(gui.getControlador().getValoracion());
 
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 100, SpringLayout.SOUTH, this);
@@ -72,7 +74,8 @@ public class PanelComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, scroll, 5, SpringLayout.SOUTH, lista);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scroll);
         layout.putConstraint(SpringLayout.NORTH, select, 30, SpringLayout.SOUTH, scroll);
-
+        layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
+        layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST,etiqueta1);
         this.setPreferredSize(new Dimension(200, 100));
         this.add(etiqueta3);
         this.add(lista);
@@ -88,7 +91,7 @@ public class PanelComentario extends JPanel implements ActionListener {
             int x= Integer.parseInt((String)lista.getSelectedItem());
             gui.getControlador().valorar(x);
         } else if(e.getSource()==boton2){
-            gui.getControlador().volverOferta();
+            gui.getControlador().volverRAvanzada();
         } else if(e.getSource()==boton3){
             gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
         }

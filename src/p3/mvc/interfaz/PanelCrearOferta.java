@@ -25,7 +25,7 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
     private JLabel texto = new JLabel("");
     private Inmueble inmueble;
     private GuiInmobiliaria gui;
-    private JLabel texto = new JLabel("");
+    private JLabel texto2 = new JLabel("");
 
     PanelCrearOferta(GuiInmobiliaria gui) {
         this.gui = gui;
@@ -91,8 +91,8 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
     }
 
     public void creadaOK(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
+        this.texto2.setText(texto);
+        this.texto2.setVisible(true);
+        this.texto2.setForeground(java.awt.Color.red);
     }
 }
