@@ -450,6 +450,6 @@ public class Controlador {
     }
 
     public void getUsuarioBloqueados(){
-
+        
     }
 }
