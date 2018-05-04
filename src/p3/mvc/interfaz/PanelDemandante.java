@@ -47,7 +47,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
         this.add(etiqueta2);
         this.add(texto);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
         buscar.addActionListener(this);
         avanzada.addActionListener(this);

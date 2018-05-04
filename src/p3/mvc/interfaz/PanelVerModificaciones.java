@@ -72,7 +72,7 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         this.add(modificaciones);
         this.add(scrollPane);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         modificar.addActionListener(this);
     }

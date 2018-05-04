@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class PanelLogin extends JPanel implements ActionListener{
     private final JTextField nif = new JTextField(10);
     private final JPasswordField pswd = new JPasswordField(15);
+    private ButtonGroup grupo = new ButtonGroup();
     private JRadioButton demandante = new JRadioButton("Demandante");
     private JRadioButton ofertante = new JRadioButton("Ofertante");
     private JRadioButton gerente = new JRadioButton("Gerente");
@@ -24,6 +25,9 @@ public class PanelLogin extends JPanel implements ActionListener{
         this.setLayout(layout);
 
         JPanel selectType = new JPanel(new GridLayout(3, 1));
+        grupo.add(demandante);
+        grupo.add(ofertante);
+        grupo.add(gerente);
         selectType.add(demandante);
         selectType.add(ofertante);
         selectType.add(gerente);
@@ -49,15 +53,21 @@ public class PanelLogin extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, pswd, 5, SpringLayout.SOUTH, nif);
         layout.putConstraint(SpringLayout.NORTH, selectType, 10, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, selectType, 0, SpringLayout.EAST, etiqueta2);
-        layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, selectType);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, selectLogin, 0, SpringLayout.HORIZONTAL_CENTER, pswd);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, selectType);
+        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.WEST, selectLogin, 0, SpringLayout.WEST, etiqueta2);
 
         this.add(etiqueta1);
         this.add(etiqueta2);
         this.add(nif);
         this.add(pswd);
+        this.add(texto);
         this.add(selectLogin);
         this.add(selectType);
+
+        this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
 
         inSes.addActionListener(this);
         volver.addActionListener(this);
@@ -65,6 +75,7 @@ public class PanelLogin extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent evento){
         String option = "";
+        texto.setVisible(false);
         if(evento.getSource()==inSes) {
             if (demandante.isSelected()) {
                 option = demandante.getText();
@@ -79,12 +90,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         }
     }
 
-    public void setError(String error) {
-        pswd.setText(error);
-        pswd.setForeground(java.awt.Color.red);
-    }
-
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

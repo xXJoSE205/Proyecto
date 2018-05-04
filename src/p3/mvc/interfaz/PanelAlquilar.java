@@ -101,6 +101,7 @@ public class PanelAlquilar extends JPanel implements ActionListener {
         this.add(vacacional);
         this.add(ascensor);
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
         alquilar.addActionListener(this);
         volver.addActionListener(this);
     }

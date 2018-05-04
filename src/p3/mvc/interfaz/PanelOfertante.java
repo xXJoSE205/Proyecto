@@ -45,7 +45,7 @@ public class PanelOfertante extends JPanel implements ActionListener {
         this.add(etiqueta2);
         this.add(texto);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
         crearInm.addActionListener(this);
         verInmuebles.addActionListener(this);

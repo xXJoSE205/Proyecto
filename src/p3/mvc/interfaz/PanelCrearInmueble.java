@@ -76,7 +76,7 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
         crear.addActionListener(this);
     }

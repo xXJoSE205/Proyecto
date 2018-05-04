@@ -42,6 +42,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public GuiInmobiliaria(String titulo) {
         super(titulo);
 
+        Image icon = new ImageIcon("definitivo3.png").getImage();
+        setIconImage(icon);
+
         // obtener contenedor, asignar layout
         contenedor = this.getContentPane(); // antes: ventana.getContentPane();
         contenedor.setLayout(new FlowLayout());
@@ -53,33 +56,23 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelBAvanzada = new PanelBusquedaAvanzada(this);
         panelCOferta = new PanelCrearOferta(this);
         panelCInmueble = new PanelCrearInmueble(this);
-        //panelComentario = new PanelComentario(this,comentario);
-
-        //panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
-        //panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
         panelAnadirComentario = new PanelAnadirComentario(this);
 
         // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
         contenedor.add(panelLogin);
-        /*contenedor.add(panelBusqueda);
+        contenedor.add(panelBusqueda);
         contenedor.add(panelBAvanzada);
         contenedor.add(panelCOferta);
         contenedor.add(panelCInmueble);
-        contenedor.add(panelComentario);*/
-        //contenedor.add(panelUsuariosBloqueados);
-        //contenedor.add(panelDesbloquearUsuario);
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
         panelLogin.setVisible(false);
-        /*panelBusqueda.setVisible(false);
+        panelBusqueda.setVisible(false);
         panelBAvanzada.setVisible(false);
         panelCOferta.setVisible(false);
         panelCInmueble.setVisible(false);
-        panelComentario.setVisible(false);*/
-        //panelUsuariosBloqueados.setVisible(false);
-        //panelDesbloquearUsuario.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTANA
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -87,10 +80,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         // Para realizar acciones al cambiar de pestanas
 
         // mostrar this, en otros ejemplos era ventana, ahora this
-        //this.pack();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        contenedor.setVisible(true);
-        this.setSize(800,600); // remove and uncomment this.pack above
+        this.setSize(1000,1000); // remove and uncomment this.pack above
         this.setVisible(true);
         this.setResizable(true);
 
@@ -155,8 +146,19 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void loginResult(boolean loginOK) {
         if (loginOK) {
             panelLogin.setVisible(false);
-            panelPrincipal.setVisible(true);
-            //
+            if(controlador.getCliente() instanceof Ofertante) {
+                panelOfertante = new PanelOfertante(this);
+                contenedor.add(panelOfertante);
+                panelOfertante.setVisible(true);
+            }else if(controlador.getCliente() instanceof Demandante) {
+                panelDemandante = new PanelDemandante(this);
+                contenedor.add(panelDemandante);
+                panelDemandante.setVisible(true);
+            }else{
+                panelGerente = new PanelGerente(this);
+                contenedor.add(panelGerente);
+                panelGerente.setVisible(true);
+            }
         }else {
             this.panelLogin.setError("Datos incorrecto o tipo no elegido");
         }
@@ -174,9 +176,13 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void logout(boolean logoutOK) {
         if(logoutOK) {
-            panelDemandante.setVisible(false);
-            panelOfertante.setVisible(false);
-            panelGerente.setVisible(false);
+            if(panelDemandante.isVisible()) {
+                panelDemandante.setVisible(false);
+            } else if(panelOfertante.isVisible()) {
+                panelOfertante.setVisible(false);
+            } else if(panelGerente.isVisible()) {
+                panelGerente.setVisible(false);
+            }
             this.getControlador().quitarLogin();
             panelPrincipal.setVisible(true);
         }else{
@@ -223,7 +229,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goBusqueda() {
-        panelDemandante.setVisible(false);
+        //panelDemandante.setVisible(false);
         panelPrincipal.setVisible(false);
         panelBusqueda.setVisible(true);
     }
@@ -400,6 +406,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void anadirCOmentarioOK(String texto){
         panelAnadirComentario.creadaOK(texto);
+    }
+
+    public void volverPrincipal() {
+        panelBusqueda.setVisible(false);
+        panelPrincipal.setVisible(true);
     }
 }
 

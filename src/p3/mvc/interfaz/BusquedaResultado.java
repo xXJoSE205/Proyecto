@@ -52,12 +52,13 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         this.add(select);
         this.add(scrollPane);
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
-            gui.getControlador().volverBusqueda2();
+            gui.getControlador().volverBusqueda();
         }
     }
 

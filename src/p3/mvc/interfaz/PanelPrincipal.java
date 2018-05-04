@@ -38,7 +38,12 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, imagen);
 
+        this.add(select);
+        this.add(texto);
+        this.add(imagen);
+
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
 
         inSes.addActionListener(this);
         buscar.addActionListener(this);

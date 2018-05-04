@@ -73,7 +73,7 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
         desb.addActionListener(this);
         desbYMod.addActionListener(this);

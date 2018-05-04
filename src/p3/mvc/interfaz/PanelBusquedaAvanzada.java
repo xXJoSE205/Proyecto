@@ -88,6 +88,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         this.add(etiqueta6);
         this.add(precio);
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
         buscar.addActionListener(this);
         volver.addActionListener(this);
 

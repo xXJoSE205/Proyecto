@@ -13,6 +13,7 @@ public class Controlador {
     private Cliente usr;
     private List<Inmueble> busqueda;
     private List<Oferta> avanzada;
+    private List<Comentario> comentarios;
     private Oferta oferta;
     private Comentario comentario;
 
@@ -85,10 +86,8 @@ public class Controlador {
     }
 
     public void volverBusqueda() {
-        this.gui.volverBusqueda(usr);
+        this.gui.volverBusqueda();
     }
-
-    public void volverBusqueda2(){this.gui.volverBusqueda();}
 
     public void goBusqueda() {
         this.gui.goBusqueda();
@@ -478,5 +477,9 @@ public class Controlador {
             texto = e.getMessage();
             this.gui.desbloqueado(texto);
         }
+    }
+
+    public void volverPrincipal() {
+        this.gui.volverPrincipal();
     }
 }

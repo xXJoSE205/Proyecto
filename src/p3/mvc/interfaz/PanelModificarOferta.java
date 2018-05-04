@@ -86,7 +86,7 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
         this.add(texto);
         this.add(scrollBar);
         this.setVisible(true);
-
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
         modificar.addActionListener(this);
     }

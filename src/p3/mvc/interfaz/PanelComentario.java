@@ -78,6 +78,7 @@ public class PanelComentario extends JPanel implements ActionListener {
         this.add(lista);
         this.add(scroll);
         this.add(select);
+        this.setPreferredSize(new Dimension(600, 400));
         boton1.addActionListener(this);
         boton2.addActionListener(this);
         boton3.addActionListener(this);

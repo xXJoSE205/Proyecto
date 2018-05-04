@@ -67,6 +67,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         this.add(select);
         this.add(scrollPane);
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
         volver.addActionListener(this);
     }
 

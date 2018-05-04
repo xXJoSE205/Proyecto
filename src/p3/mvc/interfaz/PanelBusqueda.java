@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 public class PanelBusqueda extends JPanel implements ActionListener {
 
-    private final JTextField numero = new JTextField("", 2);
-    private final JTextField numeroBan = new JTextField("", 2);
-    private final JTextField dim = new JTextField("", 2);
-    private final JTextField planta = new JTextField("", 2);
-    private final JTextField direccion = new JTextField("", 50);
+    private final JTextField numero = new JTextField("-1", 2);
+    private final JTextField numeroBan = new JTextField("-1", 2);
+    private final JTextField dim = new JTextField("-1", 2);
+    private final JTextField planta = new JTextField("-1", 2);
+    private final JTextField direccion = new JTextField(50);
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private JLabel texto = new JLabel("");
     private JButton buscar = new JButton("Buscar");
@@ -84,6 +84,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         this.add(casilla1);
         this.add(select);
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(600, 400));
 
         buscar.addActionListener(this);
         volver.addActionListener(this);
@@ -95,7 +96,11 @@ public class PanelBusqueda extends JPanel implements ActionListener {
                     , Integer.parseInt(dim.getText()),Integer.parseInt(planta.getText())
                     , casilla1.isSelected(), direccion.getText());
         } else if(evento.getSource()==volver){
-            gui.getControlador().volverDemandante();
+            if(gui.getControlador().getCliente()==null){
+                gui.getControlador().volverPrincipal();
+            }else {
+                gui.getControlador().volverDemandante();
+            }
         }
     }
 
