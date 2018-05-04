@@ -102,12 +102,19 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e) {
-        //intercept the window close event so that data can be saved to disk at this point
-        System.out.println("Guardando datos...");
-        this.getControlador().logout();
-        this.getControlador().saveData();
-        dispose();  //dispose the frame
-        System.exit(0);
+        int res = JOptionPane.showConfirmDialog(this, "Seguro que quieres salir de Muzska?"
+                , "Salir?", JOptionPane.YES_NO_OPTION);
+        if(res==JOptionPane.YES_OPTION) {
+            ((GuiInmobiliaria)e.getSource()).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //intercept the window close event so that data can be saved to disk at this point
+            System.out.println("Guardando datos...");
+            this.getControlador().logout();
+            this.getControlador().saveData();
+            dispose();  //dispose the frame
+            System.exit(0);
+        }else{
+            ((GuiInmobiliaria)e.getSource()).setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        }
     }
 
     @Override
@@ -181,7 +188,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
                 panelDemandante.setVisible(false);
             } else if(panelOfertante!=null) {
                 panelOfertante.setVisible(false);
-            } else if(panelGerente!=null) {
+            } else {
                 panelGerente.setVisible(false);
             }
             this.getControlador().quitarLogin();
@@ -290,13 +297,17 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void volverGerente(){
-        panelComprobarOfertas.setVisible(false);
-        panelUsuariosBloqueados.setVisible(false);
+        if(panelComprobarOfertas!=null)
+            panelComprobarOfertas.setVisible(false);
+        if(panelUsuariosBloqueados!=null)
+            panelUsuariosBloqueados.setVisible(false);
         panelGerente.setVisible(true);
     }
 
     public void goComprobarOfertas() {
         panelGerente.setVisible(false);
+        panelComprobarOfertas = new PanelComprobarOfertas(this);
+        contenedor.add(panelComprobarOfertas);
         panelComprobarOfertas.setVisible(true);
     }
 
@@ -310,6 +321,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goUsuariosBloqueados() {
         panelGerente.setVisible(false);
+        panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
+        contenedor.add(panelUsuariosBloqueados);
         panelUsuariosBloqueados.setVisible(true);
     }
 

@@ -32,7 +32,7 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
 
         JLabel etiqueta1 = new JLabel("Nº Habitaciones: ");
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, etiqueta1, -100, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.WEST, nHab, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, nHab, 5, SpringLayout.NORTH, this);
         JLabel etiqueta2 = new JLabel("Nº Banos: ");
@@ -57,9 +57,9 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, planta, 5, SpringLayout.SOUTH, direccion);
         layout.putConstraint(SpringLayout.WEST, casilla, 0, SpringLayout.WEST, planta);
         layout.putConstraint(SpringLayout.NORTH, casilla, 8, SpringLayout.SOUTH, etiqueta5);
-        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
-        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
+        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
 
         this.add(etiqueta1);
@@ -76,16 +76,17 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==crear){
+            texto.setVisible(false);
             gui.getControlador().crearInmueble(Integer.parseInt(nHab.getText()), Integer.parseInt(nBanos.getText())
                     , Integer.parseInt(dim.getText()), direccion.getText(), Integer.parseInt(planta.getText())
                     , casilla.isSelected());
@@ -95,6 +96,6 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
     public void creadoOK(String cadena){
         texto.setText(cadena);
         texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
+        texto.setForeground(java.awt.Color.red);
     }
 }

@@ -88,7 +88,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         this.add(etiqueta6);
         this.add(precio);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         buscar.addActionListener(this);
         volver.addActionListener(this);
 
@@ -101,7 +101,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
             ascensor = casilla1.isSelected();
             vacacional = casilla2.isSelected();
             gui.getControlador().avanzada(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText()),
-                    Integer.parseInt(dim.getText()), Integer.parseInt(planta.getText()),  ascensor, direccion.getText(),
+                    Integer.parseInt(dim.getText()), Integer.parseInt(planta.getText()), ascensor, direccion.getText(),
                     Integer.parseInt(precio.getText()),vacacional);
         } else if(evento.getSource()==volver){
             gui.getControlador().volverDemandante();

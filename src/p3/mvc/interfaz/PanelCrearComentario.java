@@ -38,7 +38,7 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         publicar.addActionListener(this);
 
@@ -46,8 +46,10 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverRAvanzada();
         } else if(evento.getSource()==publicar){
+            texto.setVisible(false);
             gui.getControlador().publicarComentario(texto.getText());
         }
     }

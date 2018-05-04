@@ -40,6 +40,7 @@ public class Controlador {
                                 this.gui.loginResult(false);
                             }
                         }
+                        this.gui.loginResult(false);
                     }
                     break;
                 }
@@ -54,6 +55,7 @@ public class Controlador {
                                 this.gui.loginResult(false);
                             }
                         }
+                        this.gui.loginResult(false);
                     }
                     break;
                 }
@@ -159,33 +161,26 @@ public class Controlador {
 
     }
     public void alquilar(Oferta oferta){
-        String texto;
         try{
             if(muzska.alquilar((Demandante)usr,oferta)){
-                texto = "Alquiler realizado correctamente";
-                this.gui.alquilerOK(texto);
+                this.gui.alquilerOK("Alquiler realizado correctamente");
             } else{
-                texto = "Error al alquilar";
-                this.gui.alquilerOK(texto);
+                this.gui.alquilerOK("Error al alquilar");
             }
         } catch (Exception e){
-            texto = e.getMessage();
-            this.gui.alquilerOK(texto);
+            this.gui.alquilerOK(e.getMessage());
         }
 
 
     }
 
     public void valorar(int x){
-        String texto;
         Valoracion valoracion = new Valoracion((Demandante)usr,x);
         try {
             if(oferta.anadirOpinion(valoracion)){
-                texto = "Valoracion realizada correctamente";
-                this.gui.valoracionOK(texto);
+                this.gui.valoracionOK("Valoracion realizada correctamente");
             } else {
-                texto = "Error al valorar";
-                this.gui.valoracionOK(texto);
+                this.gui.valoracionOK("Error al valorar");
             }
         } catch(Exception e){
             this.gui.valoracionOK(e.getMessage());
@@ -246,22 +241,21 @@ public class Controlador {
     }
 
     public void crearInmueble(int nHab, int nBanos, int dim, String dir, int planta, boolean ascensor) {
-        String texto;
+        if(dir.equals("")){
+            this.gui.creadoOK("La direccion no es valida");
+        }
         try {
             if (usr instanceof Ofertante) {
                 Inmueble inmueble = new Inmueble(nHab, nBanos, dim, dir, planta, ascensor, (Ofertante) usr);
                 if(muzska.anadirInmueble(inmueble)){
-                    texto = "El inmueble se ha creado correctamente";
-                    this.gui.creadoOK(texto);
+                    this.gui.creadoOK("El inmueble se ha creado correctamente");
                 }else{
-                    texto = "Error al añadir el inmueble";
-                    this.gui.creadoOK(texto);
+                    this.gui.creadoOK("Error al añadir el inmueble");
                 }
 
             }
         }catch(Exception e){
-            texto = e.getMessage();
-            this.gui.creadoOK(texto);
+            this.gui.creadoOK(e.getMessage());
         }
     }
 
@@ -275,22 +269,18 @@ public class Controlador {
 
     public void crearOferta(double precio, LocalDate fIni, LocalDate fFin, boolean vacacional
             , double fianza, Inmueble inmueble) {
-        String texto;
         try {
             if (usr instanceof Ofertante) {
                 Oferta oferta = new Oferta(precio, fIni, fFin, vacacional, fianza, inmueble);
                 if(inmueble.anadirOferta(oferta)){
-                    texto = "La oferta se ha creado correctamente";
-                    this.gui.creadaOK(texto);
+                    this.gui.creadaOK("La oferta se ha creado correctamente");
                 }else{
-                    texto = "Error al añadir la oferta";
-                    this.gui.creadaOK(texto);
+                    this.gui.creadaOK("Error al añadir la oferta");
                 }
 
             }
         }catch(Exception e){
-            texto = e.getMessage();
-            this.gui.creadaOK(texto);
+            this.gui.creadaOK(e.getMessage());
         }
     }
 
@@ -321,7 +311,8 @@ public class Controlador {
 
         for(Cliente c: muzska.getUsuarios()){
             if(c instanceof Demandante){
-                usuarios.add((Demandante)c);
+                if(((Demandante) c).isBloqueado())
+                    usuarios.add((Demandante)c);
             }
         }
         return usuarios;

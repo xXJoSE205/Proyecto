@@ -86,7 +86,7 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
         this.add(texto);
         this.add(scrollBar);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         modificar.addActionListener(this);
     }
@@ -96,10 +96,11 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==modificar){
+            texto.setVisible(false);
             gui.getControlador().modificarOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
                     , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
                     , oferta);

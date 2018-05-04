@@ -41,6 +41,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
             Object[] nuevaFila = {o.getPrecio(), o.getFechaInicio(), o.getFechaFin(), o.isVacacional(), o.getFianza()};
             modeloDatos.addRow(nuevaFila);
         }
+        tabla.setPreferredScrollableViewportSize(new Dimension(600, 350));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
@@ -53,10 +54,10 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         select.setVisible(true);
         texto.setVisible(false);
 
-        JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        JLabel etiqueta1 = new JLabel("Ofertas pendientes");
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, modificaciones, 5, SpringLayout.SOUTH, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, modificaciones, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
@@ -65,20 +66,35 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
 
         this.add(etiqueta1);
         this.add(select);
+        this.add(modificaciones);
         this.add(scrollPane);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverGerente();
         }else if(e.getSource()==aceptar){
-            gui.getControlador().aceptarOferta(ofertas.get(tabla.getSelectedRow()));
+            texto.setVisible(false);
+            try {
+                gui.getControlador().aceptarOferta(ofertas.get(tabla.getSelectedRow()));
+            }catch (Exception e1){
+                texto.setText("Selecciona oferta para aceptarla");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }else if(e.getSource()==rechazar){
-            gui.getControlador().rechazarOferta(ofertas.get(tabla.getSelectedRow()), modificaciones.getText());
+            texto.setVisible(false);
+            try {
+                gui.getControlador().rechazarOferta(ofertas.get(tabla.getSelectedRow()), modificaciones.getText());
+            }catch (Exception e2){
+                texto.setText("Selecciona oferta para rechazarla");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }
     }
 

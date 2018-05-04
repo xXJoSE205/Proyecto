@@ -10,7 +10,6 @@ public class PanelPrincipal extends JPanel implements ActionListener{
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton buscar = new JButton("Buscar");
     private GuiInmobiliaria gui;
-    private JLabel texto = new JLabel("");
 
     PanelPrincipal(GuiInmobiliaria gui){
         this.gui = gui;
@@ -43,7 +42,7 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         this.add(imagen);
 
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
 
         inSes.addActionListener(this);
         buscar.addActionListener(this);
@@ -55,11 +54,5 @@ public class PanelPrincipal extends JPanel implements ActionListener{
         } else if(evento.getSource()==buscar){
             this.gui.getControlador().goBusqueda();
         }
-    }
-
-    public void creadaOK(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
     }
 }

@@ -69,7 +69,7 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crear.addActionListener(this);
     }
@@ -79,10 +79,11 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        texto.setVisible(false);
         if (e.getSource() == volver) {
+            texto.setVisible(false);
             gui.getControlador().volverVerInmuebles();
         } else if (e.getSource() == crear) {
+            texto.setVisible(false);
             gui.getControlador().crearOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
                     , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
                     , inmueble);

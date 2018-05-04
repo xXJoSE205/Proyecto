@@ -44,7 +44,7 @@ public class PanelCReserva extends JPanel implements ActionListener {
         this.add(etiqueta1);
         this.add(select);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         cancelar.addActionListener(this);
     }

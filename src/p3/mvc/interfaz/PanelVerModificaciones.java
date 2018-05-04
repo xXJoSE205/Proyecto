@@ -31,7 +31,7 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         this.gui = gui;
 
         this.lista = gui.getControlador().getOfertasRechazadas();
-        JTextArea modificaciones = new JTextArea();
+        final JTextArea modificaciones = new JTextArea();
         modificaciones.setText(((Ofertante)gui.getControlador().getCliente()).getModificaciones());
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -41,6 +41,7 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
             Object[] nuevaFila = {o.getPrecio(), o.getFechaInicio(), o.getFechaFin(), o.isVacacional(), o.getFianza()};
             modeloDatos.addRow(nuevaFila);
         }
+        tabla.setPreferredScrollableViewportSize(new Dimension(600, 300));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
@@ -59,16 +60,15 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         JScrollPane scrollBar = new JScrollPane(modificaciones);
         layout.putConstraint(SpringLayout.NORTH, scrollBar, 5, SpringLayout.SOUTH, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
-        layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, modificaciones);
+        layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, scrollBar);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
         layout.putConstraint(SpringLayout.NORTH, select, 5, SpringLayout.SOUTH, texto);
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(tabla);
         this.add(texto);
-        this.add(modificaciones);
+        this.add(scrollBar);
         this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
@@ -78,11 +78,18 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==modificar){
-            gui.getControlador().goModificarOferta(lista.get(tabla.getSelectedRow()));
+            texto.setVisible(false);
+            try {
+                gui.getControlador().goModificarOferta(lista.get(tabla.getSelectedRow()));
+            }catch (Exception exception){
+                texto.setText("Selecciona oferta para modificarla");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }
     }
 }

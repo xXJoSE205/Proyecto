@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
+    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones","Direccion", "Ascensor", "Planta" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
@@ -33,14 +33,18 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Inmueble i:lista){
-            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(), i.getPlanta()};
+            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones()
+                        , i.getDireccion(), i.getAscensor(), i.getPlanta()};
             modeloDatos.addRow(nuevaFila);
         }
+        tabla.setPreferredScrollableViewportSize(new Dimension(700, 400));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
+        grupo.add(crear);
         JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
+        select.add(crear);
         select.setVisible(true);
         texto.setVisible(false);
 
@@ -48,7 +52,7 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
-        layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH, scrollPane, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
@@ -56,21 +60,28 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(tabla);
         this.add(texto);
         this.add(scrollPane);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==crear){
-            gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
+            texto.setVisible(false);
+            /* NO VA NI ESTE NI LOS PARECIDOS*/
+            try {
+                gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()%6));
+            }catch (Exception exception){
+                texto.setText("Selecciona inmueble para crear la oferta");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }
     }
 }

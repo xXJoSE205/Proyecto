@@ -41,11 +41,11 @@ public class BusquedaResultado extends JPanel implements ActionListener {
         select.setVisible(true);
 
         JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
         layout.putConstraint(SpringLayout.NORTH, select, 425, SpringLayout.NORTH, scrollPane);
 
         this.add(etiqueta1);

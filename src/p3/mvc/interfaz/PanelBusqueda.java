@@ -11,7 +11,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
     private final JTextField numeroBan = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 2);
     private final JTextField planta = new JTextField("-1", 2);
-    private final JTextField direccion = new JTextField(50);
+    private final JTextField direccion = new JTextField(30);
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private JLabel texto = new JLabel("");
     private JButton buscar = new JButton("Buscar");
@@ -35,7 +35,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, etiqueta1, -100, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
 
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
@@ -52,7 +52,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
 
-        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
+        JLabel etiqueta4 = new JLabel("Planta");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
@@ -68,7 +68,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta5);
 
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla1);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, casilla1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
 
         this.add(etiqueta1);
@@ -84,7 +84,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
         this.add(casilla1);
         this.add(select);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
 
         buscar.addActionListener(this);
         volver.addActionListener(this);
@@ -92,11 +92,13 @@ public class PanelBusqueda extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==buscar) {
+            texto.setVisible(false);
             gui.getControlador().buscar(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText())
                     , Integer.parseInt(dim.getText()),Integer.parseInt(planta.getText())
                     , casilla1.isSelected(), direccion.getText());
         } else if(evento.getSource()==volver){
-                gui.getControlador().volverDeBusqueda();
+            texto.setVisible(false);
+            gui.getControlador().volverDeBusqueda();
         }
     }
 

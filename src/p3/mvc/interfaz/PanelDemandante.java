@@ -47,7 +47,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
         this.add(etiqueta2);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         buscar.addActionListener(this);
         avanzada.addActionListener(this);
@@ -55,14 +55,17 @@ public class PanelDemandante extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento) {
-        texto.setVisible(false);
         if( evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().logout();
         } else if(evento.getSource()==buscar){
+            texto.setVisible(false);
             gui.getControlador().goBusqueda();
         } else if(evento.getSource()==avanzada){
+            texto.setVisible(false);
             gui.getControlador().goAvanzada();
         } else if(evento.getSource()==reservas){
+            texto.setVisible(false);
             gui.getControlador().goComprobarReserva();
         }
     }

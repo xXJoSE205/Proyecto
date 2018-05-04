@@ -30,11 +30,11 @@ public class PanelGerente extends JPanel implements ActionListener {
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("GERENTE");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta2, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
@@ -43,19 +43,21 @@ public class PanelGerente extends JPanel implements ActionListener {
         this.add(etiqueta2);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         desbloquear.addActionListener(this);
         comprobar.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
-        texto.setVisible(false);
-        if( evento.getSource()==volver){
+        if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().logout();
         } else if(evento.getSource()==desbloquear){
+            texto.setVisible(false);
             gui.getControlador().goUsuariosBloqueados();
         } else if(evento.getSource()==comprobar){
+            texto.setVisible(false);
             gui.getControlador().goComprobarOfertas();
         }
     }

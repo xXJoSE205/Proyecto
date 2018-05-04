@@ -33,19 +33,20 @@ public class PanelOfertante extends JPanel implements ActionListener {
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("OFERTANTE");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta2, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, etiqueta2);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
         this.add(etiqueta1);
         this.add(select);
         this.add(etiqueta2);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crearInm.addActionListener(this);
         verInmuebles.addActionListener(this);
@@ -53,24 +54,22 @@ public class PanelOfertante extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento) {
-        texto.setVisible(false);
         if (evento.getSource() == volver) {
+            texto.setVisible(false);
             gui.getControlador().logout();
         } else if (evento.getSource() == crearInm) {
+            texto.setVisible(false);
             gui.getControlador().goCrearInmueble();
         } else if (evento.getSource() == verInmuebles) {
+            texto.setVisible(false);
             gui.getControlador().goVerInmuebles();
         } else if (evento.getSource() == modificaciones) {
+            texto.setVisible(false);
             gui.getControlador().goVerModificaciones();
         }
     }
 
-    public void setError(String error) {
-        texto.setVisible(true);
-        texto.setForeground(java.awt.Color.red);
-    }
-
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

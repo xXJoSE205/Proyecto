@@ -73,7 +73,7 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         this.add(select);
         this.add(texto);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         desb.addActionListener(this);
         desbYMod.addActionListener(this);
@@ -84,12 +84,14 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
-            gui.getControlador().volverOfertante();
+            texto.setVisible(false);
+            gui.getControlador().volverUsuariosBloqueados();
         }else if(e.getSource()==desb){
+            texto.setVisible(false);
             gui.getControlador().desbloquearUsuario(demandante);
         }else if(e.getSource()==desbYMod){
+            texto.setVisible(false);
             gui.getControlador().desbloquearUsuario(demandante, tarjeta.getText());
         }
     }

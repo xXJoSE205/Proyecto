@@ -39,6 +39,7 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
                 modeloDatos.addRow(nuevaFila);
             }
         }
+        tabla.setPreferredScrollableViewportSize(new Dimension(600, 350));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
@@ -61,21 +62,27 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(tabla);
         this.add(texto);
         this.add(scrollPane);
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(600, 400));
+        this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         desbloquear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
-        texto.setVisible(false);
         if(e.getSource()==volver){
-            gui.getControlador().volverOfertante();
+            texto.setVisible(false);
+            gui.getControlador().volverGerente();
         }else if(e.getSource()==desbloquear){
-            gui.getControlador().goDesbloquearUsuarios(lista.get(tabla.getSelectedRow()));
+            texto.setVisible(false);
+            try {
+                gui.getControlador().goDesbloquearUsuarios(lista.get(tabla.getSelectedRow()));
+            }catch (Exception exception){
+                texto.setText("Selecciona usario para desbloquear");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }
     }
 }
