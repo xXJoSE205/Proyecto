@@ -42,15 +42,18 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
             modeloDatos.addRow(nuevaFila);
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(aceptar);
         grupo.add(rechazar);
+        JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(volver);
         select.add(aceptar);
         select.add(rechazar);
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
@@ -68,6 +71,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
+        texto.setVisible(false);
         if(e.getSource()==volver){
             gui.getControlador().volverGerente();
         }else if(e.getSource()==aceptar){
@@ -75,5 +79,11 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         }else if(e.getSource()==rechazar){
             gui.getControlador().rechazarOferta(ofertas.get(tabla.getSelectedRow()), modificaciones.getText());
         }
+    }
+
+    public void setError(String texto){
+        this.texto.setVisible(true);
+        this.texto.setText(texto);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

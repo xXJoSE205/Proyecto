@@ -9,32 +9,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelCReserva extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("DEMANDANTE");
-    private JTextArea etiqueta2;
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
     JButton volver = new JButton("Volver");
     JButton cancelar = new JButton("Cancelar Reserva");
-    private Reserva reserva;
     private JLabel texto = new JLabel("");
 
     PanelCReserva(GuiInmobiliaria gui){
         this.gui = gui;
-        this.reserva=((Demandante)gui.getControlador().getCliente()).getReserva();
+        Reserva reserva = ((Demandante) gui.getControlador().getCliente()).getReserva();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        if(reserva==null){
-            etiqueta2= new JTextArea("No hay ninguna reserva activa");
+        JTextArea etiqueta2;
+        if(reserva ==null){
+            etiqueta2 = new JTextArea("No hay ninguna reserva activa");
         } else {
             etiqueta2 = new JTextArea(reserva.toString() + "\n" + reserva.getOferta().toString() + "\n" + reserva.getOferta().getInmueble().toString());
         }
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(cancelar);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.add(cancelar);
         select.setVisible(true);
 
+        JLabel etiqueta1 = new JLabel("DEMANDANTE");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);

@@ -10,38 +10,37 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class BusquedaResultado extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
-    private Object filas [][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
-        public boolean isCellEditable(int row, int colum){
-            return false;
-        }
-    };
     private JButton volver = new JButton("Volver");
-    private List<Inmueble> lista;
     private JLabel texto = new JLabel("");
 
     BusquedaResultado(GuiInmobiliaria gui){
         this.gui = gui;
 
-        this.lista= gui.getControlador().getBusqueda();
+        List<Inmueble> lista = gui.getControlador().getBusqueda();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        Object[][] filas = {};
+        String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta"};
+        DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos) {
+            public boolean isCellEditable(int row, int colum) {
+                return false;
+            }
+        };
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
-        for(Inmueble i:lista){
+        for(Inmueble i: lista){
             Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(), i.getPlanta()};
             modeloDatos.addRow(nuevaFila);
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.setVisible(true);
 
+        JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);

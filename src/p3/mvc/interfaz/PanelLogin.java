@@ -6,16 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelLogin extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("NIF: ");
     private final JTextField nif = new JTextField(10);
-    private JLabel etiqueta2 = new JLabel("Contrasena: ");
     private final JPasswordField pswd = new JPasswordField(15);
-    private JPanel selectType = new JPanel(new GridLayout(3, 1));
-    private JPanel selectLogin = new JPanel(new GridLayout(1, 2));
     private JRadioButton demandante = new JRadioButton("Demandante");
     private JRadioButton ofertante = new JRadioButton("Ofertante");
     private JRadioButton gerente = new JRadioButton("Gerente");
-    private ButtonGroup grupo = new ButtonGroup();
     private JButton inSes = new JButton("Iniciar Sesion");
     private JButton volver = new JButton("Volver");
     private JLabel texto = new JLabel("");
@@ -28,17 +23,22 @@ public class PanelLogin extends JPanel implements ActionListener{
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
+        JPanel selectType = new JPanel(new GridLayout(3, 1));
         selectType.add(demandante);
         selectType.add(ofertante);
         selectType.add(gerente);
         selectType.setVisible(true);
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(inSes);
         grupo.add(volver);
+        JPanel selectLogin = new JPanel(new GridLayout(1, 2));
         selectLogin.add(inSes);
         selectLogin.add(volver);
         selectLogin.setVisible(true);
 
+        JLabel etiqueta2 = new JLabel("Contrasena: ");
+        JLabel etiqueta1 = new JLabel("NIF: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, nif, 0, SpringLayout.WEST, pswd);

@@ -6,12 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelGerente extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("GERENTE");
-    private JLabel etiqueta2;
     private JLabel texto = new JLabel("Error al cerrar sesion");
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(3, 1));
-    private ButtonGroup grupo = new ButtonGroup();
 
     JButton volver = new JButton("Desconectarse");
     JButton desbloquear = new JButton("Desbloquear usuarios");
@@ -21,16 +17,19 @@ public class PanelGerente extends JPanel implements ActionListener {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        etiqueta2=new JLabel("Bienvenido " + gui.getControlador().getSistema().getGerente().getNombre());
+        JLabel etiqueta2 = new JLabel("Bienvenido " + gui.getControlador().getSistema().getGerente().getNombre());
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(desbloquear);
         grupo.add(comprobar);
+        JPanel select = new JPanel(new GridLayout(3, 1));
         select.add(volver);
         select.add(desbloquear);
         select.add(comprobar);
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("GERENTE");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);

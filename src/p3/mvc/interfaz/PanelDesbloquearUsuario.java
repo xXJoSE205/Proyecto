@@ -8,19 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Nombre: ");
-    private final JTextField nombre;
-    private JLabel etiqueta2 = new JLabel("Apellidos: ");
-    private final JTextField apellidos;
-    private JLabel etiqueta3 = new JLabel("NIF: ");
-    private final JTextField nif;
-    private JLabel etiqueta4 = new JLabel("Tarjeta: ");
     private final JTextField tarjeta;
     private JButton desb = new JButton("Desbloquear");
     private JButton desbYMod = new JButton("Modificar");
     private JButton volver = new JButton("Cancelar");
-    private JPanel select = new JPanel(new GridLayout(1, 3));
-    private ButtonGroup grupo = new ButtonGroup();
     private JLabel texto = new JLabel("");
     private Demandante demandante;
     private GuiInmobiliaria gui;
@@ -31,20 +22,24 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        nombre = new JTextField(String.valueOf(demandante.getNombre()), 10);
-        apellidos = new JTextField(String.valueOf(demandante.getApellidos()), 10);
-        nif = new JTextField(String.valueOf(demandante.getNif()), 10);
+        JTextField nombre = new JTextField(String.valueOf(demandante.getNombre()), 10);
+        JTextField apellidos = new JTextField(String.valueOf(demandante.getApellidos()), 10);
+        JTextField nif = new JTextField(String.valueOf(demandante.getNif()), 10);
         tarjeta = new JTextField(String.valueOf(demandante.getTarjeta()), 10);
 
+        JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(volver);
         select.add(desb);
         select.add(desbYMod);
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(desb);
         grupo.add(desbYMod);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Nombre: ");
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
+        JLabel etiqueta2 = new JLabel("Apellidos: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, nombre, 0, SpringLayout.WEST, apellidos);
         layout.putConstraint(SpringLayout.NORTH, nombre, 5, SpringLayout.NORTH, this);
@@ -52,10 +47,12 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, apellidos, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, apellidos, 5, SpringLayout.SOUTH, nombre);
+        JLabel etiqueta3 = new JLabel("NIF: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, nif, 0, SpringLayout.WEST, apellidos);
         layout.putConstraint(SpringLayout.NORTH, nif, 5, SpringLayout.SOUTH, apellidos);
+        JLabel etiqueta4 = new JLabel("Tarjeta: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, tarjeta, 0, SpringLayout.WEST, nif);

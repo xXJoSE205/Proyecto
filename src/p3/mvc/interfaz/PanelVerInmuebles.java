@@ -11,12 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("Tus Inmuebles");
     private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
@@ -40,11 +37,14 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
             modeloDatos.addRow(nuevaFila);
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Tus Inmuebles");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);

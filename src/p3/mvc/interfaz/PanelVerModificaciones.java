@@ -1,6 +1,5 @@
 package p3.mvc.interfaz;
 
-import p3.mvc.modelo.Inmueble;
 import p3.mvc.modelo.Oferta;
 import p3.mvc.modelo.Ofertante;
 
@@ -34,6 +33,7 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         this.gui = gui;
 
         this.lista = gui.getControlador().getOfertasRechazadas();
+        JTextArea modificaciones = new JTextArea();
         modificaciones.setText(((Ofertante)gui.getControlador().getCliente()).getModificaciones());
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -44,13 +44,16 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
             modeloDatos.addRow(nuevaFila);
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(modificar);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.add(modificar);
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Tus Inmuebles");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);

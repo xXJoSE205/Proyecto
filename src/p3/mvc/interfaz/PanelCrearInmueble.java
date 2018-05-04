@@ -7,21 +7,14 @@ import java.awt.event.ActionListener;
 
 
 public class PanelCrearInmueble extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("Nº Habitaciones: ");
     private final JTextField nHab = new JTextField(2);
-    private JLabel etiqueta2 = new JLabel("Nº Banos: ");
     private final JTextField nBanos = new JTextField(2);
-    private JLabel etiqueta3 = new JLabel("Dimensiones: ");
     private final JTextField dim = new JTextField(5);
-    private JLabel etiqueta4 = new JLabel("Direccion: ");
     private final JTextField direccion = new JTextField(30);
-    private JLabel etiqueta5 = new JLabel("Planta: ");
     private final JTextField planta = new JTextField(2);
     private JCheckBox casilla = new JCheckBox("Ascensor");
     private JButton crear = new JButton("Crear inmueble");
     private JButton volver = new JButton("Cancelar");
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
     private JLabel texto = new JLabel("");
     private GuiInmobiliaria gui;
 
@@ -29,28 +22,35 @@ public class PanelCrearInmueble extends JPanel implements ActionListener{
         this.gui=gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(crear);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.add(crear);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Nº Habitaciones: ");
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.WEST, nHab, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, nHab, 5, SpringLayout.NORTH, this);
+        JLabel etiqueta2 = new JLabel("Nº Banos: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta2, 0, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, nBanos, 0, SpringLayout.WEST, nHab);
         layout.putConstraint(SpringLayout.NORTH, nBanos, 5, SpringLayout.SOUTH, nHab);
+        JLabel etiqueta3 = new JLabel("Dimensiones: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, nBanos);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, nBanos);
+        JLabel etiqueta4 = new JLabel("Direccion: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, direccion, 0, SpringLayout.WEST, dim);
         layout.putConstraint(SpringLayout.NORTH, direccion, 5, SpringLayout.SOUTH, dim);
+        JLabel etiqueta5 = new JLabel("Planta: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta5, 0, SpringLayout.EAST, etiqueta4);
         layout.putConstraint(SpringLayout.NORTH, etiqueta5, 8, SpringLayout.SOUTH, etiqueta4);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, direccion);

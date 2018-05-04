@@ -10,12 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("Usuarios Bloqueados");
     private String[] titulos = {"Nombre", "Apellidos", "NIF", "Tarjeta"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
@@ -43,13 +40,16 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
             }
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(desbloquear);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(volver);
         select.add(desbloquear);
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Usuarios Bloqueados");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);

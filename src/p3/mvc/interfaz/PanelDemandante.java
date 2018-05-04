@@ -6,12 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelDemandante extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("DEMANDANTE");
-    private JLabel etiqueta2;
     private JLabel texto = new JLabel("Error al cerrar sesion");
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(4, 1));
-    private ButtonGroup grupo = new ButtonGroup();
 
     JButton volver = new JButton("Desconectarse");
     JButton buscar = new JButton("Busqueda");
@@ -23,11 +19,13 @@ public class PanelDemandante extends JPanel implements ActionListener {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        etiqueta2=new JLabel("Bienvenido " + gui.getControlador().getCliente().getNombre());
+        JLabel etiqueta2 = new JLabel("Bienvenido " + gui.getControlador().getCliente().getNombre());
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(buscar);
         grupo.add(avanzada);
         grupo.add(reservas);
+        JPanel select = new JPanel(new GridLayout(4, 1));
         select.add(volver);
         select.add(buscar);
         select.add(avanzada);
@@ -35,6 +33,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
         select.setVisible(true);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("DEMANDANTE");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);

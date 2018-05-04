@@ -1,6 +1,5 @@
 package p3.mvc.interfaz;
 
-import p3.mvc.modelo.Inmueble;
 import p3.mvc.modelo.Oferta;
 
 import javax.swing.*;
@@ -11,12 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AvanzadaResultado extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
     private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Precio","Vacacional"};
     private Object filas[][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 4));
-    private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
@@ -44,16 +40,19 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
             modeloDatos.addRow(nuevaFila);
         }
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(alquilar);
         grupo.add(comentario);
         grupo.add(comentario2);
+        JPanel select = new JPanel(new GridLayout(1, 4));
         select.add(comentario);
         select.add(comentario2);
         select.add(volver);
         select.add(alquilar);
         select.setVisible(true);
 
+        JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);

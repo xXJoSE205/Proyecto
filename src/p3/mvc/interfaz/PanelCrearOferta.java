@@ -9,19 +9,13 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 public class PanelCrearOferta extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Precio: ");
     private final JTextField precio = new JTextField(10);
-    private JLabel etiqueta2 = new JLabel("Fecha inicio: ");
     private final JTextField fIni = new JTextField(10);
-    private JLabel etiqueta3 = new JLabel("Fecha final: ");
     private final JTextField fFin = new JTextField(10);
-    private JLabel etiqueta4 = new JLabel("Fianza: ");
     private final JTextField fianza = new JTextField(10);
     private JCheckBox casilla = new JCheckBox("Vacacional");
     private JButton crear = new JButton("Crear oferta");
     private JButton volver = new JButton("Cancelar");
-    private JPanel select = new JPanel(new GridLayout(1, 3));
-    private ButtonGroup grupo = new ButtonGroup();
     private JLabel texto = new JLabel("");
     private Inmueble inmueble;
     private GuiInmobiliaria gui;
@@ -30,13 +24,17 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+        JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(crear);
         select.add(volver);
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(crear);
         texto.setVisible(false);
 
+        JLabel etiqueta1 = new JLabel("Precio: ");
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
+        JLabel etiqueta2 = new JLabel("Fecha inicio: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, precio, 0, SpringLayout.WEST, fIni);
         layout.putConstraint(SpringLayout.NORTH, precio, 5, SpringLayout.NORTH, this);
@@ -44,10 +42,12 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, fIni, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, fIni, 5, SpringLayout.SOUTH, precio);
+        JLabel etiqueta3 = new JLabel("Fecha final: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, fFin, 0, SpringLayout.WEST, fIni);
         layout.putConstraint(SpringLayout.NORTH, fFin, 5, SpringLayout.SOUTH, fIni);
+        JLabel etiqueta4 = new JLabel("Fianza: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, fianza, 0, SpringLayout.WEST, fFin);

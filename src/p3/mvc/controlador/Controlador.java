@@ -3,7 +3,6 @@ package p3.mvc.controlador;
 import p3.mvc.interfaz.GuiInmobiliaria;
 import p3.mvc.modelo.*;
 
-import java.security.spec.ECField;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -334,11 +333,13 @@ public class Controlador {
     }
 
     public void aceptarOferta(Oferta oferta) {
-        this.gui.aceptarOferta(oferta);
+        oferta.setEstado(Estado.DISPONIBLE);
+        this.gui.aceptarOferta("La oferta se ha aceptado");
     }
 
     public void rechazarOferta(Oferta oferta, String modificaciones) {
-        this.gui.rechazarOferta(oferta, modificaciones);
+        oferta.getInmueble().getDueno().anadirModificaciones(modificaciones, true);
+        this.gui.rechazarOferta("La oferta se ha rechazado");
     }
 
     public void goUsuariosBloqueados() {

@@ -8,24 +8,16 @@ import java.awt.event.ActionListener;
 
 public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
 
-    private JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
     private final JTextField numero = new JTextField("", 2);
-    private JLabel etiqueta2 = new JLabel("Numero de banos:");
     private final JTextField numeroBan = new JTextField("", 2);
-    private JLabel etiqueta3 = new JLabel("Dimensiones:");
     private final JTextField dim = new JTextField("", 2);
-    private JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
     private final JTextField planta = new JTextField("", 2);
-    private JLabel etiqueta5 = new JLabel("Direccion:");
     private final JTextField direccion = new JTextField("", 50);
-    private JLabel etiqueta6 = new JLabel("Precio");
     private final JTextField precio = new JTextField("",4);
     private JCheckBox casilla2 = new JCheckBox("Vacacional");
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
-    private ButtonGroup grupo = new ButtonGroup();
     private JButton buscar = new JButton("Buscar");
     private JButton volver = new JButton("Volver");
-    private JPanel select = new JPanel(new GridLayout(1, 2));
     private GuiInmobiliaria gui;
     private JLabel texto = new JLabel("");
 
@@ -34,32 +26,40 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(buscar);
         grupo.add(volver);
+        JPanel select = new JPanel(new GridLayout(1, 2));
         select.add(buscar);
         select.add(volver);
         select.setVisible(true);
 
+        JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, numero, 5, SpringLayout.NORTH, this);
+        JLabel etiqueta2 = new JLabel("Numero de banos:");
         layout.putConstraint(SpringLayout.EAST, etiqueta2, 0, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, numeroBan, 0, SpringLayout.WEST, numero);
         layout.putConstraint(SpringLayout.NORTH, numeroBan, 5, SpringLayout.SOUTH, numero);
+        JLabel etiqueta3 = new JLabel("Dimensiones:");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
+        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
         layout.putConstraint(SpringLayout.NORTH, planta, 5, SpringLayout.SOUTH, dim);
+        JLabel etiqueta5 = new JLabel("Direccion:");
         layout.putConstraint(SpringLayout.EAST, etiqueta5, 0, SpringLayout.EAST, etiqueta4);
         layout.putConstraint(SpringLayout.NORTH, etiqueta5, 8, SpringLayout.SOUTH, etiqueta4);
         layout.putConstraint(SpringLayout.WEST, direccion, 0, SpringLayout.WEST, planta);
         layout.putConstraint(SpringLayout.NORTH, direccion, 5, SpringLayout.SOUTH, planta);
+        JLabel etiqueta6 = new JLabel("Precio");
         layout.putConstraint(SpringLayout.EAST, etiqueta6, 0, SpringLayout.EAST, etiqueta5);
         layout.putConstraint(SpringLayout.NORTH, etiqueta6, 8, SpringLayout.SOUTH, etiqueta5);
         layout.putConstraint(SpringLayout.WEST, precio, 0, SpringLayout.WEST, direccion);
@@ -97,16 +97,8 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         boolean ascensor;
         boolean vacacional;
         if(evento.getSource()==buscar) {
-            if (casilla1.isSelected()) {
-                 ascensor = true;
-            } else {
-                 ascensor = false;
-            }
-            if (casilla2.isSelected()) {
-                 vacacional=true;
-            } else {
-                 vacacional = false;
-            }
+            ascensor = casilla1.isSelected();
+            vacacional = casilla2.isSelected();
             gui.getControlador().avanzada(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText()),
                     Integer.parseInt(dim.getText()), Integer.parseInt(planta.getText()),  ascensor, direccion.getText(),
                     Integer.parseInt(precio.getText()),vacacional);

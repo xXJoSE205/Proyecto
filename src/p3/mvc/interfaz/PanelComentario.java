@@ -1,50 +1,44 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.modelo.Comentario;
-import p3.mvc.modelo.Opinion;
 
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
-import java.util.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelComentario extends JPanel implements ActionListener {
 
-    private JLabel etiqueta3 = new JLabel("Valorar: ");
     private String[] numeros = {"Val","0","1","2","3","4","5"};
     private JComboBox lista = new JComboBox(numeros);
-    private JLabel etiqueta1 = new JLabel("Precio: ");
-    private final JTextField val = new JTextField(2);
     private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
     private DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
     private JTree arbol = new JTree (modeloDatos);
 
-    private JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
     private JButton boton1 = new JButton("Valorar");
     private JButton boton2 = new JButton("Atras");
     private JButton boton3 = new JButton("Añadir Comentario");
-    private JPanel select = new JPanel(new GridLayout(1, 3));
-    private ButtonGroup grupo = new ButtonGroup();
     private GuiInmobiliaria gui;
-    private List<Comentario> com;
     private JLabel texto = new JLabel("");
 
     PanelComentario(GuiInmobiliaria gui) {
         this.gui=gui;
-        this.com= gui.getControlador().getComentarios();
+        List<Comentario> com = gui.getControlador().getComentarios();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         arbol.setVisibleRowCount(10);
+        JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.add(arbol);
         scroll.setViewportView(arbol);
         scroll.setPreferredSize(new Dimension(400,300));
+        ButtonGroup grupo = new ButtonGroup();
         grupo.add(boton1);
         grupo.add(boton2);
         grupo.add(boton3);
+        JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(boton1);
         select.add(boton2);
         select.add(boton3);
@@ -52,7 +46,7 @@ public class PanelComentario extends JPanel implements ActionListener {
         arbol.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
         int i=0;
-        for(Comentario comentario1 :com){
+        for(Comentario comentario1 : com){
             if(!comentario1.getComentarios().isEmpty()){
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode("Comentario "+i);
                 modeloDatos.insertNodeInto(node,raiz,i);
@@ -64,8 +58,10 @@ public class PanelComentario extends JPanel implements ActionListener {
             i++;
         }
 
+        JTextField val = new JTextField(2);
         val.setText(gui.getControlador().getValoracion());
 
+        JLabel etiqueta3 = new JLabel("Valorar: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 100, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, lista, 0, SpringLayout.WEST, etiqueta3);
@@ -74,8 +70,9 @@ public class PanelComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, scroll, 5, SpringLayout.SOUTH, lista);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scroll);
         layout.putConstraint(SpringLayout.NORTH, select, 30, SpringLayout.SOUTH, scroll);
+        JLabel etiqueta1 = new JLabel("Precio: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
-        layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST,etiqueta1);
+        layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST, etiqueta1);
         this.setPreferredSize(new Dimension(200, 100));
         this.add(etiqueta3);
         this.add(lista);
