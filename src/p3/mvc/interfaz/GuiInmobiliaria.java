@@ -341,7 +341,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goCrearComentario(){
-
+        panelComentario.setVisible(false);
+        panelAnadirComentario.setVisible(true);
     }
 
     public void volverComentario(){
