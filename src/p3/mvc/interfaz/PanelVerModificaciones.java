@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelVerModificaciones extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Tus Inmuebles");
+    private JLabel etiqueta1 = new JLabel("Modificaciones propuestas");
     private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;

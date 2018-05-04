@@ -187,19 +187,8 @@ public class Controlador {
 
     public void anadirComentario(Comentario comentario){
         String texto;
-        try{
-            if(this.comentario.anadirComentario(comentario)){
-                texto = "Comentario anadido correctamente";
-                this.gui.comentarioOK(texto);
-            } else {
-                texto = "Error al anadir el comentario";
-                this.gui.comentarioOK(texto);
-            }
-
-        }catch (Exception e){
-            texto = e.getMessage();
-            this.gui.comentarioOK(texto);
-        }
+        this.comentario=comentario;
+        this.gui.goAnadirComentario();
     }
 
     public void anadirComentario(Oferta oferta){
@@ -403,6 +392,18 @@ public class Controlador {
             this.gui.publicarOK(e.getMessage());
         }
 
+    }
+
+    public void publicarComentario(Comentario comentario){
+        try{
+            if(this.comentario.anadirComentario(comentario)){
+                this.gui.anadirCOmentarioOK("Comentario publicado correctamente");
+            } else {
+                this.gui.anadirCOmentarioOK("Error al publicar el comentario");
+            }
+        } catch (Exception e){
+            this.gui.anadirCOmentarioOK(e.getMessage());
+        }
     }
 
     public void goComprobarReserva(){

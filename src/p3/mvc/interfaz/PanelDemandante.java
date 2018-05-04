@@ -51,8 +51,8 @@ public class PanelDemandante extends JPanel implements ActionListener {
 
         volver.addActionListener(this);
         buscar.addActionListener(this);
-        /*avanzada.addActionListener(this);
-        reservas.addActionListener(this);*/
+        avanzada.addActionListener(this);
+        reservas.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
@@ -60,7 +60,7 @@ public class PanelDemandante extends JPanel implements ActionListener {
         if( evento.getSource()==volver){
             gui.getControlador().logout();
         } else if(evento.getSource()==buscar){
-            gui.getControlador().goBuscar();
+            gui.getControlador().goBusqueda();
         } else if(evento.getSource()==avanzada){
             gui.getControlador().goAvanzada();
         } else if(evento.getSource()==reservas){

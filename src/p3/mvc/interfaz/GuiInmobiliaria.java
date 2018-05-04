@@ -336,6 +336,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goAnadirComentario(){
         panelComentario.setVisible(false);
+        panelAnadirComentario.setVisible(true);
 
     }
 
@@ -403,6 +404,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void desbloqueado(String texto) {
         panelDesbloquearUsuario.setError(texto);
+    }
+
+    public void anadirCOmentarioOK(String texto){
+        panelAnadirComentario.creadaOK(texto);
     }
 }
 

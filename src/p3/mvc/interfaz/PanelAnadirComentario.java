@@ -49,7 +49,7 @@ public class PanelAnadirComentario extends JPanel implements ActionListener {
         if(evento.getSource()==volver){
             gui.getControlador().volverComentario();
         } else if(evento.getSource()==publicar){
-            gui.getControlador().anadirComentario(new Comentario((Demandante)gui.getControlador().getCliente(),texto.getText()));
+            gui.getControlador().publicarComentario(new Comentario((Demandante)gui.getControlador().getCliente(),texto.getText()));
         }
     }
 

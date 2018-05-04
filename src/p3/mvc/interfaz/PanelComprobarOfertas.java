@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelComprobarOfertas extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
+    private JLabel etiqueta1 = new JLabel("Tus ofertas");
     private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;

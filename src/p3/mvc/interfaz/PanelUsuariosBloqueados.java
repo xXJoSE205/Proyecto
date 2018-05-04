@@ -34,9 +34,13 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         this.setLayout(layout);
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
-        for(Demandante d:lista){
-            Object[] nuevaFila = {d.getNombre(), d.getApellidos(), d.getNif(), d.getTarjeta()};
-            modeloDatos.addRow(nuevaFila);
+        if(this.lista==null){
+            Object[] nuevaFila={"No hay usuarios bloqueados"};
+        }else {
+            for (Demandante d : lista) {
+                Object[] nuevaFila = {d.getNombre(), d.getApellidos(), d.getNif(), d.getTarjeta()};
+                modeloDatos.addRow(nuevaFila);
+            }
         }
 
         grupo.add(volver);
