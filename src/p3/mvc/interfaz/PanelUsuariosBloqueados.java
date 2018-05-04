@@ -1,8 +1,6 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.modelo.Demandante;
-import p3.mvc.modelo.Inmueble;
-import p3.mvc.modelo.Ofertante;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,8 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("Tus Inmuebles");
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
+    private JLabel etiqueta1 = new JLabel("Usuarios Bloqueados");
+    private String[] titulos = {"Nombre", "Apellidos", "NIF", "Tarjeta"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
     private JPanel select = new JPanel(new GridLayout(1, 2));
@@ -24,7 +22,7 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         }
     };
     private JButton volver = new JButton("Volver");
-    private JButton crear = new JButton("Crear Oferta");
+    private JButton desbloquear = new JButton("Desbloquear usuario");
     private List<Demandante> lista;
     private JTable tabla = new JTable(modeloDatos);
     private JLabel texto = new JLabel("");
@@ -36,13 +34,15 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         this.setLayout(layout);
         JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
-        for(Inmueble i:lista){
-            Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones(), i.getAscensor(), i.getPlanta()};
+        for(Demandante d:lista){
+            Object[] nuevaFila = {d.getNombre(), d.getApellidos(), d.getNif(), d.getTarjeta()};
             modeloDatos.addRow(nuevaFila);
         }
 
         grupo.add(volver);
+        grupo.add(desbloquear);
         select.add(volver);
+        select.add(desbloquear);
         select.setVisible(true);
         texto.setVisible(false);
 
@@ -63,15 +63,15 @@ public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         this.setVisible(true);
 
         volver.addActionListener(this);
-        crear.addActionListener(this);
+        desbloquear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
         texto.setVisible(false);
         if(e.getSource()==volver){
             gui.getControlador().volverOfertante();
-        }else if(e.getSource()==crear){
-            gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
+        }else if(e.getSource()==desbloquear){
+            gui.getControlador().goDesbloquearUsuarios(lista.get(tabla.getSelectedRow()));
         }
     }
 }

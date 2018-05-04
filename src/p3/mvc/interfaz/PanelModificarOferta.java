@@ -21,7 +21,7 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
     private JCheckBox casilla = new JCheckBox("Vacacional");
     private JButton modificar = new JButton("Modificar oferta");
     private JButton volver = new JButton("Cancelar");
-    private JPanel select = new JPanel(new GridLayout(1, 3));
+    private JPanel select = new JPanel(new GridLayout(1, 2));
     private ButtonGroup grupo = new ButtonGroup();
     private JLabel texto = new JLabel("");
     private Oferta oferta;

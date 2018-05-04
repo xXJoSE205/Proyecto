@@ -400,5 +400,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void modificada(String texto) {
         //panelModificarOferta.setError(texto);
     }
+
+    public void desbloqueado(String texto) {
+        panelDesbloquearUsuario.setError(texto);
+    }
 }
 

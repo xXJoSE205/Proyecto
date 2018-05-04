@@ -3,6 +3,7 @@ package p3.mvc.controlador;
 import p3.mvc.interfaz.GuiInmobiliaria;
 import p3.mvc.modelo.*;
 
+import java.security.spec.ECField;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -449,7 +450,31 @@ public class Controlador {
         }
     }
 
-    public void getUsuarioBloqueados(){
-        
+    public void desbloquearUsuario(Demandante demandante) {
+        String texto;
+        if(demandante.desbloquear()){
+            texto = "El usuaario ha sido desbloqueado";
+            this.gui.desbloqueado(texto);
+        }else{
+            texto = "Error al desbloquear";
+            this.gui.desbloqueado(texto);
+        }
+    }
+
+    public void desbloquearUsuario(Demandante demandante, String tarjeta) {
+        String texto;
+        try {
+            if (demandante.desbloquear()) {
+                demandante.setTarjeta(tarjeta);
+                texto = "El usuaario ha sido desbloqueado y la tarjeta se ha modificado";
+                this.gui.desbloqueado(texto);
+            } else {
+                texto = "Error al desbloquear";
+                this.gui.desbloqueado(texto);
+            }
+        }catch (Exception e){
+            texto = e.getMessage();
+            this.gui.desbloqueado(texto);
+        }
     }
 }
