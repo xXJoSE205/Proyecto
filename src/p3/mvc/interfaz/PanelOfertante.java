@@ -50,7 +50,7 @@ public class PanelOfertante extends JPanel implements ActionListener {
         volver.addActionListener(this);
         crearInm.addActionListener(this);
         verInmuebles.addActionListener(this);
-        //reservas.addActionListener(this);
+        modificaciones.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent evento) {
@@ -62,7 +62,7 @@ public class PanelOfertante extends JPanel implements ActionListener {
         } else if (evento.getSource() == verInmuebles) {
             gui.getControlador().goVerInmuebles();
         } else if (evento.getSource() == modificaciones) {
-            //gui.getControlador().goVerModificaciones();
+            gui.getControlador().goVerModificaciones();
         }
     }
 

@@ -357,4 +357,49 @@ public class Controlador {
     }
 
     public Comentario getComentario(){return comentario;}
+
+    public List<Oferta> getOfertasRechazadas() {
+        List<Oferta> ofertas = new ArrayList<>();
+
+        for(Inmueble i: ((Ofertante)usr).getInmuebles()){
+            for(Oferta o: i.getOfertas()){
+                if(o.getEstado()==Estado.RECHAZADO){
+                    ofertas.add(o);
+                }
+            }
+        }
+
+        return ofertas;
+    }
+
+    public void goVerModificaciones() {
+        this.gui.goVerModificaciones();
+    }
+
+    public void goModificarOferta(Oferta oferta) {
+        this.gui.goModifcarOferta(oferta);
+    }
+
+    public void modificarOferta(double precio, LocalDate fIni, LocalDate fFin, boolean vacacional
+            , double fianza, Oferta oferta) {
+        String texto;
+
+        try {
+            oferta.setPrecio(precio);
+            oferta.setFechaInicio(fIni);
+            oferta.setFechaFin(fFin);
+            oferta.setVacacional(vacacional);
+            oferta.setFianza(fianza);
+            oferta.setEstado(Estado.PENDIENTE);
+            texto = "La oferta se ha modificado correctamente";
+            this.gui.modificada(texto);
+        }catch (Exception e){
+            texto = e.getMessage();
+            this.gui.modificada(texto);
+        }
+    }
+
+    public void getUsuarioBloqueados(){
+
+    }
 }

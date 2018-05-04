@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
+    private JLabel etiqueta1 = new JLabel("Tus Inmuebles");
     private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
@@ -43,34 +43,34 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         grupo.add(volver);
         select.add(volver);
         select.setVisible(true);
+        texto.setVisible(false);
 
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scrollPane);
-        layout.putConstraint(SpringLayout.NORTH, select, 425, SpringLayout.NORTH, scrollPane);
+        layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
+        layout.putConstraint(SpringLayout.NORTH, select, 5, SpringLayout.SOUTH, texto);
 
         this.add(etiqueta1);
         this.add(select);
         this.add(tabla);
+        this.add(texto);
         this.add(scrollPane);
         this.setVisible(true);
 
         volver.addActionListener(this);
+        crear.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e){
+        texto.setVisible(false);
         if(e.getSource()==volver){
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==crear){
             gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
         }
-    }
-
-    public void creadaOK(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
     }
 }

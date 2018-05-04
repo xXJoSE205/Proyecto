@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiVentana extends JFrame  {
+public class MiVentana extends JFrame {
 
     public MiVentana() {
         super("Muzska");
