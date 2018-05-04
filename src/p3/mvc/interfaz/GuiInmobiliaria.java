@@ -33,6 +33,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelAlquilar panelAlquilar;
     private PanelAnadirComentario panelAnadirComentario;
     private PanelModificarOferta panelModificarOferta;
+    private PanelVerModificaciones panelVerModificaciones;
 
     private Controlador controlador;
     private Container contenedor;
@@ -160,7 +161,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
                 panelGerente.setVisible(true);
             }
         }else {
-            this.panelLogin.setError("Datos incorrecto o tipo no elegido");
+            panelLogin.setError("Datos incorrecto o tipo no elegido");
         }
     }
 
@@ -176,19 +177,22 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void logout(boolean logoutOK) {
         if(logoutOK) {
-            if(panelDemandante.isVisible()) {
+            if(panelDemandante!=null) {
                 panelDemandante.setVisible(false);
-            } else if(panelOfertante.isVisible()) {
+            } else if(panelOfertante!=null) {
                 panelOfertante.setVisible(false);
-            } else if(panelGerente.isVisible()) {
+            } else if(panelGerente!=null) {
                 panelGerente.setVisible(false);
             }
             this.getControlador().quitarLogin();
             panelPrincipal.setVisible(true);
         }else{
-            this.panelDemandante.setError("Error al cerrar sesion");
-            this.panelOfertante.setError("Error al cerrar sesion");
-            this.panelGerente.setError("Error al cerrar sesion");
+            if(panelDemandante!=null)
+                this.panelDemandante.setError("Error al cerrar sesion");
+            if(panelOfertante!=null)
+                this.panelOfertante.setError("Error al cerrar sesion");
+            if(panelGerente!=null)
+                this.panelGerente.setError("Error al cerrar sesion");
         }
     }
 
@@ -212,7 +216,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     }
 
-    public void volverBusqueda(Cliente usr) {
+    public void volverDeBusqueda(Cliente usr) {
         panelBusqueda.setVisible(false);
         if(usr==null){
             panelPrincipal.setVisible(true);
@@ -229,14 +233,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goBusqueda() {
-        //panelDemandante.setVisible(false);
+        if(panelDemandante!=null)
+            panelDemandante.setVisible(false);
         panelPrincipal.setVisible(false);
         panelBusqueda.setVisible(true);
     }
 
     public void volverOferta(){
         panelComentario.setVisible(false);
-        //panelAvanzada.setVisibel(true);
+        panelBusquedaAvanzada.setVisible(true);
     }
 
     public void goCrearInmueble() {
@@ -252,7 +257,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverOfertante(){
         panelCInmueble.setVisible(false);
-        panelVerInmuebles.setVisible(false);
+        if(panelVerInmuebles!=null)
+            panelVerInmuebles.setVisible(false);
+        if(panelVerModificaciones!=null)
+            panelVerModificaciones.setVisible(false);
         panelOfertante.setVisible(true);
     }
 
@@ -267,6 +275,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goVerInmuebles() {
         panelOfertante.setVisible(false);
+        panelVerInmuebles = new PanelVerInmuebles(this);
+        contenedor.add(panelVerInmuebles);
         panelVerInmuebles.setVisible(true);
     }
 
@@ -387,7 +397,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goVerModificaciones() {
         panelOfertante.setVisible(false);
-        panelVerInmuebles.setVisible(true);
+        panelVerModificaciones = new PanelVerModificaciones(this);
+        contenedor.add(panelVerModificaciones);
+        panelVerModificaciones.setVisible(true);
     }
 
     public void goModifcarOferta(Oferta oferta) {

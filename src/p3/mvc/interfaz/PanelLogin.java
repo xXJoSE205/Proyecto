@@ -40,6 +40,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         selectLogin.add(inSes);
         selectLogin.add(volver);
         selectLogin.setVisible(true);
+        texto.setVisible(false);
 
         JLabel etiqueta2 = new JLabel("Contrasena: ");
         JLabel etiqueta1 = new JLabel("NIF: ");

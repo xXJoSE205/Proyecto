@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelVerModificaciones extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Modificaciones propuestas");
     private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
@@ -27,7 +26,6 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
     private List<Oferta> lista;
     private JTable tabla = new JTable(modeloDatos);
     private JLabel texto = new JLabel("");
-    private JTextArea modificaciones = new JTextArea();
 
     public PanelVerModificaciones(GuiInmobiliaria gui){
         this.gui = gui;
@@ -53,15 +51,16 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         select.setVisible(true);
         texto.setVisible(false);
 
-        JLabel etiqueta1 = new JLabel("Tus Inmuebles");
+        JLabel etiqueta1 = new JLabel("Modificaciones propuestas");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.NORTH, modificaciones, 5, SpringLayout.SOUTH, scrollPane);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, modificaciones, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
+        JScrollPane scrollBar = new JScrollPane(modificaciones);
+        layout.putConstraint(SpringLayout.NORTH, scrollBar, 5, SpringLayout.SOUTH, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
         layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, modificaciones);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, modificaciones);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
         layout.putConstraint(SpringLayout.NORTH, select, 5, SpringLayout.SOUTH, texto);
 
@@ -73,6 +72,7 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
+
         volver.addActionListener(this);
         modificar.addActionListener(this);
     }

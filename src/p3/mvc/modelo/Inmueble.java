@@ -45,7 +45,7 @@ public class Inmueble implements Serializable {
                     Ofertante dueno) throws NullPointerException, IllegalArgumentException{
         if(direccion==null || dueno==null){ throw new NullPointerException("Direccion o dueno null"); }
         if(nHabitaciones<1 || nBanos<1 || dimensiones<1 || planta<0){
-            throw new IllegalArgumentException("Numero de habbitaciones, banos o dimesiones menores que 1"
+            throw new IllegalArgumentException("Habitaciones, banos o dimesiones menores que 1"
                     +" o planta menor que 0: "+nHabitaciones+", "+nBanos+", "+dimensiones+", "+planta);
         }
         this.nHabitaciones = nHabitaciones;

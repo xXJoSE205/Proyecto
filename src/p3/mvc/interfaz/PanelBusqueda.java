@@ -96,11 +96,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
                     , Integer.parseInt(dim.getText()),Integer.parseInt(planta.getText())
                     , casilla1.isSelected(), direccion.getText());
         } else if(evento.getSource()==volver){
-            if(gui.getControlador().getCliente()==null){
-                gui.getControlador().volverPrincipal();
-            }else {
-                gui.getControlador().volverDemandante();
-            }
+                gui.getControlador().volverDeBusqueda();
         }
     }
 

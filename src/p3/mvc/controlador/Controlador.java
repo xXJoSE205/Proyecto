@@ -26,38 +26,47 @@ public class Controlador {
         if(nif==null || passwd==null || option==null){
             this.gui.loginResult(false);
         }
-        assert option != null;
-        switch (option) {
-            case "Demandante": {
-                List<Cliente> clientes = muzska.getUsuarios();
-                for (Cliente d : clientes) {
-                    if (d.getNif().equals(nif)) {
-                        if (d instanceof Demandante) {
-                            this.usr = d;
-                            this.gui.loginResult(muzska.login(usr, nif, passwd));
+        try {
+            assert option != null;
+            switch (option) {
+                case "Demandante": {
+                    List<Cliente> clientes = muzska.getUsuarios();
+                    for (Cliente d : clientes) {
+                        if (d.getNif().equals(nif)) {
+                            if (d instanceof Demandante) {
+                                this.usr = d;
+                                this.gui.loginResult(muzska.login(usr, nif, passwd));
+                            }else{
+                                this.gui.loginResult(false);
+                            }
                         }
                     }
+                    break;
                 }
-                break;
-            }
-            case "Ofertante": {
-                List<Cliente> clientes = muzska.getUsuarios();
-                for (Cliente d : clientes) {
-                    if (d.getNif().equals(nif)) {
-                        if (d instanceof Ofertante) {
-                            this.usr = d;
-                            this.gui.loginResult(muzska.login(usr, nif, passwd));
+                case "Ofertante": {
+                    List<Cliente> clientes = muzska.getUsuarios();
+                    for (Cliente d : clientes) {
+                        if (d.getNif().equals(nif)) {
+                            if (d instanceof Ofertante) {
+                                this.usr = d;
+                                this.gui.loginResult(muzska.login(usr, nif, passwd));
+                            }else{
+                                this.gui.loginResult(false);
+                            }
                         }
                     }
+                    break;
                 }
-                break;
+                case "Gerente":
+                    this.gui.loginResult(muzska.login(nif, passwd));
+                    break;
+                default:
+                    this.gui.loginResult(false);
+                    break;
             }
-            case "Gerente":
-                this.gui.loginResult(muzska.login(nif, passwd));
-                break;
-            default:
-                this.gui.loginResult(false);
-                break;
+        }catch (Exception e){
+            quitarLogin();
+            this.gui.loginResult(false);
         }
     }
 
@@ -83,6 +92,10 @@ public class Controlador {
 
     public void goLogin() {
         this.gui.goLogin();
+    }
+
+    public void volverDeBusqueda() {
+        this.gui.volverDeBusqueda(usr);
     }
 
     public void volverBusqueda() {
