@@ -47,9 +47,9 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
-            gui.getControlador().volverBAvanzada();
+            gui.getControlador().volverRAvanzada();
         } else if(evento.getSource()==publicar){
-            gui.getControlador().anadirComentario(gui.getControlador().getOferta());
+            gui.getControlador().publicarComentario(texto.getText());
         }
     }
 

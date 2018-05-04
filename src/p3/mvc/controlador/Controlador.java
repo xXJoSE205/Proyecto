@@ -111,10 +111,6 @@ public class Controlador {
         }
     }
 
-    public void goBuscar(){
-        this.gui.goBuscar();
-    }
-
     public void goAvanzada(){
         this.gui.goAvanzada();
     }
@@ -124,10 +120,12 @@ public class Controlador {
     }
 
     public void cancelarReserva(){
-        for(Cliente c: this.muzska.getUsuarios()){
-            if(c.isLogeado()){
-                ((Demandante)c).quitarReserva();
-                this.gui.volverDemandante();
+        if(usr instanceof Demandante){
+            try{
+                ((Demandante) usr).quitarReserva();
+                this.gui.cancelarReservaOK("Reserva cancelada");
+            } catch (Exception e){
+                this.gui.cancelarReservaOK(e.getMessage());
             }
         }
     }
@@ -167,7 +165,19 @@ public class Controlador {
     }
 
     public void valorar(int x){
-
+        String texto;
+        Valoracion valoracion = new Valoracion((Demandante)usr,x);
+        try {
+            if(oferta.anadirOpinion(valoracion)){
+                texto = "Valoracion realizada correctamente";
+                this.gui.valoracionOK(texto);
+            } else {
+                texto = "Error al valorar";
+                this.gui.valoracionOK(texto);
+            }
+        } catch(Exception e){
+            this.gui.valoracionOK(e.getMessage());
+        }
     }
 
     public void volverOferta(){
@@ -205,7 +215,13 @@ public class Controlador {
     public List<Oferta> getAvanzada(){return avanzada;}
 
     public List<Comentario> getComentarios(){
-        return (List<Comentario>)(Comentario)oferta.getOpiniones();
+        List<Comentario> lista= new ArrayList<>();
+        for(Opinion o :oferta.getOpiniones()){
+            if(o instanceof Comentario){
+                lista.add((Comentario)o);
+            }
+        }
+        return lista;
     }
 
     public Cliente getCliente() {
@@ -357,6 +373,40 @@ public class Controlador {
     }
 
     public Comentario getComentario(){return comentario;}
+
+    public String getValoracion(){
+        double x=0;
+        int i=0;
+        for(Opinion o :oferta.getOpiniones()){
+            if(o instanceof Valoracion){
+                x+=((Valoracion) o).getPuntuacion();
+                i++;
+            }
+        }
+        x=x/i;
+        return String.valueOf(x);
+
+    }
+
+    public void publicarComentario(String texto){
+        String texto2;
+        try{
+            if(oferta.anadirOpinion(new Comentario((Demandante)usr,texto))){
+                texto2 = "Comentario publicado";
+                this.gui.publicarOK(texto2);
+            } else {
+                texto2 = "Error al publicar";
+                this.gui.publicarOK(texto2);
+            }
+        }catch (Exception e){
+            this.gui.publicarOK(e.getMessage());
+        }
+
+    }
+
+    public void goComprobarReserva(){
+        this.gui.goComprobarReserva();
+    }
 
     public List<Oferta> getOfertasRechazadas() {
         List<Oferta> ofertas = new ArrayList<>();
