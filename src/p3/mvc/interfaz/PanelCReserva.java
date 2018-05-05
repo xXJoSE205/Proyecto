@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 
 public class PanelCReserva extends JPanel implements ActionListener {
     private GuiInmobiliaria gui;
-    JButton volver = new JButton("Volver");
-    JButton cancelar = new JButton("Cancelar Reserva");
+    private JButton volver = new JButton("Volver");
+    private JButton cancelar = new JButton("Cancelar Reserva");
     private JLabel texto = new JLabel("");
 
     PanelCReserva(GuiInmobiliaria gui){
@@ -19,7 +19,7 @@ public class PanelCReserva extends JPanel implements ActionListener {
         Reserva reserva = ((Demandante) gui.getControlador().getCliente()).getReserva();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        JTextArea etiqueta2;
+        final JTextArea etiqueta2;
         if(reserva ==null){
             etiqueta2 = new JTextArea("No hay ninguna reserva activa");
         } else {
@@ -32,17 +32,21 @@ public class PanelCReserva extends JPanel implements ActionListener {
         select.add(volver);
         select.add(cancelar);
         select.setVisible(true);
+        texto.setVisible(false);
 
-        JLabel etiqueta1 = new JLabel("DEMANDANTE");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        JLabel etiqueta1 = new JLabel("Tu Reserva");
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);
-        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 20, SpringLayout.NORTH, etiqueta1);
-        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, etiqueta2);
-        layout.putConstraint(SpringLayout.NORTH, select, 220, SpringLayout.NORTH, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta2, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, texto);
         this.add(etiqueta2);
         this.add(etiqueta1);
         this.add(select);
+        this.add(texto);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
@@ -52,13 +56,15 @@ public class PanelCReserva extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverDemandante();
         } else if(evento.getSource()==cancelar){
+            texto.setVisible(false);
             gui.getControlador().cancelarReserva();
         }
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

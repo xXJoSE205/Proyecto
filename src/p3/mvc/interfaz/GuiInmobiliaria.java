@@ -396,7 +396,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void cancelarReservaOK(String texto){
-        panelCReserva.creadaOK(texto);
+        panelCReserva.setError(texto);
     }
 
     public void goComprobarReserva(){

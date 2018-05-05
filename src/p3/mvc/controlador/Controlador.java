@@ -82,19 +82,17 @@ public class Controlador {
     }
 
     public void buscar (int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        String direccion;
         if(dir.length()>0) {
-            try {
-                this.busqueda = muzska.buscar(nHab, nBan, dim, planta, ascensor, dir);
-                if (this.busqueda == null) {
-                    this.gui.errorBusqueda("Error, no hay inmuebles que coincidan con las condiciones");
-                } else {
-                    this.gui.goBusquedaResultado();
-                }
-            } catch (Exception e) {
-                this.gui.errorBusqueda(e.getMessage());
-            }
+            direccion = dir;
         }else{
-            this.gui.errorBusqueda("La direccion no es valida");
+            direccion = null;
+        }
+        this.busqueda = muzska.buscar(nHab, nBan, dim, planta, ascensor, direccion);
+        if (this.busqueda.isEmpty()) {
+            this.gui.errorBusqueda("Error, no hay inmuebles que coincidan con las condiciones");
+        } else {
+            this.gui.goBusquedaResultado();
         }
     }
 
@@ -146,29 +144,27 @@ public class Controlador {
 
     public void cancelarReserva(){
         if(usr instanceof Demandante){
-            try{
+            if(((Demandante) usr).getReserva()!=null){
                 ((Demandante) usr).quitarReserva();
                 this.gui.cancelarReservaOK("Reserva cancelada");
-            } catch (Exception e){
-                this.gui.cancelarReservaOK(e.getMessage());
+            }else{
+                this.gui.cancelarReservaOK("No tienes una reserva activa");
             }
         }
     }
 
     public void avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, int precio, boolean vacacional){
+        String direccion;
         if(dir.length()>0) {
-            try {
-                this.avanzada = muzska.avanzada(nHab, nBan, dim, planta, ascensor, dir, precio, vacacional, usr);
-                if (this.avanzada == null) {
-                    this.gui.avanzadaError("Error, no hay ofertas que coincidan con las condiciones");
-                } else {
-                    this.gui.goRAvanzada();
-                }
-            } catch (Exception e) {
-                this.gui.avanzadaError(e.getMessage());
-            }
-        }else {
-            this.gui.avanzadaError("La direccion no es valida");
+            direccion = dir;
+        }else{
+            direccion = null;
+        }
+        this.avanzada = muzska.avanzada(nHab, nBan, dim, planta, ascensor, direccion, precio, vacacional, usr);
+        if (this.avanzada.isEmpty()) {
+            this.gui.avanzadaError("Error, no hay ofertas que coincidan con las condiciones");
+        } else {
+            this.gui.goRAvanzada();
         }
     }
     public void alquilar(Oferta oferta){
@@ -211,7 +207,7 @@ public class Controlador {
         this.gui.goCrearComentario();
 
     }
-    public void quitarLogin(){
+    private void quitarLogin(){
         this.usr = null;
     }
 

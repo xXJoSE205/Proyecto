@@ -55,7 +55,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, selectType, 10, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, selectType, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, selectType);
-        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, texto);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, selectLogin, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
@@ -76,6 +76,7 @@ public class PanelLogin extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent evento){
         String option = "";
+        pswd.setText("");
         if(evento.getSource()==inSes) {
             texto.setVisible(false);
             if (demandante.isSelected()) {
@@ -86,7 +87,6 @@ public class PanelLogin extends JPanel implements ActionListener{
                 option = gerente.getText();
             }
             gui.getControlador().login(nif.getText(), new String(pswd.getPassword()), option);
-            pswd.setText("");
         }else if(evento.getSource()==volver){
             texto.setVisible(false);
             gui.getControlador().volverLogin();
