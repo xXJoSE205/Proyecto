@@ -41,11 +41,8 @@ public class Controlador {
                                 }else{
                                     this.gui.loginResult(false);
                                 }
-                            }else{
-                                this.gui.loginResult(false);
                             }
                         }
-                        this.gui.loginResult(false);
                     }
                     break;
                 }
@@ -60,11 +57,8 @@ public class Controlador {
                                 }else{
                                     this.gui.loginResult(false);
                                 }
-                            }else{
-                                this.gui.loginResult(false);
                             }
                         }
-                        this.gui.loginResult(false);
                     }
                     break;
                 }

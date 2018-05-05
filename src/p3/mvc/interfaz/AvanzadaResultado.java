@@ -62,7 +62,7 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(tabla);
+        this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
