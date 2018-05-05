@@ -23,7 +23,7 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
 
     PanelModificarOferta(GuiInmobiliaria gui) {
         this.gui = gui;
-
+        this.oferta=gui.getControlador().getOferta();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
@@ -68,7 +68,7 @@ public class PanelModificarOferta extends JPanel implements ActionListener {
         JScrollPane scrollBar = new JScrollPane(modificaciones);
         layout.putConstraint(SpringLayout.NORTH, scrollBar, 5, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, casilla);
-        layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, scrollBar);
+        layout.putConstraint(SpringLayout.NORTH, texto, 50, SpringLayout.SOUTH, scrollBar);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, scrollBar);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scrollBar);

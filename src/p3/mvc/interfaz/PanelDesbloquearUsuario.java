@@ -18,14 +18,14 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
 
     PanelDesbloquearUsuario(GuiInmobiliaria gui) {
         this.gui = gui;
-
+        this.demandante=this.gui.getControlador().getDemandante();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
         JTextField nombre = new JTextField(String.valueOf(demandante.getNombre()), 10);
         JTextField apellidos = new JTextField(String.valueOf(demandante.getApellidos()), 10);
         JTextField nif = new JTextField(String.valueOf(demandante.getNif()), 10);
-        tarjeta = new JTextField(String.valueOf(demandante.getTarjeta()), 10);
+        tarjeta = new JTextField(String.valueOf(demandante.getTarjeta()), 12);
 
         JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(volver);

@@ -63,6 +63,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
         layout.putConstraint(SpringLayout.NORTH, texto, 20, SpringLayout.NORTH, select);
+
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tabla.setColumnSelectionAllowed(false);
         tabla.getSelectionModel().getLeadSelectionIndex();
@@ -71,12 +72,16 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
         layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, scrollBar);
+        layout.putConstraint(SpringLayout.NORTH, texto,20,SpringLayout.SOUTH,select);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
 
         this.add(etiqueta1);
         this.add(select);
         this.add(scrollBar);
         this.add(scrollPane);
         this.setVisible(true);
+        this.add(texto);
+        texto.setVisible(false);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         aceptar.addActionListener(this);
@@ -90,8 +95,8 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         }else if(e.getSource()==aceptar){
             texto.setVisible(false);
             try {
+                int x =tabla.getSelectedRow();
                 gui.getControlador().aceptarOferta(ofertas.get(tabla.getSelectedRow()));
-                modeloDatos.removeRow(tabla.getSelectedRow());
                 texto.setText("Oferta aceptada");
             }catch (Exception e1){
                 texto.setText("Selecciona oferta para aceptarla");

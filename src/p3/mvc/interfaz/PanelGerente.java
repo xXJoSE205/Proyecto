@@ -13,6 +13,7 @@ public class PanelGerente extends JPanel implements ActionListener {
     JButton desbloquear = new JButton("Desbloquear usuarios");
     JButton comprobar = new JButton("Comprobar ofertas");
 
+
     PanelGerente(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -28,6 +29,7 @@ public class PanelGerente extends JPanel implements ActionListener {
         select.add(comprobar);
         select.setVisible(true);
         texto.setVisible(false);
+        JLabel etiqueta3 = new JLabel("Comisiones totales: "+gui.getControlador().getSistema().getTotalComisiones());
 
         JLabel etiqueta1 = new JLabel("GERENTE");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
@@ -38,10 +40,14 @@ public class PanelGerente extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, select);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, select);
+
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta3, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta3, 20, SpringLayout.SOUTH, texto);
         this.add(etiqueta1);
         this.add(select);
         this.add(etiqueta2);
         this.add(texto);
+        this.add(etiqueta3);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);

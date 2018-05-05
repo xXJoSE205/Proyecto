@@ -337,6 +337,9 @@ public class Sistema implements Serializable {
             if(oferta.isVacacional()!=vacacional){
                 remove.add(i);
             }
+            if(oferta.isReservado()){
+                remove.add(i);
+            }
             i++;
         }
 

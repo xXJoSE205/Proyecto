@@ -31,9 +31,8 @@ public class PanelComentario extends JPanel implements ActionListener {
 
 
         arbol.setVisibleRowCount(10);
-        JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane scroll = new JScrollPane(arbol,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.add(arbol);
         scroll.setViewportView(arbol);
         scroll.setPreferredSize(new Dimension(400,300));
         ButtonGroup grupo = new ButtonGroup();
@@ -61,7 +60,6 @@ public class PanelComentario extends JPanel implements ActionListener {
         }
 
         JTextField val = new JTextField(2);
-        val.setText(gui.getControlador().getValoracion());
 
         JLabel etiqueta3 = new JLabel("Valorar: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, this);
@@ -72,19 +70,21 @@ public class PanelComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, scroll, 5, SpringLayout.SOUTH, lista);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scroll);
         layout.putConstraint(SpringLayout.NORTH, select, 30, SpringLayout.SOUTH, scroll);
-        JLabel etiqueta1 = new JLabel("Precio: ");
+        JLabel etiqueta1 = new JLabel("Valoracion media: "+gui.getControlador().getValoracion());
         layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
         layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST, etiqueta1);
         this.add(etiqueta3);
         this.add(lista);
         this.add(scroll);
         this.add(select);
-        this.setVisible(true);
+        this.add(val);
+
         this.setPreferredSize(new Dimension(800, 600));
 
         boton1.addActionListener(this);
         boton2.addActionListener(this);
         boton3.addActionListener(this);
+        this.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -92,7 +92,7 @@ public class PanelComentario extends JPanel implements ActionListener {
             int x= Integer.parseInt((String)lista.getSelectedItem());
             gui.getControlador().valorar(x);
         } else if(e.getSource()==boton2){
-            gui.getControlador().volverRAvanzada();
+            gui.getControlador().volverRAvanzada(3);
         } else if(e.getSource()==boton3){
             gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
         }

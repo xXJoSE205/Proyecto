@@ -95,6 +95,7 @@ public class Demandante extends Cliente implements Serializable {
      * Quita la reserva que tuviese el demandante
      */
     public void quitarReserva(){
+        reserva.getOferta().setReservado(false);
         this.reserva = null;
         this.reservaActiva=false;
     }

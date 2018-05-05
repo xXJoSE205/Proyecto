@@ -11,7 +11,7 @@ public class PanelBusqueda extends JPanel implements ActionListener {
     private final JTextField numeroBan = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 2);
     private final JTextField planta = new JTextField("-1", 2);
-    private final JTextField direccion = new JTextField("null",30);
+    private final JTextField direccion = new JTextField("",30);
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private JLabel texto = new JLabel("");
     private JButton buscar = new JButton("Buscar");

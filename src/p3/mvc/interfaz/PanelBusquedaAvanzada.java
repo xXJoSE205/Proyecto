@@ -12,7 +12,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
     private final JTextField numeroBan = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 2);
     private final JTextField planta = new JTextField("-1", 2);
-    private final JTextField direccion = new JTextField("null", 30);
+    private final JTextField direccion = new JTextField("", 30);
     private final JTextField precio = new JTextField("-1",4);
     private JCheckBox casilla2 = new JCheckBox("Vacacional");
     private JCheckBox casilla1 = new JCheckBox("Ascensor");

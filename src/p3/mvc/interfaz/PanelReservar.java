@@ -118,7 +118,7 @@ public class PanelReservar extends JPanel implements ActionListener {
         if(evento.getSource()==alquilar){
             gui.getControlador().reservar(oferta);
         } else if(evento.getSource()==volver){
-            gui.getControlador().volverRAvanzada();
+            gui.getControlador().volverRAvanzada(2);
         }
 
     }
