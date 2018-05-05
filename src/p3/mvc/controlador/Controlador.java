@@ -33,8 +33,8 @@ public class Controlador {
                 case "Demandante": {
                     List<Cliente> clientes = muzska.getUsuarios();
                     for (Cliente d : clientes) {
-                        if (d.getNif().equals(nif)) {
-                            if (d instanceof Demandante) {
+                        if (d instanceof Demandante) {
+                            if (d.getNif().equals(nif)) {
                                 if(muzska.login(d, nif, passwd)) {
                                     this.usr = d;
                                     this.gui.loginResult(true);
@@ -49,8 +49,8 @@ public class Controlador {
                 case "Ofertante": {
                     List<Cliente> clientes = muzska.getUsuarios();
                     for (Cliente o : clientes) {
-                        if (o.getNif().equals(nif)) {
-                            if (o instanceof Ofertante) {
+                        if (o instanceof Ofertante) {
+                            if (o.getNif().equals(nif)) {
                                 if(muzska.login(o, nif, passwd)) {
                                     this.usr = o;
                                     this.gui.loginResult(true);

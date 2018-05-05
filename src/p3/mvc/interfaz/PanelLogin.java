@@ -76,7 +76,6 @@ public class PanelLogin extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent evento){
         String option = "";
-        pswd.setText("");
         if(evento.getSource()==inSes) {
             texto.setVisible(false);
             if (demandante.isSelected()) {
@@ -87,7 +86,9 @@ public class PanelLogin extends JPanel implements ActionListener{
                 option = gerente.getText();
             }
             gui.getControlador().login(nif.getText(), new String(pswd.getPassword()), option);
+            pswd.setText("");
         }else if(evento.getSource()==volver){
+            pswd.setText("");
             texto.setVisible(false);
             gui.getControlador().volverLogin();
         }
