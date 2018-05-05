@@ -4,8 +4,6 @@ import p3.mvc.modelo.Inmueble;
 import p3.mvc.modelo.Ofertante;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones","Direccion", "Ascensor", "Planta" };
+    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Direccion", "Ascensor", "Planta"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
@@ -85,16 +83,8 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
             gui.getControlador().volverOfertante();
         }else if(e.getSource()==crear){
             texto.setVisible(false);
-            /* NO VA NI ESTE NI LOS PARECIDOS*/
             try {
-                int x = tabla.getSelectedRow();
-                if(x==-1){
-                    x=tabla.getSelectionModel().getLeadSelectionIndex();
-                }
-                int y = tabla.getSelectedRowCount();
                 gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
-                System.out.println(tabla.getSelectedRow());
-
             }catch (Exception exception){
                 texto.setText("Selecciona inmueble para crear la oferta");
                 texto.setVisible(true);

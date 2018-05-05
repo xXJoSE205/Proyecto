@@ -10,12 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelComprobarOfertas extends JPanel implements ActionListener {
-    private JLabel etiqueta1 = new JLabel("Tus ofertas");
     private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 3));
-    private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
@@ -24,7 +21,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
     private JButton volver = new JButton("Volver");
     private JButton aceptar = new JButton("Aceptar");
     private JButton rechazar = new JButton("Rechazar");
-    private JTextArea modificaciones = new JTextArea("Modificaciones propuestas");
+    private JTextArea modificaciones = new JTextArea("Proponer modificaciones");
     private JLabel texto = new JLabel("");
     private List<Oferta> ofertas;
     private JTable tabla = new JTable(modeloDatos);
@@ -52,6 +49,8 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         select.add(rechazar);
         select.setVisible(true);
         texto.setVisible(false);
+        JScrollPane scrollBar = new JScrollPane(modificaciones);
+        scrollBar.setPreferredSize(new Dimension(400, 100));
 
         JLabel etiqueta1 = new JLabel("Ofertas pendientes");
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
@@ -68,10 +67,14 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         tabla.setColumnSelectionAllowed(false);
         tabla.getSelectionModel().getLeadSelectionIndex();
         tabla.setRowSelectionAllowed(true);
+        layout.putConstraint(SpringLayout.NORTH, scrollBar, 5, SpringLayout.SOUTH, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
+        layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, scrollBar);
 
         this.add(etiqueta1);
         this.add(select);
-        this.add(modificaciones);
+        this.add(scrollBar);
         this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
@@ -98,10 +101,7 @@ public class PanelComprobarOfertas extends JPanel implements ActionListener {
         }else if(e.getSource()==rechazar){
             texto.setVisible(false);
             try {
-                int x=tabla.getSelectedRow();
                 gui.getControlador().rechazarOferta(ofertas.get(tabla.getSelectedRow()), modificaciones.getText());
-                modeloDatos.removeRow(tabla.getSelectedRow());
-                texto.setText("Oferta rechazada");
             }catch (Exception e2){
                 texto.setText("Selecciona oferta para rechazarla");
                 texto.setVisible(true);
