@@ -6,7 +6,9 @@ import es.uam.eps.padsof.telecard.InvalidCardNumberException;
 import es.uam.eps.padsof.telecard.OrderRejectedException;
 import es.uam.eps.padsof.telecard.TeleChargeAndPaySystem;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Esta clase contiene la informacion del Sistema
@@ -255,28 +257,39 @@ public class Sistema implements Serializable {
      * @return list, lista con las viviendas obtenidas aplicando los filtros
      */
     public List<Inmueble> buscar(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
+        Set<Integer> remove = new HashSet<>();
         List<Inmueble> busqueda = new ArrayList<>();
+        int i=0;
         for(Inmueble inmueble: inmuebles){
             if(inmueble.getnHabitaciones()>=nHab && nHab>-1){
                 busqueda.add(inmueble);
             } else {
                 busqueda.add(inmueble);
             }
+
         }for (Inmueble inmueble:busqueda){
             if(inmueble.getnBanos()<nBan && nBan>-1){
-                busqueda.remove(inmueble);
+                remove.add(i);
             }
             if(inmueble.getDimensiones()<dim && dim>-1){
-                busqueda.remove(inmueble);
+                remove.add(i);
             }
             if(inmueble.getPlanta()>planta && planta>-1){
-                busqueda.remove(inmueble);
+                remove.add(i);
             }
             if(inmueble.getAscensor()!=ascensor){
-                busqueda.remove(inmueble);
+                remove.add(i);
             }
             if(!(inmueble.getDireccion().equals(dir)) && dir!=null){
-                busqueda.remove(inmueble);
+                remove.add(i);
+            }
+            i++;
+
+        }
+
+        for(i=remove.size();i>-1;i--){
+            if(remove.contains(i)){
+                busqueda.remove(i);
             }
         }
         return busqueda;
@@ -301,6 +314,8 @@ public class Sistema implements Serializable {
                                        boolean vacacional, Cliente cliente){
         List<Oferta> ofertas = new ArrayList<>();
         List<Inmueble> aux;
+        Set<Integer> remove = new HashSet<>();
+        int i=0;
         if(cliente==null){
             throw new NullPointerException("Cliente null");
         }
@@ -317,10 +332,17 @@ public class Sistema implements Serializable {
         }
         for(Oferta oferta: ofertas){
             if(oferta.getPrecio()>precio && precio>-1){
-                ofertas.remove(oferta);
+                remove.add(i);
             }
             if(oferta.isVacacional()!=vacacional){
-                ofertas.remove(oferta);
+                remove.add(i);
+            }
+            i++;
+        }
+
+        for(i=remove.size();i>-1;i--){
+            if(remove.contains(i)){
+                ofertas.remove(i);
             }
         }
         return ofertas;

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class AvanzadaResultado extends JPanel implements ActionListener {
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Precio","Vacacional"};
+    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Direccion","Precio","Vacacional"};
     private Object filas[][] = {};
     private GuiInmobiliaria gui;
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
@@ -22,9 +22,11 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
     private JButton alquilar = new JButton("Alquilar");
     private JButton comentario = new JButton("Anadir comentario");
     private JButton comentario2 = new JButton("Ver comentarios");
+    private JButton reservar = new JButton("Reservar");
     private List<Oferta> lista;
     private JTable tabla = new JTable(modeloDatos);
     private JLabel texto = new JLabel("");
+
 
     AvanzadaResultado(GuiInmobiliaria gui) {
         this.gui = gui;
@@ -33,11 +35,17 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
         this.lista= gui.getControlador().getAvanzada();
 
         JScrollPane scrollPane = new JScrollPane(tabla);
-
-        for (Oferta i : lista) {
-            Object[] nuevaFila = {i.getInmueble().getnHabitaciones(), i.getInmueble().getnBanos(), i.getInmueble().getDimensiones(),
-                    i.getInmueble().getAscensor(), i.getInmueble().getPlanta(),i.getPrecio(),i.isVacacional()};
-            modeloDatos.addRow(nuevaFila);
+        texto.setVisible(false);
+        if(this.lista==null) {
+            texto.setVisible(true);
+            this.texto.setForeground(java.awt.Color.red);
+            texto.setText("No hay resultados");
+        }else{
+            for (Oferta i : lista) {
+                Object[] nuevaFila = {i.getInmueble().getnHabitaciones(), i.getInmueble().getnBanos(), i.getInmueble().getDimensiones(),
+                        i.getInmueble().getAscensor(), i.getInmueble().getPlanta(),i.getInmueble().getDireccion(), i.getPrecio(), i.isVacacional()};
+                modeloDatos.addRow(nuevaFila);
+            }
         }
 
         ButtonGroup grupo = new ButtonGroup();
@@ -45,11 +53,13 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
         grupo.add(alquilar);
         grupo.add(comentario);
         grupo.add(comentario2);
-        JPanel select = new JPanel(new GridLayout(1, 4));
+        grupo.add(reservar);
+        JPanel select = new JPanel(new GridLayout(1, 5));
         select.add(comentario);
         select.add(comentario2);
         select.add(volver);
         select.add(alquilar);
+        select.add(reservar);
         select.setVisible(true);
 
         JLabel etiqueta1 = new JLabel("Resultados de la busqueda");
@@ -58,17 +68,27 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, scrollPane, 5, SpringLayout.WEST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, scrollPane);
-        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, scrollPane);
+        layout.putConstraint(SpringLayout.NORTH, select, 450, SpringLayout.NORTH, scrollPane);
+        layout.putConstraint(SpringLayout.NORTH,texto,400,SpringLayout.NORTH,scrollPane);
+        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, scrollPane);
 
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.setColumnSelectionAllowed(false);
+        tabla.getSelectionModel().getLeadSelectionIndex();
+        tabla.setRowSelectionAllowed(true);
+
+        scrollPane.setPreferredSize(new Dimension(700,400));
         this.add(etiqueta1);
         this.add(select);
-        this.add(tabla);
+        this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
+        this.add(texto);
         volver.addActionListener(this);
         comentario.addActionListener(this);
         comentario2.addActionListener(this);
         alquilar.addActionListener(this);
+        reservar.addActionListener(this);
 
     }
 
@@ -81,6 +101,8 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
             gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
         }else if(evento.getSource()==comentario2){
             gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
+        } else if(evento.getSource()==reservar){
+            gui.getControlador().goReserva(lista.get(tabla.getSelectedRow()));
         }
 
     }

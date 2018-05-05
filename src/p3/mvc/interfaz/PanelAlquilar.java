@@ -44,6 +44,7 @@ public class PanelAlquilar extends JPanel implements ActionListener {
         JTextField vacacional = new JTextField("", 4);
         vacacional.setText(String.valueOf(oferta.isVacacional()));
 
+        texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -75,14 +76,21 @@ public class PanelAlquilar extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta6, 8, SpringLayout.SOUTH, etiqueta5);
         layout.putConstraint(SpringLayout.WEST, precio, 0, SpringLayout.WEST, direccion);
         layout.putConstraint(SpringLayout.NORTH, precio, 5, SpringLayout.SOUTH, direccion);
-        JLabel etiqueta7 = new JLabel("Ascensor");
+        JLabel etiqueta7 = new JLabel("Ascensor:");
         layout.putConstraint(SpringLayout.EAST, etiqueta7, 0, SpringLayout.EAST, etiqueta6);
         layout.putConstraint(SpringLayout.NORTH, etiqueta7, 8, SpringLayout.SOUTH, etiqueta6);
-        JLabel etiqueta8 = new JLabel("Vacacional");
+        layout.putConstraint(SpringLayout.EAST, ascensor, 0, SpringLayout.EAST, precio);
+        layout.putConstraint(SpringLayout.NORTH, ascensor, 8, SpringLayout.SOUTH, precio);
+        JLabel etiqueta8 = new JLabel("Vacacional:");
         layout.putConstraint(SpringLayout.WEST, etiqueta8, 0, SpringLayout.WEST, etiqueta7);
         layout.putConstraint(SpringLayout.NORTH, etiqueta8, 8, SpringLayout.SOUTH, etiqueta7);
-        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, etiqueta8);
+        layout.putConstraint(SpringLayout.EAST, vacacional, 0, SpringLayout.EAST, ascensor);
+        layout.putConstraint(SpringLayout.NORTH, vacacional, 8, SpringLayout.SOUTH, ascensor);
+        layout.putConstraint(SpringLayout.NORTH, select, 15, SpringLayout.SOUTH, etiqueta8);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta8);
+
+        layout.putConstraint(SpringLayout.NORTH,texto,20,SpringLayout.NORTH,select);
+        this.add(texto);
         this.add(etiqueta1);
         this.add(numero);
         this.add(numeroBan);

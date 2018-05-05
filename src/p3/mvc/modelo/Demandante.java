@@ -96,6 +96,7 @@ public class Demandante extends Cliente implements Serializable {
      */
     public void quitarReserva(){
         this.reserva = null;
+        this.reservaActiva=false;
     }
 
     /**

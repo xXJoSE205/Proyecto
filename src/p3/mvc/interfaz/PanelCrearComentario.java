@@ -31,12 +31,15 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, texto, 5, SpringLayout.WEST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, texto, 20, SpringLayout.NORTH, etiqueta1);
 
-        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, texto);
-        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, texto);
+        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, texto);
+        layout.putConstraint(SpringLayout.NORTH, select, 350, SpringLayout.NORTH, texto);
+        layout.putConstraint(SpringLayout.WEST, texto2, 5, SpringLayout.WEST, select);
+        layout.putConstraint(SpringLayout.NORTH, texto2, 30, SpringLayout.NORTH, select);
 
         this.add(etiqueta1);
         this.add(select);
         this.add(texto);
+        this.add(texto2);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
@@ -49,8 +52,9 @@ public class PanelCrearComentario extends JPanel implements ActionListener {
             texto.setVisible(false);
             gui.getControlador().volverRAvanzada();
         } else if(evento.getSource()==publicar){
-            texto.setVisible(false);
+
             gui.getControlador().publicarComentario(texto.getText());
+            texto.setText("");
         }
     }
 

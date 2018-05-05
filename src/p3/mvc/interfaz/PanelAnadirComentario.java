@@ -26,6 +26,7 @@ public class PanelAnadirComentario extends JPanel implements ActionListener {
         select.add(volver);
         select.add(publicar);
         texto.setEditable(true);
+        texto2.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Texto: ");
         layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
@@ -36,9 +37,12 @@ public class PanelAnadirComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, texto);
         layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, texto);
 
+        layout.putConstraint(SpringLayout.NORTH,texto2,5,SpringLayout.NORTH,etiqueta1);
+
         this.add(etiqueta1);
         this.add(select);
         this.add(texto);
+        this.add(texto2);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);

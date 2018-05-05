@@ -28,6 +28,8 @@ public class PanelComentario extends JPanel implements ActionListener {
         List<Comentario> com = gui.getControlador().getComentarios();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
+
+
         arbol.setVisibleRowCount(10);
         JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -73,12 +75,13 @@ public class PanelComentario extends JPanel implements ActionListener {
         JLabel etiqueta1 = new JLabel("Precio: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
         layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST, etiqueta1);
-        this.setPreferredSize(new Dimension(200, 100));
         this.add(etiqueta3);
         this.add(lista);
         this.add(scroll);
         this.add(select);
+        this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
+
         boton1.addActionListener(this);
         boton2.addActionListener(this);
         boton3.addActionListener(this);

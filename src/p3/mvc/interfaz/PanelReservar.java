@@ -1,42 +1,53 @@
 package p3.mvc.interfaz;
 
+import p3.mvc.modelo.Oferta;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
-
-    private final JTextField numero = new JTextField("-1", 2);
-    private final JTextField numeroBan = new JTextField("-1", 2);
-    private final JTextField dim = new JTextField("-1", 2);
-    private final JTextField planta = new JTextField("-1", 2);
-    private final JTextField direccion = new JTextField("null", 30);
-    private final JTextField precio = new JTextField("-1",4);
-    private JCheckBox casilla2 = new JCheckBox("Vacacional");
-    private JCheckBox casilla1 = new JCheckBox("Ascensor");
-    private JButton buscar = new JButton("Buscar");
-    private JButton volver = new JButton("Volver");
+public class PanelReservar extends JPanel implements ActionListener {
+    private JButton alquilar = new JButton("Reservar");
+    private JButton volver = new JButton("Cancelar");
     private GuiInmobiliaria gui;
     private JLabel texto = new JLabel("");
+    private Oferta oferta;
 
-    PanelBusquedaAvanzada(GuiInmobiliaria gui) {
+    PanelReservar(GuiInmobiliaria gui){
         this.gui = gui;
+        this.oferta=gui.getControlador().getOferta();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
         ButtonGroup grupo = new ButtonGroup();
-        grupo.add(buscar);
+        grupo.add(alquilar);
         grupo.add(volver);
         JPanel select = new JPanel(new GridLayout(1, 2));
-        select.add(buscar);
+        select.add(alquilar);
         select.add(volver);
         select.setVisible(true);
+        JTextField numero = new JTextField("", 2);
+        numero.setText(String.valueOf(oferta.getInmueble().getnHabitaciones()));
+        JTextField numeroBan = new JTextField("", 2);
+        numeroBan.setText(String.valueOf(oferta.getInmueble().getnBanos()));
+        JTextField dim = new JTextField("", 2);
+        dim.setText(String.valueOf(oferta.getInmueble().getDimensiones()));
+        JTextField planta = new JTextField("", 2);
+        planta.setText(String.valueOf(oferta.getInmueble().getPlanta()));
+        JTextField direccion = new JTextField("", 50);
+        direccion.setText(oferta.getInmueble().getDireccion());
+        JTextField precio = new JTextField("", 4);
+        precio.setText(String.valueOf(oferta.getPrecio()));
+        JTextField ascensor = new JTextField("", 4);
+        ascensor.setText(String.valueOf(oferta.getInmueble().getAscensor()));
+        JTextField vacacional = new JTextField("", 4);
+        vacacional.setText(String.valueOf(oferta.isVacacional()));
+
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
-        layout.putConstraint(SpringLayout.EAST, etiqueta1, -100, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, numero, 5, SpringLayout.NORTH, this);
@@ -50,7 +61,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
-        JLabel etiqueta4 = new JLabel("Planta:");
+        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
@@ -65,15 +76,21 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta6, 8, SpringLayout.SOUTH, etiqueta5);
         layout.putConstraint(SpringLayout.WEST, precio, 0, SpringLayout.WEST, direccion);
         layout.putConstraint(SpringLayout.NORTH, precio, 5, SpringLayout.SOUTH, direccion);
-        layout.putConstraint(SpringLayout.EAST, casilla1, 0, SpringLayout.EAST, etiqueta6);
-        layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta6);
-        layout.putConstraint(SpringLayout.WEST, casilla2, 0, SpringLayout.WEST, casilla1);
-        layout.putConstraint(SpringLayout.NORTH, casilla2, 8, SpringLayout.SOUTH, casilla1);
-        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, casilla2);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        JLabel etiqueta7 = new JLabel("Ascensor:");
+        layout.putConstraint(SpringLayout.EAST, etiqueta7, 0, SpringLayout.EAST, etiqueta6);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta7, 8, SpringLayout.SOUTH, etiqueta6);
+        layout.putConstraint(SpringLayout.EAST, ascensor, 0, SpringLayout.EAST, precio);
+        layout.putConstraint(SpringLayout.NORTH, ascensor, 8, SpringLayout.SOUTH, precio);
+        JLabel etiqueta8 = new JLabel("Vacacional:");
+        layout.putConstraint(SpringLayout.WEST, etiqueta8, 0, SpringLayout.WEST, etiqueta7);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta8, 8, SpringLayout.SOUTH, etiqueta7);
+        layout.putConstraint(SpringLayout.EAST, vacacional, 0, SpringLayout.EAST, ascensor);
+        layout.putConstraint(SpringLayout.NORTH, vacacional, 8, SpringLayout.SOUTH, ascensor);
+        layout.putConstraint(SpringLayout.NORTH, select, 15, SpringLayout.SOUTH, etiqueta8);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta8);
 
+        layout.putConstraint(SpringLayout.NORTH,texto,20,SpringLayout.NORTH,select);
+        this.add(texto);
         this.add(etiqueta1);
         this.add(numero);
         this.add(numeroBan);
@@ -84,33 +101,29 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         this.add(etiqueta5);
         this.add(direccion);
         this.add(planta);
-        this.add(casilla1);
+        this.add(etiqueta7);
         this.add(select);
-        this.add(casilla2);
+        this.add(etiqueta8);
         this.add(etiqueta6);
         this.add(precio);
-        this.add(texto);
+        this.add(vacacional);
+        this.add(ascensor);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
-        buscar.addActionListener(this);
+        alquilar.addActionListener(this);
         volver.addActionListener(this);
     }
 
-    public void actionPerformed(ActionEvent evento) {
-        boolean ascensor;
-        boolean vacacional;
-        if(evento.getSource()==buscar) {
-            ascensor = casilla1.isSelected();
-            vacacional = casilla2.isSelected();
-            gui.getControlador().avanzada(Integer.parseInt(numero.getText()), Integer.parseInt(numeroBan.getText()),
-                    Integer.parseInt(dim.getText()), Integer.parseInt(planta.getText()), ascensor, direccion.getText(),
-                    Integer.parseInt(precio.getText()),vacacional);
+    public void actionPerformed(ActionEvent evento){
+        if(evento.getSource()==alquilar){
+            gui.getControlador().reservar(oferta);
         } else if(evento.getSource()==volver){
-            gui.getControlador().volverDemandante();
+            gui.getControlador().volverRAvanzada();
         }
+
     }
 
-    public void setError(String texto) {
+    public void creadaOK(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

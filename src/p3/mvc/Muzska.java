@@ -10,11 +10,12 @@ public class Muzska {
 
     public static void main(String[] args){
         GuiInmobiliaria gui = new GuiInmobiliaria("Muzska");
-        Sistema muzska;
+        Sistema muzska = new Sistema();
+
 
         try {
             if (args.length == 1 && args[0].equals("clientes.txt")) {
-                muzska = new Sistema();
+                //muzska = new Sistema();
                 System.out.println("Cargando clientes...");
                 cargarClientes(muzska, args[0]);
             } else if (args.length == 0) {

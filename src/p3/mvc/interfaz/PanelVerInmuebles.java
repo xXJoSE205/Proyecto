@@ -4,6 +4,8 @@ import p3.mvc.modelo.Inmueble;
 import p3.mvc.modelo.Ofertante;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -24,17 +26,18 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
     private List<Inmueble> lista;
     private JTable tabla = new JTable(modeloDatos);
     private JLabel texto = new JLabel("");
+    private int row;
 
     public PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
         this.lista = ((Ofertante)gui.getControlador().getCliente()).getInmuebles();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        JTable tabla = new JTable(modeloDatos);
+        //JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Inmueble i:lista){
             Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones()
-                        , i.getDireccion(), i.getAscensor(), i.getPlanta()};
+                        , i.getDireccion(), i.getAscensor(), i.getPlanta(), i};
             modeloDatos.addRow(nuevaFila);
         }
         tabla.setPreferredScrollableViewportSize(new Dimension(700, 400));
@@ -58,6 +61,12 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
         layout.putConstraint(SpringLayout.NORTH, select, 5, SpringLayout.SOUTH, texto);
 
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.setColumnSelectionAllowed(false);
+        tabla.getSelectionModel().getLeadSelectionIndex();
+        tabla.setRowSelectionAllowed(true);
+
+
         this.add(etiqueta1);
         this.add(select);
         this.add(texto);
@@ -66,6 +75,8 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crear.addActionListener(this);
+
+
     }
 
     public void actionPerformed(ActionEvent e){
@@ -76,7 +87,14 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
             texto.setVisible(false);
             /* NO VA NI ESTE NI LOS PARECIDOS*/
             try {
-                gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()%6));
+                int x = tabla.getSelectedRow();
+                if(x==-1){
+                    x=tabla.getSelectionModel().getLeadSelectionIndex();
+                }
+                int y = tabla.getSelectedRowCount();
+                gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
+                System.out.println(tabla.getSelectedRow());
+
             }catch (Exception exception){
                 texto.setText("Selecciona inmueble para crear la oferta");
                 texto.setVisible(true);

@@ -56,6 +56,8 @@ public class PanelCrearOferta extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, casilla, 8, SpringLayout.SOUTH, etiqueta4);
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla);
         layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, casilla);
+        layout.putConstraint(SpringLayout.NORTH, texto, 10, SpringLayout.SOUTH, select);
+        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, select);
 
         this.add(etiqueta1);
         this.add(precio);

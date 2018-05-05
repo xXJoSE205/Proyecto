@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class PanelVerModificaciones extends JPanel implements ActionListener {
-    private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
+    private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza", "Modificaciones" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
     private JPanel select = new JPanel(new GridLayout(1, 2));
@@ -35,7 +35,6 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         modificaciones.setText(((Ofertante)gui.getControlador().getCliente()).getModificaciones());
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Oferta o:lista){
             Object[] nuevaFila = {o.getPrecio(), o.getFechaInicio(), o.getFechaFin(), o.isVacacional(), o.getFianza()};
@@ -65,6 +64,10 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, texto);
         layout.putConstraint(SpringLayout.NORTH, select, 5, SpringLayout.SOUTH, texto);
 
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tabla.setColumnSelectionAllowed(false);
+        tabla.getSelectionModel().getLeadSelectionIndex();
+        tabla.setRowSelectionAllowed(true);
         this.add(etiqueta1);
         this.add(select);
         this.add(texto);
@@ -72,7 +75,6 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         this.add(scrollPane);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
-
         volver.addActionListener(this);
         modificar.addActionListener(this);
     }
