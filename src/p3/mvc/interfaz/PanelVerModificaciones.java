@@ -14,8 +14,6 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
     private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
-    private JPanel select = new JPanel(new GridLayout(1, 2));
-    private ButtonGroup grupo = new ButtonGroup();
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
@@ -32,7 +30,12 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
 
         this.lista = gui.getControlador().getOfertasRechazadas();
         final JTextArea modificaciones = new JTextArea();
-        modificaciones.setText(((Ofertante)gui.getControlador().getCliente()).getModificaciones());
+        String cadena = ((Ofertante)gui.getControlador().getCliente()).getModificaciones();
+        if(cadena!=null) {
+            modificaciones.setText(((Ofertante) gui.getControlador().getCliente()).getModificaciones());
+        }else{
+            modificaciones.setText("No tienes propuestas");
+        }
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         JTable tabla = new JTable(modeloDatos);

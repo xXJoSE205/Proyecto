@@ -76,7 +76,7 @@ public class PanelVerInmuebles extends JPanel implements ActionListener{
             texto.setVisible(false);
             /* NO VA NI ESTE NI LOS PARECIDOS*/
             try {
-                gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()%6));
+                gui.getControlador().goCrearOferta(lista.get(tabla.getSelectedRow()));
             }catch (Exception exception){
                 texto.setText("Selecciona inmueble para crear la oferta");
                 texto.setVisible(true);
