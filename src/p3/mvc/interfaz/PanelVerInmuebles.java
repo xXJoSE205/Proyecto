@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones","Direccion", "Ascensor", "Planta" };
+    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Direccion", "Ascensor", "Planta"};
     private Object filas [][] = {};
     private GuiInmobiliaria gui;
     private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
