@@ -207,6 +207,7 @@ public class Controlador {
         this.gui.goCrearComentario();
 
     }
+
     private void quitarLogin(){
         this.usr = null;
     }
