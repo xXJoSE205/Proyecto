@@ -8,12 +8,12 @@ import java.awt.event.ActionListener;
 
 public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
 
-    private final JTextField numero = new JTextField("", 2);
-    private final JTextField numeroBan = new JTextField("", 2);
-    private final JTextField dim = new JTextField("", 2);
-    private final JTextField planta = new JTextField("", 2);
-    private final JTextField direccion = new JTextField("", 50);
-    private final JTextField precio = new JTextField("",4);
+    private final JTextField numero = new JTextField("-1", 2);
+    private final JTextField numeroBan = new JTextField("-1", 2);
+    private final JTextField dim = new JTextField("-1", 2);
+    private final JTextField planta = new JTextField("-1", 2);
+    private final JTextField direccion = new JTextField("", 30);
+    private final JTextField precio = new JTextField("-1",4);
     private JCheckBox casilla2 = new JCheckBox("Vacacional");
     private JCheckBox casilla1 = new JCheckBox("Ascensor");
     private JButton buscar = new JButton("Buscar");
@@ -35,7 +35,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         select.setVisible(true);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, etiqueta1, -100, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, numero, 5, SpringLayout.NORTH, this);
@@ -49,7 +49,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
-        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
+        JLabel etiqueta4 = new JLabel("Planta:");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
@@ -68,9 +68,10 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, casilla1, 8, SpringLayout.SOUTH, etiqueta6);
         layout.putConstraint(SpringLayout.WEST, casilla2, 0, SpringLayout.WEST, casilla1);
         layout.putConstraint(SpringLayout.NORTH, casilla2, 8, SpringLayout.SOUTH, casilla1);
-        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, casilla2);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, casilla2);
-
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, casilla2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
         this.add(etiqueta1);
         this.add(numero);
@@ -87,11 +88,11 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         this.add(casilla2);
         this.add(etiqueta6);
         this.add(precio);
+        this.add(texto);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(800, 600));
         buscar.addActionListener(this);
         volver.addActionListener(this);
-
     }
 
     public void actionPerformed(ActionEvent evento) {
@@ -108,7 +109,7 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
         }
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

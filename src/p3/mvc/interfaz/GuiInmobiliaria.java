@@ -25,7 +25,6 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelVerInmuebles panelVerInmuebles;
     private PanelCrearComentario panelCrearComentario;
     private AvanzadaResultado avanzadaResultado;
-    private PanelBusquedaAvanzada panelBusquedaAvanzada;
     private PanelGerente panelGerente;
     private PanelComprobarOfertas panelComprobarOfertas;
     private PanelDesbloquearUsuario panelDesbloquearUsuario;
@@ -102,13 +101,14 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     @Override
     public void windowClosing(WindowEvent e) {
-        int res = JOptionPane.showConfirmDialog(this, "Seguro que quieres salir de Muzska?"
-                , "Salir?", JOptionPane.YES_NO_OPTION);
+        int res = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres salir de Muzska?"
+                , "¿Salir?", JOptionPane.YES_NO_OPTION);
         if(res==JOptionPane.YES_OPTION) {
             ((GuiInmobiliaria)e.getSource()).setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             //intercept the window close event so that data can be saved to disk at this point
             System.out.println("Guardando datos...");
             this.getControlador().logout();
+            this.getControlador().comprobarReservas();
             this.getControlador().saveData();
             dispose();  //dispose the frame
             System.exit(0);
@@ -174,6 +174,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverLogin() {
         panelLogin.setVisible(false);
+        this.getControlador().comprobarReservas();
         panelPrincipal.setVisible(true);
     }
 
@@ -184,14 +185,12 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void logout(boolean logoutOK) {
         if(logoutOK) {
-            if(panelDemandante!=null) {
+            if(panelDemandante!=null)
                 panelDemandante.setVisible(false);
-            } else if(panelOfertante!=null) {
+            if(panelOfertante!=null)
                 panelOfertante.setVisible(false);
-            } else {
+            if(panelGerente!=null)
                 panelGerente.setVisible(false);
-            }
-            this.getControlador().quitarLogin();
             panelPrincipal.setVisible(true);
         }else{
             if(panelDemandante!=null)
@@ -209,9 +208,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void volverDemandante(){
-        panelCReserva.setVisible(false);
+        if(panelCReserva!=null)
+            panelCReserva.setVisible(false);
         panelBusqueda.setVisible(false);
-        panelBusquedaAvanzada.setVisible(false);
+        panelBAvanzada.setVisible(false);
         panelDemandante.setVisible(true);
     }
 
@@ -229,8 +229,6 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
             panelPrincipal.setVisible(true);
         }else if(usr instanceof Demandante){
             panelDemandante.setVisible(true);
-        }else if(usr instanceof Ofertante){
-            panelOfertante.setVisible(true);
         }
     }
 
@@ -248,7 +246,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverOferta(){
         panelComentario.setVisible(false);
-        panelBusquedaAvanzada.setVisible(true);
+        panelBAvanzada.setVisible(true);
     }
 
     public void goCrearInmueble() {
@@ -340,7 +338,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverBAvanzada(){
         avanzadaResultado.setVisible(false);
-        panelBusquedaAvanzada.setVisible(true);
+        panelBAvanzada.setVisible(true);
     }
 
     public void alquilerOK(String texto){
@@ -375,15 +373,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void errorBusqueda(String texto){
-        panelBusqueda.creadaOK(texto);
+        panelBusqueda.setError(texto);
     }
 
     public void avanzadaError(String texto){
-        panelBusquedaAvanzada.creadaOK(texto);
+        panelBAvanzada.setError(texto);
     }
 
     public void goRAvanzada(){
-        panelBusquedaAvanzada.setVisible(false);
+        panelBAvanzada.setVisible(false);
         avanzadaResultado = new AvanzadaResultado(this);
         contenedor.add(avanzadaResultado);
         avanzadaResultado.setVisible(true);
@@ -435,6 +433,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverPrincipal() {
         panelBusqueda.setVisible(false);
+        this.getControlador().comprobarReservas();
         panelPrincipal.setVisible(true);
     }
 }

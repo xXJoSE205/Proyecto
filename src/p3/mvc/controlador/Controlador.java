@@ -16,6 +16,7 @@ public class Controlador {
     private List<Comentario> comentarios;
     private Oferta oferta;
     private Comentario comentario;
+    private String fichero;
 
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
@@ -34,8 +35,12 @@ public class Controlador {
                     for (Cliente d : clientes) {
                         if (d.getNif().equals(nif)) {
                             if (d instanceof Demandante) {
-                                this.usr = d;
-                                this.gui.loginResult(muzska.login(usr, nif, passwd));
+                                if(muzska.login(d, nif, passwd)) {
+                                    this.usr = d;
+                                    this.gui.loginResult(true);
+                                }else{
+                                    this.gui.loginResult(false);
+                                }
                             }else{
                                 this.gui.loginResult(false);
                             }
@@ -46,11 +51,15 @@ public class Controlador {
                 }
                 case "Ofertante": {
                     List<Cliente> clientes = muzska.getUsuarios();
-                    for (Cliente d : clientes) {
-                        if (d.getNif().equals(nif)) {
-                            if (d instanceof Ofertante) {
-                                this.usr = d;
-                                this.gui.loginResult(muzska.login(usr, nif, passwd));
+                    for (Cliente o : clientes) {
+                        if (o.getNif().equals(nif)) {
+                            if (o instanceof Ofertante) {
+                                if(muzska.login(o, nif, passwd)) {
+                                    this.usr = o;
+                                    this.gui.loginResult(true);
+                                }else{
+                                    this.gui.loginResult(false);
+                                }
                             }else{
                                 this.gui.loginResult(false);
                             }
@@ -73,19 +82,20 @@ public class Controlador {
     }
 
     public void buscar (int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
-        String texto;
-        try{
-            this.busqueda=muzska.buscar(nHab,nBan,dim,planta,ascensor,dir);
-            if(this.busqueda==null){
-                texto ="Error, no hay inmuebles que coincidan con las condiciones";
-                this.gui.errorBusqueda(texto);
-            }else {
-                this.gui.goBusquedaResultado();
+        if(dir.length()>0) {
+            try {
+                this.busqueda = muzska.buscar(nHab, nBan, dim, planta, ascensor, dir);
+                if (this.busqueda == null) {
+                    this.gui.errorBusqueda("Error, no hay inmuebles que coincidan con las condiciones");
+                } else {
+                    this.gui.goBusquedaResultado();
+                }
+            } catch (Exception e) {
+                this.gui.errorBusqueda(e.getMessage());
             }
-        } catch (Exception e){
-            this.gui.errorBusqueda(e.getMessage());
+        }else{
+            this.gui.errorBusqueda("La direccion no es valida");
         }
-
     }
 
     public void volverLogin() {
@@ -119,6 +129,7 @@ public class Controlador {
             for(Cliente c: this.muzska.getUsuarios()){
                 if(c.isLogeado()){
                     this.gui.logout(this.muzska.logout(c));
+                    quitarLogin();
                 }
             }
             this.gui.logout(false);
@@ -145,20 +156,20 @@ public class Controlador {
     }
 
     public void avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, int precio, boolean vacacional){
-        String texto;
-        try{
-            this.avanzada=muzska.avanzada(nHab,nBan, dim,planta,ascensor,dir,precio,vacacional,usr);
-            if(this.avanzada==null){
-                texto = "Error, no hay ofertas que coincidan con las condiciones";
-                this.gui.avanzadaError(texto);
-            } else {
-                this.gui.goRAvanzada();
+        if(dir.length()>0) {
+            try {
+                this.avanzada = muzska.avanzada(nHab, nBan, dim, planta, ascensor, dir, precio, vacacional, usr);
+                if (this.avanzada == null) {
+                    this.gui.avanzadaError("Error, no hay ofertas que coincidan con las condiciones");
+                } else {
+                    this.gui.goRAvanzada();
+                }
+            } catch (Exception e) {
+                this.gui.avanzadaError(e.getMessage());
             }
-        }catch (Exception e){
-            this.gui.avanzadaError(e.getMessage());
+        }else {
+            this.gui.avanzadaError("La direccion no es valida");
         }
-
-
     }
     public void alquilar(Oferta oferta){
         try{
@@ -170,8 +181,6 @@ public class Controlador {
         } catch (Exception e){
             this.gui.alquilerOK(e.getMessage());
         }
-
-
     }
 
     public void valorar(int x){
@@ -241,21 +250,21 @@ public class Controlador {
     }
 
     public void crearInmueble(int nHab, int nBanos, int dim, String dir, int planta, boolean ascensor) {
-        if(dir.equals("")){
-            this.gui.creadoOK("La direccion no es valida");
-        }
-        try {
-            if (usr instanceof Ofertante) {
-                Inmueble inmueble = new Inmueble(nHab, nBanos, dim, dir, planta, ascensor, (Ofertante) usr);
-                if(muzska.anadirInmueble(inmueble)){
-                    this.gui.creadoOK("El inmueble se ha creado correctamente");
-                }else{
-                    this.gui.creadoOK("Error al añadir el inmueble");
+        if(dir.length()>0){
+            try {
+                if (usr instanceof Ofertante) {
+                    Inmueble inmueble = new Inmueble(nHab, nBanos, dim, dir, planta, ascensor, (Ofertante) usr);
+                    if (muzska.anadirInmueble(inmueble)) {
+                        this.gui.creadoOK("El inmueble se ha creado correctamente");
+                    } else {
+                        this.gui.creadoOK("Error al añadir el inmueble");
+                    }
                 }
-
+            } catch (Exception e) {
+                this.gui.creadoOK(e.getMessage());
             }
-        }catch(Exception e){
-            this.gui.creadoOK(e.getMessage());
+        }else {
+            this.gui.creadoOK("La direccion no es valida");
         }
     }
 
@@ -485,5 +494,17 @@ public class Controlador {
 
     public void volverPrincipal() {
         this.gui.volverPrincipal();
+    }
+
+    public void comprobarReservas() {
+        muzska.comprobarReservas();
+    }
+
+    public String getFichero() {
+        return fichero;
+    }
+
+    public void setFichero(String fichero) {
+        this.fichero = fichero;
     }
 }

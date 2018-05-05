@@ -93,7 +93,6 @@ public class PanelComentario extends JPanel implements ActionListener {
         } else if(e.getSource()==boton3){
             gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
         }
-
     }
 
     public void creadaOK(String texto) {

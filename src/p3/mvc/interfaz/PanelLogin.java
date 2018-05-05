@@ -48,7 +48,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, nif, 0, SpringLayout.WEST, pswd);
         layout.putConstraint(SpringLayout.NORTH, nif, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.EAST, etiqueta2, -20, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.EAST, etiqueta2, -50, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, pswd, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, pswd, 5, SpringLayout.SOUTH, nif);
@@ -57,7 +57,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, selectType);
         layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, texto);
-        layout.putConstraint(SpringLayout.WEST, selectLogin, 0, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, selectLogin, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
         this.add(etiqueta1);
         this.add(etiqueta2);
