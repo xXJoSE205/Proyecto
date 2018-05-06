@@ -29,15 +29,16 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
         texto2.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Texto: ");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, texto, 5, SpringLayout.WEST, etiqueta1);
-        layout.putConstraint(SpringLayout.NORTH, texto, 20, SpringLayout.NORTH, etiqueta1);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, etiqueta1);
 
-        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, texto);
-        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, texto2);
 
-        layout.putConstraint(SpringLayout.NORTH,texto2,20,SpringLayout.SOUTH,select);
+        layout.putConstraint(SpringLayout.NORTH,texto2,8,SpringLayout.SOUTH,texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto2, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
         this.add(etiqueta1);
         this.add(select);
@@ -47,18 +48,19 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         publicar.addActionListener(this);
-
     }
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
+            texto2.setVisible(false);
             gui.getControlador().volverComentario();
         } else if(evento.getSource()==publicar){
+            texto2.setVisible(false);
             gui.getControlador().publicarComentario(new Comentario((Demandante)gui.getControlador().getCliente(),texto.getText()));
         }
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto2.setText(texto);
         this.texto2.setVisible(true);
         this.texto2.setForeground(java.awt.Color.red);

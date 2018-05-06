@@ -409,7 +409,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void comentarioOK(String texto){
-        panelAnadirComentario.creadaOK(texto);
+        panelAnadirComentario.setError(texto);
     }
 
     public void errorBusqueda(String texto){
@@ -470,7 +470,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void anadirCOmentarioOK(String texto){
-        panelAnadirComentario.creadaOK(texto);
+        panelAnadirComentario.setError(texto);
     }
 
     public void goReserva(Oferta oferta) {

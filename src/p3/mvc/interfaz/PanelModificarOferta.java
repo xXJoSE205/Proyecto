@@ -27,7 +27,7 @@ class PanelModificarOferta extends JPanel implements ActionListener {
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
-        JTextArea modificaciones = new JTextArea();
+        JTextArea modificaciones = new JTextArea(20,100);
         modificaciones.setText(((Ofertante)gui.getControlador().getCliente()).getModificaciones());
         precio = new JTextField(String.valueOf(oferta.getPrecio()), 10);
         fIni = new JTextField(String.valueOf(oferta.getFechaInicio()), 10);

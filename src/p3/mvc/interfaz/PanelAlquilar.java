@@ -16,7 +16,7 @@ class PanelAlquilar extends JPanel implements ActionListener {
 
     PanelAlquilar(GuiInmobiliaria gui){
         this.gui = gui;
-        this.oferta=gui.getControlador().getOferta();
+        this.oferta = gui.getControlador().getOferta();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
@@ -43,7 +43,6 @@ class PanelAlquilar extends JPanel implements ActionListener {
         ascensor.setText(String.valueOf(oferta.getInmueble().getAscensor()));
         JTextField vacacional = new JTextField("", 4);
         vacacional.setText(String.valueOf(oferta.isVacacional()));
-
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");

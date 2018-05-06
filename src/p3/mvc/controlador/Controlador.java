@@ -293,10 +293,9 @@ public class Controlador {
 
     /**
      * Llama al GUI para ir a la pantalla de anadir comentario
-     * @param comentario Comentario a anadir
+     * @param comentario Comentario al que se quiere anadir un comentario
      */
     public void anadirComentario(Comentario comentario){
-        String texto;
         this.comentario=comentario;
         this.gui.goAnadirComentario();
     }

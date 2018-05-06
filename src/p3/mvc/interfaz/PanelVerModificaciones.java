@@ -29,7 +29,7 @@ class PanelVerModificaciones extends JPanel implements ActionListener {
         this.gui = gui;
 
         this.lista = gui.getControlador().getOfertasRechazadas();
-        final JTextArea modificaciones = new JTextArea();
+        final JTextArea modificaciones = new JTextArea(20,100);
         String cadena = ((Ofertante)gui.getControlador().getCliente()).getModificaciones();
         if(cadena!=null) {
             modificaciones.setText(((Ofertante) gui.getControlador().getCliente()).getModificaciones());

@@ -37,8 +37,6 @@ class PanelComentario extends JPanel implements ActionListener {
         select.add(boton2);
         select.add(boton3);
 
-
-
         JScrollPane scroll = new JScrollPane(arbol,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setViewportView(arbol);

@@ -24,7 +24,6 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
     private final List<Inmueble> lista;
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
-    private int row;
 
     public PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
@@ -64,7 +63,6 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
         tabla.getSelectionModel().getLeadSelectionIndex();
         tabla.setRowSelectionAllowed(true);
 
-
         this.add(etiqueta1);
         this.add(select);
         this.add(texto);
@@ -73,8 +71,6 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         crear.addActionListener(this);
-
-
     }
 
     public void actionPerformed(ActionEvent e){
