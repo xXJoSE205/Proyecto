@@ -118,7 +118,11 @@ class PanelAlquilar extends JPanel implements ActionListener {
         if(evento.getSource()==alquilar){
             gui.getControlador().alquilar(oferta);
         } else if(evento.getSource()==volver){
-            gui.getControlador().volverRAvanzada(1);
+            if(gui.getControlador().getFlag()==0) {
+                gui.getControlador().volverRAvanzada(1);
+            }else if(gui.getControlador().getFlag()==1){
+                gui.getControlador().volverCReserva();
+            }
         }
 
     }
