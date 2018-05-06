@@ -10,20 +10,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PanelVerModificaciones extends JPanel implements ActionListener {
-    private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
-    private Object filas [][] = {};
-    private GuiInmobiliaria gui;
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
+class PanelVerModificaciones extends JPanel implements ActionListener {
+    private final String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
+    private final Object[][] filas  = {};
+    private final GuiInmobiliaria gui;
+    private final DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
         }
     };
-    private JButton volver = new JButton("Volver");
-    private JButton modificar = new JButton("Modificar");
-    private List<Oferta> lista;
-    private JTable tabla = new JTable(modeloDatos);
-    private JLabel texto = new JLabel("");
+    private final JButton volver = new JButton("Volver");
+    private final JButton modificar = new JButton("Modificar");
+    private final List<Oferta> lista;
+    private final JTable tabla = new JTable(modeloDatos);
+    private final JLabel texto = new JLabel("");
 
     public PanelVerModificaciones(GuiInmobiliaria gui){
         this.gui = gui;
@@ -44,6 +44,8 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
             modeloDatos.addRow(nuevaFila);
         }
         tabla.setPreferredScrollableViewportSize(new Dimension(600, 300));
+        JScrollPane scrollBar = new JScrollPane(modificaciones);
+        scrollBar.setPreferredSize(new Dimension(400, 100));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
@@ -59,7 +61,6 @@ public class PanelVerModificaciones extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollPane, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, scrollPane, 20, SpringLayout.NORTH, etiqueta1);
-        JScrollPane scrollBar = new JScrollPane(modificaciones);
         layout.putConstraint(SpringLayout.NORTH, scrollBar, 5, SpringLayout.SOUTH, scrollPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, scrollBar, 0, SpringLayout.HORIZONTAL_CENTER, scrollPane);
         layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, scrollBar);

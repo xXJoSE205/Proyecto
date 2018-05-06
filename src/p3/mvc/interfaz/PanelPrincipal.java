@@ -6,10 +6,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelPrincipal extends JPanel implements ActionListener{
-    private JButton inSes = new JButton("Iniciar Sesion");
-    private JButton buscar = new JButton("Buscar");
-    private GuiInmobiliaria gui;
+class PanelPrincipal extends JPanel implements ActionListener{
+    private final JButton inSes = new JButton("Iniciar Sesion");
+    private final JButton buscar = new JButton("Buscar");
+    private final GuiInmobiliaria gui;
 
     PanelPrincipal(GuiInmobiliaria gui){
         this.gui = gui;

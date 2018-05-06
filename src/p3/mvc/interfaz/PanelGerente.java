@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelGerente extends JPanel implements ActionListener {
-    private JLabel texto = new JLabel("Error al cerrar sesion");
-    private GuiInmobiliaria gui;
+class PanelGerente extends JPanel implements ActionListener {
+    private final JLabel texto = new JLabel("Error al cerrar sesion");
+    private final GuiInmobiliaria gui;
 
-    JButton volver = new JButton("Desconectarse");
-    JButton desbloquear = new JButton("Desbloquear usuarios");
-    JButton comprobar = new JButton("Comprobar ofertas");
+    private final JButton volver = new JButton("Desconectarse");
+    private final JButton desbloquear = new JButton("Desbloquear usuarios");
+    private final JButton comprobar = new JButton("Comprobar ofertas");
 
 
     PanelGerente(GuiInmobiliaria gui){
@@ -68,14 +68,9 @@ public class PanelGerente extends JPanel implements ActionListener {
         }
     }
 
-    public void setError(String error) {
-        texto.setVisible(true);
-        texto.setForeground(java.awt.Color.red);
-    }
-
-    public void creadaOK(String texto) {
-        this.texto.setText(texto);
+    public void setError(String texto) {
         this.texto.setVisible(true);
+        this.texto.setText(texto);
         this.texto.setForeground(java.awt.Color.red);
     }
 }

@@ -6,17 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class PanelCrearInmueble extends JPanel implements ActionListener{
+class PanelCrearInmueble extends JPanel implements ActionListener{
     private final JTextField nHab = new JTextField("-1", 2);
     private final JTextField nBanos = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 5);
     private final JTextField direccion = new JTextField(30);
     private final JTextField planta = new JTextField("-1", 2);
-    private JCheckBox casilla = new JCheckBox("Ascensor");
-    private JButton crear = new JButton("Crear inmueble");
-    private JButton volver = new JButton("Cancelar");
-    private JLabel texto = new JLabel("");
-    private GuiInmobiliaria gui;
+    private final JCheckBox casilla = new JCheckBox("Ascensor");
+    private final JButton crear = new JButton("Crear inmueble");
+    private final JButton volver = new JButton("Cancelar");
+    private final JLabel texto = new JLabel("");
+    private final GuiInmobiliaria gui;
 
     PanelCrearInmueble(GuiInmobiliaria gui){
         this.gui=gui;

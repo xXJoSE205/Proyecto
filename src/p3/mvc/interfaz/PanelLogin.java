@@ -5,18 +5,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelLogin extends JPanel implements ActionListener{
+class PanelLogin extends JPanel implements ActionListener{
     private final JTextField nif = new JTextField(10);
     private final JPasswordField pswd = new JPasswordField(15);
-    private ButtonGroup grupo = new ButtonGroup();
-    private JRadioButton demandante = new JRadioButton("Demandante");
-    private JRadioButton ofertante = new JRadioButton("Ofertante");
-    private JRadioButton gerente = new JRadioButton("Gerente");
-    private JButton inSes = new JButton("Iniciar Sesion");
-    private JButton volver = new JButton("Volver");
-    private JLabel texto = new JLabel("");
+    private final JRadioButton demandante = new JRadioButton("Demandante");
+    private final JRadioButton ofertante = new JRadioButton("Ofertante");
+    private final JRadioButton gerente = new JRadioButton("Gerente");
+    private final JButton inSes = new JButton("Iniciar Sesion");
+    private final JButton volver = new JButton("Volver");
+    private final JLabel texto = new JLabel("");
 
-    private GuiInmobiliaria gui;
+    private final GuiInmobiliaria gui;
 
     PanelLogin(GuiInmobiliaria gui){
         this.gui = gui;
@@ -25,9 +24,10 @@ public class PanelLogin extends JPanel implements ActionListener{
         this.setLayout(layout);
 
         JPanel selectType = new JPanel(new GridLayout(3, 1));
-        grupo.add(demandante);
-        grupo.add(ofertante);
-        grupo.add(gerente);
+        ButtonGroup grupo1 = new ButtonGroup();
+        grupo1.add(demandante);
+        grupo1.add(ofertante);
+        grupo1.add(gerente);
         selectType.add(demandante);
         selectType.add(ofertante);
         selectType.add(gerente);

@@ -1,7 +1,6 @@
 package p3.mvc.interfaz;
 
 import p3.mvc.modelo.Inmueble;
-import p3.mvc.modelo.Oferta;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,16 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class BusquedaResultado extends JPanel implements ActionListener {
-    private GuiInmobiliaria gui;
-    private JButton volver = new JButton("Volver");
-    private JLabel texto = new JLabel("");
-    private List<Inmueble> lista;
+class BusquedaResultado extends JPanel implements ActionListener {
+    private final GuiInmobiliaria gui;
+    private final JButton volver = new JButton("Volver");
+    private final JLabel texto = new JLabel("");
 
     BusquedaResultado(GuiInmobiliaria gui){
         this.gui = gui;
 
-        this.lista = gui.getControlador().getBusqueda();
+        List<Inmueble> lista = gui.getControlador().getBusqueda();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
         Object[][] filas = {};
@@ -38,7 +36,7 @@ public class BusquedaResultado extends JPanel implements ActionListener {
                 modeloDatos.removeRow(k);
             }
         }
-        if(this.lista.isEmpty()){
+        if(lista.isEmpty()){
             texto.setVisible(true);
             this.texto.setForeground(java.awt.Color.red);
             texto.setText("No hay resultados");

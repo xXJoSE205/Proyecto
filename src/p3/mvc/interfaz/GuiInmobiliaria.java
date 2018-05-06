@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class GuiInmobiliaria extends JFrame implements WindowListener{
-    private PanelPrincipal panelPrincipal;
-    private PanelLogin panelLogin;
-    private PanelBusqueda panelBusqueda;
-    private PanelBusquedaAvanzada panelBAvanzada;
-    private PanelCrearOferta panelCOferta;
-    private PanelCrearInmueble panelCInmueble;
+    private final PanelPrincipal panelPrincipal;
+    private final PanelLogin panelLogin;
+    private final PanelBusqueda panelBusqueda;
+    private final PanelBusquedaAvanzada panelBAvanzada;
+    private final PanelCrearOferta panelCOferta;
+    private final PanelCrearInmueble panelCInmueble;
     private PanelComentario panelComentario;
     private PanelDemandante panelDemandante;
     private PanelCReserva panelCReserva;
@@ -30,12 +30,12 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelDesbloquearUsuario panelDesbloquearUsuario;
     private PanelUsuariosBloqueados panelUsuariosBloqueados;
     private PanelAlquilar panelAlquilar;
-    private PanelAnadirComentario panelAnadirComentario;
+    private final PanelAnadirComentario panelAnadirComentario;
     private PanelModificarOferta panelModificarOferta;
     private PanelVerModificaciones panelVerModificaciones;
 
     private Controlador controlador;
-    private Container contenedor;
+    private final Container contenedor;
     private BusquedaResultado busquedaResultado;
 
 

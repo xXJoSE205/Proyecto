@@ -8,17 +8,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
-public class PanelCrearOferta extends JPanel implements ActionListener {
+class PanelCrearOferta extends JPanel implements ActionListener {
     private final JTextField precio = new JTextField(10);
     private final JTextField fIni = new JTextField(10);
     private final JTextField fFin = new JTextField(10);
     private final JTextField fianza = new JTextField(10);
-    private JCheckBox casilla = new JCheckBox("Vacacional");
-    private JButton crear = new JButton("Crear oferta");
-    private JButton volver = new JButton("Cancelar");
-    private JLabel texto = new JLabel("");
+    private final JCheckBox casilla = new JCheckBox("Vacacional");
+    private final JButton crear = new JButton("Crear oferta");
+    private final JButton volver = new JButton("Cancelar");
+    private final JLabel texto = new JLabel("");
     private Inmueble inmueble;
-    private GuiInmobiliaria gui;
+    private final GuiInmobiliaria gui;
 
     PanelCrearOferta(GuiInmobiliaria gui) {
         this.gui = gui;

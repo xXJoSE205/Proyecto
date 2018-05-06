@@ -5,20 +5,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelBusqueda extends JPanel implements ActionListener {
+class PanelBusqueda extends JPanel implements ActionListener {
 
     private final JTextField numero = new JTextField("-1", 2);
     private final JTextField numeroBan = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 2);
     private final JTextField planta = new JTextField("-1", 2);
     private final JTextField direccion = new JTextField("",30);
-    private JCheckBox casilla1 = new JCheckBox("Ascensor");
-    private JLabel texto = new JLabel("");
-    private JButton buscar = new JButton("Buscar");
-    private JButton volver = new JButton("Volver");
+    private final JCheckBox casilla1 = new JCheckBox("Ascensor");
+    private final JLabel texto = new JLabel("");
+    private final JButton buscar = new JButton("Buscar");
+    private final JButton volver = new JButton("Volver");
 
 
-    private GuiInmobiliaria gui;
+    private final GuiInmobiliaria gui;
 
     PanelBusqueda(GuiInmobiliaria gui){
         this.gui = gui;

@@ -15,7 +15,7 @@ public class Ofertante extends Cliente implements Serializable {
     /** Cadena con las modificaciones propuestas*/
     private String modificaciones = null;
     /** Lista de inmuebles del ofertante*/
-    private List<Inmueble> inmuebles;
+    private final List<Inmueble> inmuebles;
 
     /**
      * Constructor de Ofertante, se llama al constructor de Cliente
