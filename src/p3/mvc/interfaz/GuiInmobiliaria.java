@@ -395,7 +395,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void valoracionOK(String texto){
-        panelComentario.creadaOK(texto);
+        panelComentario.setError(texto);
     }
 
     public void publicarOK(String texto){

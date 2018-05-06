@@ -100,7 +100,7 @@ class PanelComentario extends JPanel implements ActionListener {
         }
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);
