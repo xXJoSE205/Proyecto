@@ -18,7 +18,7 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
 
     PanelDesbloquearUsuario(GuiInmobiliaria gui) {
         this.gui = gui;
-        this.demandante=this.gui.getControlador().getDemandante();
+        //this.demandante=this.gui.getControlador().getDemandante();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 

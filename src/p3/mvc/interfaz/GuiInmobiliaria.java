@@ -291,6 +291,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void goDesbloquearUsuarios(Demandante demandante) {
         panelGerente.setVisible(false);
+        panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
+        panelDesbloquearUsuario.setDemandante(demandante);
         panelDesbloquearUsuario.setVisible(true);
     }
 

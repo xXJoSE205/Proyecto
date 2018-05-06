@@ -482,12 +482,11 @@ public class Controlador {
         }
     }
 
-    public void volverPrincipal() {
-        this.gui.volverPrincipal();
-    }
-
     public void comprobarReservas() {
         muzska.comprobarReservas();
     }
 
+    public Gerente getGerente() {
+        return muzska.getGerente();
+    }
 }
