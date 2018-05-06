@@ -750,7 +750,6 @@ public class Controlador {
         muzska.comprobarReservas();
     }
 
-
     /**
      * Reserva una oferta
      * @param oferta, oferta a reservar
@@ -773,7 +772,6 @@ public class Controlador {
      * Llama al GUI para ir a la pantalla de reservar
      * @param oferta Oferta que se quiere reservar
      */
-
     public void goReserva(Oferta oferta){
         this.oferta=oferta;
         this.gui.goReserva();
