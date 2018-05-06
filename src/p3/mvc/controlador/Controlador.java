@@ -30,6 +30,8 @@ public class Controlador {
     /** Comentario seleccionado*/
     private Comentario comentario;
 
+    private Demandante demandante;
+    private int flag=0;
     /**
      * Constructor del Controlador
      *
@@ -117,12 +119,16 @@ public class Controlador {
         }else{
             direccion = null;
         }
-        this.busqueda = muzska.buscar(nHab, nBan, dim, planta, ascensor, direccion);
-        if (this.busqueda.isEmpty()) {
-            this.gui.errorBusqueda("Error, no hay inmuebles que coincidan con las condiciones");
-        } else {
-            this.gui.goBusquedaResultado();
-        }
+            try {
+                this.busqueda = muzska.buscar(nHab, nBan, dim, planta, ascensor, direccion);
+                if (this.busqueda == null || this.busqueda.size()==0) {
+                    this.gui.errorBusqueda("Error, no hay inmuebles que coincidan con las condiciones");
+                } else {
+                    this.gui.goBusquedaResultado();
+                }
+            } catch (Exception e) {
+                this.gui.errorBusqueda(e.getMessage());
+            }
     }
 
     /**
@@ -195,6 +201,7 @@ public class Controlador {
      * Llama al GUI para volver a la pantalla de demandante
      */
     public void volverDemandante(){
+        this.flag=0;
         this.gui.volverDemandante();
     }
 
@@ -203,11 +210,15 @@ public class Controlador {
      */
     public void cancelarReserva(){
         if(usr instanceof Demandante){
-            if(((Demandante) usr).getReserva()!=null){
-                ((Demandante) usr).quitarReserva();
-                this.gui.cancelarReservaOK("Reserva cancelada");
-            }else{
-                this.gui.cancelarReservaOK("No tienes una reserva activa");
+            try{
+                if(((Demandante) usr).isReservaActiva()) {
+                    ((Demandante) usr).quitarReserva();
+                    this.gui.cancelarReservaOK("Reserva cancelada");
+                }else{
+                    this.gui.cancelarReservaOK("Error, no hay reserva");
+                }
+            } catch (Exception e){
+                this.gui.cancelarReservaOK(e.getMessage());
             }
         }
     }
@@ -247,6 +258,10 @@ public class Controlador {
         try{
             if(muzska.alquilar((Demandante)usr,oferta)){
                 this.gui.alquilerOK("Alquiler realizado correctamente");
+                if(flag==1){
+                    ((Demandante) usr).setReservaActiva(false);
+                    ((Demandante)usr).quitarReserva();
+                }
             } else{
                 this.gui.alquilerOK("Error al alquilar");
             }
@@ -398,6 +413,7 @@ public class Controlador {
 
     public void goComentario(Oferta oferta){
         this.oferta=oferta;
+        this.gui.goComentarios();
     }
 
     /**
@@ -441,8 +457,16 @@ public class Controlador {
      */
     public Oferta getOferta(){return oferta;}
 
-    public void volverRAvanzada(){
-        this.gui.volverRAvanzada();
+    public void volverRAvanzada(int n){
+        if(n==1) {
+            this.gui.volverRAvanzada();
+        }else if (n==2){
+            this.gui.volverRAvanzada2();
+        }else if(n==3){
+            this.gui.volverRAvanzada3();
+        }else if(n==4){
+            this.gui.volverRAvanzada4();
+        }
     }
 
     /**
@@ -457,6 +481,7 @@ public class Controlador {
      * @param demandante Demandante a desbloquear
      */
     public void goDesbloquearUsuarios(Demandante demandante) {
+        this.demandante=demandante;
         this.gui.goDesbloquearUsuarios(demandante);
     }
 
@@ -545,6 +570,12 @@ public class Controlador {
      * @param oferta Oferta que se quiere alquilar
      */
     public void goAlquilar(Oferta oferta){
+        this.oferta=oferta;
+        this.gui.goAlquilar();
+    }
+
+    public void goAlquilarR(Oferta oferta){
+        this.flag=1;
         this.oferta=oferta;
         this.gui.goAlquilar();
     }
@@ -645,6 +676,7 @@ public class Controlador {
      * @param oferta oferta a modificar
      */
     public void goModificarOferta(Oferta oferta) {
+        this.oferta=oferta;
         this.gui.goModifcarOferta(oferta);
     }
 
@@ -711,11 +743,56 @@ public class Controlador {
         muzska.comprobarReservas();
     }
 
+
+    /**
+     * Reserva una oferta
+     * @param oferta, oferta a reservar
+     */
+    public void reservar(Oferta oferta){
+
+        try {
+            if (oferta.reservar((Demandante) usr)) {
+                this.gui.reservaOK("Reserva realizada correctamente");
+            } else {
+                this.gui.reservaOK("Error al reservar");
+            }
+        } catch (Exception e){
+            this.gui.reservaOK(e.getMessage());
+        }
+
+    }
+
     /**
      * Llama al GUI para ir a la pantalla de reservar
      * @param oferta Oferta que se quiere reservar
      */
-    public void goReserva(Oferta oferta) {
-        this.gui.goReserva(oferta);
+
+    public void goReserva(Oferta oferta){
+        this.oferta=oferta;
+        this.gui.goReserva();
+    }
+
+    /**
+     * Obtiene el demandante guardado
+     * @return Demandante, ultimo demandante guardado en el controlador
+     */
+    public Demandante getDemandante() {
+        return demandante;
+    }
+
+    /**
+     * Obtiene el flag del controlador
+     * @return int, flag del controlador
+     */
+    public int getFlag(){
+        return flag;
+    }
+
+    /**
+     * Llama al GUI para ir a la pantalla de comprobar reserva
+     */
+    public void volverCReserva(){
+
+        this.gui.volverCReserva();
     }
 }
