@@ -82,7 +82,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
         // mostrar this, en otros ejemplos era ventana, ahora this
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,1000); // remove and uncomment this.pack above
+        this.setSize(1000,900); // remove and uncomment this.pack above
         this.setVisible(true);
         this.setResizable(true);
 
