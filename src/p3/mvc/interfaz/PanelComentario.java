@@ -28,13 +28,6 @@ class PanelComentario extends JPanel implements ActionListener {
         List<Comentario> com = gui.getControlador().getComentarios();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-
-
-        arbol.setVisibleRowCount(10);
-        JScrollPane scroll = new JScrollPane(arbol,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setViewportView(arbol);
-        scroll.setPreferredSize(new Dimension(400,300));
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(boton1);
         grupo.add(boton2);
@@ -43,6 +36,14 @@ class PanelComentario extends JPanel implements ActionListener {
         select.add(boton1);
         select.add(boton2);
         select.add(boton3);
+
+
+
+        JScrollPane scroll = new JScrollPane(arbol,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setViewportView(arbol);
+        scroll.setPreferredSize(new Dimension(400,300));
+
         lista.setSelectedIndex(0);
         arbol.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
@@ -60,7 +61,7 @@ class PanelComentario extends JPanel implements ActionListener {
         }
 
         JTextField val = new JTextField(2);
-
+        arbol.setVisibleRowCount(10);
         JLabel etiqueta3 = new JLabel("Valorar: ");
         layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 100, SpringLayout.SOUTH, this);
@@ -74,6 +75,7 @@ class PanelComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
         layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST, etiqueta1);
         this.add(etiqueta3);
+        this.add(etiqueta1);
         this.add(lista);
         this.add(scroll);
         this.add(select);

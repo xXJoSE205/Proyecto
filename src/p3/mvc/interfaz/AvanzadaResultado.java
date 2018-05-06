@@ -101,19 +101,25 @@ class AvanzadaResultado extends JPanel implements ActionListener {
                 texto.setVisible(false);
                 gui.getControlador().goAlquilar(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para alquilarla");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
         } else if(evento.getSource()==comentario){
-            texto.setVisible(false);
-            gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
+            try{
+                texto.setVisible(false);
+                gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
+            }catch (Exception e){
+                texto.setText("Selecciona oferta para anadir comentario");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }else if(evento.getSource()==comentario2){
             try{
                 texto.setVisible(false);
                 gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
             } catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para ver los comentarios");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
@@ -122,7 +128,7 @@ class AvanzadaResultado extends JPanel implements ActionListener {
                 texto.setVisible(false);
                 gui.getControlador().goReserva(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para reservarla");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
