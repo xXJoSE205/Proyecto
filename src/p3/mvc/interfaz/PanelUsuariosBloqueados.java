@@ -81,7 +81,6 @@ class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         }else if(e.getSource()==desbloquear){
             texto.setVisible(false);
             try {
-                int x=tabla.getSelectedRow();
                 gui.getControlador().goDesbloquearUsuarios(lista.get(tabla.getSelectedRow()));
             }catch (Exception exception){
                 texto.setText("Selecciona usario para desbloquear");

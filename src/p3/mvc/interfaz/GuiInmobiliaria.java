@@ -68,6 +68,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         contenedor.add(panelCOferta);
         contenedor.add(panelCInmueble);
         contenedor.add(panelCrearComentario);
+        contenedor.add(panelAnadirComentario);
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
@@ -77,6 +78,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCOferta.setVisible(false);
         panelCInmueble.setVisible(false);
         panelCrearComentario.setVisible(false);
+        panelAnadirComentario.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTANA
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -302,9 +304,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goDesbloquearUsuarios(Demandante demandante) {
-        panelGerente.setVisible(false);
+        panelUsuariosBloqueados.setVisible(false);
         panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
         panelDesbloquearUsuario.setDemandante(demandante);
+        contenedor.add(panelDesbloquearUsuario);
         panelDesbloquearUsuario.setVisible(true);
     }
 
@@ -367,8 +370,6 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverRAvanzada4(){
         panelAlquilar.setVisible(false);
-        contenedor.remove(panelAlquilar);
-        panelAlquilar=null;
         avanzadaResultado.setVisible(true);
     }
 
@@ -453,8 +454,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goModifcarOferta(Oferta oferta) {
-        panelVerInmuebles.setVisible(false);
-        panelModificarOferta.setOferta(oferta);
+        panelVerModificaciones.setVisible(false);
+        //panelModificarOferta.setOferta(oferta);
+        panelModificarOferta= new PanelModificarOferta(this);
+        contenedor.add(panelModificarOferta);
         panelModificarOferta.setVisible(true);
     }
 

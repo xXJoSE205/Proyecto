@@ -71,7 +71,7 @@ class PanelModificarOferta extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, texto, 50, SpringLayout.SOUTH, scrollBar);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, scrollBar);
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, scrollBar);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scrollBar);
+        layout.putConstraint(SpringLayout.WEST, select, 10, SpringLayout.WEST, scrollBar);
 
         this.add(etiqueta1);
         this.add(precio);

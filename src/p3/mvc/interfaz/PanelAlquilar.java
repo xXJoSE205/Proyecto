@@ -122,7 +122,7 @@ class PanelAlquilar extends JPanel implements ActionListener {
         } else if(evento.getSource()==volver){
             texto.setVisible(false);
             if(gui.getControlador().getFlag()==0) {
-                gui.getControlador().volverRAvanzada(1);
+                gui.getControlador().volverRAvanzada(4);
             }else if(gui.getControlador().getFlag()==1){
                 gui.getControlador().volverCReserva();
             }

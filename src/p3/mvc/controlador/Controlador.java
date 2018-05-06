@@ -29,8 +29,9 @@ public class Controlador {
     private Oferta oferta;
     /** Comentario seleccionado*/
     private Comentario comentario;
-
+    /**Demandante seleccionado*/
     private Demandante demandante;
+    /**Flag para saber el retorno de alquilar*/
     private int flag=0;
     /**
      * Constructor del Controlador
@@ -41,6 +42,9 @@ public class Controlador {
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
         this.muzska = muzska;
+        Demandante demandante = new Demandante("tony","Stark","78945612T","Ironman","7894789478947894");
+        demandante.bloquear();
+        muzska.anadirUsuario(demandante);
     }
 
     /**
@@ -602,6 +606,9 @@ public class Controlador {
                 x+=((Valoracion) o).getPuntuacion();
                 i++;
             }
+        }
+        if(x==0){
+            return String.valueOf(x);
         }
         x=x/i;
         return String.valueOf(x);

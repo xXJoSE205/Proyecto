@@ -86,9 +86,14 @@ class PanelCrearOferta extends JPanel implements ActionListener {
             gui.getControlador().volverVerInmuebles();
         } else if (e.getSource() == crear) {
             texto.setVisible(false);
-            gui.getControlador().crearOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
-                    , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
-                    , inmueble);
+            try {
+                gui.getControlador().crearOferta(Double.parseDouble(precio.getText()), LocalDate.parse(fIni.getText())
+                        , LocalDate.parse(fFin.getText()), casilla.isSelected(), Double.parseDouble(fianza.getText())
+                        , inmueble);
+
+            }catch (Exception ex){
+                this.gui.creadoOK("Error al crear la oferta, revisa los campos");
+            }
         }
     }
 

@@ -21,7 +21,7 @@ class PanelComentario extends JPanel implements ActionListener {
     private final JButton boton2 = new JButton("Atras");
     private final JButton boton3 = new JButton("Añadir Comentario");
     private final GuiInmobiliaria gui;
-    private final JLabel texto = new JLabel("");
+    private final JTextField texto = new JTextField("");
 
     PanelComentario(GuiInmobiliaria gui) {
         this.gui=gui;
@@ -53,33 +53,44 @@ class PanelComentario extends JPanel implements ActionListener {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode("Comentario "+i);
                 modeloDatos.insertNodeInto(node,raiz,i);
                 for(int j=0;j<comentario1.getComentarios().size();j++) {
-                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), raiz, j);
+                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), "cometario"+i, j);
                 }
             }
             modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:"+comentario1.getAutor().getNombre()+", "+comentario1.getTexto() ), raiz, i);
             i++;
         }
-
-        JTextField val = new JTextField(2);
+        texto.setVisible(false);
+        texto.setEditable(false);
         arbol.setVisibleRowCount(10);
         JLabel etiqueta3 = new JLabel("Valorar: ");
-        layout.putConstraint(SpringLayout.EAST, etiqueta3, 0, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.NORTH, etiqueta3, 100, SpringLayout.SOUTH, this);
-        layout.putConstraint(SpringLayout.WEST, lista, 0, SpringLayout.WEST, etiqueta3);
-        layout.putConstraint(SpringLayout.NORTH, lista, 30, SpringLayout.SOUTH, etiqueta3);
-        layout.putConstraint(SpringLayout.WEST, scroll, 0, SpringLayout.WEST, lista);
-        layout.putConstraint(SpringLayout.NORTH, scroll, 5, SpringLayout.SOUTH, lista);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, scroll);
-        layout.putConstraint(SpringLayout.NORTH, select, 30, SpringLayout.SOUTH, scroll);
-        JLabel etiqueta1 = new JLabel("Valoracion media: "+gui.getControlador().getValoracion());
-        layout.putConstraint(SpringLayout.EAST, etiqueta1,5, SpringLayout.WEST,lista);
-        layout.putConstraint(SpringLayout.EAST, val,5, SpringLayout.WEST, etiqueta1);
+        JLabel etiqueta2 = new JLabel("COMENTARIOS");
+        String x= gui.getControlador().getValoracion();
+        JLabel etiqueta1 = new JLabel("Valoracion media: "+x);
+
+        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 5, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.SOUTH, etiqueta2);
+        layout.putConstraint(SpringLayout.WEST, scroll, 0, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta3, 10, SpringLayout.SOUTH, scroll);
+        layout.putConstraint(SpringLayout.WEST, etiqueta3, 0, SpringLayout.WEST, scroll);
+        layout.putConstraint(SpringLayout.NORTH, lista, 10, SpringLayout.SOUTH, scroll);
+        layout.putConstraint(SpringLayout.WEST, lista, 50, SpringLayout.WEST, etiqueta3);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta3, 20, SpringLayout.SOUTH, scroll);
+        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.SOUTH, lista);
+        layout.putConstraint(SpringLayout.WEST, select, 50, SpringLayout.WEST, scroll);
+        layout.putConstraint(SpringLayout.NORTH, texto, 20, SpringLayout.SOUTH, select);
+        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, select);
+        layout.putConstraint(SpringLayout.WEST, etiqueta1, 60, SpringLayout.WEST, lista);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta1, 20, SpringLayout.SOUTH, scroll);
+
+
         this.add(etiqueta3);
+        this.add(etiqueta2);
         this.add(etiqueta1);
         this.add(lista);
         this.add(scroll);
         this.add(select);
-        this.add(val);
+        this.add(texto);
 
         this.setPreferredSize(new Dimension(800, 600));
 
@@ -91,12 +102,33 @@ class PanelComentario extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton1){
-            int x= Integer.parseInt((String)lista.getSelectedItem());
-            gui.getControlador().valorar(x);
+            try{
+                int x= Integer.parseInt((String)lista.getSelectedItem());
+                gui.getControlador().valorar(x);
+            } catch (Exception ex){
+                setError("Seleccione un numero");
+            }
         } else if(e.getSource()==boton2){
             gui.getControlador().volverRAvanzada(3);
         } else if(e.getSource()==boton3){
-            gui.getControlador().anadirComentario((Comentario)arbol.getLastSelectedPathComponent());
+            try{
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
+                if(node==null){
+                    setError("selecciona un comentario");
+                }
+                Object comen = node.getUserObject();
+                String comentario =(String)comen;
+
+                for(Comentario com: gui.getControlador().getComentarios()){
+                    String comnetario2=("Autor:" + com.getAutor().getNombre() + ", " + com.getTexto());
+                    if(comentario.equals(comnetario2)){
+                        gui.getControlador().anadirComentario(com);
+                    }
+                }
+
+            } catch (Exception ex){
+                setError("Seleccione un comentario");
+            }
         }
     }
 

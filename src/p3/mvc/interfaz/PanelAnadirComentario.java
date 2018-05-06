@@ -35,9 +35,9 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, texto, 20, SpringLayout.NORTH, etiqueta1);
 
         layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, texto);
-        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.NORTH, texto);
+        layout.putConstraint(SpringLayout.NORTH, select, 20, SpringLayout.SOUTH, texto);
 
-        layout.putConstraint(SpringLayout.NORTH,texto2,5,SpringLayout.NORTH,etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH,texto2,20,SpringLayout.SOUTH,select);
 
         this.add(etiqueta1);
         this.add(select);
