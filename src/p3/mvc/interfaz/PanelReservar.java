@@ -120,13 +120,15 @@ class PanelReservar extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==alquilar){
+            texto.setVisible(false);
             gui.getControlador().reservar(oferta);
         } else if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverRAvanzada(2);
         }
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

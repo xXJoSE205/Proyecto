@@ -461,14 +461,19 @@ public class Controlador {
     public Oferta getOferta(){return oferta;}
 
     public void volverRAvanzada(int n){
-        if(n==1) {
-            this.gui.volverRAvanzada();
-        }else if (n==2){
-            this.gui.volverRAvanzada2();
-        }else if(n==3){
-            this.gui.volverRAvanzada3();
-        }else if(n==4){
-            this.gui.volverRAvanzada4();
+        switch (n) {
+            case 1:
+                this.gui.volverRAvanzada();
+                break;
+            case 2:
+                this.gui.volverRAvanzada2();
+                break;
+            case 3:
+                this.gui.volverRAvanzada3();
+                break;
+            case 4:
+                this.gui.volverRAvanzada4();
+                break;
         }
     }
 
@@ -549,9 +554,13 @@ public class Controlador {
      * @param oferta Oferta a rechazar
      */
     public void rechazarOferta(Oferta oferta, String modificaciones) {
-        oferta.getInmueble().getDueno().anadirModificaciones(modificaciones, true);
-        oferta.setEstado(Estado.RECHAZADO);
-        this.gui.rechazarOferta("La oferta se ha rechazado");
+        try {
+            oferta.getInmueble().getDueno().anadirModificaciones(modificaciones, true);
+            oferta.setEstado(Estado.RECHAZADO);
+            this.gui.rechazarOferta("La oferta se ha rechazado");
+        }catch (Exception e){
+            this.gui.rechazarOferta(e.getMessage());
+        }
     }
 
     /**

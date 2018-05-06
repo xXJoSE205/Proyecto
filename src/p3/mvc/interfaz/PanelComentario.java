@@ -100,6 +100,7 @@ class PanelComentario extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton1){
+            texto.setVisible(false);
             try{
                 int x= Integer.parseInt((String)lista.getSelectedItem());
                 gui.getControlador().valorar(x);
@@ -107,8 +108,10 @@ class PanelComentario extends JPanel implements ActionListener {
                 setError("Seleccione un numero");
             }
         } else if(e.getSource()==boton2){
+            texto.setVisible(false);
             gui.getControlador().volverRAvanzada(3);
         } else if(e.getSource()==boton3){
+            texto.setVisible(false);
             try{
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
                 if(node==null){
@@ -123,7 +126,6 @@ class PanelComentario extends JPanel implements ActionListener {
                         gui.getControlador().anadirComentario(com);
                     }
                 }
-
             } catch (Exception ex){
                 setError("Seleccione un comentario");
             }

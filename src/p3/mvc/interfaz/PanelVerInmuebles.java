@@ -25,12 +25,11 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
-    public PanelVerInmuebles(GuiInmobiliaria gui){
+    PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
         this.lista = ((Ofertante)gui.getControlador().getCliente()).getInmuebles();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        //JTable tabla = new JTable(modeloDatos);
         JScrollPane scrollPane = new JScrollPane(tabla);
         for(Inmueble i:lista){
             Object[] nuevaFila = {i.getnHabitaciones(), i.getnBanos(), i.getDimensiones()

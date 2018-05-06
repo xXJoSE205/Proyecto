@@ -107,9 +107,8 @@ public class Ofertante extends Cliente implements Serializable {
      * Anade un inmueble a la lista del ofertante
      *
      * @param inmueble Inmueble a anadir
-     * @return boolean, true si se anade correctamente, false en caso contrario
      */
-    public boolean anadirInmueble(Inmueble inmueble) {
-        return inmuebles.add(inmueble);
+    public void anadirInmueble(Inmueble inmueble) {
+        inmuebles.add(inmueble);
     }
 }

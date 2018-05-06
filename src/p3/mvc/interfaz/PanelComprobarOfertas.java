@@ -26,7 +26,7 @@ class PanelComprobarOfertas extends JPanel implements ActionListener {
     private final List<Oferta> ofertas;
     private final JTable tabla = new JTable(modeloDatos);
 
-    public PanelComprobarOfertas(GuiInmobiliaria gui){
+    PanelComprobarOfertas(GuiInmobiliaria gui){
         this.gui = gui;
 
         this.ofertas = gui.getControlador().getOfertasPendientes();
@@ -95,7 +95,6 @@ class PanelComprobarOfertas extends JPanel implements ActionListener {
         }else if(e.getSource()==aceptar){
             texto.setVisible(false);
             try {
-                int x =tabla.getSelectedRow();
                 gui.getControlador().aceptarOferta(ofertas.get(tabla.getSelectedRow()));
                 texto.setText("Oferta aceptada");
             }catch (Exception e1){

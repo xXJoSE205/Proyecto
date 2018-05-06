@@ -52,13 +52,14 @@ class PanelCrearComentario extends JPanel implements ActionListener {
             texto2.setVisible(false);
             gui.getControlador().volverRAvanzada(1);
         } else if(evento.getSource()==publicar){
+            texto2.setVisible(false);
             gui.getControlador().publicarComentario(texto.getText());
             texto.setText("");
             texto.setEditable(true);
         }
     }
 
-    public void creadaOK(String texto) {
+    public void creadoOK(String texto) {
         this.texto2.setText(texto);
         this.texto2.setVisible(true);
         this.texto2.setForeground(java.awt.Color.red);

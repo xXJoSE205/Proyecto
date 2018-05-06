@@ -24,7 +24,7 @@ class PanelUsuariosBloqueados extends JPanel implements ActionListener{
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
-    public PanelUsuariosBloqueados(GuiInmobiliaria gui){
+    PanelUsuariosBloqueados(GuiInmobiliaria gui){
         this.gui = gui;
         this.lista = gui.getControlador().getUsuariosBloqueados();
         SpringLayout layout = new SpringLayout();
@@ -32,6 +32,7 @@ class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         JScrollPane scrollPane = new JScrollPane(tabla);
         if(this.lista==null){
             Object[] nuevaFila={"No hay usuarios bloqueados"};
+            modeloDatos.addRow(nuevaFila);
         }else {
             for (Demandante d : lista) {
                 Object[] nuevaFila = {d.getNombre(), d.getApellidos(), d.getNif(), d.getTarjeta()};

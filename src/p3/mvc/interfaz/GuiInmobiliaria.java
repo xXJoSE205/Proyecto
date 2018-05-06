@@ -432,11 +432,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void publicarOK(String texto){
-        panelCrearComentario.creadaOK(texto);
+        panelCrearComentario.creadoOK(texto);
     }
 
     public void cancelarReservaOK(String texto){
-        panelCReserva.creadaOK(texto);
+        panelCReserva.setError(texto);
     }
 
     public void goComprobarReserva(){
@@ -481,7 +481,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void reservaOK(String texto){
-        this.panelReservar.creadaOK(texto);
+        this.panelReservar.setError(texto);
     }
 
     public void goReserva(){

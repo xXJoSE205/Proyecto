@@ -79,6 +79,7 @@ class BusquedaResultado extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverBusqueda();
         }
     }
