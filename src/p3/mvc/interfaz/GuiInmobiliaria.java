@@ -33,6 +33,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private final PanelAnadirComentario panelAnadirComentario;
     private PanelModificarOferta panelModificarOferta;
     private PanelVerModificaciones panelVerModificaciones;
+    private PanelReservar panelReservar;
 
     private Controlador controlador;
     private final Container contenedor;
@@ -191,6 +192,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
                 panelOfertante.setVisible(false);
             if(panelGerente!=null)
                 panelGerente.setVisible(false);
+            this.getControlador().comprobarReservas();
             panelPrincipal.setVisible(true);
         }else{
             if(panelDemandante!=null)
@@ -226,6 +228,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void volverDeBusqueda(Cliente usr) {
         panelBusqueda.setVisible(false);
         if(usr==null){
+            this.getControlador().comprobarReservas();
             panelPrincipal.setVisible(true);
         }else if(usr instanceof Demandante){
             panelDemandante.setVisible(true);
@@ -437,6 +440,14 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelBusqueda.setVisible(false);
         this.getControlador().comprobarReservas();
         panelPrincipal.setVisible(true);
+    }
+
+    public void goReserva(Oferta oferta) {
+        panelBAvanzada.setVisible(false);
+        panelReservar = new PanelReservar(this);
+        panelReservar.setOferta(oferta);
+        contenedor.add(panelReservar);
+        panelReservar.setVisible(true);
     }
 }
 

@@ -481,4 +481,8 @@ public class Controlador {
     public Gerente getGerente() {
         return muzska.getGerente();
     }
+
+    public void goReserva(Oferta oferta) {
+        this.gui.goReserva(oferta);
+    }
 }
