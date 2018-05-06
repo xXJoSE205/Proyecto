@@ -12,6 +12,7 @@ class PanelCReserva extends JPanel implements ActionListener {
     private final GuiInmobiliaria gui;
     private final JButton volver = new JButton("Volver");
     private final JButton cancelar = new JButton("Cancelar Reserva");
+    private  final JButton alquilar = new JButton("Alquilar");
     private final JLabel texto = new JLabel("");
 
     PanelCReserva(GuiInmobiliaria gui){
@@ -19,52 +20,60 @@ class PanelCReserva extends JPanel implements ActionListener {
         Reserva reserva = ((Demandante) gui.getControlador().getCliente()).getReserva();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        final JTextArea etiqueta2;
+        JTextArea etiqueta2;
         if(reserva ==null){
             etiqueta2 = new JTextArea("No hay ninguna reserva activa");
         } else {
             etiqueta2 = new JTextArea(reserva.toString() + "\n" + reserva.getOferta().toString() + "\n" + reserva.getOferta().getInmueble().toString());
         }
+        etiqueta2.setEditable(false);
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(cancelar);
-        JPanel select = new JPanel(new GridLayout(1, 2));
+        grupo.add(alquilar);
+        JPanel select = new JPanel(new GridLayout(1, 3));
         select.add(volver);
         select.add(cancelar);
+        select.add(alquilar);
         select.setVisible(true);
-        texto.setVisible(false);
 
-        JLabel etiqueta1 = new JLabel("Tu Reserva");
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta1, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        JLabel etiqueta1 = new JLabel("RESERVA");
+        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta2, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, etiqueta2);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
-        layout.putConstraint(SpringLayout.NORTH, select, 8, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, etiqueta1);
+        layout.putConstraint(SpringLayout.NORTH, etiqueta2, 20, SpringLayout.NORTH, etiqueta1);
+        layout.putConstraint(SpringLayout.WEST, select, 5, SpringLayout.WEST, etiqueta2);
+        layout.putConstraint(SpringLayout.NORTH, select, 220, SpringLayout.NORTH, etiqueta2);
+        layout.putConstraint(SpringLayout.WEST, texto, 5, SpringLayout.WEST, select);
+        layout.putConstraint(SpringLayout.NORTH, texto, 220, SpringLayout.NORTH, select);
+
         this.add(etiqueta2);
         this.add(etiqueta1);
         this.add(select);
-        this.add(texto);
         this.setVisible(true);
+        this.add(texto);
         this.setPreferredSize(new Dimension(800, 600));
         volver.addActionListener(this);
         cancelar.addActionListener(this);
+        alquilar.addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
-            texto.setVisible(false);
             gui.getControlador().volverDemandante();
         } else if(evento.getSource()==cancelar){
-            texto.setVisible(false);
             gui.getControlador().cancelarReserva();
+        } else if(evento.getSource()==alquilar){
+            try{
+                gui.getControlador().goAlquilarR(((Demandante)gui.getControlador().getCliente()).getReserva().getOferta());
+            } catch (Exception e){
+                texto.setText("No tienes ningna reserva");
+            }
         }
     }
 
-    public void setError(String texto) {
+    public void creadaOK(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);
