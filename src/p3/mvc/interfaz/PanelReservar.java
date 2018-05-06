@@ -12,7 +12,7 @@ class PanelReservar extends JPanel implements ActionListener {
     private final JButton volver = new JButton("Cancelar");
     private final GuiInmobiliaria gui;
     private final JLabel texto = new JLabel("");
-    private final Oferta oferta;
+    private Oferta oferta;
 
     PanelReservar(GuiInmobiliaria gui){
         this.gui = gui;
@@ -114,13 +114,16 @@ class PanelReservar extends JPanel implements ActionListener {
         volver.addActionListener(this);
     }
 
+    public void setOferta(Oferta oferta){
+        this.oferta = oferta;
+    }
+
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==alquilar){
             gui.getControlador().reservar(oferta);
         } else if(evento.getSource()==volver){
             gui.getControlador().volverRAvanzada(2);
         }
-
     }
 
     public void creadaOK(String texto) {

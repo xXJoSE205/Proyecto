@@ -18,7 +18,7 @@ class PanelGerente extends JPanel implements ActionListener {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
-        JLabel etiqueta2 = new JLabel("Bienvenido " + gui.getControlador().getGerente().getNombre());
+        JLabel etiqueta2 = new JLabel("Bienvenido " + gui.getControlador().getSistema().getGerente().getNombre());
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(volver);
         grupo.add(desbloquear);

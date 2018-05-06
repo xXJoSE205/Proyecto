@@ -47,7 +47,7 @@ class PanelAlquilar extends JPanel implements ActionListener {
         texto.setVisible(false);
 
         JLabel etiqueta1 = new JLabel("Numero de habitaciones:");
-        layout.putConstraint(SpringLayout.WEST, etiqueta1, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.WEST, etiqueta1, -100, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta1, 5, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, numero, 5, SpringLayout.EAST, etiqueta1);
         layout.putConstraint(SpringLayout.NORTH, numero, 5, SpringLayout.NORTH, this);
@@ -61,7 +61,7 @@ class PanelAlquilar extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta3, 8, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, dim, 0, SpringLayout.WEST, numeroBan);
         layout.putConstraint(SpringLayout.NORTH, dim, 5, SpringLayout.SOUTH, numeroBan);
-        JLabel etiqueta4 = new JLabel("Numero de habitaciones:");
+        JLabel etiqueta4 = new JLabel("Planta:");
         layout.putConstraint(SpringLayout.EAST, etiqueta4, 0, SpringLayout.EAST, etiqueta3);
         layout.putConstraint(SpringLayout.NORTH, etiqueta4, 8, SpringLayout.SOUTH, etiqueta3);
         layout.putConstraint(SpringLayout.WEST, planta, 0, SpringLayout.WEST, dim);
@@ -86,10 +86,11 @@ class PanelAlquilar extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.NORTH, etiqueta8, 8, SpringLayout.SOUTH, etiqueta7);
         layout.putConstraint(SpringLayout.EAST, vacacional, 0, SpringLayout.EAST, ascensor);
         layout.putConstraint(SpringLayout.NORTH, vacacional, 8, SpringLayout.SOUTH, ascensor);
-        layout.putConstraint(SpringLayout.NORTH, select, 15, SpringLayout.SOUTH, etiqueta8);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, etiqueta8);
+        layout.putConstraint(SpringLayout.NORTH, select, 15, SpringLayout.SOUTH, texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.NORTH,texto,8,SpringLayout.SOUTH,etiqueta8);
 
-        layout.putConstraint(SpringLayout.NORTH,texto,20,SpringLayout.NORTH,select);
         this.add(texto);
         this.add(etiqueta1);
         this.add(numero);
@@ -116,18 +117,19 @@ class PanelAlquilar extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==alquilar){
+            texto.setVisible(false);
             gui.getControlador().alquilar(oferta);
         } else if(evento.getSource()==volver){
+            texto.setVisible(false);
             if(gui.getControlador().getFlag()==0) {
                 gui.getControlador().volverRAvanzada(1);
             }else if(gui.getControlador().getFlag()==1){
                 gui.getControlador().volverCReserva();
             }
         }
-
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);

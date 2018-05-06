@@ -33,6 +33,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private final PanelAnadirComentario panelAnadirComentario;
     private PanelModificarOferta panelModificarOferta;
     private PanelVerModificaciones panelVerModificaciones;
+    private PanelReservar panelReservar;
 
     private Controlador controlador;
     private final Container contenedor;
@@ -81,7 +82,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
         // mostrar this, en otros ejemplos era ventana, ahora this
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000,1000); // remove and uncomment this.pack above
+        this.setSize(1000,900); // remove and uncomment this.pack above
         this.setVisible(true);
         this.setResizable(true);
 
@@ -191,6 +192,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
                 panelOfertante.setVisible(false);
             if(panelGerente!=null)
                 panelGerente.setVisible(false);
+            this.getControlador().comprobarReservas();
             panelPrincipal.setVisible(true);
         }else{
             if(panelDemandante!=null)
@@ -226,6 +228,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void volverDeBusqueda(Cliente usr) {
         panelBusqueda.setVisible(false);
         if(usr==null){
+            this.getControlador().comprobarReservas();
             panelPrincipal.setVisible(true);
         }else if(usr instanceof Demandante){
             panelDemandante.setVisible(true);
@@ -332,8 +335,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void volverRAvanzada(){
-        panelCrearComentario.setVisible(false);
-        panelAlquilar.setVisible(false);
+        if(panelCrearComentario!=null)
+            panelCrearComentario.setVisible(false);
+        if(panelAlquilar!=null)
+            panelAlquilar.setVisible(false);
         panelComentario.setVisible(false);
         avanzadaResultado.setVisible(true);
     }
@@ -344,7 +349,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void alquilerOK(String texto){
-        panelAlquilar.creadaOK(texto);
+        panelAlquilar.setError(texto);
     }
 
     public void goAlquilar(){
@@ -390,7 +395,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void valoracionOK(String texto){
-        panelComentario.creadaOK(texto);
+        panelComentario.setError(texto);
     }
 
     public void publicarOK(String texto){
@@ -433,10 +438,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelAnadirComentario.creadaOK(texto);
     }
 
-    public void volverPrincipal() {
-        panelBusqueda.setVisible(false);
-        this.getControlador().comprobarReservas();
-        panelPrincipal.setVisible(true);
+    public void goReserva(Oferta oferta) {
+        panelBAvanzada.setVisible(false);
+        panelReservar = new PanelReservar(this);
+        contenedor.add(panelReservar);
+        panelReservar.setVisible(true);
     }
 }
 

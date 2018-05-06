@@ -7,21 +7,47 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Esta clase contiene la funcionalidad del Controlador de la aplicacion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class Controlador {
+    /** GUI de la aplicacion*/
     private final GuiInmobiliaria gui;
+    /** Sistema principal*/
     private final Sistema muzska;
+    /** Cliente logueado*/
     private Cliente usr;
+    /** Lista con los inmuebles buscados*/
     private List<Inmueble> busqueda;
+    /** Lista con las ofertas buscadas*/
     private List<Oferta> avanzada;
+
     private List<Comentario> comentarios;
+    /** Oferta seleccionada*/
     private Oferta oferta;
+    /** Comentario seleccionado*/
     private Comentario comentario;
 
+    /**
+     * Constructor del Controlador
+     *
+     * @param gui GUI de la aplicacion
+     * @param muzska Sistema a controlar
+     */
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
         this.muzska = muzska;
     }
 
+    /**
+     * Loguea en el sistema al usuario correspondiente y llama al GUI
+     *
+     * @param nif NIF del usuario a loguear
+     * @param passwd Contrasena del usuario
+     * @param option Opcion de logueo, Demandante, Ofertante o Gerente
+     */
     public void login(String nif, String passwd, String option) {
         if(nif==null || passwd==null || option==null){
             this.gui.loginResult(false);
@@ -74,6 +100,16 @@ public class Controlador {
         }
     }
 
+    /**
+     * Realiza una busqueda basica y llama al GUI
+     *
+     * @param nHab Numero de habitaciones
+     * @param nBan Numero de banos
+     * @param dim Dimensiones en m2
+     * @param planta Planta
+     * @param ascensor Boolean, si hay ascensor o no
+     * @param dir Direccion
+     */
     public void buscar (int nHab, int nBan, int dim, int planta, boolean ascensor, String dir){
         String direccion;
         if(dir.length()>0) {
@@ -89,30 +125,51 @@ public class Controlador {
         }
     }
 
+    /**
+     * Llama al GUI para volver a la pantalla principal
+     */
     public void volverLogin() {
         this.gui.volverLogin();
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de login
+     */
     public void goLogin() {
         this.gui.goLogin();
     }
 
+    /**
+     * Llama al GUI para volver a la pantalla anterior de una busqueda
+     */
     public void volverDeBusqueda() {
         this.gui.volverDeBusqueda(usr);
     }
 
+    /**
+     * Llama al GUI para volver a la pantalla de busqueda
+     */
     public void volverBusqueda() {
         this.gui.volverBusqueda();
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de busqueda
+     */
     public void goBusqueda() {
         this.gui.goBusqueda();
     }
 
+    /**
+     * Llama al GUI para guardar los datos del sistema
+     */
     public void saveData() {
         this.gui.guardarDatos(this.muzska);
     }
 
+    /**
+     * Desloguea al usuario o gerente y llama al GUI
+     */
     public void logout() {
         if(this.muzska.getGerente().isLogeado()) {
             this.gui.logout(this.muzska.logout());
@@ -127,14 +184,23 @@ public class Controlador {
         }
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de busqueda avanzada
+     */
     public void goAvanzada(){
         this.gui.goAvanzada();
     }
 
+    /**
+     * Llama al GUI para volver a la pantalla de demandante
+     */
     public void volverDemandante(){
         this.gui.volverDemandante();
     }
 
+    /**
+     * Cancela la reserva del demandante logueado y llama al GUI
+     */
     public void cancelarReserva(){
         if(usr instanceof Demandante){
             if(((Demandante) usr).getReserva()!=null){
@@ -146,6 +212,18 @@ public class Controlador {
         }
     }
 
+    /**
+     * Realiza una busqueda avanzada y llama al GUI
+     *
+     * @param nHab Numero de habitaciones
+     * @param nBan Numero de banos
+     * @param dim Dimensiones en m2
+     * @param planta Planta
+     * @param ascensor Boolean, si tiene ascensor o no
+     * @param dir Direccion
+     * @param precio Precio
+     * @param vacacional Boolean, si es vacacional o no
+     */
     public void avanzada(int nHab, int nBan, int dim, int planta, boolean ascensor, String dir, int precio, boolean vacacional){
         String direccion;
         if(dir.length()>0) {
@@ -160,6 +238,11 @@ public class Controlador {
             this.gui.goRAvanzada();
         }
     }
+
+    /**
+     * Alquila una oferta con el Demandante logueado y llama al GUI
+     * @param oferta Oferta a alquilar
+     */
     public void alquilar(Oferta oferta){
         try{
             if(muzska.alquilar((Demandante)usr,oferta)){
@@ -172,6 +255,10 @@ public class Controlador {
         }
     }
 
+    /**
+     * Anade una valoracion a la oferta y llama al GUI
+     * @param x Entero, valoracion de la oferta 1-5
+     */
     public void valorar(int x){
         Valoracion valoracion = new Valoracion((Demandante)usr,x);
         try {
@@ -185,26 +272,48 @@ public class Controlador {
         }
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de anadir comentario
+     * @param comentario Comentario a anadir
+     */
     public void anadirComentario(Comentario comentario){
         String texto;
         this.comentario=comentario;
         this.gui.goAnadirComentario();
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de crear comentario
+     * @param oferta Oferta a la que se quiere anadir un comentario/valoracion
+     */
     public void anadirComentario(Oferta oferta){
         this.oferta=oferta;
         this.gui.goCrearComentario();
-
     }
 
+    /**
+     * Pone a null el atributo usr
+     */
     private void quitarLogin(){
         this.usr = null;
     }
 
+    /**
+     * Devuelve la lista con los resultados de la busqueda basica
+     * @return Lista con los inmuebles encontrados
+     */
     public List<Inmueble> getBusqueda(){return busqueda;}
 
+    /**
+     * Devuelve la lista con los resultados de la busqueda avanzada
+     * @return Lista con las ofertas encontradas
+     */
     public List<Oferta> getAvanzada(){return avanzada;}
 
+    /**
+     * Devuelve la lista con los comentarios de la oferta
+     * @return Lista con los comentarios encontrados
+     */
     public List<Comentario> getComentarios(){
         List<Comentario> lista= new ArrayList<>();
         for(Opinion o :oferta.getOpiniones()){
@@ -215,26 +324,52 @@ public class Controlador {
         return lista;
     }
 
+    /**
+     * Devuelve el usuario logueado
+     * @return Cliente si hay un usario registrado, null en caso contrario
+     */
     public Cliente getCliente() {
         return usr;
     }
 
+    /**
+     * LLama al GUI para ir a la pantalla de crear inmueble
+     */
     public void goCrearInmueble() {
         this.gui.goCrearInmueble();
     }
 
+    /**
+     * LLama al GUI para ir a la pantalla de crear oferta
+     */
     public void goCrearOferta(Inmueble inmueble) {
         this.gui.goCrearOferta(inmueble);
     }
 
+    /**
+     * LLama al GUI para volver a la pantalla de ofertante
+     */
     public void volverOfertante(){
         this.gui.volverOfertante();
     }
 
+    /**
+     * LLama al GUI para volver a la pantalla de ver inmuebles
+     */
     public void volverVerInmuebles(){
         this.gui.volverVerInmuebles();
     }
 
+    /**
+     * Crea un inmueble, lo anade al sistema y llama al GUI
+     *
+     * @param nHab Numero de habitaciones
+     * @param nBanos Numero de banos
+     * @param dim Dimensiones en m2
+     * @param dir Direccion
+     * @param planta Planta
+     * @param ascensor Boolean, si tiene ascensor o no
+     */
     public void crearInmueble(int nHab, int nBanos, int dim, String dir, int planta, boolean ascensor) {
         if(dir.length()>0){
             try {
@@ -254,6 +389,9 @@ public class Controlador {
         }
     }
 
+    /**
+     * LLama al GUI para ir a la pantalla de ver inmuebles
+     */
     public void goVerInmuebles() {
         this.gui.goVerInmuebles();
     }
@@ -262,6 +400,16 @@ public class Controlador {
         this.oferta=oferta;
     }
 
+    /**
+     * Crea una oferta para el inmueble indicado y llama al GUI
+     *
+     * @param precio Precio
+     * @param fIni Fecha de inicio
+     * @param fFin Fecha final
+     * @param vacacional Boolean, si es vacacional o no
+     * @param fianza Fianza
+     * @param inmueble Inmueble al que anadir la oferta
+     */
     public void crearOferta(double precio, LocalDate fIni, LocalDate fFin, boolean vacacional
             , double fianza, Inmueble inmueble) {
         try {
@@ -279,28 +427,50 @@ public class Controlador {
         }
     }
 
+    /**
+     * Devuelve el sistema de la aplicacion
+     * @return Sistema, Muzska
+     */
     public Sistema getSistema() {
         return muzska;
     }
 
+    /**
+     * Devuelve la oferta seleccionada
+     * @return Oferta seleccionada
+     */
     public Oferta getOferta(){return oferta;}
 
     public void volverRAvanzada(){
         this.gui.volverRAvanzada();
     }
 
+    /**
+     * Llama al GUI para volver a la pantalla de busqueda avanzada
+     */
     public void volverAvanzada(){
         this.gui.volverBAvanzada();
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de desbloquear usuario
+     * @param demandante Demandante a desbloquear
+     */
     public void goDesbloquearUsuarios(Demandante demandante) {
         this.gui.goDesbloquearUsuarios(demandante);
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de comprobar ofertas pendientes
+     */
     public void goComprobarOfertas() {
         this.gui.goComprobarOfertas();
     }
 
+    /**
+     * Devuelve la lista de los usuarios bloqueados
+     * @return Lista con los usuarios bloqueados
+     */
     public List<Demandante> getUsuariosBloqueados() {
         List<Demandante> usuarios = new ArrayList<>();
 
@@ -313,10 +483,17 @@ public class Controlador {
         return usuarios;
     }
 
+    /**
+     * Llama la GUI para volver a la pantalla de gerente
+     */
     public void volverGerente() {
         this.gui.volverGerente();
     }
 
+    /**
+     * Devuelve la lista de las ofertas pendientes
+     * @return Lista con las ofertas pendientes
+     */
     public List<Oferta> getOfertasPendientes() {
         List<Oferta> ofertas = new ArrayList<>();
 
@@ -330,24 +507,43 @@ public class Controlador {
         return ofertas;
     }
 
+    /**
+     * Acepta la oferta indicada y la pone como DISPONIBLE
+     * @param oferta Oferta a aceptar
+     */
     public void aceptarOferta(Oferta oferta) {
         oferta.setEstado(Estado.DISPONIBLE);
         this.gui.aceptarOferta("La oferta se ha aceptado");
     }
 
+    /**
+     * Rechaza la oferta indicada, anade las modificaciones propuestas al dueno y la pone como RECHAZADA
+     * @param oferta Oferta a rechazar
+     */
     public void rechazarOferta(Oferta oferta, String modificaciones) {
         oferta.getInmueble().getDueno().anadirModificaciones(modificaciones, true);
+        oferta.setEstado(Estado.RECHAZADO);
         this.gui.rechazarOferta("La oferta se ha rechazado");
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de usuarios bloqueados
+     */
     public void goUsuariosBloqueados() {
         this.gui.goUsuariosBloqueados();
     }
 
+    /**
+     * LLama al GUI para volver a la pantalla de usuarios bloqueados
+     */
     public void volverUsuariosBloqueados(){
         this.gui.volverUsuariosBloqueados();
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de alquilar
+     * @param oferta Oferta que se quiere alquilar
+     */
     public void goAlquilar(Oferta oferta){
         this.oferta=oferta;
         this.gui.goAlquilar();
@@ -357,8 +553,16 @@ public class Controlador {
         this.gui.volverComentario();
     }
 
+    /**
+     * Devuelve el comentario
+     * @return Comentario seleccionado
+     */
     public Comentario getComentario(){return comentario;}
 
+    /**
+     * Devuelve la valoracion media de la oferta seleccionada
+     * @return Cadena con la valoracion medio
+     */
     public String getValoracion(){
         double x=0;
         int i=0;
@@ -370,25 +574,28 @@ public class Controlador {
         }
         x=x/i;
         return String.valueOf(x);
-
     }
 
+    /**
+     * Anade un comentario al oferta seleccionada y llama al GUI
+     * @param texto Cadena con el comentario a andir
+     */
     public void publicarComentario(String texto){
-        String texto2;
         try{
             if(oferta.anadirOpinion(new Comentario((Demandante)usr,texto))){
-                texto2 = "Comentario publicado";
-                this.gui.publicarOK(texto2);
+                this.gui.publicarOK("Comentario publicado");
             } else {
-                texto2 = "Error al publicar";
-                this.gui.publicarOK(texto2);
+                this.gui.publicarOK("Error al publicar");
             }
         }catch (Exception e){
             this.gui.publicarOK(e.getMessage());
         }
-
     }
 
+    /**
+     * Anade un comentario al oferta seleccionada y llama al GUI
+     * @param comentario Comentario a anadir
+     */
     public void publicarComentario(Comentario comentario){
         try{
             if(this.comentario.anadirComentario(comentario)){
@@ -401,10 +608,17 @@ public class Controlador {
         }
     }
 
+    /**
+     * Llama al GUI para ir a la pantalla de comrpobar reserva
+     */
     public void goComprobarReserva(){
         this.gui.goComprobarReserva();
     }
 
+    /**
+     * Devuelve una lista con las ofertas rechazadas del ofertante logueado y llama al GUI
+     * @return Lista con las ofertas rechazadas
+     */
     public List<Oferta> getOfertasRechazadas() {
         List<Oferta> ofertas = new ArrayList<>();
 
@@ -419,18 +633,33 @@ public class Controlador {
         return ofertas;
     }
 
+    /**
+     * LLama al GUI para ir a la pantalla de ver modificaciones propuestas
+     */
     public void goVerModificaciones() {
         this.gui.goVerModificaciones();
     }
 
+    /**
+     * LLama al GUI para ir a la pantalla de modificar oferta
+     * @param oferta oferta a modificar
+     */
     public void goModificarOferta(Oferta oferta) {
         this.gui.goModifcarOferta(oferta);
     }
 
+    /**
+     * Modifica la oferta indicada y llama al GUI
+     *
+     * @param precio Nuevo precio
+     * @param fIni Nueva fecha de inicio
+     * @param fFin Nueva fecha final
+     * @param vacacional Nuevo boolean, si es vacacional o no
+     * @param fianza Nueva fianza
+     * @param oferta Oferta a modificar
+     */
     public void modificarOferta(double precio, LocalDate fIni, LocalDate fFin, boolean vacacional
             , double fianza, Oferta oferta) {
-        String texto;
-
         try {
             oferta.setPrecio(precio);
             oferta.setFechaInicio(fIni);
@@ -438,47 +667,55 @@ public class Controlador {
             oferta.setVacacional(vacacional);
             oferta.setFianza(fianza);
             oferta.setEstado(Estado.PENDIENTE);
-            texto = "La oferta se ha modificado correctamente";
-            this.gui.modificada(texto);
+            this.gui.modificada("La oferta se ha modificado correctamente");
         }catch (Exception e){
-            texto = e.getMessage();
-            this.gui.modificada(texto);
+            this.gui.modificada(e.getMessage());
         }
     }
 
+    /**
+     * Desbloquea al demandante indicado y llama la GUI
+     * @param demandante Demandante a desbloquear
+     */
     public void desbloquearUsuario(Demandante demandante) {
-        String texto;
         if(demandante.desbloquear()){
-            texto = "El usuaario ha sido desbloqueado";
-            this.gui.desbloqueado(texto);
+            this.gui.desbloqueado("El usuaario ha sido desbloqueado");
         }else{
-            texto = "Error al desbloquear";
-            this.gui.desbloqueado(texto);
+            this.gui.desbloqueado("Error al desbloquear");
         }
     }
 
+    /**
+     * Desbloquea al demandante, modifica su tarjeta y llama al GUI
+     * @param demandante Demandante a desbloquear
+     * @param tarjeta Nuevo numero de tarjeta
+     */
     public void desbloquearUsuario(Demandante demandante, String tarjeta) {
-        String texto;
         try {
             if (demandante.desbloquear()) {
                 demandante.setTarjeta(tarjeta);
-                texto = "El usuaario ha sido desbloqueado y la tarjeta se ha modificado";
-                this.gui.desbloqueado(texto);
+                this.gui.desbloqueado("El usuaario ha sido desbloqueado y la tarjeta se ha modificado");
             } else {
-                texto = "Error al desbloquear";
-                this.gui.desbloqueado(texto);
+                this.gui.desbloqueado("Error al desbloquear");
             }
         }catch (Exception e){
-            texto = e.getMessage();
-            this.gui.desbloqueado(texto);
+            demandante.bloquear();
+            this.gui.desbloqueado(e.getMessage());
         }
     }
 
+    /**
+     * Comprueba la validez de las reservas de los demandantes
+     */
     public void comprobarReservas() {
         muzska.comprobarReservas();
     }
 
-    public Gerente getGerente() {
-        return muzska.getGerente();
+    /**
+     * Llama al GUI para ir a la pantalla de reservar
+     * @param oferta Oferta que se quiere reservar
+     */
+    public void goReserva(Oferta oferta) {
+        this.gui.goReserva(oferta);
     }
 }
