@@ -8,11 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelCReserva extends JPanel implements ActionListener {
-    private GuiInmobiliaria gui;
-    private JButton volver = new JButton("Volver");
-    private JButton cancelar = new JButton("Cancelar Reserva");
-    private JLabel texto = new JLabel("");
+class PanelCReserva extends JPanel implements ActionListener {
+    private final GuiInmobiliaria gui;
+    private final JButton volver = new JButton("Volver");
+    private final JButton cancelar = new JButton("Cancelar Reserva");
+    private final JLabel texto = new JLabel("");
 
     PanelCReserva(GuiInmobiliaria gui){
         this.gui = gui;

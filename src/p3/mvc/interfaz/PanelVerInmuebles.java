@@ -10,20 +10,20 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelVerInmuebles extends JPanel implements ActionListener{
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Direccion", "Ascensor", "Planta"};
-    private Object filas [][] = {};
-    private GuiInmobiliaria gui;
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
+class PanelVerInmuebles extends JPanel implements ActionListener{
+    private final String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Direccion", "Ascensor", "Planta"};
+    private final Object[][] filas  = {};
+    private final GuiInmobiliaria gui;
+    private final DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
         }
     };
-    private JButton volver = new JButton("Volver");
-    private JButton crear = new JButton("Crear Oferta");
-    private List<Inmueble> lista;
-    private JTable tabla = new JTable(modeloDatos);
-    private JLabel texto = new JLabel("");
+    private final JButton volver = new JButton("Volver");
+    private final JButton crear = new JButton("Crear Oferta");
+    private final List<Inmueble> lista;
+    private final JTable tabla = new JTable(modeloDatos);
+    private final JLabel texto = new JLabel("");
     private int row;
 
     public PanelVerInmuebles(GuiInmobiliaria gui){

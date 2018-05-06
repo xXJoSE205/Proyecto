@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
+class PanelBusquedaAvanzada extends JPanel implements ActionListener {
 
     private final JTextField numero = new JTextField("-1", 2);
     private final JTextField numeroBan = new JTextField("-1", 2);
@@ -14,12 +14,12 @@ public class PanelBusquedaAvanzada extends JPanel implements ActionListener {
     private final JTextField planta = new JTextField("-1", 2);
     private final JTextField direccion = new JTextField("", 30);
     private final JTextField precio = new JTextField("-1",4);
-    private JCheckBox casilla2 = new JCheckBox("Vacacional");
-    private JCheckBox casilla1 = new JCheckBox("Ascensor");
-    private JButton buscar = new JButton("Buscar");
-    private JButton volver = new JButton("Volver");
-    private GuiInmobiliaria gui;
-    private JLabel texto = new JLabel("");
+    private final JCheckBox casilla2 = new JCheckBox("Vacacional");
+    private final JCheckBox casilla1 = new JCheckBox("Ascensor");
+    private final JButton buscar = new JButton("Buscar");
+    private final JButton volver = new JButton("Volver");
+    private final GuiInmobiliaria gui;
+    private final JLabel texto = new JLabel("");
 
     PanelBusquedaAvanzada(GuiInmobiliaria gui) {
         this.gui = gui;

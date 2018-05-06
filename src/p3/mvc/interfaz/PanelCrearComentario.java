@@ -5,13 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelCrearComentario extends JPanel implements ActionListener {
+class PanelCrearComentario extends JPanel implements ActionListener {
 
     private final JTextArea texto = new JTextArea(20,100);
-    private GuiInmobiliaria gui;
-    private JButton volver = new JButton("Volver");
-    private JButton publicar = new JButton("Publicar");
-    private JLabel texto2 = new JLabel("");
+    private final GuiInmobiliaria gui;
+    private final JButton volver = new JButton("Volver");
+    private final JButton publicar = new JButton("Publicar");
+    private final JLabel texto2 = new JLabel("");
 
     PanelCrearComentario(GuiInmobiliaria gui){
         this.gui = gui;

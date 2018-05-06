@@ -9,17 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
-public class PanelModificarOferta extends JPanel implements ActionListener {
+class PanelModificarOferta extends JPanel implements ActionListener {
     private final JTextField precio;
     private final JTextField fIni;
     private final JTextField fFin;
     private final JTextField fianza;
-    private JCheckBox casilla = new JCheckBox("Vacacional");
-    private JButton modificar = new JButton("Modificar oferta");
-    private JButton volver = new JButton("Cancelar");
-    private JLabel texto = new JLabel("");
+    private final JCheckBox casilla = new JCheckBox("Vacacional");
+    private final JButton modificar = new JButton("Modificar oferta");
+    private final JButton volver = new JButton("Cancelar");
+    private final JLabel texto = new JLabel("");
     private Oferta oferta;
-    private GuiInmobiliaria gui;
+    private final GuiInmobiliaria gui;
 
     PanelModificarOferta(GuiInmobiliaria gui) {
         this.gui = gui;

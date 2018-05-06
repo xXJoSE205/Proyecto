@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelOfertante extends JPanel implements ActionListener {
-    private JLabel texto = new JLabel("Error al cerrar sesion");
-    private GuiInmobiliaria gui;
+class PanelOfertante extends JPanel implements ActionListener {
+    private final JLabel texto = new JLabel("Error al cerrar sesion");
+    private final GuiInmobiliaria gui;
 
-    JButton volver = new JButton("Desconectarse");
-    JButton crearInm = new JButton("Crear Inmueble");
-    JButton verInmuebles = new JButton("Ver Inmuebles");
-    JButton modificaciones = new JButton("Ver modificaciones propuestas");
+    private final JButton volver = new JButton("Desconectarse");
+    private final JButton crearInm = new JButton("Crear Inmueble");
+    private final JButton verInmuebles = new JButton("Ver Inmuebles");
+    private final JButton modificaciones = new JButton("Ver modificaciones propuestas");
 
     PanelOfertante(GuiInmobiliaria gui) {
         this.gui = gui;

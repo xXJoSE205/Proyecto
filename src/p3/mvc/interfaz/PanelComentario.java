@@ -9,18 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PanelComentario extends JPanel implements ActionListener {
+class PanelComentario extends JPanel implements ActionListener {
 
-    private String[] numeros = {"Val","0","1","2","3","4","5"};
-    private JComboBox lista = new JComboBox(numeros);
-    private DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
-    private DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
-    private JTree arbol = new JTree (modeloDatos);
-    private JButton boton1 = new JButton("Valorar");
-    private JButton boton2 = new JButton("Atras");
-    private JButton boton3 = new JButton("Añadir Comentario");
-    private GuiInmobiliaria gui;
-    private JLabel texto = new JLabel("");
+    private final String[] numeros = {"Val","0","1","2","3","4","5"};
+    private final JComboBox lista = new JComboBox(numeros);
+    private final DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
+    private final DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
+    private final JTree arbol = new JTree (modeloDatos);
+
+    private final JButton boton1 = new JButton("Valorar");
+    private final JButton boton2 = new JButton("Atras");
+    private final JButton boton3 = new JButton("Añadir Comentario");
+    private final GuiInmobiliaria gui;
+    private final JLabel texto = new JLabel("");
 
     PanelComentario(GuiInmobiliaria gui) {
         this.gui=gui;

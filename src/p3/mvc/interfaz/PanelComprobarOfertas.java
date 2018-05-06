@@ -9,22 +9,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PanelComprobarOfertas extends JPanel implements ActionListener {
-    private String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza"};
-    private Object filas [][] = {};
-    private GuiInmobiliaria gui;
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
+class PanelComprobarOfertas extends JPanel implements ActionListener {
+    private final String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza"};
+    private final Object[][] filas  = {};
+    private final GuiInmobiliaria gui;
+    private final DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
         }
     };
-    private JButton volver = new JButton("Volver");
-    private JButton aceptar = new JButton("Aceptar");
-    private JButton rechazar = new JButton("Rechazar");
-    private JTextArea modificaciones = new JTextArea("Proponer modificaciones");
-    private JLabel texto = new JLabel("");
-    private List<Oferta> ofertas;
-    private JTable tabla = new JTable(modeloDatos);
+    private final JButton volver = new JButton("Volver");
+    private final JButton aceptar = new JButton("Aceptar");
+    private final JButton rechazar = new JButton("Rechazar");
+    private final JTextArea modificaciones = new JTextArea("Proponer modificaciones");
+    private final JLabel texto = new JLabel("");
+    private final List<Oferta> ofertas;
+    private final JTable tabla = new JTable(modeloDatos);
 
     public PanelComprobarOfertas(GuiInmobiliaria gui){
         this.gui = gui;

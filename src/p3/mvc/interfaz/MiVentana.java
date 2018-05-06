@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MiVentana extends JFrame {
 
-    public MiVentana() {
+    private MiVentana() {
         super("Muzska");
         Container contenedor = this.getContentPane();
         contenedor.setLayout(new BorderLayout());

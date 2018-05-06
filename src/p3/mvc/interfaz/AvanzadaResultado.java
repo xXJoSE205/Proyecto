@@ -9,23 +9,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class AvanzadaResultado extends JPanel implements ActionListener {
-    private String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Direccion","Precio","Vacacional"};
-    private Object filas[][] = {};
-    private GuiInmobiliaria gui;
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
+class AvanzadaResultado extends JPanel implements ActionListener {
+    private final String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Direccion","Precio","Vacacional"};
+    private final Object[][] filas = {};
+    private final GuiInmobiliaria gui;
+    private final DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
         }
     };
-    private JButton volver = new JButton("Volver");
-    private JButton alquilar = new JButton("Alquilar");
-    private JButton comentario = new JButton("Anadir comentario");
-    private JButton comentario2 = new JButton("Ver comentarios");
-    private JButton reservar = new JButton("Reservar");
-    private List<Oferta> lista;
-    private JTable tabla = new JTable(modeloDatos);
-    private JLabel texto = new JLabel("");
+    private final JButton volver = new JButton("Volver");
+    private final JButton alquilar = new JButton("Alquilar");
+    private final JButton comentario = new JButton("Anadir comentario");
+    private final JButton comentario2 = new JButton("Ver comentarios");
+    private final JButton reservar = new JButton("Reservar");
+    private final List<Oferta> lista;
+    private final JTable tabla = new JTable(modeloDatos);
+    private final JLabel texto = new JLabel("");
 
 
     AvanzadaResultado(GuiInmobiliaria gui) {

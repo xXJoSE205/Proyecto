@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Controlador {
-    private GuiInmobiliaria gui;
-    private Sistema muzska;
+    private final GuiInmobiliaria gui;
+    private final Sistema muzska;
     private Cliente usr;
     private List<Inmueble> busqueda;
     private List<Oferta> avanzada;
     private List<Comentario> comentarios;
     private Oferta oferta;
     private Comentario comentario;
-    private String fichero;
 
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
@@ -483,19 +482,11 @@ public class Controlador {
         }
     }
 
-    public void volverPrincipal() {
-        this.gui.volverPrincipal();
-    }
-
     public void comprobarReservas() {
         muzska.comprobarReservas();
     }
 
-    public String getFichero() {
-        return fichero;
-    }
-
-    public void setFichero(String fichero) {
-        this.fichero = fichero;
+    public Gerente getGerente() {
+        return muzska.getGerente();
     }
 }

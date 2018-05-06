@@ -9,20 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PanelUsuariosBloqueados extends JPanel implements ActionListener{
-    private String[] titulos = {"Nombre", "Apellidos", "NIF", "Tarjeta"};
-    private Object filas [][] = {};
-    private GuiInmobiliaria gui;
-    private DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
+class PanelUsuariosBloqueados extends JPanel implements ActionListener{
+    private final String[] titulos = {"Nombre", "Apellidos", "NIF", "Tarjeta"};
+    private final Object[][] filas  = {};
+    private final GuiInmobiliaria gui;
+    private final DefaultTableModel modeloDatos = new DefaultTableModel(filas, titulos){
         public boolean isCellEditable(int row, int colum){
             return false;
         }
     };
-    private JButton volver = new JButton("Volver");
-    private JButton desbloquear = new JButton("Desbloquear usuario");
-    private List<Demandante> lista;
-    private JTable tabla = new JTable(modeloDatos);
-    private JLabel texto = new JLabel("");
+    private final JButton volver = new JButton("Volver");
+    private final JButton desbloquear = new JButton("Desbloquear usuario");
+    private final List<Demandante> lista;
+    private final JTable tabla = new JTable(modeloDatos);
+    private final JLabel texto = new JLabel("");
 
     public PanelUsuariosBloqueados(GuiInmobiliaria gui){
         this.gui = gui;

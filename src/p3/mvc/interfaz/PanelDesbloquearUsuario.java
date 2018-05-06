@@ -7,18 +7,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
+class PanelDesbloquearUsuario extends JPanel implements ActionListener {
     private final JTextField tarjeta;
-    private JButton desb = new JButton("Desbloquear");
-    private JButton desbYMod = new JButton("Modificar");
-    private JButton volver = new JButton("Cancelar");
-    private JLabel texto = new JLabel("");
+    private final JButton desb = new JButton("Desbloquear");
+    private final JButton desbYMod = new JButton("Modificar");
+    private final JButton volver = new JButton("Cancelar");
+    private final JLabel texto = new JLabel("");
     private Demandante demandante;
-    private GuiInmobiliaria gui;
+    private final GuiInmobiliaria gui;
 
     PanelDesbloquearUsuario(GuiInmobiliaria gui) {
         this.gui = gui;
-        this.demandante=this.gui.getControlador().getDemandante();
+        //this.demandante=this.gui.getControlador().getDemandante();
         SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
 
@@ -79,7 +79,7 @@ public class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         desbYMod.addActionListener(this);
     }
 
-    public void setOferta(Demandante demandante){
+    public void setDemandante(Demandante demandante){
         this.demandante = demandante;
     }
 

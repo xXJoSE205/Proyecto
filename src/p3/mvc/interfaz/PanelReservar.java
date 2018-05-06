@@ -7,12 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelReservar extends JPanel implements ActionListener {
-    private JButton alquilar = new JButton("Reservar");
-    private JButton volver = new JButton("Cancelar");
-    private GuiInmobiliaria gui;
-    private JLabel texto = new JLabel("");
-    private Oferta oferta;
+class PanelReservar extends JPanel implements ActionListener {
+    private final JButton alquilar = new JButton("Reservar");
+    private final JButton volver = new JButton("Cancelar");
+    private final GuiInmobiliaria gui;
+    private final JLabel texto = new JLabel("");
+    private final Oferta oferta;
 
     PanelReservar(GuiInmobiliaria gui){
         this.gui = gui;
