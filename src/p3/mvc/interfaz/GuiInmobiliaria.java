@@ -58,6 +58,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCOferta = new PanelCrearOferta(this);
         panelCInmueble = new PanelCrearInmueble(this);
         panelAnadirComentario = new PanelAnadirComentario(this);
+        panelCrearComentario = new PanelCrearComentario(this);
 
         // anadir componentes al contenedor
         contenedor.add(panelPrincipal);
@@ -66,6 +67,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         contenedor.add(panelBAvanzada);
         contenedor.add(panelCOferta);
         contenedor.add(panelCInmueble);
+        contenedor.add(panelCrearComentario);
 
         // visibilidad inicial
         panelPrincipal.setVisible(true);
@@ -74,6 +76,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelBAvanzada.setVisible(false);
         panelCOferta.setVisible(false);
         panelCInmueble.setVisible(false);
+        panelCrearComentario.setVisible(false);
 
         // Propuesta: PERMITIR REGRESAR A PANEL LOGIN DESDE CUALQUIER PESTANA
         // Proposed work: ALLOW RETURN TO PANEL LOGIN FROM ANY TAB
@@ -182,6 +185,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public void goLogin() {
         panelPrincipal.setVisible(false);
         panelLogin.setVisible(true);
+        panelLogin.text();
     }
 
     public void logout(boolean logoutOK) {
@@ -237,6 +241,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     public void volverBusqueda(){
        busquedaResultado.setVisible(false);
+       contenedor.remove(busquedaResultado);
        panelBusqueda.setVisible(true);
     }
 
@@ -264,11 +269,15 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void volverOfertante(){
-        panelCInmueble.setVisible(false);
         if(panelVerInmuebles!=null)
             panelVerInmuebles.setVisible(false);
         if(panelVerModificaciones!=null)
             panelVerModificaciones.setVisible(false);
+        if(panelModificarOferta!=null){
+            panelModificarOferta.setVisible(false);
+        }
+        if(panelCInmueble!=null)
+            panelCInmueble.setVisible(false);
         panelOfertante.setVisible(true);
     }
 
@@ -315,11 +324,11 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void aceptarOferta(String texto) {
-        panelDesbloquearUsuario.setError(texto);
+        panelComprobarOfertas.setError(texto);
     }
 
     public void rechazarOferta(String texto) {
-        panelDesbloquearUsuario.setError(texto);
+        panelComprobarOfertas.setError(texto);
     }
 
     public void goUsuariosBloqueados() {
@@ -330,16 +339,36 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void volverUsuariosBloqueados() {
-        panelDesbloquearUsuario.setVisible(false);
+        if(panelDesbloquearUsuario!=null)
+            panelDesbloquearUsuario.setVisible(false);
+        if(panelCrearComentario!=null)
+            panelCrearComentario.setVisible(false);
+        if(panelReservar!=null)
+            panelReservar.setVisible(false);
+        if(panelAlquilar!=null)
+            panelAlquilar.setVisible(false);
         panelUsuariosBloqueados.setVisible(true);
     }
 
     public void volverRAvanzada(){
-        if(panelCrearComentario!=null)
-            panelCrearComentario.setVisible(false);
-        if(panelAlquilar!=null)
-            panelAlquilar.setVisible(false);
+        panelCrearComentario.setVisible(false);
+        avanzadaResultado.setVisible(true);
+    }
+
+    public void volverRAvanzada2(){
+        panelReservar.setVisible(false);
+        avanzadaResultado.setVisible(true);
+    }
+
+    public void volverRAvanzada3(){
         panelComentario.setVisible(false);
+        avanzadaResultado.setVisible(true);
+    }
+
+    public void volverRAvanzada4(){
+        panelAlquilar.setVisible(false);
+        contenedor.remove(panelAlquilar);
+        panelAlquilar=null;
         avanzadaResultado.setVisible(true);
     }
 
@@ -353,7 +382,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goAlquilar(){
-        avanzadaResultado.setVisible(false);
+        if(avanzadaResultado!=null)
+            avanzadaResultado.setVisible(false);
+        if(panelCReserva!=null)
+            panelCReserva.setVisible(false);
         panelAlquilar = new PanelAlquilar(this);
         contenedor.add(panelAlquilar);
         panelAlquilar.setVisible(true);
@@ -366,8 +398,8 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void goCrearComentario(){
-        panelComentario.setVisible(false);
-        panelAnadirComentario.setVisible(true);
+        avanzadaResultado.setVisible(false);
+        panelCrearComentario.setVisible(true);
     }
 
     public void volverComentario(){
@@ -403,7 +435,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void cancelarReservaOK(String texto){
-        panelCReserva.setError(texto);
+        panelCReserva.creadaOK(texto);
     }
 
     public void goComprobarReserva(){
@@ -443,6 +475,30 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelReservar = new PanelReservar(this);
         contenedor.add(panelReservar);
         panelReservar.setVisible(true);
+    }
+
+    public void reservaOK(String texto){
+        this.panelReservar.creadaOK(texto);
+    }
+
+    public void goReserva(){
+        avanzadaResultado.setVisible(false);
+        panelReservar = new PanelReservar(this);
+        contenedor.add(panelReservar);
+        panelReservar.setVisible(true);
+
+    }
+
+    public void goComentarios(){
+        avanzadaResultado.setVisible(false);
+        panelComentario = new PanelComentario(this);
+        contenedor.add(panelComentario);
+        panelComentario.setVisible(true);
+    }
+
+    public void volverCReserva(){
+        panelAlquilar.setVisible(false);
+        panelCReserva.setVisible(true);
     }
 }
 
