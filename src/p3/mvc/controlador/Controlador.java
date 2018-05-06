@@ -185,10 +185,6 @@ public class Controlador {
         }
     }
 
-    public void volverOferta(){
-        this.gui.volverOferta();
-    }
-
     public void anadirComentario(Comentario comentario){
         String texto;
         this.comentario=comentario;
@@ -355,10 +351,6 @@ public class Controlador {
     public void goAlquilar(Oferta oferta){
         this.oferta=oferta;
         this.gui.goAlquilar();
-    }
-
-    public void volverBAvanzada(){
-        this.gui.volverBAvanzada();
     }
 
     public void volverComentario(){
