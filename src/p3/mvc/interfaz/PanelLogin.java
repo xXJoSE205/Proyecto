@@ -55,7 +55,7 @@ class PanelLogin extends JPanel implements ActionListener{
         layout.putConstraint(SpringLayout.NORTH, selectType, 10, SpringLayout.SOUTH, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, selectType, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, texto, 8, SpringLayout.SOUTH, selectType);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
+        layout.putConstraint(SpringLayout.WEST, texto, 0, SpringLayout.WEST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, selectLogin, 10, SpringLayout.SOUTH, texto);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, selectLogin, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
@@ -98,5 +98,9 @@ class PanelLogin extends JPanel implements ActionListener{
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);
+    }
+
+    public void text (){
+        this.texto.setVisible(false);
     }
 }
