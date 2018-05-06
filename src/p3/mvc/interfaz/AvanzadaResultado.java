@@ -94,9 +94,11 @@ class AvanzadaResultado extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
+            texto.setVisible(false);
             gui.getControlador().volverAvanzada();
         } else if(evento.getSource()==alquilar){
             try{
+                texto.setVisible(false);
                 gui.getControlador().goAlquilar(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
                 texto.setText("Selecciona oferta para modificarla");
@@ -104,9 +106,11 @@ class AvanzadaResultado extends JPanel implements ActionListener {
                 texto.setForeground(Color.red);
             }
         } else if(evento.getSource()==comentario){
+            texto.setVisible(false);
             gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
         }else if(evento.getSource()==comentario2){
             try{
+                texto.setVisible(false);
                 gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
             } catch (Exception e){
                 texto.setText("Selecciona oferta para modificarla");
@@ -115,6 +119,7 @@ class AvanzadaResultado extends JPanel implements ActionListener {
             }
         } else if(evento.getSource()==reservar){
             try{
+                texto.setVisible(false);
                 gui.getControlador().goReserva(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
                 texto.setText("Selecciona oferta para modificarla");
@@ -122,10 +127,9 @@ class AvanzadaResultado extends JPanel implements ActionListener {
                 texto.setForeground(Color.red);
             }
         }
-
     }
 
-    public void creadaOK(String texto) {
+    public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);
