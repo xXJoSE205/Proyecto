@@ -344,7 +344,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     }
 
     public void alquilerOK(String texto){
-        panelAlquilar.creadaOK(texto);
+        panelAlquilar.setError(texto);
     }
 
     public void goAlquilar(){
