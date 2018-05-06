@@ -99,17 +99,23 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
             try{
                 gui.getControlador().goAlquilar(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para alquilarla");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
         } else if(evento.getSource()==comentario){
-            gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
+            try{
+                gui.getControlador().anadirComentario(lista.get(tabla.getSelectedRow()));
+            }catch (Exception e){
+                texto.setText("Selecciona oferta para anadir comentario");
+                texto.setVisible(true);
+                texto.setForeground(Color.red);
+            }
         }else if(evento.getSource()==comentario2){
             try{
                 gui.getControlador().goComentario(lista.get(tabla.getSelectedRow()));
             } catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para ver los comentarios");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
@@ -117,7 +123,7 @@ public class AvanzadaResultado extends JPanel implements ActionListener {
             try{
                 gui.getControlador().goReserva(lista.get(tabla.getSelectedRow()));
             }catch (Exception e){
-                texto.setText("Selecciona oferta para modificarla");
+                texto.setText("Selecciona oferta para reservarla");
                 texto.setVisible(true);
                 texto.setForeground(Color.red);
             }
