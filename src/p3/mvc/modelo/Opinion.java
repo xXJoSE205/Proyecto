@@ -60,7 +60,4 @@ public abstract class Opinion implements Serializable {
         return comentarios;
     }
 
-    public String getNombre(){
-        return autor.getNombre();
-    }
 }

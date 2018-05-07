@@ -67,7 +67,7 @@ class PanelComentario extends JPanel implements ActionListener {
                 }
 
                 for(int j=0;j<comentario1.getComentarios().size();j++) {
-                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), node, j);
+                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getAutor().getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), node, j);
                 }
             }
             modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:"+comentario1.getAutor().getNombre()+", "+comentario1.getTexto() ), raiz, i);
