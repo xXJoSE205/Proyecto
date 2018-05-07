@@ -1,4 +1,6 @@
 NIF: 00000000G, PSWD: Apruebanos
 
 Primero hay que ejecutar el programa con el archivo "clientes.txt" para cargar los clientes
-y despues sin el fichero para cargar los datos guardados del sistema
+y despues sin el fichero para cargar los datos guardados del sistema.
+
+Logo creado en www.designevo.com
