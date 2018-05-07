@@ -42,9 +42,6 @@ public class Controlador {
     public Controlador(GuiInmobiliaria gui, Sistema muzska) {
         this.gui = gui;
         this.muzska = muzska;
-        Demandante demandante = new Demandante("tony","Stark","78945612T","Ironman","7894789478947894");
-        demandante.bloquear();
-        muzska.anadirUsuario(demandante);
     }
 
     /**
