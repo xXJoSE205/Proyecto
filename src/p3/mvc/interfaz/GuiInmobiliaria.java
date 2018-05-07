@@ -11,35 +11,68 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * Esta clase contiene una ventana que controla paneles
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 public class GuiInmobiliaria extends JFrame implements WindowListener{
+    /**Panel princioal*/
     private final PanelPrincipal panelPrincipal;
+    /**Panel login*/
     private final PanelLogin panelLogin;
+    /**Panel de busqueda*/
     private final PanelBusqueda panelBusqueda;
+    /**Panel de busqueda avanzada*/
     private final PanelBusquedaAvanzada panelBAvanzada;
+    /**Panel crear oferta*/
     private final PanelCrearOferta panelCOferta;
+    /**Panel crear inmueble*/
     private final PanelCrearInmueble panelCInmueble;
+    /**Panel de los comentarios*/
     private PanelComentario panelComentario;
+    /**Panel de demandante*/
     private PanelDemandante panelDemandante;
+    /**Panel comprobar reserva*/
     private PanelCReserva panelCReserva;
+    /**Panel de ofertante*/
     private PanelOfertante panelOfertante;
+    /**Panel ver inmuebles*/
     private PanelVerInmuebles panelVerInmuebles;
-    private final PanelCrearComentario panelCrearComentario;
+    /**Panel crear comentarios*/
+    private PanelCrearComentario panelCrearComentario;
+    /**Panel con el resultado de busqueda avanzada*/
     private AvanzadaResultado avanzadaResultado;
+    /**Panel del gerente*/
     private PanelGerente panelGerente;
+    /**Panel para comprobar las ofertas*/
     private PanelComprobarOfertas panelComprobarOfertas;
+    /**Pane desbloquear usuarios*/
     private PanelDesbloquearUsuario panelDesbloquearUsuario;
+    /**Panel ver usuarios bloqueados*/
     private PanelUsuariosBloqueados panelUsuariosBloqueados;
+    /**Panel alquilar*/
     private PanelAlquilar panelAlquilar;
+    /**Panel anadir comentario*/
     private final PanelAnadirComentario panelAnadirComentario;
+    /**Panel modificar oferta*/
     private PanelModificarOferta panelModificarOferta;
+    /**Panel ver modificaciones*/
     private PanelVerModificaciones panelVerModificaciones;
+    /**Panel reservar*/
     private PanelReservar panelReservar;
-
+    /**Controlador de la aplicacion*/
     private Controlador controlador;
+    /**Contenedor para almacenar los paneles*/
     private final Container contenedor;
+    /**Panel con el resultado de la busqueda*/
     private BusquedaResultado busquedaResultado;
 
 
+    /**
+     * Constructor de GuiInmobiliaria
+     *
+     * @param titulo Nombre de la aplicacion
+     */
     public GuiInmobiliaria(String titulo) {
         super(titulo);
 
@@ -94,17 +127,33 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         this.addWindowListener(this);
     }
 
+    /**
+     * Añade el controlador al GUI
+     * @param c controlador que se quiere añadir
+     */
     public void setControlador(Controlador c) {
         this.controlador = c;
     }
 
+    /**
+     * Obtiene el controlador del GUI
+     * @return Controlador, el controlador del GUI
+     */
     public Controlador getControlador() {
         return this.controlador;
     }
 
+    /**
+     * Accion a realizar cuando se abre la aplicacion
+     * @param e evento
+     */
     @Override
     public void windowOpened(WindowEvent e) {}
 
+    /**
+     * Accion a realizar cuando se cierra la aplicacion
+     * @param e evento
+     */
     @Override
     public void windowClosing(WindowEvent e) {
         int res = JOptionPane.showConfirmDialog(this, "¿Seguro que quieres salir de Muzska?"
@@ -157,6 +206,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }
     }
 
+    /**
+     * Cambia el panel cuando se realiza el login
+     * @param loginOK Boolean, si se ha realizado correctamente el login
+     */
     public void loginResult(boolean loginOK) {
         if (loginOK) {
             panelLogin.setVisible(false);
@@ -178,18 +231,28 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }
     }
 
+    /**
+     * Vuelve del panel de login al principal
+     */
     public void volverLogin() {
         panelLogin.setVisible(false);
         this.getControlador().comprobarReservas();
         panelPrincipal.setVisible(true);
     }
 
+    /**
+     * Va del panel principal al de login
+     */
     public void goLogin() {
         panelPrincipal.setVisible(false);
         panelLogin.setVisible(true);
         panelLogin.text();
     }
 
+    /**
+     * Cambia del panel del demandante, ofertante o gerente al principal
+     * @param logoutOK Boolean, si se ha realizado correctamente el logout o no
+     */
     public void logout(boolean logoutOK) {
         if(logoutOK) {
             if(panelDemandante!=null)
@@ -210,11 +273,17 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }
     }
 
+    /**
+     * Cambia el panel del demandante al de busqueda avanzada
+     */
     public void goAvanzada(){
         panelDemandante.setVisible(false);
         panelBAvanzada.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de comprobar reserva, el de busqueda o el de busqueda avanzada por el de demandante
+     */
     public void volverDemandante(){
         if(panelCReserva!=null)
             panelCReserva.setVisible(false);
@@ -223,6 +292,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelDemandante.setVisible(true);
     }
 
+    /**
+     * Crea un nuevo panel de resultado de busqueda y lo cambia por el de busqueda
+     */
     public void goBusquedaResultado(){
         panelBusqueda.setVisible(false);
         busquedaResultado = new BusquedaResultado(this);
@@ -231,6 +303,10 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     }
 
+    /**
+     * Cambia el panel de busqueda por el principal o el demandante
+     * @param usr, Cliente logeado actualmente
+     */
     public void volverDeBusqueda(Cliente usr) {
         panelBusqueda.setVisible(false);
         if(usr==null){
@@ -241,12 +317,18 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         }
     }
 
+    /**
+     * Cambia el panel del resultado de la busqueda por el de busqueda
+     */
     public void volverBusqueda(){
        busquedaResultado.setVisible(false);
        contenedor.remove(busquedaResultado);
        panelBusqueda.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de demandante o principal por el de busqueda
+     */
     public void goBusqueda() {
         if(panelDemandante!=null)
             panelDemandante.setVisible(false);
@@ -254,22 +336,27 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelBusqueda.setVisible(true);
     }
 
-    public void volverOferta(){
-        panelComentario.setVisible(false);
-        panelBAvanzada.setVisible(true);
-    }
-
+    /**
+     * Cambia el panel de ofertante por el de crear inmueble
+     */
     public void goCrearInmueble() {
         panelOfertante.setVisible(false);
         panelCInmueble.setVisible(true);
     }
 
+    /**
+     * Cambnia el panel de ver inmuebles por el de crear oferta
+     * @param inmueble
+     */
     public void goCrearOferta(Inmueble inmueble) {
         panelVerInmuebles.setVisible(false);
         panelCOferta.setInmueble(inmueble);
         panelCOferta.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de ver inmuebles, ver modificaciones, modificar oferta o crear inmueble por el de ofertante
+     */
     public void volverOfertante(){
         if(panelVerInmuebles!=null)
             panelVerInmuebles.setVisible(false);
@@ -283,15 +370,25 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelOfertante.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de crear oferta por el de ver inmuebles
+     */
     public void volverVerInmuebles(){
         panelCOferta.setVisible(false);
         panelVerInmuebles.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje del panel crear inmueble
+     * @param texto texto que se quiere anadir al mensaje
+     */
     public void creadoOK(String texto) {
         panelCInmueble.creadoOK(texto);
     }
 
+    /**
+     * Crea un nuevo panel de ver inmueble y lo cambia por el de ofertante
+     */
     public void goVerInmuebles() {
         panelOfertante.setVisible(false);
         panelVerInmuebles = new PanelVerInmuebles(this);
@@ -299,10 +396,18 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelVerInmuebles.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje de crear oferta
+     * @param texto texto que se quiere anadir al mensaje
+     */
     public void creadaOK(String texto) {
         panelCOferta.creadaOK(texto);
     }
 
+    /**
+     * Crea un nuevo panel de desbloquear usuarios y lo cambia por el de usuarios bloqueados
+     * @param demandante demandante sobre el que se quiere crear el panel de desbloquear usuario
+     */
     public void goDesbloquearUsuarios(Demandante demandante) {
         panelUsuariosBloqueados.setVisible(false);
         panelDesbloquearUsuario = new PanelDesbloquearUsuario(this);
@@ -311,6 +416,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelDesbloquearUsuario.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de comprobar ofertas o el de usuarios bloqueados por el de gerente
+     */
     public void volverGerente(){
         if(panelComprobarOfertas!=null)
             panelComprobarOfertas.setVisible(false);
@@ -319,6 +427,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelGerente.setVisible(true);
     }
 
+    /**
+     * Crea un nuevo panel de comprobar ofertas y lo cambia por el de gerente
+     */
     public void goComprobarOfertas() {
         panelGerente.setVisible(false);
         panelComprobarOfertas = new PanelComprobarOfertas(this);
@@ -326,14 +437,25 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelComprobarOfertas.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje comproba ofertas
+     * @param texto texto que se quiere anadir al mensaje
+     */
     public void aceptarOferta(String texto) {
         panelComprobarOfertas.setError(texto);
     }
 
+    /**
+     * Cambia el mensaje comproba ofertas
+     * @param texto texto que se quiere anadir al mensaje
+     */
     public void rechazarOferta(String texto) {
         panelComprobarOfertas.setError(texto);
     }
 
+    /**
+     * Crea un nuevo panel usuario bloqueado y lo cambia por el de gerente
+     */
     public void goUsuariosBloqueados() {
         panelGerente.setVisible(false);
         panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
@@ -341,49 +463,66 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelUsuariosBloqueados.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de desbloquear usuarios, crear comentario, reservar o alquilar por el de usuarios bloqueados
+     */
     public void volverUsuariosBloqueados() {
         if(panelDesbloquearUsuario!=null)
             panelDesbloquearUsuario.setVisible(false);
-        if(panelCrearComentario!=null)
-            panelCrearComentario.setVisible(false);
-        if(panelReservar!=null)
-            panelReservar.setVisible(false);
-        if(panelAlquilar!=null)
-            panelAlquilar.setVisible(false);
-        panelUsuariosBloqueados = new PanelUsuariosBloqueados(this);
-        contenedor.add(panelUsuariosBloqueados);
         panelUsuariosBloqueados.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de crear comentario por el resultado de la busqueda avanzada
+     */
     public void volverRAvanzada(){
         panelCrearComentario.setVisible(false);
         avanzadaResultado.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de reservar por el resultado de la busqueda avanzada
+     */
     public void volverRAvanzada2(){
         panelReservar.setVisible(false);
         avanzadaResultado.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de los cometarios por el resultado de la busqueda avanzada
+     */
     public void volverRAvanzada3(){
         panelComentario.setVisible(false);
         avanzadaResultado.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de alquilar por el resultado de la busqueda avanzada
+     */
     public void volverRAvanzada4(){
         panelAlquilar.setVisible(false);
         avanzadaResultado.setVisible(true);
     }
 
+    /**
+     * Cambia el panel del resultado de la busqueda avanzada por el de busqueda avanzada
+     */
     public void volverBAvanzada(){
         avanzadaResultado.setVisible(false);
         panelBAvanzada.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje del panel de alquilar
+     * @param texto texto que se quiere anadir al mensaje
+     */
     public void alquilerOK(String texto){
         panelAlquilar.setError(texto);
     }
 
+    /**
+     * Cambia el panel del resultado de busqueda avanzada o el de comprobar reserva por el de alquilar
+     */
     public void goAlquilar(){
         if(avanzadaResultado!=null)
             avanzadaResultado.setVisible(false);
@@ -394,34 +533,50 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelAlquilar.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de comentario por el de anadir comentario
+     */
     public void goAnadirComentario(){
         panelComentario.setVisible(false);
         panelAnadirComentario.setVisible(true);
 
     }
 
+    /**
+     * Cambia el panel del resultado de la busqueda avanzada por el de crear comentario
+     */
     public void goCrearComentario(){
         avanzadaResultado.setVisible(false);
         panelCrearComentario.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de anadir comentario por el de comentario
+     */
     public void volverComentario(){
         panelAnadirComentario.setVisible(false);
         panelComentario.setVisible(true);
     }
 
-    public void comentarioOK(String texto){
-        panelAnadirComentario.setError(texto);
-    }
-
+    /**
+     * Cambia el mensaje del panel de busqueda
+     * @param texto texto del mensaje
+     */
     public void errorBusqueda(String texto){
         panelBusqueda.setError(texto);
     }
 
+    /**
+     * Cambia el mensaje de busqueda avanzada
+     * @param texto texto del mensaje
+     */
     public void avanzadaError(String texto){
         panelBAvanzada.setError(texto);
     }
 
+    /**
+     * Crea un nuevo panel de resultado de busqueda avanzada y lo cambia por el de busqueda avanzada
+     */
     public void goRAvanzada(){
         panelBAvanzada.setVisible(false);
         avanzadaResultado = new AvanzadaResultado(this);
@@ -429,18 +584,33 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         avanzadaResultado.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje del panel de comentario
+     * @param texto texto del mensaje
+     */
     public void valoracionOK(String texto){
         panelComentario.setError(texto);
     }
 
+    /**
+     * Cambia el mensaje del panel crear comentario
+     * @param texto texto del mensaje
+     */
     public void publicarOK(String texto){
         panelCrearComentario.creadoOK(texto);
     }
 
+    /**
+     * Cambia el mensaje del panel comprobar reserva
+     * @param texto texto del mensaje
+     */
     public void cancelarReservaOK(String texto){
         panelCReserva.setError(texto);
     }
 
+    /**
+     * Crea un nuevo panel de comprobar reserva y lo cambia por el de demandante
+     */
     public void goComprobarReserva(){
         panelDemandante.setVisible(false);
         panelCReserva = new PanelCReserva(this);
@@ -448,6 +618,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelCReserva.setVisible(true);
     }
 
+    /**
+     * Crea un nuevo panel para ver las modificaciones y lo cambia por el de ofertante
+     */
     public void goVerModificaciones() {
         panelOfertante.setVisible(false);
         panelVerModificaciones = new PanelVerModificaciones(this);
@@ -455,37 +628,52 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelVerModificaciones.setVisible(true);
     }
 
+    /**
+     * Crea un nuevo panel de modificaciones y lo cambia por el de ver modificaciones
+     * @param oferta oferta que se quiere modificar
+     */
     public void goModifcarOferta(Oferta oferta) {
         panelVerModificaciones.setVisible(false);
-        //panelModificarOferta.setOferta(oferta);
         panelModificarOferta= new PanelModificarOferta(this);
         contenedor.add(panelModificarOferta);
         panelModificarOferta.setVisible(true);
     }
 
+    /**
+     * Cambia el mensaje del panel modificar oferta
+     * @param texto texto del mensaje
+     */
     public void modificada(String texto) {
         panelModificarOferta.setError(texto);
     }
 
+    /**
+     * Cambia el mensaje del panel de desbloquear usuarios
+     * @param texto texto del mensaje
+     */
     public void desbloqueado(String texto) {
         panelDesbloquearUsuario.setError(texto);
     }
 
+    /**
+     * Cambia el mensaje del panel anadir comentario
+     * @param texto texto del mensaje
+     */
     public void anadirCOmentarioOK(String texto){
         panelAnadirComentario.setError(texto);
     }
 
-    public void goReserva(Oferta oferta) {
-        panelBAvanzada.setVisible(false);
-        panelReservar = new PanelReservar(this);
-        contenedor.add(panelReservar);
-        panelReservar.setVisible(true);
-    }
-
+    /**
+     * Cambia el mensaje del panel reservar
+     * @param texto texto del mensaje
+     */
     public void reservaOK(String texto){
         this.panelReservar.setError(texto);
     }
 
+    /**
+     * Crea un nuevo panel de reservar y lo cambia por el de resultado de busqueda avanzada
+     */
     public void goReserva(){
         avanzadaResultado.setVisible(false);
         panelReservar = new PanelReservar(this);
@@ -494,6 +682,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
 
     }
 
+    /**
+     * Crea un nuevo panel de comentarios y lo cambia por el del resultado de busqueda avanzada
+     */
     public void goComentarios(){
         avanzadaResultado.setVisible(false);
         panelComentario = new PanelComentario(this);
@@ -501,6 +692,9 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
         panelComentario.setVisible(true);
     }
 
+    /**
+     * Cambia el panel de alquilar por el de comprobar reserva
+     */
     public void volverCReserva(){
         panelAlquilar.setVisible(false);
         panelCReserva.setVisible(true);

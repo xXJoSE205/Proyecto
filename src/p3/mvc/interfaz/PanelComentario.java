@@ -33,6 +33,7 @@ class PanelComentario extends JPanel implements ActionListener {
      * @param gui GUI de la inmobiliaria
      */
     PanelComentario(GuiInmobiliaria gui) {
+        DefaultMutableTreeNode node;
         this.gui=gui;
         List<Comentario> com = gui.getControlador().getComentarios();
         SpringLayout layout = new SpringLayout();
@@ -57,10 +58,16 @@ class PanelComentario extends JPanel implements ActionListener {
         int i=0;
         for(Comentario comentario1 : com){
             if(!comentario1.getComentarios().isEmpty()){
-                DefaultMutableTreeNode node = new DefaultMutableTreeNode("Comentario "+i);
-                modeloDatos.insertNodeInto(node,raiz,i);
+                if(!comentario1.getComentarios().isEmpty()){
+                    node = new DefaultMutableTreeNode("Autor:"+comentario1.getAutor().getNombre()+", "+comentario1.getTexto());
+                    modeloDatos.insertNodeInto(node,raiz,i);
+                }else {
+                    node = new DefaultMutableTreeNode("Comentario"+i);
+                    modeloDatos.insertNodeInto(node, raiz, i);
+                }
+
                 for(int j=0;j<comentario1.getComentarios().size();j++) {
-                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), raiz, j);
+                    modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:" + comentario1.getComentarios().get(j).getNombre() + ", " + comentario1.getComentarios().get(j).getTexto()), node, j);
                 }
             }
             modeloDatos.insertNodeInto(new DefaultMutableTreeNode("Autor:"+comentario1.getAutor().getNombre()+", "+comentario1.getTexto() ), raiz, i);

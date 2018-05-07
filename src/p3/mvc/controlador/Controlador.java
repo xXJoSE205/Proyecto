@@ -266,6 +266,7 @@ public class Controlador {
                     ((Demandante) usr).setReservaActiva(false);
                     ((Demandante)usr).quitarReserva();
                 }
+                
             } else{
                 this.gui.alquilerOK("Error al alquilar");
             }
