@@ -148,13 +148,4 @@ class AvanzadaResultado extends JPanel implements ActionListener {
         }
     }
 
-    /**
-     * Establece el mensaje que se va a mostrar por pantalla
-     * @param texto Cadena con el mensaje a mostrar
-     */
-    public void setError(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
-    }
 }

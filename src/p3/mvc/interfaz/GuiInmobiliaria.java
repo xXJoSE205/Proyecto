@@ -23,7 +23,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     private PanelCReserva panelCReserva;
     private PanelOfertante panelOfertante;
     private PanelVerInmuebles panelVerInmuebles;
-    private PanelCrearComentario panelCrearComentario;
+    private final PanelCrearComentario panelCrearComentario;
     private AvanzadaResultado avanzadaResultado;
     private PanelGerente panelGerente;
     private PanelComprobarOfertas panelComprobarOfertas;
