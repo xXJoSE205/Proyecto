@@ -10,6 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Ver odificaciones
+ * Crea un panel en el que se muestran las ofertas rechazadas, un recuadro de texto con las modificaciones propuestas
+ * y unos botones para volver y modificar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelVerModificaciones extends JPanel implements ActionListener {
     private final String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza" };
     private final Object[][] filas  = {};
@@ -25,11 +32,15 @@ class PanelVerModificaciones extends JPanel implements ActionListener {
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
+    /**
+     * Constructor de PanelVerModificaciones
+     * @param gui GUI de la inmobiliaria
+     */
     public PanelVerModificaciones(GuiInmobiliaria gui){
         this.gui = gui;
 
         this.lista = gui.getControlador().getOfertasRechazadas();
-        final JTextArea modificaciones = new JTextArea(20,100);
+        final JLabel modificaciones = new JLabel();
         String cadena = ((Ofertante)gui.getControlador().getCliente()).getModificaciones();
         if(cadena!=null) {
             modificaciones.setText(((Ofertante) gui.getControlador().getCliente()).getModificaciones());
@@ -83,6 +94,10 @@ class PanelVerModificaciones extends JPanel implements ActionListener {
         modificar.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);

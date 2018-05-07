@@ -1,16 +1,25 @@
 package p3.mvc.interfaz;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Principal
+ * Crea un panel en el que se muestran el logo de la empresa, un mensaje y unos botones para iniciar sesion y buscar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelPrincipal extends JPanel implements ActionListener{
     private final JButton inSes = new JButton("Iniciar Sesion");
     private final JButton buscar = new JButton("Buscar");
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelPrincipal
+     * @param gui GUI de la inmobiliaria
+     */
     PanelPrincipal(GuiInmobiliaria gui){
         this.gui = gui;
 
@@ -48,6 +57,10 @@ class PanelPrincipal extends JPanel implements ActionListener{
         buscar.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==inSes){
             this.gui.getControlador().goLogin();

@@ -9,6 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Usuarios bloqueados
+ * Crea un panel en el que se muestran los usuarios bloqueados y unos botones para volver y desbloquear usuario
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelUsuariosBloqueados extends JPanel implements ActionListener{
     private final String[] titulos = {"Nombre", "Apellidos", "NIF", "Tarjeta"};
     private final Object[][] filas  = {};
@@ -24,6 +30,10 @@ class PanelUsuariosBloqueados extends JPanel implements ActionListener{
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
+    /**
+     * Constructor de PanelUsuariosBloqueados
+     * @param gui GUI de la inmobiliaria
+     */
     PanelUsuariosBloqueados(GuiInmobiliaria gui){
         this.gui = gui;
         this.lista = gui.getControlador().getUsuariosBloqueados();
@@ -75,6 +85,10 @@ class PanelUsuariosBloqueados extends JPanel implements ActionListener{
         desbloquear.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);

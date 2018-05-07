@@ -10,6 +10,13 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Ver inmuebles
+ * Crea un panel en el que se muestran los datos de los inmuebles del usuario logueado y unos botones para
+ * volver y crear oferta
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelVerInmuebles extends JPanel implements ActionListener{
     private final String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Direccion", "Ascensor", "Planta"};
     private final Object[][] filas  = {};
@@ -25,6 +32,10 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
+    /**
+     * Constructor de PanelVerInmuebles
+     * @param gui GUI de la inmobiliaria
+     */
     PanelVerInmuebles(GuiInmobiliaria gui){
         this.gui = gui;
         this.lista = ((Ofertante)gui.getControlador().getCliente()).getInmuebles();
@@ -72,6 +83,10 @@ class PanelVerInmuebles extends JPanel implements ActionListener{
         crear.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);

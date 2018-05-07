@@ -5,15 +5,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Demandante
+ * Crea un panel en el que se muestran las distintas acciones que puede realizar el demandante, unos botones para
+ * cerrar sesion(desconectarse), buscar, buscar avanzado, y comprobar reservas
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelDemandante extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("Error al cerrar sesion");
     private final GuiInmobiliaria gui;
-
     private final JButton volver = new JButton("Desconectarse");
     private final JButton buscar = new JButton("Busqueda");
     private final JButton avanzada = new JButton("Busqueda Avanzada");
     private final JButton reservas = new JButton("Comprobar Reserva");
 
+    /**
+     * Constructor de PanelDemandante
+     * @param gui GUI de la inmobiliaria
+     */
     PanelDemandante(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -53,6 +63,10 @@ class PanelDemandante extends JPanel implements ActionListener {
         reservas.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if( evento.getSource()==volver){
             texto.setVisible(false);
@@ -69,6 +83,10 @@ class PanelDemandante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param error Cadena con el mensaje a mostrar
+     */
     public void setError(String error) {
         texto.setVisible(true);
         texto.setText(error);

@@ -9,6 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Comprobar ofertas
+ * Crea un panel en el que se muestran las ofertas pendientes y unos botones para volver, aceptar
+ * y rechazar(anade las modificaciones al dueno)
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelComprobarOfertas extends JPanel implements ActionListener {
     private final String[] titulos = {"Precio", "Fecha Inicio", "Fecha Fin", "Vacacional", "Fianza"};
     private final Object[][] filas  = {};
@@ -26,6 +33,10 @@ class PanelComprobarOfertas extends JPanel implements ActionListener {
     private final List<Oferta> ofertas;
     private final JTable tabla = new JTable(modeloDatos);
 
+    /**
+     * Constructor de PanelComprobarOfertas
+     * @param gui GUI de la inmobiliaria
+     */
     PanelComprobarOfertas(GuiInmobiliaria gui){
         this.gui = gui;
 
@@ -88,6 +99,10 @@ class PanelComprobarOfertas extends JPanel implements ActionListener {
         rechazar.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);
@@ -114,6 +129,10 @@ class PanelComprobarOfertas extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto){
         this.texto.setVisible(true);
         this.texto.setText(texto);

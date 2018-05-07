@@ -8,6 +8,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Desbloquear usuario
+ * Crea un panel en el que se muestran la reserva activa y la oferta correspondiente, y unos botones para volver,
+ * cancelar reserva y alquilar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelCReserva extends JPanel implements ActionListener {
     private final GuiInmobiliaria gui;
     private final JButton volver = new JButton("Volver");
@@ -15,6 +22,10 @@ class PanelCReserva extends JPanel implements ActionListener {
     private  final JButton alquilar = new JButton("Alquilar");
     private final JLabel texto = new JLabel("");
 
+    /**
+     * Constructor de PanelCReserva
+     * @param gui GUI de la inmobiliaria
+     */
     PanelCReserva(GuiInmobiliaria gui){
         this.gui = gui;
         Reserva reserva = ((Demandante) gui.getControlador().getCliente()).getReserva();
@@ -58,7 +69,10 @@ class PanelCReserva extends JPanel implements ActionListener {
         alquilar.addActionListener(this);
     }
 
-
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
             texto.setVisible(false);
@@ -76,6 +90,10 @@ class PanelCReserva extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

@@ -7,6 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Alquilar
+ * Crea un panel en el que se muestra la oferta deseada y unos botones para volver(cancelar) y alquilar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelAlquilar extends JPanel implements ActionListener {
     private final JButton alquilar = new JButton("Alquilar");
     private final JButton volver = new JButton("Cancelar");
@@ -14,6 +20,10 @@ class PanelAlquilar extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("");
     private final Oferta oferta;
 
+    /**
+     * Constructor de PanelAlquilar
+     * @param gui GUI de la inmobiliaria
+     */
     PanelAlquilar(GuiInmobiliaria gui){
         this.gui = gui;
         this.oferta = gui.getControlador().getOferta();
@@ -114,6 +124,10 @@ class PanelAlquilar extends JPanel implements ActionListener {
         volver.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==alquilar){
             texto.setVisible(false);
@@ -128,6 +142,10 @@ class PanelAlquilar extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

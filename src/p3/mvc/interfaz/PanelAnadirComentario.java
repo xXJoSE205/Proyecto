@@ -8,6 +8,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Anadir comentario
+ * Crea un panel en el que se muestra un recuadro para el comentario y unos botones para volver y publicar
+ * Anade un comentario a otro
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelAnadirComentario extends JPanel implements ActionListener {
     private final JTextArea texto = new JTextArea(20,100);
     private final GuiInmobiliaria gui;
@@ -15,6 +22,10 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
     private final JButton publicar = new JButton("Publicar");
     private final JLabel texto2 = new JLabel("");
 
+    /**
+     * Constructor de PanelAnadirComentario
+     * @param gui GUI de la inmobiliaria
+     */
     PanelAnadirComentario(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -50,6 +61,10 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
         publicar.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
             texto2.setVisible(false);
@@ -60,6 +75,10 @@ class PanelAnadirComentario extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto2.setText(texto);
         this.texto2.setVisible(true);

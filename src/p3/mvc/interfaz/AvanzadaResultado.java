@@ -9,6 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Resultados de busqueda avanzada
+ * Crea un panel en el que se muestra una tabla con las ofertas encontradas y unos botones para alquilar,
+ * anadir comentario, ver comentarios, reservar y volver
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class AvanzadaResultado extends JPanel implements ActionListener {
     private final String[] titulos = {"Habitaciones", "Banos", "Dimensiones", "Ascensor", "Planta","Direccion","Precio","Vacacional"};
     private final Object[][] filas = {};
@@ -27,7 +34,10 @@ class AvanzadaResultado extends JPanel implements ActionListener {
     private final JTable tabla = new JTable(modeloDatos);
     private final JLabel texto = new JLabel("");
 
-
+    /**
+     * Constructor de AvanzadaResultados
+     * @param gui GUI de la inmobiliaria
+     */
     AvanzadaResultado(GuiInmobiliaria gui) {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -89,9 +99,12 @@ class AvanzadaResultado extends JPanel implements ActionListener {
         comentario2.addActionListener(this);
         alquilar.addActionListener(this);
         reservar.addActionListener(this);
-
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
             texto.setVisible(false);
@@ -135,6 +148,10 @@ class AvanzadaResultado extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

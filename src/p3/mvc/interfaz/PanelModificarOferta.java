@@ -9,6 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
+/**
+ * Esta clase contiene la informacion del panel Modificar oferta
+ * Crea un panel en el que se muestran los campos de la oferta a modificar y unos botones para volver(cancelar)
+ * y modificar oferta
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelModificarOferta extends JPanel implements ActionListener {
     private final JTextField precio;
     private final JTextField fIni;
@@ -21,6 +28,10 @@ class PanelModificarOferta extends JPanel implements ActionListener {
     private Oferta oferta;
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelModificarOferta
+     * @param gui GUI de la inmobiliaria
+     */
     PanelModificarOferta(GuiInmobiliaria gui) {
         this.gui = gui;
         this.oferta=gui.getControlador().getOferta();
@@ -91,10 +102,18 @@ class PanelModificarOferta extends JPanel implements ActionListener {
         modificar.addActionListener(this);
     }
 
+    /**
+     * Establece la oferta la cual se va a modificar
+     * @param oferta Oferta a modificar
+     */
     public void setOferta(Oferta oferta){
         this.oferta = oferta;
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);
@@ -107,6 +126,10 @@ class PanelModificarOferta extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto){
         this.texto.setText(texto);
         this.texto.setVisible(true);

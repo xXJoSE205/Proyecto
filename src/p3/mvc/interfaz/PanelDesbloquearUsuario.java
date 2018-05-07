@@ -7,6 +7,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Desbloquear usuario
+ * Crea un panel en el que se muestran los datos del demandante y unos botones para volver(cancelar), modificar
+ * y desbloquear
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelDesbloquearUsuario extends JPanel implements ActionListener {
     private final JTextField tarjeta;
     private final JButton desb = new JButton("Desbloquear");
@@ -16,6 +23,10 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
     private Demandante demandante;
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelDesbloquearUsuario
+     * @param gui GUI de la inmobiliaria
+     */
     PanelDesbloquearUsuario(GuiInmobiliaria gui) {
         this.gui = gui;
         this.demandante=this.gui.getControlador().getDemandante();
@@ -43,7 +54,7 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.EAST, etiqueta1, 0, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.WEST, nombre, 0, SpringLayout.WEST, apellidos);
         layout.putConstraint(SpringLayout.NORTH, nombre, 5, SpringLayout.NORTH, this);
-        layout.putConstraint(SpringLayout.WEST, etiqueta2, 5, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, etiqueta2, -80, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, etiqueta2, 8, SpringLayout.SOUTH, etiqueta1);
         layout.putConstraint(SpringLayout.WEST, apellidos, 5, SpringLayout.EAST, etiqueta2);
         layout.putConstraint(SpringLayout.NORTH, apellidos, 5, SpringLayout.SOUTH, nombre);
@@ -58,9 +69,9 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         layout.putConstraint(SpringLayout.WEST, tarjeta, 0, SpringLayout.WEST, nif);
         layout.putConstraint(SpringLayout.NORTH, tarjeta, 5, SpringLayout.SOUTH, nif);
         layout.putConstraint(SpringLayout.NORTH, texto, 5, SpringLayout.SOUTH, tarjeta);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, tarjeta);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, texto, 0, SpringLayout.HORIZONTAL_CENTER, this);
         layout.putConstraint(SpringLayout.NORTH, select, 10, SpringLayout.SOUTH, texto);
-        layout.putConstraint(SpringLayout.WEST, select, 0, SpringLayout.WEST, texto);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, select, 0, SpringLayout.HORIZONTAL_CENTER, this);
 
         this.add(etiqueta1);
         this.add(nombre);
@@ -79,10 +90,18 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         desbYMod.addActionListener(this);
     }
 
+    /**
+     * Establece el demandante que se quiere desbloquear
+     * @param demandante Demandante a desbloquear
+     */
     public void setDemandante(Demandante demandante){
         this.demandante = demandante;
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);
@@ -96,6 +115,10 @@ class PanelDesbloquearUsuario extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto){
         this.texto.setText(texto);
         this.texto.setVisible(true);

@@ -5,14 +5,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Crear comentario
+ * Crea un panel en el que se muestra un recuadro para el comentario y unos botones para volver y publicar
+ * Anade un comentario a la oferta
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelCrearComentario extends JPanel implements ActionListener {
-
     private final JTextArea texto = new JTextArea(20,100);
     private final GuiInmobiliaria gui;
     private final JButton volver = new JButton("Volver");
     private final JButton publicar = new JButton("Publicar");
     private final JLabel texto2 = new JLabel("");
 
+    /**
+     * Constructor de PanelCrearComentario
+     * @param gui GUI de la inmobiliaria
+     */
     PanelCrearComentario(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -47,6 +57,10 @@ class PanelCrearComentario extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==volver){
             texto2.setVisible(false);
@@ -59,6 +73,10 @@ class PanelCrearComentario extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void creadoOK(String texto) {
         this.texto2.setText(texto);
         this.texto2.setVisible(true);

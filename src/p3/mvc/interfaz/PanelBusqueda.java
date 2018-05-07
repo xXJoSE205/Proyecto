@@ -5,8 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Busqueda
+ * Crea un panel en el que se muestran los campos de busqueda y unos botones para volver y buscar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelBusqueda extends JPanel implements ActionListener {
-
     private final JTextField numero = new JTextField("-1", 2);
     private final JTextField numeroBan = new JTextField("-1", 2);
     private final JTextField dim = new JTextField("-1", 2);
@@ -16,10 +21,12 @@ class PanelBusqueda extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("");
     private final JButton buscar = new JButton("Buscar");
     private final JButton volver = new JButton("Volver");
-
-
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelBusqueda
+     * @param gui GUI de la inmobiliaria
+     */
     PanelBusqueda(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -85,6 +92,10 @@ class PanelBusqueda extends JPanel implements ActionListener {
         volver.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==buscar) {
             texto.setVisible(false);
@@ -97,6 +108,10 @@ class PanelBusqueda extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

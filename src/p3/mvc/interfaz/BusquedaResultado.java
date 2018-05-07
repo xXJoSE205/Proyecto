@@ -9,11 +9,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Resultados de busqueda basica
+ * Crea un panel en el que se muestra una tabla con los inmuebles encontrados y un boton para volver
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class BusquedaResultado extends JPanel implements ActionListener {
     private final GuiInmobiliaria gui;
     private final JButton volver = new JButton("Volver");
     private final JLabel texto = new JLabel("");
 
+    /**
+     * Constructor de BusqeudaResultados
+     * @param gui GUI de la inmobiliaria
+     */
     BusquedaResultado(GuiInmobiliaria gui){
         this.gui = gui;
 
@@ -77,17 +87,14 @@ class BusquedaResultado extends JPanel implements ActionListener {
         volver.addActionListener(this);
     }
 
+    /**
+     * Manejador de la accion del boton volver
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
             texto.setVisible(false);
             gui.getControlador().volverBusqueda();
         }
     }
-
-    public void creadaOK(String texto) {
-        this.texto.setText(texto);
-        this.texto.setVisible(true);
-        this.texto.setForeground(java.awt.Color.red);
-    }
-
 }

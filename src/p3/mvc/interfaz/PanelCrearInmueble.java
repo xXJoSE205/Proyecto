@@ -5,7 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Esta clase contiene la informacion del panel Crear inmueble
+ * Crea un panel en el que se muestran los campos del inmueble y unos botones para volver(cancelar) y crear inmueble
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelCrearInmueble extends JPanel implements ActionListener{
     private final JTextField nHab = new JTextField("-1", 2);
     private final JTextField nBanos = new JTextField("-1", 2);
@@ -18,6 +23,10 @@ class PanelCrearInmueble extends JPanel implements ActionListener{
     private final JLabel texto = new JLabel("");
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelCrearInmueble
+     * @param gui GUI de la inmobiliaria
+     */
     PanelCrearInmueble(GuiInmobiliaria gui){
         this.gui=gui;
         SpringLayout layout = new SpringLayout();
@@ -81,6 +90,10 @@ class PanelCrearInmueble extends JPanel implements ActionListener{
         crear.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==volver){
             texto.setVisible(false);
@@ -93,9 +106,13 @@ class PanelCrearInmueble extends JPanel implements ActionListener{
         }
     }
 
-    public void creadoOK(String cadena){
-        texto.setText(cadena);
-        texto.setVisible(true);
-        texto.setForeground(java.awt.Color.red);
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
+    public void creadoOK(String texto){
+        this.texto.setText(texto);
+        this.texto.setVisible(true);
+        this.texto.setForeground(java.awt.Color.red);
     }
 }

@@ -9,20 +9,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Esta clase contiene la informacion del panel Comentario
+ * Crea un panel en el que se muestran los comentarios de la oferta y unos botones para volver(atras), valorar
+ * y anadir comentario
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelComentario extends JPanel implements ActionListener {
-
     private final String[] numeros = {"Val","0","1","2","3","4","5"};
     private final JComboBox lista = new JComboBox(numeros);
     private final DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Comentarios");
     private final DefaultTreeModel modeloDatos = new DefaultTreeModel(raiz);
     private final JTree arbol = new JTree (modeloDatos);
-
     private final JButton boton1 = new JButton("Valorar");
     private final JButton boton2 = new JButton("Atras");
     private final JButton boton3 = new JButton("Añadir Comentario");
     private final GuiInmobiliaria gui;
     private final JTextField texto = new JTextField("");
 
+    /**
+     * Constructor de PanelComentario
+     * @param gui GUI de la inmobiliaria
+     */
     PanelComentario(GuiInmobiliaria gui) {
         this.gui=gui;
         List<Comentario> com = gui.getControlador().getComentarios();
@@ -98,6 +107,10 @@ class PanelComentario extends JPanel implements ActionListener {
         this.setVisible(true);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param e Accion que se activa
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton1){
             texto.setVisible(false);
@@ -132,6 +145,10 @@ class PanelComentario extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

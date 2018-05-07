@@ -5,15 +5,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Gerente
+ * Crea un panel en el que se muestran las distintas acciones que puede realizar el gerente, unos botones para
+ * cerrar sesion(desconectarse), desbloquear usuarios y comprobar ofertas
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelGerente extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("Error al cerrar sesion");
     private final GuiInmobiliaria gui;
-
     private final JButton volver = new JButton("Desconectarse");
     private final JButton desbloquear = new JButton("Desbloquear usuarios");
     private final JButton comprobar = new JButton("Comprobar ofertas");
 
-
+    /**
+     * Constructor de PanelGerente
+     * @param gui GUI de la inmobiliaria
+     */
     PanelGerente(GuiInmobiliaria gui){
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -55,6 +64,10 @@ class PanelGerente extends JPanel implements ActionListener {
         comprobar.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if(evento.getSource()==volver){
             texto.setVisible(false);
@@ -68,6 +81,10 @@ class PanelGerente extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setVisible(true);
         this.texto.setText(texto);

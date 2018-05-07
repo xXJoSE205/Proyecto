@@ -7,6 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Reservar
+ * Crea un panel en el que se muestran los datos de la oferta y unos botones para volver(cancelar) y reservar
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelReservar extends JPanel implements ActionListener {
     private final JButton alquilar = new JButton("Reservar");
     private final JButton volver = new JButton("Cancelar");
@@ -14,6 +20,10 @@ class PanelReservar extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("");
     private Oferta oferta;
 
+    /**
+     * Constructor de PanelReservar
+     * @param gui GUI de la inmobiliaria
+     */
     PanelReservar(GuiInmobiliaria gui){
         this.gui = gui;
         this.oferta=gui.getControlador().getOferta();
@@ -114,10 +124,18 @@ class PanelReservar extends JPanel implements ActionListener {
         volver.addActionListener(this);
     }
 
+    /**
+     * Establece la oferta que se quiere reservar
+     * @param oferta Oferta a reservar
+     */
     public void setOferta(Oferta oferta){
         this.oferta = oferta;
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         if(evento.getSource()==alquilar){
             texto.setVisible(false);
@@ -128,6 +146,10 @@ class PanelReservar extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

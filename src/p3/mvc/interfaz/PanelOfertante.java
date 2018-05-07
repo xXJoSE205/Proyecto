@@ -5,15 +5,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Ofertante
+ * Crea un panel en el que se muestran las distintas acciones que puede realizar el ofertante, unos botones para
+ * cerrar sesion(desconectarse), crear inmueble, ver inmuebles, y ver modificaciones propuestas
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelOfertante extends JPanel implements ActionListener {
     private final JLabel texto = new JLabel("Error al cerrar sesion");
     private final GuiInmobiliaria gui;
-
     private final JButton volver = new JButton("Desconectarse");
     private final JButton crearInm = new JButton("Crear Inmueble");
     private final JButton verInmuebles = new JButton("Ver Inmuebles");
     private final JButton modificaciones = new JButton("Ver modificaciones propuestas");
 
+    /**
+     * Constructor de PanelOfertante
+     * @param gui GUI de la inmobiliaria
+     */
     PanelOfertante(GuiInmobiliaria gui) {
         this.gui = gui;
         SpringLayout layout = new SpringLayout();
@@ -53,6 +63,10 @@ class PanelOfertante extends JPanel implements ActionListener {
         modificaciones.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource() == volver) {
             texto.setVisible(false);
@@ -69,6 +83,10 @@ class PanelOfertante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);

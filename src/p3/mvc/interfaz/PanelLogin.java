@@ -5,6 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Esta clase contiene la informacion del panel Login
+ * Crea un panel en el que se muestran los campos NIF, contrasena, una seleccion del tipo de suario y unos botones
+ * para volver e iniciar sesion
+ *
+ * @author Jorge Mateo Segura y Jose Antonio Munoz Ortega
+ */
 class PanelLogin extends JPanel implements ActionListener{
     private final JTextField nif = new JTextField(10);
     private final JPasswordField pswd = new JPasswordField(15);
@@ -14,9 +21,12 @@ class PanelLogin extends JPanel implements ActionListener{
     private final JButton inSes = new JButton("Iniciar Sesion");
     private final JButton volver = new JButton("Volver");
     private final JLabel texto = new JLabel("");
-
     private final GuiInmobiliaria gui;
 
+    /**
+     * Constructor de PanelLogin
+     * @param gui GUI de la inmobiliaria
+     */
     PanelLogin(GuiInmobiliaria gui){
         this.gui = gui;
 
@@ -74,6 +84,10 @@ class PanelLogin extends JPanel implements ActionListener{
         volver.addActionListener(this);
     }
 
+    /**
+     * Manejador de las acciones de los botones
+     * @param evento Accion que se activa
+     */
     public void actionPerformed(ActionEvent evento){
         String option = "";
         if(evento.getSource()==inSes) {
@@ -94,12 +108,19 @@ class PanelLogin extends JPanel implements ActionListener{
         }
     }
 
+    /**
+     * Establece el mensaje que se va a mostrar por pantalla
+     * @param texto Cadena con el mensaje a mostrar
+     */
     public void setError(String texto) {
         this.texto.setText(texto);
         this.texto.setVisible(true);
         this.texto.setForeground(java.awt.Color.red);
     }
 
+    /**
+     * Oculta el mensaje que se muestra por pantalla
+     */
     public void text (){
         this.texto.setVisible(false);
     }
