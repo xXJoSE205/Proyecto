@@ -43,7 +43,7 @@ public class GuiInmobiliaria extends JFrame implements WindowListener{
     public GuiInmobiliaria(String titulo) {
         super(titulo);
 
-        Image icon = new ImageIcon("definitivo3.png").getImage();
+        Image icon = new ImageIcon("logo.jpg").getImage();
         setIconImage(icon);
 
         // obtener contenedor, asignar layout
