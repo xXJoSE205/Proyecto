@@ -261,13 +261,12 @@ public class Sistema implements Serializable {
         List<Inmueble> busqueda = new ArrayList<>();
         int i=0;
         for(Inmueble inmueble: inmuebles){
-            if(inmueble.getnHabitaciones()>=nHab && nHab>-1){
-                busqueda.add(inmueble);
-            } else {
-                busqueda.add(inmueble);
-            }
+            busqueda.add(inmueble);
 
         }for (Inmueble inmueble:busqueda){
+            if(inmueble.getnHabitaciones()<nHab && nBan>-1){
+                remove.add(i);
+            }
             if(inmueble.getnBanos()<nBan && nBan>-1){
                 remove.add(i);
             }

@@ -32,7 +32,7 @@ class PanelPrincipal extends JPanel implements ActionListener{
         select.setVisible(true);
 
         ImageIcon logo = new ImageIcon("logo.jpg");
-        Image newLogo = logo.getImage().getScaledInstance(400, 400, java.awt.Image.SCALE_DEFAULT);
+        Image newLogo = logo.getImage().getScaledInstance(200, 200, java.awt.Image.SCALE_DEFAULT);
         logo.setImage(newLogo);
         JLabel imagen = new JLabel(logo);
 
